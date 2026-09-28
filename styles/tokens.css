@@ -1,0 +1,144 @@
+/*
+ * Matrix OS design tokens — the single source of truth.
+ *
+ * Source: matrix-os DESIGN.md + Figma brand file xPG2FeYRtC9owCKSVXCqWA (page "Styles").
+ * Primitive values are verified 1:1 against Figma (2026-09-28).
+ *
+ * Three tiers:
+ *   1. Primitives  — raw brand scales. Never used directly in components.
+ *   2. Semantic    — what a color means (background, primary, border…). Uses shadcn names
+ *                    so the same tokens drive this site (Fumadocs) and Matrix's product.
+ *   3. Tailwind    — exposed as utilities in app/global.css (@theme).
+ *
+ * Light mode only for now. Dark mode is a planned deliverable.
+ */
+
+:root {
+  /* ─── 1. Primitives ─────────────────────────────────────────── */
+
+  --green-50: #f4f7ed;
+  --green-100: #e4edd4;
+  --green-200: #cee0ae;
+  --green-300: #bed77b; /* brand Green */
+  --green-400: #9ac059;
+  --green-500: #748e59;
+  --green-600: #62783a;
+  --green-700: #475926;
+  --green-800: #2b3715;
+  --green-900: #171f0a;
+
+  --teal-50: #eef7f2;
+  --teal-100: #c9e8d9;
+  --teal-200: #97d8b9;
+  --teal-300: #5ec996;
+  --teal-400: #34b275;
+  --teal-500: #288a5b;
+  --teal-600: #1b6541;
+  --teal-700: #13492f;
+  --teal-800: #0e3422; /* brand Teal — the anchor */
+  --teal-900: #061810;
+
+  --coral-50: #faeeeb;
+  --coral-100: #f2d6cf;
+  --coral-200: #e6b5a8;
+  --coral-300: #da9481;
+  --coral-400: #d06e53; /* brand Coral */
+  --coral-500: #ba5236;
+  --coral-600: #8f432d;
+  --coral-700: #6b3324;
+  --coral-800: #442118;
+  --coral-900: #25130e;
+
+  --gold-50: #fcf5e8;
+  --gold-100: #faead1;
+  --gold-200: #f6daac;
+  --gold-300: #f1c379; /* brand Gold */
+  --gold-400: #e0aa52;
+  --gold-500: #d2932d;
+  --gold-600: #a37429;
+  --gold-700: #775622;
+  --gold-800: #4d3919;
+  --gold-900: #251c0e;
+
+  --blue-50: #edf3f7;
+  --blue-100: #c5d6e2; /* brand Blue */
+  --blue-200: #9dbfd7;
+  --blue-300: #71a9d0;
+  --blue-400: #5ca0d1;
+  --blue-500: #3b85ba;
+  --blue-600: #306991;
+  --blue-700: #254d6a;
+  --blue-800: #193143;
+  --blue-900: #0f1b24;
+
+  --neutral-50: #ffffff;
+  --neutral-100: #f3f2f2;
+  --neutral-200: #e1e0e0;
+  --neutral-300: #c8c6c6;
+  --neutral-400: #a8a4a4;
+  --neutral-500: #827d7d;
+  --neutral-600: #635f5f;
+  --neutral-700: #413e3e;
+  --neutral-800: #242323;
+  --neutral-900: #0d0c0c;
+
+  /* Named brand values that sit outside the scales (DESIGN.md). */
+  --brand-ink: #1f2d1d;
+  --brand-paper: #fcfcf8;
+  --brand-sage: #e0e1ca; /* OPEN DECISION: off-scale, hidden in Figma, used as default border */
+
+  /* ─── 2. Semantic (light) ──────────────────────────────────────
+     Mapped from DESIGN.md `semanticColors`. Items marked PROVISIONAL
+     are my interpretation and need a decision during planning. */
+
+  --background: var(--green-50);
+  --foreground: var(--brand-ink);
+
+  --card: var(--brand-paper);
+  --card-foreground: var(--brand-ink);
+  --popover: var(--neutral-50);
+  --popover-foreground: var(--brand-ink);
+
+  --primary: var(--teal-800);
+  --primary-foreground: var(--brand-paper);
+
+  --secondary: var(--green-100); /* PROVISIONAL */
+  --secondary-foreground: var(--teal-800);
+
+  --muted: var(--neutral-100);
+  --muted-foreground: var(--neutral-600);
+
+  /* shadcn "accent" = hover/selected surface, NOT the brand accent color.
+     The brand accent (Coral) is exposed as --attention. PROVISIONAL */
+  --accent: var(--green-100);
+  --accent-foreground: var(--teal-800);
+  --attention: var(--coral-400);
+
+  --destructive: var(--coral-500);
+  --success: var(--teal-500);
+  --warning: var(--gold-500);
+  --info: var(--blue-500);
+
+  --border: var(--brand-sage);
+  --input: var(--brand-sage);
+  --ring: var(--gold-300); /* Focus is always Gold, with a visible offset */
+
+  --sidebar: var(--background);
+  --sidebar-foreground: var(--foreground);
+  --sidebar-primary: var(--primary);
+  --sidebar-primary-foreground: var(--primary-foreground);
+  --sidebar-accent: var(--accent);
+  --sidebar-accent-foreground: var(--accent-foreground);
+  --sidebar-border: var(--border);
+  --sidebar-ring: var(--ring);
+
+  /* ─── Shape, depth, motion ─────────────────────────────────── */
+
+  --radius: 0.75rem; /* 12px default component radius */
+
+  --shadow-color: 31 45 29; /* ink, as RGB channels */
+
+  --duration-fast: 120ms;
+  --duration-base: 180ms;
+  --duration-slow: 240ms;
+}

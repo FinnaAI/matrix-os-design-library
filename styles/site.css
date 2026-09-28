@@ -1,0 +1,39 @@
+/*
+ * Documentation site chrome: a neutral white and gray frame, so Matrix components and
+ * content stand out. Site-only. Matrix components never use these tokens.
+ * Values come from the Matrix neutral scale in tokens.css.
+ */
+
+:root {
+  --site-bg: var(--neutral-50);
+  --site-fg: var(--neutral-900);
+  --site-muted: var(--neutral-600);
+  --site-subtle: var(--neutral-500);
+  --site-hover: var(--neutral-100);
+  --site-active: var(--neutral-100);
+  --site-border: var(--neutral-200);
+  --site-code: var(--neutral-100);
+  --site-nav: var(--neutral-700);
+  --site-nav-active: var(--neutral-600);
+  --site-nav-fg: var(--neutral-50);
+  --site-nav-muted: var(--neutral-300);
+  --site-sidebar-max-h: calc(100vh - 8rem);
+
+  /* Fumadocs MDX blocks (prose, code blocks, callouts, cards) follow the site palette. */
+  --color-fd-background: var(--site-bg);
+  --color-fd-foreground: var(--site-fg);
+  --color-fd-muted: var(--site-code);
+  --color-fd-muted-foreground: var(--site-muted);
+  --color-fd-popover: var(--site-bg);
+  --color-fd-popover-foreground: var(--site-fg);
+  --color-fd-card: var(--site-bg);
+  --color-fd-card-foreground: var(--site-fg);
+  --color-fd-border: var(--site-border);
+  --color-fd-primary: var(--site-fg);
+  --color-fd-primary-foreground: var(--site-bg);
+  --color-fd-secondary: var(--site-code);
+  --color-fd-secondary-foreground: var(--site-fg);
+  --color-fd-accent: var(--site-hover);
+  --color-fd-accent-foreground: var(--site-fg);
+  --color-fd-ring: var(--neutral-400);
+}
