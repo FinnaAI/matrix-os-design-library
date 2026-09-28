@@ -16,7 +16,7 @@ function libraryNodes(): PageTree.Node[] {
 export default function LibraryLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="grid gap-12 md:grid-cols-[15rem_1fr] md:gap-20">
-      <aside className="md:sticky md:top-28 md:max-h-(--site-sidebar-max-h) md:self-start md:overflow-y-auto">
+      <aside className="md:sticky md:top-28 md:max-h-(--site-sidebar-max-h) md:self-start md:overflow-y-auto md:pb-6 no-scrollbar">
         <LibrarySidebar nodes={libraryNodes()} />
       </aside>
       {children}

@@ -207,8 +207,21 @@
   }
 }
 
+/* Hidden scrollbars: the page and sidebar still scroll by wheel, trackpad and keyboard. */
 html {
-  scrollbar-gutter: stable;
+  scrollbar-width: none;
+}
+
+html::-webkit-scrollbar {
+  display: none;
+}
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 html > body[data-scroll-locked] {
