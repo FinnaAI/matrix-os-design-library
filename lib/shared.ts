@@ -2,7 +2,7 @@ export const appName = 'Matrix OS Design System';
 
 export const gitConfig = {
   user: 'sahar-nouri-1',
-  repo: 'Matrix-design-system-',
+  repo: 'Matrix_design-system',
   branch: 'main',
 };
 
