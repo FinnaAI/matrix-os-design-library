@@ -1,6 +1,125 @@
 ---
 title: Colors
-description: Brand palette, scales and semantic color roles.
+description: Teal anchors every screen; four supporting colors carry meaning. Semantic tokens wrap the right step at the right tier, so product code rarely reaches for a raw scale number.
 ---
 
-<Callout>This page is being written. The tokens already exist in `styles/tokens.css`.</Callout>
+## Usage
+
+```css
+/* Every color is a CSS custom property in styles/tokens.css.
+   Prefer a semantic role; reach for a raw step only when no role fits. */
+color: var(--muted-foreground);
+background: var(--card);
+border-color: var(--border);
+```
+
+```tsx
+// The same roles as Tailwind utilities
+<div className="border-border bg-card text-foreground" />
+```
+
+Click any swatch to copy its token.
+
+## Core palettes
+
+<ColorRamp scale="teal" label="Teal · brand anchor" brandStep="800" />
+<ColorRamp scale="neutral" label="Neutral · grey" />
+
+#### Teal is Matrix's color
+
+Teal carries identity: primary actions, navigation and strong text. Keep one dominant teal action per region. The supporting colors create rhythm and communicate state; they never compete with teal for attention.
+
+### Ink, paper and sage
+
+Three brand values sit outside the scales. Ink is the default text color, paper is the card surface, and the green-tinted canvas (`--green-50`) is the page background.
+
+<ColorSet
+  tokens={[
+    { token: 'brand-ink', name: 'Ink', note: 'Body text' },
+    { token: 'brand-paper', name: 'Paper', note: 'Cards and surfaces' },
+    { token: 'green-50', name: 'Canvas', note: 'Page background' },
+    { token: 'brand-sage', name: 'Sage', note: 'Default border (decision pending)' },
+  ]}
+/>
+
+## Supporting colors
+
+<ColorRamp scale="green" label="Green · ready, success" brandStep="300" />
+<ColorRamp scale="gold" label="Gold · pending, focus, selected" brandStep="300" />
+<ColorRamp scale="coral" label="Coral · attention, failed, destructive" brandStep="400" />
+<ColorRamp scale="blue" label="Blue · information, syncing" brandStep="100" />
+
+#### Supporting colors are signals, not confetti
+
+`green` means ready, connected or successful. `gold` means pending, selected or needs attention without failure. `coral` means failed, destructive or urgent. `blue` means informational, syncing or neutral progress. Never encode state by color alone: always pair it with an icon or a label. Never use these colors for decoration, and don't give all four equal weight in one view.
+
+#### Coral is attention, not text
+
+Brand coral (`--coral-400`) is 3.38:1 on paper: fine for large text and icons, not for body text or small button labels. For text that reports a failure, use `--destructive-text`.
+
+## Semantic roles
+
+<SemanticRoles
+  roles={[
+    { token: 'background', use: 'Page canvas behind everything.' },
+    { token: 'foreground', use: 'Body text.', on: 'background' },
+    { token: 'card', use: 'Cards, panels and raised surfaces.' },
+    { token: 'popover', use: 'Menus, popovers and dialogs.' },
+    { token: 'primary', use: 'Primary actions, selected navigation, strong emphasis.' },
+    { token: 'primary-foreground', use: 'Text and icons on primary.', on: 'primary' },
+    { token: 'secondary', use: 'Secondary action fill.', status: 'provisional' },
+    { token: 'muted', use: 'Quiet fills: wells, table stripes, disabled backgrounds.' },
+    { token: 'muted-foreground', use: 'Secondary text and captions.', on: 'card' },
+    { token: 'accent', use: 'Hover and selected surfaces (shadcn “accent”).', status: 'provisional' },
+    { token: 'attention', use: 'Brand coral for emphasis. Large text and icons only.' },
+    { token: 'destructive', use: 'Destructive action fill.' },
+    { token: 'destructive-foreground', use: 'Text on destructive.', on: 'destructive' },
+    { token: 'destructive-text', use: 'Text that reports a failure.', on: 'card' },
+    { token: 'success-text', use: 'Text that reports a good outcome.', on: 'card' },
+    { token: 'warning-text', use: 'Text that asks for attention.', on: 'card' },
+    { token: 'info-text', use: 'Informational text.', on: 'card' },
+    { token: 'border', use: 'Cards and dividers.', status: 'pending' },
+    { token: 'input', use: 'Input borders.', status: 'pending' },
+    { token: 'ring', use: 'The keyboard focus ring, everywhere.', status: 'pending' },
+  ]}
+/>
+
+The full list lives in `styles/tokens.css`. Status fills (`--success`, `--warning`, `--info`) are for icons, dots and large shapes; use the `-text` roles for words.
+
+## Tints
+
+<TintTable variants={['neutral', 'brand', 'success', 'warning', 'destructive', 'info']} />
+
+#### A tint is a set, not a single color
+
+Fill, border and text travel together. Each set pairs the lightest step of its scale with a darker text step, so every label stays above 6:1. Use tints for chips, badges and inline banners; never mix parts of two sets.
+
+## Open decisions
+
+<Callout title="Waiting on a decision" type="warn">
+  - **Focus ring.** Brand Gold (`--gold-300`) is 1.51:1 on the canvas; a visible focus indicator needs 3:1. Options: a two-tone ring (Gold with a dark inner ring), a darker gold, or an exemption.
+  - **Border.** Sage `#E0E1CA` is 1.23:1: fine for decorative dividers, too faint for input borders (3:1). Options: keep sage for dividers and pick a stronger input border, or switch to a scale step (`--green-100`, `--neutral-200`, or the product's current `#DCD9CC`).
+  - **Secondary and accent** currently use `--green-100`.
+</Callout>
+
+## Guidelines
+
+<Guidelines>
+  <Guideline>Prefer semantic roles over raw steps: `--muted-foreground`, not `--neutral-600`.</Guideline>
+  <Guideline>Never hardcode a hex. Every color on screen traces back to a token.</Guideline>
+  <Guideline>Keep one dominant teal action per region.</Guideline>
+  <Guideline>Pair every status color with an icon or a label; color alone never carries meaning.</Guideline>
+  <Guideline dont>Don't use coral for body text or small labels.</Guideline>
+  <Guideline dont>Don't use supporting colors for decoration.</Guideline>
+</Guidelines>
+
+## Related
+
+<Related>
+  <RelatedCard title="Typography" href="/library/foundations/typography">
+    <span className="font-heading text-h3 text-site-fg">Aa</span>
+  </RelatedCard>
+  <RelatedCard title="Elevation" href="/library/foundations/elevation">
+    <span className="rounded-lg bg-site-bg px-4 py-2 text-caption text-site-muted shadow-md">surface</span>
+  </RelatedCard>
+</Related>

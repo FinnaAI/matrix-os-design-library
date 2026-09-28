@@ -323,7 +323,7 @@ for each component:
 
 **Verification:** The page builds. Owner review of wording and the source-of-truth decision.
 
-- [ ] **Unit 4: Colors** 🛑 *review stop with decisions*
+- [ ] **Unit 4: Colors** 🛑 *review stop with decisions* (page built 2026-09-28, with `lib/tokens.ts` reading values from `tokens.css`, plus the swatch, role-table, tint-table, guideline and related blocks pulled forward from U1; status text roles and tint sets added as PROVISIONAL; focus ring, border and secondary/accent still open)
 
 **Goal:** A complete color foundation: palette, semantic roles, contrast, and status usage. PROVISIONAL tokens get resolved.
 

@@ -115,9 +115,36 @@
   --attention: var(--coral-400);
 
   --destructive: var(--coral-500);
+  --destructive-foreground: var(--brand-paper);
   --success: var(--teal-500);
   --warning: var(--gold-500);
   --info: var(--blue-500);
+
+  /* Status text on light surfaces. The fills above fail 4.5:1 as text, so text uses a darker step. PROVISIONAL */
+  --success-text: var(--teal-600);
+  --warning-text: var(--gold-700);
+  --destructive-text: var(--coral-600);
+  --info-text: var(--blue-600);
+
+  /* Tints: fill + border + text sets for chips, badges and banners. All text pairs ≥ 6:1. PROVISIONAL */
+  --tint-neutral-fill: var(--neutral-100);
+  --tint-neutral-border: var(--neutral-200);
+  --tint-neutral-text: var(--neutral-700);
+  --tint-brand-fill: var(--teal-50);
+  --tint-brand-border: var(--teal-100);
+  --tint-brand-text: var(--teal-800);
+  --tint-success-fill: var(--green-50);
+  --tint-success-border: var(--green-200);
+  --tint-success-text: var(--green-700);
+  --tint-warning-fill: var(--gold-50);
+  --tint-warning-border: var(--gold-200);
+  --tint-warning-text: var(--gold-700);
+  --tint-destructive-fill: var(--coral-50);
+  --tint-destructive-border: var(--coral-200);
+  --tint-destructive-text: var(--coral-600);
+  --tint-info-fill: var(--blue-50);
+  --tint-info-border: var(--blue-100);
+  --tint-info-text: var(--blue-700);
 
   --border: var(--brand-sage);
   --input: var(--brand-sage);
