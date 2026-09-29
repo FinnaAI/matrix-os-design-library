@@ -33,6 +33,8 @@ Never invent brand values. If something is missing from Figma and DESIGN.md, mar
 
 ## Docs content
 
+- **Developer-ready, always.** Every foundation and component page must be usable by developers as-is: real token names **and** Tailwind classes, copy-paste code that works, copyable values, and any setup a developer needs (token CSS, `@theme`, fonts, `cn`). Designers and developers read the same page.
+
 - Pages live in `content/docs/library/**` (Start here, foundations, components) and `content/docs/guides/**`. Navigation order lives in each folder's `meta.json`.
 - **Site chrome is neutral white/gray** (`styles/site.css`, `bg-site-*`/`text-site-*` utilities) so components stand out. Site chrome never uses Matrix brand colors; Matrix components never use `site-*` tokens.
 - The site layout is custom and Matrix-style: floating pill nav (`components/site/site-nav.tsx`), plain sidebar (`components/site/library-sidebar.tsx`), page body (`components/site/doc-page.tsx`). Fumadocs is used only for content loading and MDX blocks.
