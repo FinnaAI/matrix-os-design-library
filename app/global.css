@@ -69,6 +69,7 @@
   --color-ring: var(--ring);
 
   /* Brand scales */
+  --color-green-25: var(--green-25);
   --color-green-50: var(--green-50);
   --color-green-100: var(--green-100);
   --color-green-200: var(--green-200);
@@ -79,6 +80,7 @@
   --color-green-700: var(--green-700);
   --color-green-800: var(--green-800);
   --color-green-900: var(--green-900);
+  --color-teal-25: var(--teal-25);
   --color-teal-50: var(--teal-50);
   --color-teal-100: var(--teal-100);
   --color-teal-200: var(--teal-200);
@@ -89,6 +91,7 @@
   --color-teal-700: var(--teal-700);
   --color-teal-800: var(--teal-800);
   --color-teal-900: var(--teal-900);
+  --color-coral-25: var(--coral-25);
   --color-coral-50: var(--coral-50);
   --color-coral-100: var(--coral-100);
   --color-coral-200: var(--coral-200);
@@ -99,6 +102,7 @@
   --color-coral-700: var(--coral-700);
   --color-coral-800: var(--coral-800);
   --color-coral-900: var(--coral-900);
+  --color-gold-25: var(--gold-25);
   --color-gold-50: var(--gold-50);
   --color-gold-100: var(--gold-100);
   --color-gold-200: var(--gold-200);
@@ -109,6 +113,7 @@
   --color-gold-700: var(--gold-700);
   --color-gold-800: var(--gold-800);
   --color-gold-900: var(--gold-900);
+  --color-blue-25: var(--blue-25);
   --color-blue-50: var(--blue-50);
   --color-blue-100: var(--blue-100);
   --color-blue-200: var(--blue-200);
@@ -119,6 +124,7 @@
   --color-blue-700: var(--blue-700);
   --color-blue-800: var(--blue-800);
   --color-blue-900: var(--blue-900);
+  --color-neutral-25: var(--neutral-25);
   --color-neutral-50: var(--neutral-50);
   --color-neutral-100: var(--neutral-100);
   --color-neutral-200: var(--neutral-200);

@@ -1,8 +1,9 @@
 /*
  * Matrix OS design tokens — the single source of truth.
  *
- * Source: matrix-os DESIGN.md + Figma brand file xPG2FeYRtC9owCKSVXCqWA (page "Styles").
- * Primitive values are verified 1:1 against Figma (2026-09-28).
+ * Source: matrix-os DESIGN.md + Figma brand file xPG2FeYRtC9owCKSVXCqWA (page "Styles")
+ * and Figma Style library SiIcS4zeWkvC5R3pfanUgL (node 1:9, "Style Sheet — Color").
+ * Primitive values are verified 1:1 against both (2026-09-28); the Style library adds the 25 steps.
  *
  * Three tiers:
  *   1. Primitives  — raw brand scales. Never used directly in components.
@@ -16,6 +17,7 @@
 :root {
   /* ─── 1. Primitives ─────────────────────────────────────────── */
 
+  --green-25: #f9fbf5;
   --green-50: #f4f7ed;
   --green-100: #e4edd4;
   --green-200: #cee0ae;
@@ -27,6 +29,7 @@
   --green-800: #2b3715;
   --green-900: #171f0a;
 
+  --teal-25: #f7fbf9;
   --teal-50: #eef7f2;
   --teal-100: #c9e8d9;
   --teal-200: #97d8b9;
@@ -38,6 +41,7 @@
   --teal-800: #0e3422; /* brand Teal — the anchor */
   --teal-900: #061810;
 
+  --coral-25: #fdf7f5;
   --coral-50: #faeeeb;
   --coral-100: #f2d6cf;
   --coral-200: #e6b5a8;
@@ -49,6 +53,7 @@
   --coral-800: #442118;
   --coral-900: #25130e;
 
+  --gold-25: #fefaf3;
   --gold-50: #fcf5e8;
   --gold-100: #faead1;
   --gold-200: #f6daac;
@@ -60,6 +65,7 @@
   --gold-800: #4d3919;
   --gold-900: #251c0e;
 
+  --blue-25: #f6f9fb;
   --blue-50: #edf3f7;
   --blue-100: #c5d6e2; /* brand Blue */
   --blue-200: #9dbfd7;
@@ -71,6 +77,8 @@
   --blue-800: #193143;
   --blue-900: #0f1b24;
 
+  /* Figma Style library: identical to --neutral-50; kept so every scale has 11 steps. */
+  --neutral-25: #ffffff;
   --neutral-50: #ffffff;
   --neutral-100: #f3f2f2;
   --neutral-200: #e1e0e0;

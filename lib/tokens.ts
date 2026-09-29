@@ -1,5 +1,5 @@
 import 'server-only';
-import { readFileSync } from 'node:fs';
+import { readFileSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 
 // Reads styles/tokens.css at build time so documentation pages show real token values
@@ -8,19 +8,22 @@ import { join } from 'node:path';
 const HEX = /^#[0-9a-f]{6}$/i;
 const VAR = /^var\(--([a-z0-9-]+)\)$/i;
 
-let cache: Map<string, string> | undefined;
+const TOKENS_FILE = join(process.cwd(), 'styles/tokens.css');
+
+// Cached per file version: the dev server doesn't reload this module when tokens.css
+// changes (it isn't an import), so re-read whenever the file's modified time moves.
+let cache: { mtimeMs: number; values: Map<string, string> } | undefined;
 
 function declarations(): Map<string, string> {
-  if (cache) return cache;
-  const css = readFileSync(join(process.cwd(), 'styles/tokens.css'), 'utf8').replace(
-    /\/\*[\s\S]*?\*\//g,
-    '',
-  );
-  cache = new Map();
+  const { mtimeMs } = statSync(TOKENS_FILE);
+  if (cache?.mtimeMs === mtimeMs) return cache.values;
+  const css = readFileSync(TOKENS_FILE, 'utf8').replace(/\/\*[\s\S]*?\*\//g, '');
+  const values = new Map<string, string>();
   for (const match of css.matchAll(/--([a-z0-9-]+)\s*:\s*([^;]+);/gi)) {
-    cache.set(match[1], match[2].trim());
+    values.set(match[1], match[2].trim());
   }
-  return cache;
+  cache = { mtimeMs, values };
+  return values;
 }
 
 /** The raw declared value, e.g. `var(--teal-800)` or `#0e3422`. */

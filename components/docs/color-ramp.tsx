@@ -1,9 +1,9 @@
 import { isDark, resolveColor } from '@/lib/tokens';
 import { ColorSwatch } from './color-swatch';
 
-const STEPS = ['50', '100', '200', '300', '400', '500', '600', '700', '800', '900'];
+const STEPS = ['25', '50', '100', '200', '300', '400', '500', '600', '700', '800', '900'];
 
-// A labeled row of 10 swatches for one scale, e.g. "Teal · brand anchor".
+// A labeled row of 11 swatches (25–900) for one scale, e.g. "Teal · brand anchor".
 export function ColorRamp({
   scale,
   label,
@@ -16,7 +16,7 @@ export function ColorRamp({
   return (
     <div className="not-prose mb-6">
       <p className="mb-2 text-body-sm text-site-muted">{label}</p>
-      <div className="grid grid-cols-5 gap-2 sm:grid-cols-10">
+      <div className="grid grid-cols-4 gap-2 sm:grid-cols-11">
         {STEPS.map((step) => {
           const token = `${scale}-${step}`;
           return (

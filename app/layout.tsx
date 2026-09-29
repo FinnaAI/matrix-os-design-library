@@ -22,8 +22,9 @@ export default function Layout({ children }: LayoutProps<'/'>) {
       suppressHydrationWarning
     >
       <body className="min-h-screen bg-site-bg text-site-fg">
-        {/* Light only until the dark palette is designed. */}
-        <RootProvider theme={{ forcedTheme: 'light', enableSystem: false }}>{children}</RootProvider>
+        {/* Light only: theme switching (next-themes) is off, which also removes its inline
+            <script> that React 19 flags as an error in development. */}
+        <RootProvider theme={{ enabled: false }}>{children}</RootProvider>
       </body>
     </html>
   );
