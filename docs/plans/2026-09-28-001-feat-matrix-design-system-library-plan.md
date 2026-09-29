@@ -132,7 +132,7 @@ The layout and page anatomy follow the design system:
 - *Build order?* Foundations first, then components basics-first (user). Tiers below.
 - *Landing page?* Not now. The site is the docs with left navigation only (user).
 - *Responsive rules?* Decided per component, not as a foundation (user). Every component page's Guidelines state how it adapts to window size and touch.
-- *Focus ring contrast* (Gold is 1.5:1; needs 3:1): **decide later** (user). Options on the table: a two-tone ring (Gold + dark inner ring), a darker gold, or an exemption. The contrast test marks the focus pair as pending until decided. It must be decided before U7 Button ships.
+- *Focus ring contrast:* `--ring` is brand gold-400 for now (user, 2026-09-29). The final ring treatment and the input border are **decided when building the Input component (U9)**, using the side-by-side previews in `components/docs/decision-previews.tsx` (two-tone and neutral-500 pass 3:1; gold alone is 2.0:1). Button (U7) uses the gold ring until then; the contrast test marks the focus pair as pending.
 
 ### Needs a decision at a review stop (non-blocking for the plan)
 

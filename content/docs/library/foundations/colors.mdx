@@ -89,8 +89,8 @@ The page (`--neutral-25`) and card (`--neutral-100`) surfaces are close in value
     { token: 'warning-text', use: 'Text that asks for attention.', on: 'card' },
     { token: 'info-text', use: 'Informational text.', on: 'card' },
     { token: 'border', use: 'Cards and dividers.' },
-    { token: 'input', use: 'Input borders.', status: 'pending' },
-    { token: 'ring', use: 'The keyboard focus ring, everywhere.', status: 'pending' },
+    { token: 'input', use: 'Input borders. Finalized with the Input component.', status: 'provisional' },
+    { token: 'ring', use: 'The keyboard focus ring, everywhere (brand gold).' },
   ]}
 />
 
@@ -103,24 +103,6 @@ The full list lives in `styles/tokens.css`. Status fills (`--success`, `--warnin
 #### A tint is a set, not a single color
 
 Fill, border and text travel together. Each set pairs a light step of its scale with a darker text step, so every label stays above 6:1. Use tints for chips, badges and inline banners; never mix parts of two sets.
-
-## Open decisions
-
-### Focus ring
-
-The keyboard focus indicator needs 3:1 against the surface it sits on. Each option is shown in its focused state on a coral button and an input.
-
-<FocusRingOptions />
-
-### Input border
-
-An input's edge needs 3:1 so people can find the field. Dividers and card borders are decorative and can stay lighter.
-
-<InputBorderOptions />
-
-<Callout title="Also waiting on a decision" type="warn">
-  **Action vs destructive.** Both are coral. Destructive uses the darker `--coral-700` so delete never looks like "continue"; confirm this with the brand owner.
-</Callout>
 
 ## Guidelines
 
