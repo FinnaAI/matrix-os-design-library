@@ -1,8 +1,9 @@
 /*
  * Matrix OS design tokens — the single source of truth.
  *
- * Source: matrix-os DESIGN.md + Figma brand file xPG2FeYRtC9owCKSVXCqWA (page "Styles")
- * and Figma Style library SiIcS4zeWkvC5R3pfanUgL (node 1:9, "Style Sheet — Color").
+ * Source of truth: Figma Style library SiIcS4zeWkvC5R3pfanUgL (node 1:9, "Style Sheet — Color").
+ * Scales also match the brand file xPG2FeYRtC9owCKSVXCqWA; roles follow the Style library.
+ * Rule: every color is a step of a brand scale. No off-scale values.
  * Primitive values are verified 1:1 against both (2026-09-28); the Style library adds the 25 steps.
  *
  * Three tiers:
@@ -21,9 +22,9 @@
   --green-50: #f4f7ed;
   --green-100: #e4edd4;
   --green-200: #cee0ae;
-  --green-300: #bed77b; /* brand Green */
+  --green-300: #bed77b;
   --green-400: #9ac059;
-  --green-500: #748e59;
+  --green-500: #748e59; /* brand Green: primary brand tone */
   --green-600: #62783a;
   --green-700: #475926;
   --green-800: #2b3715;
@@ -35,10 +36,10 @@
   --teal-200: #97d8b9;
   --teal-300: #5ec996;
   --teal-400: #34b275;
-  --teal-500: #288a5b;
+  --teal-500: #288a5b; /* brand Teal: success */
   --teal-600: #1b6541;
   --teal-700: #13492f;
-  --teal-800: #0e3422; /* brand Teal — the anchor */
+  --teal-800: #0e3422;
   --teal-900: #061810;
 
   --coral-25: #fdf7f5;
@@ -46,8 +47,8 @@
   --coral-100: #f2d6cf;
   --coral-200: #e6b5a8;
   --coral-300: #da9481;
-  --coral-400: #d06e53; /* brand Coral */
-  --coral-500: #ba5236;
+  --coral-400: #d06e53;
+  --coral-500: #ba5236; /* brand Coral: warm action / CTA */
   --coral-600: #8f432d;
   --coral-700: #6b3324;
   --coral-800: #442118;
@@ -57,8 +58,8 @@
   --gold-50: #fcf5e8;
   --gold-100: #faead1;
   --gold-200: #f6daac;
-  --gold-300: #f1c379; /* brand Gold */
-  --gold-400: #e0aa52;
+  --gold-300: #f1c379;
+  --gold-400: #e0aa52; /* brand Gold: highlight / accent */
   --gold-500: #d2932d;
   --gold-600: #a37429;
   --gold-700: #775622;
@@ -67,7 +68,7 @@
 
   --blue-25: #f6f9fb;
   --blue-50: #edf3f7;
-  --blue-100: #c5d6e2; /* brand Blue */
+  --blue-100: #c5d6e2;
   --blue-200: #9dbfd7;
   --blue-300: #71a9d0;
   --blue-400: #5ca0d1;
@@ -90,40 +91,40 @@
   --neutral-800: #242323;
   --neutral-900: #0d0c0c;
 
-  /* Named brand values that sit outside the scales (DESIGN.md). */
-  --brand-ink: #1f2d1d;
-  --brand-paper: #fcfcf8;
-  --brand-sage: #e0e1ca; /* OPEN DECISION: off-scale, hidden in Figma, used as default border */
-
   /* ─── 2. Semantic (light) ──────────────────────────────────────
-     Mapped from DESIGN.md `semanticColors`. Items marked PROVISIONAL
-     are my interpretation and need a decision during planning. */
+     Rule: every semantic color points at a brand scale step. No off-scale values.
+     Roles follow the Figma Style library (SiIcS4zeWkvC5R3pfanUgL, "Style Sheet — Color"):
+     Green = primary brand tone · Coral = warm action/CTA · Teal = success · Gold = highlight.
+     PROVISIONAL = my interpretation where the Style library is silent. */
 
+  /* Brand */
+  --brand: var(--green-500); /* Primary brand tone: logo, brand moments */
+  --brand-foreground: var(--neutral-50);
+
+  /* Surfaces and text (Style library: base-background, card-surface, accent-surface, text-default, text-subtle) */
   --background: var(--green-50);
-  --foreground: var(--brand-ink);
+  --foreground: var(--neutral-800);
+  --card: var(--neutral-100);
+  --card-foreground: var(--neutral-800);
+  --popover: var(--neutral-50); /* PROVISIONAL */
+  --popover-foreground: var(--neutral-800);
 
-  --card: var(--brand-paper);
-  --card-foreground: var(--brand-ink);
-  --popover: var(--neutral-50);
-  --popover-foreground: var(--brand-ink);
-
-  --primary: var(--teal-800);
-  --primary-foreground: var(--brand-paper);
-
+  /* Actions */
+  --primary: var(--coral-500); /* Warm action / CTA */
+  --primary-foreground: var(--neutral-50);
   --secondary: var(--green-100); /* PROVISIONAL */
-  --secondary-foreground: var(--teal-800);
+  --secondary-foreground: var(--green-800);
 
-  --muted: var(--neutral-100);
+  --muted: var(--neutral-200); /* PROVISIONAL: card is neutral-100, so wells inside cards step down once */
   --muted-foreground: var(--neutral-600);
 
-  /* shadcn "accent" = hover/selected surface, NOT the brand accent color.
-     The brand accent (Coral) is exposed as --attention. PROVISIONAL */
-  --accent: var(--green-100);
-  --accent-foreground: var(--teal-800);
-  --attention: var(--coral-400);
+  /* shadcn "accent" = hover/selected surface (Style library: accent-surface). */
+  --accent: var(--teal-50);
+  --accent-foreground: var(--neutral-800);
+  --attention: var(--gold-400); /* Highlight / accent: badges, premium, attention */
 
-  --destructive: var(--coral-500);
-  --destructive-foreground: var(--brand-paper);
+  --destructive: var(--coral-700); /* PROVISIONAL: darker than the coral CTA so delete never looks like "continue" */
+  --destructive-foreground: var(--neutral-50);
   --success: var(--teal-500);
   --warning: var(--gold-500);
   --info: var(--blue-500);
@@ -138,12 +139,12 @@
   --tint-neutral-fill: var(--neutral-100);
   --tint-neutral-border: var(--neutral-200);
   --tint-neutral-text: var(--neutral-700);
-  --tint-brand-fill: var(--teal-50);
-  --tint-brand-border: var(--teal-100);
-  --tint-brand-text: var(--teal-800);
-  --tint-success-fill: var(--green-50);
-  --tint-success-border: var(--green-200);
-  --tint-success-text: var(--green-700);
+  --tint-brand-fill: var(--green-50);
+  --tint-brand-border: var(--green-200);
+  --tint-brand-text: var(--green-800);
+  --tint-success-fill: var(--teal-50);
+  --tint-success-border: var(--teal-100);
+  --tint-success-text: var(--teal-700);
   --tint-warning-fill: var(--gold-50);
   --tint-warning-border: var(--gold-200);
   --tint-warning-text: var(--gold-700);
@@ -154,9 +155,9 @@
   --tint-info-border: var(--blue-100);
   --tint-info-text: var(--blue-700);
 
-  --border: var(--brand-sage);
-  --input: var(--brand-sage);
-  --ring: var(--gold-300); /* Focus is always Gold, with a visible offset */
+  --border: var(--neutral-300); /* Style library: border-subtle */
+  --input: var(--neutral-300); /* OPEN: input borders need 3:1; neutral-300 is 1.5:1 */
+  --ring: var(--gold-400); /* OPEN: brand gold is 1.9:1 on the page; a focus indicator needs 3:1 */
 
   --sidebar: var(--background);
   --sidebar-foreground: var(--foreground);
@@ -171,7 +172,7 @@
 
   --radius: 0.75rem; /* 12px default component radius */
 
-  --shadow-color: 31 45 29; /* ink, as RGB channels */
+  --shadow-color: 36 35 35; /* neutral-800 (text-default), as RGB channels */
 
   --duration-fast: 120ms;
   --duration-base: 180ms;

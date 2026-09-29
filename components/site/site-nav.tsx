@@ -25,7 +25,7 @@ export function SiteNav() {
         <Link
           href="/library"
           aria-label="Matrix OS Design System"
-          className="mr-1 flex size-8 items-center justify-center rounded-full bg-site-nav-fg text-primary"
+          className="mr-1 flex size-8 items-center justify-center rounded-full bg-site-nav-fg text-brand"
         >
           <RabbitMark className="h-5" />
         </Link>

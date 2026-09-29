@@ -1,4 +1,5 @@
 import { isDark, resolveColor } from '@/lib/tokens';
+import { cn } from '@/lib/utils';
 import { ColorSwatch } from './color-swatch';
 
 const STEPS = ['25', '50', '100', '200', '300', '400', '500', '600', '700', '800', '900'];
@@ -38,7 +39,12 @@ export function ColorRamp({
 // Named brand values that sit outside the scales (ink, paper, sage).
 export function ColorSet({ tokens }: { tokens: { token: string; name: string; note?: string }[] }) {
   return (
-    <div className="not-prose mb-6 grid grid-cols-2 gap-4 sm:grid-cols-4">
+    <div
+      className={cn(
+        'not-prose mb-6 grid grid-cols-2 gap-4',
+        tokens.length % 3 === 0 ? 'sm:grid-cols-3' : 'sm:grid-cols-4',
+      )}
+    >
       {tokens.map(({ token, name, note }) => {
         const hex = resolveColor(token);
         return (

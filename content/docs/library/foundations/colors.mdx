@@ -1,6 +1,6 @@
 ---
 title: Colors
-description: Teal anchors every screen; four supporting colors carry meaning. Semantic tokens wrap the right step at the right tier, so product code rarely reaches for a raw scale number.
+description: Green is Matrix's brand tone, coral drives action, teal confirms success and gold highlights. Every color on screen is a step of these brand scales; semantic tokens wrap the right step, so product code rarely reaches for a raw number.
 ---
 
 ## Usage
@@ -20,42 +20,62 @@ border-color: var(--border);
 
 Click any swatch to copy its token.
 
-## Core palettes
-
-<ColorRamp scale="teal" label="Teal · brand anchor" brandStep="800" />
-<ColorRamp scale="neutral" label="Neutral · grey" />
-
-#### Teal is Matrix's color
-
-Teal carries identity: primary actions, navigation and strong text. Keep one dominant teal action per region. The supporting colors create rhythm and communicate state; they never compete with teal for attention.
-
-### Ink, paper and sage
-
-Three brand values sit outside the scales. Ink is the default text color, paper is the card surface, and the green-tinted canvas (`--green-50`) is the page background.
+## Brand colors
 
 <ColorSet
   tokens={[
-    { token: 'brand-ink', name: 'Ink', note: 'Body text' },
-    { token: 'brand-paper', name: 'Paper', note: 'Cards and surfaces' },
-    { token: 'green-50', name: 'Canvas', note: 'Page background' },
-    { token: 'brand-sage', name: 'Sage', note: 'Default border (decision pending)' },
+    { token: 'green-500', name: 'Green', note: 'Primary brand tone' },
+    { token: 'teal-500', name: 'Teal', note: 'Success / accent' },
+    { token: 'coral-500', name: 'Coral', note: 'Warm action / CTA' },
+    { token: 'gold-400', name: 'Gold', note: 'Highlight / accent' },
   ]}
 />
 
-## Supporting colors
+Every other color in the system is a lighter or darker step of these hues, plus a warm neutral for structure and text. There are no off-scale values.
 
-<ColorRamp scale="green" label="Green · ready, success" brandStep="300" />
-<ColorRamp scale="gold" label="Gold · pending, focus, selected" brandStep="300" />
-<ColorRamp scale="coral" label="Coral · attention, failed, destructive" brandStep="400" />
-<ColorRamp scale="blue" label="Blue · information, syncing" brandStep="100" />
+## Core palettes
 
-#### Supporting colors are signals, not confetti
+<ColorRamp scale="green" label="Green · primary brand tone" brandStep="500" />
+<ColorRamp scale="neutral" label="Neutral · warm grey" />
 
-`green` means ready, connected or successful. `gold` means pending, selected or needs attention without failure. `coral` means failed, destructive or urgent. `blue` means informational, syncing or neutral progress. Never encode state by color alone: always pair it with an icon or a label. Never use these colors for decoration, and don't give all four equal weight in one view.
+#### Green is Matrix's color
 
-#### Coral is attention, not text
+Green carries identity: the logo, brand moments and tinted surfaces (the page itself is `--green-50`). Darker steps work for brand headings, lighter steps for backgrounds and hover. Green is not the action color; coral is.
 
-Brand coral (`--coral-400`) is 3.38:1 on paper: fine for large text and icons, not for body text or small button labels. For text that reports a failure, use `--destructive-text`.
+## Action and highlight
+
+<ColorRamp scale="coral" label="Coral · warm action, CTA" brandStep="500" />
+<ColorRamp scale="gold" label="Gold · highlight, accent" brandStep="400" />
+
+#### Coral is the action color
+
+Coral marks what people can do: primary buttons, links and interactive highlights. Keep one dominant coral action per region. Brand coral (`--coral-500`) is 4.3:1 on a card, so small text and links use `--coral-600` (6.3:1).
+
+## Status
+
+<ColorRamp scale="teal" label="Teal · success" brandStep="500" />
+<ColorRamp scale="blue" label="Blue · information, links" />
+
+#### Status colors mean status
+
+`teal` means success, connected or ready. `gold` means pending or needs attention. `coral` (the darker `--coral-700`) means failed or destructive. `blue` means informational or syncing. Always pair a status color with an icon or a label; color alone never carries meaning. Never use status colors for decoration.
+
+## Surfaces and text
+
+<ColorSet
+  tokens={[
+    { token: 'background', name: 'Page', note: 'base-background: the default canvas' },
+    { token: 'card', name: 'Card', note: 'card-surface: elevated content' },
+    { token: 'accent', name: 'Accent', note: 'accent-surface: highlight and hover' },
+    { token: 'border', name: 'Border', note: 'border-subtle: dividers and borders' },
+    { token: 'foreground', name: 'Text', note: 'text-default: primary copy' },
+    { token: 'muted-foreground', name: 'Subtle text', note: 'text-subtle: secondary copy' },
+  ]}
+/>
+
+#### Cards separate by edge, not fill
+
+The page (`--green-50`) and card (`--neutral-100`) surfaces are only 1.03:1 apart, so a card never relies on its fill to stand out. Give it a border or a shadow.
 
 ## Semantic roles
 
@@ -64,21 +84,23 @@ Brand coral (`--coral-400`) is 3.38:1 on paper: fine for large text and icons, n
     { token: 'background', use: 'Page canvas behind everything.' },
     { token: 'foreground', use: 'Body text.', on: 'background' },
     { token: 'card', use: 'Cards, panels and raised surfaces.' },
-    { token: 'popover', use: 'Menus, popovers and dialogs.' },
-    { token: 'primary', use: 'Primary actions, selected navigation, strong emphasis.' },
+    { token: 'popover', use: 'Menus, popovers and dialogs.', status: 'provisional' },
+    { token: 'brand', use: 'Logo and brand moments. Not for actions.' },
+    { token: 'primary', use: 'Primary actions and links (coral CTA).' },
     { token: 'primary-foreground', use: 'Text and icons on primary.', on: 'primary' },
     { token: 'secondary', use: 'Secondary action fill.', status: 'provisional' },
-    { token: 'muted', use: 'Quiet fills: wells, table stripes, disabled backgrounds.' },
+    { token: 'secondary-foreground', use: 'Text on secondary.', on: 'secondary' },
+    { token: 'muted', use: 'Quiet fills inside cards: wells, disabled backgrounds.', status: 'provisional' },
     { token: 'muted-foreground', use: 'Secondary text and captions.', on: 'card' },
-    { token: 'accent', use: 'Hover and selected surfaces (shadcn “accent”).', status: 'provisional' },
-    { token: 'attention', use: 'Brand coral for emphasis. Large text and icons only.' },
-    { token: 'destructive', use: 'Destructive action fill.' },
+    { token: 'accent', use: 'Hover and selected surfaces (shadcn “accent”).' },
+    { token: 'attention', use: 'Gold highlight for badges and premium moments. Not for text.' },
+    { token: 'destructive', use: 'Destructive action fill.', status: 'provisional' },
     { token: 'destructive-foreground', use: 'Text on destructive.', on: 'destructive' },
     { token: 'destructive-text', use: 'Text that reports a failure.', on: 'card' },
     { token: 'success-text', use: 'Text that reports a good outcome.', on: 'card' },
     { token: 'warning-text', use: 'Text that asks for attention.', on: 'card' },
     { token: 'info-text', use: 'Informational text.', on: 'card' },
-    { token: 'border', use: 'Cards and dividers.', status: 'pending' },
+    { token: 'border', use: 'Cards and dividers.' },
     { token: 'input', use: 'Input borders.', status: 'pending' },
     { token: 'ring', use: 'The keyboard focus ring, everywhere.', status: 'pending' },
   ]}
@@ -92,25 +114,26 @@ The full list lives in `styles/tokens.css`. Status fills (`--success`, `--warnin
 
 #### A tint is a set, not a single color
 
-Fill, border and text travel together. Each set pairs the lightest step of its scale with a darker text step, so every label stays above 6:1. Use tints for chips, badges and inline banners; never mix parts of two sets.
+Fill, border and text travel together. Each set pairs a light step of its scale with a darker text step, so every label stays above 6:1. Use tints for chips, badges and inline banners; never mix parts of two sets.
 
 ## Open decisions
 
 <Callout title="Waiting on a decision" type="warn">
-  - **Focus ring.** Brand Gold (`--gold-300`) is 1.51:1 on the canvas; a visible focus indicator needs 3:1. Options: a two-tone ring (Gold with a dark inner ring), a darker gold, or an exemption.
-  - **Border.** Sage `#E0E1CA` is 1.23:1: fine for decorative dividers, too faint for input borders (3:1). Options: keep sage for dividers and pick a stronger input border, or switch to a scale step (`--green-100`, `--neutral-200`, or the product's current `#DCD9CC`).
-  - **Secondary and accent** currently use `--green-100`.
+  - **Focus ring.** Brand gold (`--gold-400`) is 1.9:1 on the page; a visible focus indicator needs 3:1. Options: a two-tone ring (gold with a dark inner ring), a darker gold step, or an exemption.
+  - **Input border.** `--neutral-300` (Style library border) is 1.5:1: fine for dividers, too faint for input fields (3:1). `--neutral-500` is 3.6:1.
+  - **Action vs destructive.** Both are coral. Destructive uses the darker `--coral-700` so delete never looks like "continue"; confirm this with the brand owner.
+  - **Neutral 25.** In the Style library it is `#FFFFFF`, identical to Neutral 50.
 </Callout>
 
 ## Guidelines
 
 <Guidelines>
+  <Guideline>Every color is a step of a brand scale. Never use an off-scale value or a hardcoded hex.</Guideline>
   <Guideline>Prefer semantic roles over raw steps: `--muted-foreground`, not `--neutral-600`.</Guideline>
-  <Guideline>Never hardcode a hex. Every color on screen traces back to a token.</Guideline>
-  <Guideline>Keep one dominant teal action per region.</Guideline>
+  <Guideline>Keep one dominant coral action per region.</Guideline>
   <Guideline>Pair every status color with an icon or a label; color alone never carries meaning.</Guideline>
-  <Guideline dont>Don't use coral for body text or small labels.</Guideline>
-  <Guideline dont>Don't use supporting colors for decoration.</Guideline>
+  <Guideline dont>Don't use green for actions; green is identity, coral is action.</Guideline>
+  <Guideline dont>Don't set small text or links in `--coral-500`; use `--coral-600`.</Guideline>
 </Guidelines>
 
 ## Related
