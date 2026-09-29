@@ -78,9 +78,8 @@
   --blue-800: #193143;
   --blue-900: #0f1b24;
 
-  /* Figma Style library: identical to --neutral-50; kept so every scale has 11 steps. */
-  --neutral-25: #ffffff;
-  --neutral-50: #ffffff;
+  --neutral-25: #fafafa;
+  --neutral-50: #f5f5f5;
   --neutral-100: #f3f2f2;
   --neutral-200: #e1e0e0;
   --neutral-300: #c8c6c6;
@@ -99,19 +98,19 @@
 
   /* Brand */
   --brand: var(--green-500); /* Primary brand tone: logo, brand moments */
-  --brand-foreground: var(--neutral-50);
+  --brand-foreground: var(--neutral-25);
 
   /* Surfaces and text (Style library: base-background, card-surface, accent-surface, text-default, text-subtle) */
-  --background: var(--neutral-50); /* Her call (2026-09-29): neutral white page, not the Style library's green-50 */
+  --background: var(--neutral-25); /* Her call (2026-09-29): near-white neutral page, not the Style library's green-50 */
   --foreground: var(--neutral-800);
   --card: var(--neutral-100);
   --card-foreground: var(--neutral-800);
-  --popover: var(--neutral-50); /* PROVISIONAL */
+  --popover: var(--neutral-25); /* PROVISIONAL */
   --popover-foreground: var(--neutral-800);
 
   /* Actions */
   --primary: var(--coral-500); /* Warm action / CTA */
-  --primary-foreground: var(--neutral-50);
+  --primary-foreground: var(--neutral-25); /* 4.63:1 on coral-500; neutral-50 would fail at 4.43:1 */
   --secondary: var(--green-100); /* PROVISIONAL */
   --secondary-foreground: var(--green-800);
 
@@ -124,7 +123,7 @@
   --attention: var(--gold-400); /* Highlight / accent: badges, premium, attention */
 
   --destructive: var(--coral-700); /* PROVISIONAL: darker than the coral CTA so delete never looks like "continue" */
-  --destructive-foreground: var(--neutral-50);
+  --destructive-foreground: var(--neutral-25);
   --success: var(--teal-500);
   --warning: var(--gold-500);
   --info: var(--blue-500);
@@ -157,7 +156,7 @@
 
   --border: var(--neutral-300); /* Style library: border-subtle */
   --input: var(--neutral-300); /* OPEN: input borders need 3:1; neutral-300 is 1.5:1 */
-  --ring: var(--gold-400); /* OPEN: brand gold is 2.1:1 on the page; a focus indicator needs 3:1 */
+  --ring: var(--gold-400); /* OPEN: brand gold is 2.0:1 on the page; a focus indicator needs 3:1 */
 
   --sidebar: var(--background);
   --sidebar-foreground: var(--foreground);

@@ -52,7 +52,7 @@ Every other color in the system is a lighter or darker step of these hues, plus 
 
 <ColorSet
   tokens={[
-    { token: 'background', name: 'Page', note: 'The default canvas: neutral white' },
+    { token: 'background', name: 'Page', note: 'The default canvas: near-white neutral' },
     { token: 'card', name: 'Card', note: 'card-surface: elevated content' },
     { token: 'accent', name: 'Accent', note: 'accent-surface: highlight and hover' },
     { token: 'border', name: 'Border', note: 'border-subtle: dividers and borders' },
@@ -63,7 +63,7 @@ Every other color in the system is a lighter or darker step of these hues, plus 
 
 #### Cards separate by edge, not fill
 
-The page (`--neutral-50`) and card (`--neutral-100`) surfaces are close in value, so a card never relies on its fill alone to stand out. Give it a border or a shadow.
+The page (`--neutral-25`) and card (`--neutral-100`) surfaces are close in value, so a card never relies on its fill alone to stand out. Give it a border or a shadow.
 
 ## Semantic roles
 
@@ -107,10 +107,9 @@ Fill, border and text travel together. Each set pairs a light step of its scale 
 ## Open decisions
 
 <Callout title="Waiting on a decision" type="warn">
-  - **Focus ring.** Brand gold (`--gold-400`) is 2.1:1 on the page; a visible focus indicator needs 3:1. Options: a two-tone ring (gold with a dark inner ring), a darker gold step, or an exemption.
+  - **Focus ring.** Brand gold (`--gold-400`) is 2.0:1 on the page; a visible focus indicator needs 3:1. Options: a two-tone ring (gold with a dark inner ring), a darker gold step, or an exemption.
   - **Input border.** `--neutral-300` (Style library border) is 1.5:1 on a card: fine for dividers, too faint for input fields (3:1). `--neutral-500` is 3.6:1.
   - **Action vs destructive.** Both are coral. Destructive uses the darker `--coral-700` so delete never looks like "continue"; confirm this with the brand owner.
-  - **Neutral 25.** In the Style library it is `#FFFFFF`, identical to Neutral 50.
 </Callout>
 
 ## Guidelines

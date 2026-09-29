@@ -5,17 +5,17 @@
  */
 
 :root {
-  --site-bg: var(--neutral-50);
+  --site-bg: var(--neutral-25);
   --site-fg: var(--neutral-900);
   --site-muted: var(--neutral-600);
   --site-subtle: var(--neutral-500);
-  --site-hover: var(--neutral-100);
+  --site-hover: var(--neutral-50);
   --site-active: var(--neutral-100);
   --site-border: var(--neutral-200);
   --site-code: var(--neutral-100);
   --site-nav: var(--neutral-700);
   --site-nav-active: var(--neutral-600);
-  --site-nav-fg: var(--neutral-50);
+  --site-nav-fg: var(--neutral-25);
   --site-nav-muted: var(--neutral-300);
   --site-sidebar-max-h: calc(100vh - 8rem);
 
