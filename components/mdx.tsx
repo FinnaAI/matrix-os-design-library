@@ -3,6 +3,7 @@ import type { MDXComponents } from 'mdx/types';
 import { ColorRamp, ColorSet } from '@/components/docs/color-ramp';
 import { SemanticRoles, TintTable } from '@/components/docs/token-tables';
 import { Guideline, Guidelines, Related, RelatedCard } from '@/components/docs/guidelines';
+import { FocusRingOptions, InputBorderOptions } from '@/components/docs/decision-previews';
 
 export function getMDXComponents(components?: MDXComponents) {
   return {
@@ -11,6 +12,8 @@ export function getMDXComponents(components?: MDXComponents) {
     ColorSet,
     SemanticRoles,
     TintTable,
+    FocusRingOptions,
+    InputBorderOptions,
     Guidelines,
     Guideline,
     Related,

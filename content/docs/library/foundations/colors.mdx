@@ -106,10 +106,20 @@ Fill, border and text travel together. Each set pairs a light step of its scale 
 
 ## Open decisions
 
-<Callout title="Waiting on a decision" type="warn">
-  - **Focus ring.** Brand gold (`--gold-400`) is 2.0:1 on the page; a visible focus indicator needs 3:1. Options: a two-tone ring (gold with a dark inner ring), a darker gold step, or an exemption.
-  - **Input border.** `--neutral-300` (Style library border) is 1.5:1 on a card: fine for dividers, too faint for input fields (3:1). `--neutral-500` is 3.6:1.
-  - **Action vs destructive.** Both are coral. Destructive uses the darker `--coral-700` so delete never looks like "continue"; confirm this with the brand owner.
+### Focus ring
+
+The keyboard focus indicator needs 3:1 against the surface it sits on. Each option is shown in its focused state on a coral button and an input.
+
+<FocusRingOptions />
+
+### Input border
+
+An input's edge needs 3:1 so people can find the field. Dividers and card borders are decorative and can stay lighter.
+
+<InputBorderOptions />
+
+<Callout title="Also waiting on a decision" type="warn">
+  **Action vs destructive.** Both are coral. Destructive uses the darker `--coral-700` so delete never looks like "continue"; confirm this with the brand owner.
 </Callout>
 
 ## Guidelines
