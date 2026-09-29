@@ -102,7 +102,7 @@
   --brand-foreground: var(--neutral-50);
 
   /* Surfaces and text (Style library: base-background, card-surface, accent-surface, text-default, text-subtle) */
-  --background: var(--green-50);
+  --background: var(--neutral-50); /* Her call (2026-09-29): neutral white page, not the Style library's green-50 */
   --foreground: var(--neutral-800);
   --card: var(--neutral-100);
   --card-foreground: var(--neutral-800);
@@ -157,7 +157,7 @@
 
   --border: var(--neutral-300); /* Style library: border-subtle */
   --input: var(--neutral-300); /* OPEN: input borders need 3:1; neutral-300 is 1.5:1 */
-  --ring: var(--gold-400); /* OPEN: brand gold is 1.9:1 on the page; a focus indicator needs 3:1 */
+  --ring: var(--gold-400); /* OPEN: brand gold is 2.1:1 on the page; a focus indicator needs 3:1 */
 
   --sidebar: var(--background);
   --sidebar-foreground: var(--foreground);
