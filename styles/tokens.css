@@ -171,9 +171,29 @@
 
   /* ─── Shape, depth, motion ─────────────────────────────────── */
 
-  --radius: 0.75rem; /* 12px default component radius */
+  /* Radius (Matrix DESIGN.md, plus 2px and 4px for small elements: her call 2026-09-30).
+     Named --rounded-* to match Tailwind's rounded-* classes. Radius follows the element's size. */
+  --rounded-2xs: 2px;
+  --rounded-xs: 4px;
+  --rounded-sm: 6px;
+  --rounded-md: 8px; /* compact controls, swatches */
+  --rounded-lg: 12px; /* default component radius */
+  --rounded-xl: 16px; /* brand cards */
+  --rounded-2xl: 24px;
+  --rounded-full: 9999px; /* pills */
+  --radius: var(--rounded-lg); /* shadcn's base radius */
 
+  /* Elevation: layered shadows modelled on the scale (her call, 2026-09-30), tinted with the
+     Matrix warm neutral instead of pure black. Use xs (resting controls), lg (overlays), xl (dialogs). */
   --shadow-color: 36 35 35; /* neutral-800 (text-default), as RGB channels */
+  --elevation-xs: 0 1px 2px 0 rgb(var(--shadow-color) / 0.05);
+  --elevation-sm: 0 1px 2px 0 rgb(var(--shadow-color) / 0.06), 0 1px 3px 0 rgb(var(--shadow-color) / 0.1);
+  --elevation-md: 0 2px 4px -2px rgb(var(--shadow-color) / 0.06), 0 4px 8px -2px rgb(var(--shadow-color) / 0.1);
+  --elevation-lg: 0 2px 2px -1px rgb(var(--shadow-color) / 0.04), 0 4px 6px -2px rgb(var(--shadow-color) / 0.03), 0 12px 16px -4px rgb(var(--shadow-color) / 0.08);
+  --elevation-xl: 0 3px 3px -1.5px rgb(var(--shadow-color) / 0.04), 0 8px 8px -4px rgb(var(--shadow-color) / 0.03), 0 20px 24px -4px rgb(var(--shadow-color) / 0.08);
+  --elevation-2xl: 0 4px 4px -2px rgb(var(--shadow-color) / 0.04), 0 24px 48px -12px rgb(var(--shadow-color) / 0.18);
+  --elevation-3xl: 0 5px 5px -2.5px rgb(var(--shadow-color) / 0.04), 0 32px 64px -12px rgb(var(--shadow-color) / 0.14);
+  --elevation-xs-top: 0 -1px 2px 0 rgb(var(--shadow-color) / 0.05); /* xs inverted, for bars anchored to the bottom edge */
 
   --duration-fast: 120ms;
   --duration-base: 180ms;

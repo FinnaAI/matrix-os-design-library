@@ -26,6 +26,8 @@ Never invent brand values. If something is missing from Figma and DESIGN.md, mar
 - **shadcn naming.** Semantic tokens use shadcn names so components drop into the Matrix product unchanged. Note that shadcn `accent` is a hover surface (`--coral-25`, kept lighter than the coral-50 error tint); gold highlight is `attention`; brand identity is `brand`.
 - **Fonts:** Bricolage Grotesque for headings (`font-heading`), Geist for UI and body (`font-sans`), Geist Mono for code and machine text (`font-mono`).
 - **Icons:** Lucide (`lucide-react`, shadcn's default; her call 2026-09-30, Hugeicons felt too soft), always rendered through `components/ui/icon.tsx` with a scale size matching (`xxs` 12 · `xs` 14 · `sm` 16 · `md` 20 default · `lg` 24; stroke 2 on the 24 grid, floored at 1.25px). Never pass a pixel size or `strokeWidth`; never mix in Hugeicons or emoji.
+- **Elevation:** shadows only from tokens: `--elevation-{xs,sm,md,lg,xl,2xl,3xl,xs-top}` in `tokens.css` = Tailwind `shadow-*`. Resting controls `xs`, overlays `lg`, dialogs `xl`. Never hand-write a `box-shadow`. (Source tokens are named `--elevation-*` because `@theme` can't map `--shadow-lg` to itself.)
+- **Radius:** `--rounded-{2xs 2,xs 4,sm 6,md 8,lg 12 default,xl 16,2xl 24,full}` in `tokens.css` = Tailwind `rounded-*`; `--radius` (shadcn) = `--rounded-lg`. Pick the radius by the container's size (see the Radius page's size table); nested corners: inner = outer − padding.
 - **Focus** is always the Gold ring (`--ring`) with an offset. Never remove focus without replacing it.
 - **Minimum sizes:** body text 14px or more, touch targets 44px or more.
 - **One component per concept.** Add components with `pnpm dlx shadcn@latest add <name>`, then restyle with tokens. Never create a second Button.

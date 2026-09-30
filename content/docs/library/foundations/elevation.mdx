@@ -1,6 +1,60 @@
 ---
 title: Elevation
-description: Shadows, surfaces and layering.
+description: Elevation says how far a surface sits above the page. Seven steps up, one that casts upward, all tinted with the Matrix warm neutral.
 ---
 
-<Callout>This page is being written. The tokens already exist in `styles/tokens.css`.</Callout>
+## Usage
+
+```css
+/* Elevation is one property: box-shadow, from a token.
+   Steps xs · sm · md · lg · xl · 2xl · 3xl, plus the upward xs-top. */
+.panel {
+  box-shadow: var(--elevation-lg);
+}
+```
+
+```tsx
+// The same steps as Tailwind utilities
+<div className="rounded-xl bg-popover shadow-lg" />
+```
+
+Click a token or class in the tables to copy it.
+
+## Shadow scale
+
+<ShadowScale steps={['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl']} />
+
+`xs` rests on form controls · `lg` lifts the overlays (menus, popovers, tooltips) · `xl` is the dialog, the only surface that goes higher.
+
+## Directional
+
+<ShadowScale steps={['xs-top']} />
+
+The `xs` shadow inverted, for a surface anchored to the bottom edge of the viewport, like the chat composer on mobile.
+
+## Guidelines
+
+<Guidelines>
+  <Guideline>Use a token, never a hand-written `box-shadow`; the warm ink color is part of the scale.</Guideline>
+  <Guideline>Let elevation follow the surface: resting controls `xs`, overlays `lg`, dialogs `xl`.</Guideline>
+  <Guideline>Elevation is not emphasis. To make something matter more, use hierarchy and space, not a bigger shadow.</Guideline>
+  <Guideline>Don't stack a shadow on a surface that already has one; the outer container owns the elevation.</Guideline>
+  <Guideline>Prefer `xs`, `lg` or `xl`. The other steps exist for rare cases; reach for them only when none of the three fit.</Guideline>
+  <Guideline>Cards on the page separate by a border first (see Colors); add `xs` only when the card must read as raised.</Guideline>
+  <Guideline dont>Don't add directional shadows beyond `xs-top`; elevation in another direction is a layout question, not a new token.</Guideline>
+</Guidelines>
+
+## Related
+
+<Related>
+  <RelatedCard title="Colors" href="/library/foundations/colors">
+    <span className="flex gap-1">
+      <span className="size-4 rounded-full bg-neutral-800" />
+      <span className="size-4 rounded-full bg-green-500" />
+      <span className="size-4 rounded-full bg-coral-500" />
+    </span>
+  </RelatedCard>
+  <RelatedCard title="Radius" href="/library/foundations/radius">
+    <span className="size-10 rounded-xl border border-site-border bg-site-bg" />
+  </RelatedCard>
+</Related>

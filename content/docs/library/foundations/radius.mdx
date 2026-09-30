@@ -1,6 +1,76 @@
 ---
 title: Radius
-description: Corner radius for controls, cards and pills.
+description: Matrix is rounded but precise. Eight steps from a 2px corner to a full pill, chosen by the size of the element; 12px is the default for components.
 ---
 
-<Callout>This page is being written. The tokens already exist in `styles/tokens.css`.</Callout>
+## Usage
+
+```css
+/* Radius is one property: border-radius, from a token. */
+.panel {
+  border-radius: var(--rounded-lg);
+}
+```
+
+```tsx
+// The same steps as Tailwind utilities
+<div className="rounded-lg border border-border bg-card" />
+```
+
+shadcn components read `--radius`, which points at `--rounded-lg` (12px), so they pick up the Matrix default automatically.
+
+## Radius scale
+
+<RadiusScale
+  steps={[
+    { step: '2xs', use: 'Tiny marks under 16px: status dots in a row, mini swatches, progress segments.' },
+    { step: 'xs', use: 'Checkboxes, inline code, keyboard keys, small counters.' },
+    { step: 'sm', use: 'Small tags, tooltips and badges around 24px tall.' },
+    { step: 'md', use: 'Compact controls and swatches: small buttons, menu items.' },
+    { step: 'lg', use: 'The default: buttons, inputs, menus, popovers.' },
+    { step: 'xl', use: 'Brand cards and panels.' },
+    { step: '2xl', use: 'Dialogs, sheets and large feature surfaces.', provisional: true },
+    { step: 'full', use: 'Pills: badges, avatars, toggles, chips.' },
+  ]}
+/>
+
+Click a token or class to copy it.
+
+## Radius follows size
+
+<RadiusBySize />
+
+A corner has to fit the element it rounds. The same 12px that looks right on a 40px button turns a 20px tag into a pill, and a 4px corner looks sharp on a large card. Before you pick a radius, check the height of the container and use the step next to it in the table. Between two rows, pick the smaller radius.
+
+## Nested corners
+
+<NestedRadius />
+
+When a rounded surface sits inside another, the inner corner is the outer corner minus the gap between them. A 16px card with 8px padding holds 8px items. Matching radii make the inner corners look too round.
+
+## Guidelines
+
+<Guidelines>
+  <Guideline>Use a token, never a hand-written `border-radius` or an arbitrary `rounded-[10px]`.</Guideline>
+  <Guideline>Always consider the size of the container before picking a radius: small elements get small corners, large surfaces get larger ones.</Guideline>
+  <Guideline>Start from `lg` (12px) for standard controls. Go smaller for compact elements, larger only for cards and dialogs.</Guideline>
+  <Guideline>Nest corners: inner radius = outer radius − padding.</Guideline>
+  <Guideline>Use `full` only for pills and circles, never for rectangular buttons or cards.</Guideline>
+  <Guideline dont>Don't mix radii on one surface (a rounded top with square bottom corners), except where it's attached to an edge.</Guideline>
+  <Guideline dont>Don't round data tables or full-width bars; square edges read as structure.</Guideline>
+</Guidelines>
+
+## Related
+
+<Related>
+  <RelatedCard title="Elevation" href="/library/foundations/elevation">
+    <span className="rounded-lg bg-site-bg px-4 py-2 text-caption text-site-muted shadow-lg">surface</span>
+  </RelatedCard>
+  <RelatedCard title="Spacing" href="/library/foundations/spacing">
+    <span className="flex items-end gap-1">
+      <span className="h-2 w-2 rounded-sm bg-site-border" />
+      <span className="h-4 w-2 rounded-sm bg-site-border" />
+      <span className="h-6 w-2 rounded-sm bg-site-border" />
+    </span>
+  </RelatedCard>
+</Related>

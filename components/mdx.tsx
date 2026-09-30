@@ -6,6 +6,8 @@ import { Guideline, Guidelines, Related, RelatedCard } from '@/components/docs/g
 import { CopyFormatToggle } from '@/components/docs/copy';
 import { IconBrowser } from '@/components/docs/icon-browser';
 import { IconSizes } from '@/components/docs/icon-sizes';
+import { ShadowScale } from '@/components/docs/shadow-scale';
+import { NestedRadius, RadiusBySize, RadiusScale } from '@/components/docs/radius-scale';
 import { FocusRingOptions, InputBorderOptions } from '@/components/docs/decision-previews';
 
 export function getMDXComponents(components?: MDXComponents) {
@@ -16,6 +18,10 @@ export function getMDXComponents(components?: MDXComponents) {
     CopyFormatToggle,
     IconBrowser,
     IconSizes,
+    ShadowScale,
+    RadiusScale,
+    NestedRadius,
+    RadiusBySize,
     SemanticRoles,
     TintTable,
     FocusRingOptions,

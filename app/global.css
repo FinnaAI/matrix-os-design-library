@@ -181,19 +181,25 @@
   --text-machine: 0.875rem;
   --text-machine--line-height: 1.5;
 
-  /* Radius (DESIGN.md) */
-  --radius-sm: 6px;
-  --radius-md: 8px;
-  --radius-lg: 12px;
-  --radius-xl: 16px;
-  --radius-2xl: 24px;
+  /* Radius: values live in styles/tokens.css as --rounded-* (plain CSS: var(--rounded-lg)) */
+  --radius-2xs: var(--rounded-2xs);
+  --radius-xs: var(--rounded-xs);
+  --radius-sm: var(--rounded-sm);
+  --radius-md: var(--rounded-md);
+  --radius-lg: var(--rounded-lg);
+  --radius-xl: var(--rounded-xl);
+  --radius-2xl: var(--rounded-2xl);
+  --radius-full: var(--rounded-full);
 
-  /* Shadows — ink-tinted (DESIGN.md) */
-  --shadow-xs: 0 1px 2px rgb(var(--shadow-color) / 0.05);
-  --shadow-sm: 0 2px 8px rgb(var(--shadow-color) / 0.07);
-  --shadow-md: 0 4px 24px rgb(var(--shadow-color) / 0.08);
-  --shadow-lg: 0 12px 36px rgb(var(--shadow-color) / 0.12);
-  --shadow-xl: 0 24px 64px rgb(var(--shadow-color) / 0.16);
+  /* Shadows: values live in styles/tokens.css as --elevation-* (plain CSS: var(--elevation-lg)) */
+  --shadow-xs: var(--elevation-xs);
+  --shadow-sm: var(--elevation-sm);
+  --shadow-md: var(--elevation-md);
+  --shadow-lg: var(--elevation-lg);
+  --shadow-xl: var(--elevation-xl);
+  --shadow-2xl: var(--elevation-2xl);
+  --shadow-3xl: var(--elevation-3xl);
+  --shadow-xs-top: var(--elevation-xs-top);
 
   /* Motion */
   --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
