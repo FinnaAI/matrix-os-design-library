@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { createRelativeLink } from 'fumadocs-ui/mdx';
+import { appName } from '@/lib/shared';
 import { source } from '@/lib/source';
 import { getMDXComponents } from '@/components/mdx';
 
@@ -27,7 +28,16 @@ export function DocPage({ slugs }: { slugs: string[] }) {
 export function docMetadata(slugs: string[]): Metadata {
   const page = source.getPage(slugs);
   if (!page) notFound();
-  return { title: page.data.title, description: page.data.description };
+  const { title, description } = page.data;
+  // Each page's own title and summary in link previews. A page-level openGraph replaces the site one
+  // entirely, so the preview image (app/opengraph-image.tsx) is named again here.
+  const shared = { title: `${title} · ${appName}`, description, images: ['/opengraph-image'] };
+  return {
+    title,
+    description,
+    openGraph: { ...shared, type: 'website', siteName: appName, url: page.url },
+    twitter: { ...shared, card: 'summary_large_image' },
+  };
 }
 
 export function docParams(section: string) {

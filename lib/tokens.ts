@@ -73,13 +73,15 @@ export function isDark(name: string): boolean {
 // Tailwind exposes a color token as a utility only when a @theme block maps it
 // (`--color-primary: var(--primary)` → `bg-primary`). Matrix colors are mapped in styles/theme.css,
 // site chrome in app/global.css; read both so the docs never show a class that doesn't exist.
-const THEME_FILES = [join(process.cwd(), 'styles/theme.css'), join(process.cwd(), 'app/global.css')];
+// Named one by one (not a list) so the bundler can see exactly which files are read.
+const MATRIX_THEME_FILE = join(process.cwd(), 'styles/theme.css');
+const SITE_THEME_FILE = join(process.cwd(), 'app/global.css');
 let themeCache: { key: string; colors: Set<string> } | undefined;
 
 function themeColors(): Set<string> {
-  const key = THEME_FILES.map((f) => statSync(f).mtimeMs).join(':');
+  const key = `${statSync(MATRIX_THEME_FILE).mtimeMs}:${statSync(SITE_THEME_FILE).mtimeMs}`;
   if (themeCache?.key === key) return themeCache.colors;
-  const css = THEME_FILES.map((f) => readFileSync(f, 'utf8')).join('\n');
+  const css = readFileSync(MATRIX_THEME_FILE, 'utf8') + readFileSync(SITE_THEME_FILE, 'utf8');
   const colors = new Set([...css.matchAll(/--color-([a-z0-9-]+)\s*:/gi)].map((m) => m[1]));
   themeCache = { key, colors };
   return colors;
