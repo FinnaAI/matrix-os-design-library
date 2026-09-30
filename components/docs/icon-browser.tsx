@@ -75,11 +75,11 @@ export function IconBrowser() {
         onChange={(e) => setQuery(e.target.value)}
         placeholder="Search by name or meaning (e.g. email, warning, user)"
         aria-label="Search icons"
-        className="mb-4 w-full rounded-lg border border-site-border bg-site-bg px-3 py-2 text-body-sm text-site-fg placeholder:text-site-subtle"
+        className="mb-4 w-full rounded-lg border border-site-border bg-site-bg px-3 py-2 text-ui text-site-fg placeholder:text-site-subtle"
       />
 
-      {failed && <p className="text-body-sm text-site-muted">Icons couldn&apos;t load. Reload the page to try again.</p>}
-      {!icons && !failed && <p className="text-body-sm text-site-muted">Loading icons…</p>}
+      {failed && <p className="text-ui text-site-muted">Icons couldn&apos;t load. Reload the page to try again.</p>}
+      {!icons && !failed && <p className="text-ui text-site-muted">Loading icons…</p>}
 
       {icons && (
         <>
@@ -91,13 +91,13 @@ export function IconBrowser() {
             icons={matrix}
             defaultOpen
           />
-          <p className="mt-6 mb-2 text-caption text-site-subtle">
+          <p className="mt-6 mb-2 text-ui-xs text-site-subtle">
             {searching ? `${total.toLocaleString('en')} matches by category` : 'All icons by category'}
           </p>
           {categories.map(([slug, list]) => (
             <IconGroup key={`${slug}-${q}`} title={title(slug)} icons={list} defaultOpen={searching} />
           ))}
-          {total === 0 && <p className="text-body-sm text-site-muted">No icons match “{deferredQuery}”.</p>}
+          {total === 0 && <p className="text-ui text-site-muted">No icons match “{deferredQuery}”.</p>}
         </>
       )}
     </div>
@@ -127,12 +127,12 @@ function IconGroup({
         aria-expanded={open}
         className="flex w-full items-baseline gap-2 py-1.5 text-left"
       >
-        <span aria-hidden="true" className={cn('text-caption text-site-subtle transition-transform', open && 'rotate-90')}>
+        <span aria-hidden="true" className={cn('text-ui-xs text-site-subtle transition-transform', open && 'rotate-90')}>
           ›
         </span>
-        <span className="text-caption font-medium tracking-wide text-site-fg uppercase">{title}</span>
-        <span className="text-caption text-site-subtle">{icons.length.toLocaleString('en')}</span>
-        {note && <span className="ml-auto hidden text-caption text-site-subtle sm:inline">{note}</span>}
+        <span className="text-ui-xs font-medium tracking-wide text-site-fg uppercase">{title}</span>
+        <span className="text-ui-xs text-site-subtle">{icons.length.toLocaleString('en')}</span>
+        {note && <span className="ml-auto hidden text-ui-xs text-site-subtle sm:inline">{note}</span>}
       </button>
 
       {open && (
@@ -146,7 +146,7 @@ function IconGroup({
             <button
               type="button"
               onClick={() => setShown(shown + PAGE * 2)}
-              className="mt-3 rounded-lg border border-site-border px-3 py-1.5 text-body-sm text-site-fg hover:bg-site-hover"
+              className="mt-3 rounded-lg border border-site-border px-3 py-1.5 text-ui text-site-fg hover:bg-site-hover"
             >
               Show more ({(icons.length - shown).toLocaleString('en')} left)
             </button>
@@ -167,7 +167,7 @@ function IconTile({ name, node }: { name: string; node: IconNode }) {
       aria-label={`Copy ${name}`}
       className="flex h-20 flex-col justify-between rounded-lg border border-site-border p-2 text-left text-site-fg transition-colors duration-150 hover:bg-site-hover"
     >
-      <span className="truncate text-caption text-site-muted">{copied ? 'Copied' : name}</span>
+      <span className="truncate text-ui-xs text-site-muted">{copied ? 'Copied' : name}</span>
       <span className="flex justify-center pb-2">
         <IconFromNode node={node} />
       </span>

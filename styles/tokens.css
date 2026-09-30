@@ -171,6 +171,57 @@
 
   /* ─── Shape, depth, motion ─────────────────────────────────── */
 
+  /* Typography (her call, 2026-09-30): a compact product scale in Geist, plus
+     the DESIGN.md Bricolage sizes as a separate brand scale for onboarding, empty states and marketing.
+     Product headings are Geist semibold. Weights: 400 regular, 500 medium, 600 semibold (no bold in product).
+     Tailwind: text-ui, text-heading, text-brand-h1… (app/global.css). Plain CSS: the size + leading pairs. */
+  --font-family-sans: var(--font-geist-sans, 'Geist'), ui-sans-serif, system-ui, sans-serif;
+  --font-family-heading: var(--font-bricolage, 'Bricolage Grotesque'), var(--font-geist-sans, 'Geist'), ui-sans-serif, sans-serif;
+  --font-family-mono: var(--font-geist-mono, 'Geist Mono'), ui-monospace, monospace;
+
+  /* Product scale (Geist) */
+  --type-ui-lg-size: 17px; --type-ui-lg-leading: 24px; /* ledes, large body copy */
+  --type-ui-size: 14px; --type-ui-leading: 20px; /* default UI text; same as shadcn's text-sm */
+  --type-ui-sm-size: 13px; --type-ui-sm-leading: 18px; /* chart labels, timestamps, badge text */
+  --type-ui-xs-size: 12px; --type-ui-xs-leading: 16px; /* metadata, helper text */
+  --type-ui-cap-size: 11px; --type-ui-cap-leading: 16px; /* uppercase table headers and eyebrows */
+  --type-heading-size: 17px; --type-heading-leading: 24px; /* page title, semibold */
+  --type-heading-sm-size: 14px; --type-heading-sm-leading: 20px; /* section title, semibold */
+  --type-metric-size: 24px; --type-metric-leading: 32px; /* display numbers, semibold, tabular */
+  --type-metric-sm-size: 20px; --type-metric-sm-leading: 28px;
+
+  /* Brand scale (Bricolage Grotesque, DESIGN.md): rare, never in dense UI */
+  --type-brand-display-size: 72px; --type-brand-display-leading: 1.1;
+  --type-brand-h1-size: 48px; --type-brand-h1-leading: 1.15;
+  --type-brand-h2-size: 36px; --type-brand-h2-leading: 1.2;
+  --type-brand-h3-size: 28px; --type-brand-h3-leading: 1.25;
+  --type-brand-label-size: 11px; --type-brand-label-leading: 1.3; /* uppercase eyebrow, 3px tracking */
+
+  /* Spacing: steps on the 4px grid (with 2px and 6px for component insides), plus 64/96
+     from Matrix DESIGN.md for page layout (her call, 2026-09-30). In Tailwind use the numeric classes
+     (p-2 = 8px): --spacing is 4px, so each token lines up with a Tailwind step. */
+  --space-none: 0;
+  --space-2xs: 2px; /* p-0.5 */
+  --space-xs: 4px; /* p-1 */
+  --space-sm: 6px; /* p-1.5 */
+  --space-md: 8px; /* p-2: default gap inside a component */
+  --space-lg: 12px; /* p-3 */
+  --space-xl: 16px; /* p-4: default gap between components */
+  --space-2xl: 20px; /* p-5 */
+  --space-3xl: 24px; /* p-6 */
+  --space-4xl: 32px; /* p-8 */
+  --space-5xl: 40px; /* p-10 */
+  --space-6xl: 48px; /* p-12 */
+  --space-7xl: 56px; /* p-14 */
+  --space-8xl: 64px; /* p-16 */
+  --space-9xl: 96px; /* p-24 */
+
+  /* Border width */
+  --border-width-none: 0;
+  --border-width-default: 1px; /* border */
+  --border-width-thick: 2px; /* border-2: focus and active states */
+  --border-width-thicker: 4px; /* border-4: rare emphasis, e.g. a selected card's accent edge */
+
   /* Radius (Matrix DESIGN.md, plus 2px and 4px for small elements: her call 2026-09-30).
      Named --rounded-* to match Tailwind's rounded-* classes. Radius follows the element's size. */
   --rounded-2xs: 2px;

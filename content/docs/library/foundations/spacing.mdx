@@ -1,6 +1,64 @@
 ---
 title: Spacing
-description: The 4px grid and layout rhythm.
+description: Every gap, padding and border comes from one scale on the 4px grid. Fine steps for the inside of components, wide steps for page layout, and no value outside them.
 ---
 
-<Callout>This page is being written. The tokens already exist in `styles/tokens.css`.</Callout>
+## Usage
+
+```css
+/* Spacing and border width are CSS custom properties.
+   Reach for a token; never write a raw pixel value. */
+.card {
+  padding: var(--space-3xl);
+  gap: var(--space-xl);
+  border: var(--border-width-default) solid var(--border);
+  border-radius: var(--rounded-xl);
+}
+```
+
+```tsx
+// In Tailwind, use the numeric classes: each step is 4px, so p-2 = 8px and gap-4 = 16px
+<div className="flex flex-col gap-4 rounded-xl border border-border p-6" />
+```
+
+Click a token or class to copy it.
+
+## Spacing scale
+
+<SpaceScale />
+
+`md` (8px) is the default gap inside a component and `xl` (16px) the default between components. `2xs`–`lg` are for the inside of components, `xl`–`3xl` for spacing between them, and `4xl` and up for sections and page layout.
+
+## In context
+
+<SpacingInContext />
+
+## Border width
+
+<BorderWidthScale />
+
+1px is the standard border. 2px is for focus and active states; 4px is rare, for an accent edge such as a selected card.
+
+Icon and icon-container sizes live on [Iconography](/library/foundations/iconography); corners live on [Radius](/library/foundations/radius).
+
+## Guidelines
+
+<Guidelines>
+  <Guideline>Use a token or its Tailwind class, never a raw pixel value. Every gap, padding and border traces back to one step.</Guideline>
+  <Guideline>Inside a component, default to 8px (`gap-2`); between components, 16px (`gap-4`).</Guideline>
+  <Guideline>Group with space before lines: more space between groups than inside them, and a divider only when space isn't enough.</Guideline>
+  <Guideline>Prefer `gap` on the parent over margins on the children, so spacing stays in one place.</Guideline>
+  <Guideline dont>Don't use off-scale Tailwind steps like `p-2.5` (10px), `gap-7` (28px) or `p-[13px]`.</Guideline>
+  <Guideline dont>Don't use 2px or 4px borders for decoration; thick borders mean focus, active or selected.</Guideline>
+</Guidelines>
+
+## Related
+
+<Related>
+  <RelatedCard title="Radius" href="/library/foundations/radius">
+    <span className="size-10 rounded-xl border border-site-border bg-site-bg" />
+  </RelatedCard>
+  <RelatedCard title="Iconography" href="/library/foundations/iconography">
+    <span className="font-mono text-ui-xs text-site-muted">16 · 20 · 24</span>
+  </RelatedCard>
+</Related>

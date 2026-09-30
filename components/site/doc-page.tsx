@@ -13,9 +13,9 @@ export function DocPage({ slugs }: { slugs: string[] }) {
 
   return (
     <article className="min-w-0">
-      <h1 className="text-h2 text-site-fg">{page.data.title}</h1>
+      <h1 className="text-site-title text-site-fg">{page.data.title}</h1>
       {page.data.description && (
-        <p className="mt-3 text-body-lg text-site-muted">{page.data.description}</p>
+        <p className="mt-3 text-ui-lg text-site-muted">{page.data.description}</p>
       )}
       <div className="prose mt-12 max-w-none">
         <MDX components={getMDXComponents({ a: createRelativeLink(source, page) })} />

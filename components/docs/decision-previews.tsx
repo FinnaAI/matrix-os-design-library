@@ -20,7 +20,7 @@ function Verdict({ ratio, min }: { ratio: number; min: number }) {
         borderColor: `var(--tint-${tint}-border)`,
         color: `var(--tint-${tint}-text)`,
       }}
-      className="inline-flex w-fit rounded-md border px-1.5 text-caption font-medium"
+      className="inline-flex w-fit rounded-md border px-1.5 text-ui-xs font-medium"
     >
       {ratio.toFixed(1)}:1 {pass ? 'pass' : 'fail'}
     </span>
@@ -46,10 +46,10 @@ function OptionCard({
       )}
     >
       <div className="flex items-baseline justify-between gap-2 px-4 pt-3">
-        <p className="text-body-sm font-medium text-site-fg">{title}</p>
-        {recommended && <span className="text-caption text-site-muted">Recommended</span>}
+        <p className="text-ui font-medium text-site-fg">{title}</p>
+        {recommended && <span className="text-ui-xs text-site-muted">Recommended</span>}
       </div>
-      <p className="px-4 pb-3 font-mono text-caption text-site-subtle">{detail}</p>
+      <p className="px-4 pb-3 font-mono text-ui-xs text-site-subtle">{detail}</p>
       <div className="grid grid-cols-2 border-t border-site-border">{children}</div>
     </div>
   );
@@ -58,7 +58,7 @@ function OptionCard({
 function Surface({ token, label, children }: { token: string; label: string; children: ReactNode }) {
   return (
     <div style={{ background: `var(--${token})` }} className="flex flex-col gap-3 p-4">
-      <span style={{ color: 'var(--muted-foreground)' }} className="text-caption">
+      <span style={{ color: 'var(--muted-foreground)' }} className="text-ui-xs">
         {label}
       </span>
       {children}
@@ -76,7 +76,7 @@ function MockInput({ border, ring }: { border: string; ring?: CSSProperties['box
   return (
     <div
       style={{ ...inputStyle, borderColor: `var(--${border})`, boxShadow: ring }}
-      className="flex h-9 items-center rounded-md border px-3 text-body-sm"
+      className="flex h-9 items-center rounded-md border px-3 text-ui"
     >
       Email
     </div>
@@ -87,7 +87,7 @@ function MockButton({ ring }: { ring: CSSProperties['boxShadow'] }) {
   return (
     <div
       style={{ background: 'var(--primary)', color: 'var(--primary-foreground)', boxShadow: ring }}
-      className="flex h-9 w-fit items-center rounded-md px-4 text-body-sm font-medium"
+      className="flex h-9 w-fit items-center rounded-md px-4 text-ui font-medium"
     >
       Continue
     </div>

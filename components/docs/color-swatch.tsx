@@ -40,8 +40,8 @@ export function ColorSwatch({
         className,
       )}
     >
-      <span className="text-caption font-medium">{brand ? 'Brand' : ''}</span>
-      <span className="text-caption">{copied ? 'Copied' : label}</span>
+      <span className="text-ui-xs font-medium">{brand ? 'Brand' : ''}</span>
+      <span className="text-ui-xs">{copied ? 'Copied' : label}</span>
     </button>
   );
 }

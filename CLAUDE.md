@@ -21,13 +21,15 @@ Never invent brand values. If something is missing from Figma and DESIGN.md, mar
 ## Rules
 
 - **Every color is a step of a brand scale.** No off-scale values (the old ink/paper/sage/canvas are gone).
-- **Tokens only.** No hex, rgb or arbitrary Tailwind values (`w-[13px]`, `text-[11px]`) in components or pages. Use semantic utilities (`bg-primary`, `text-muted-foreground`, `border-border`) and the type scale (`text-h1`, `text-body`, `text-caption`, `text-label`).
+- **Tokens only.** No hex, rgb or arbitrary Tailwind values (`w-[13px]`, `text-[11px]`) in components or pages. Use semantic utilities (`bg-primary`, `text-muted-foreground`, `border-border`) and the type scale: product `text-ui-lg/ui/ui-sm/ui-xs/ui-cap`, `text-heading(-sm)`, `text-metric(-sm)`; brand `text-brand-*` with `font-heading`, for brand moments only.
 - **Semantic before primitive.** Prefer `bg-primary` over `bg-teal-800`. Use brand scales only for illustrations, swatches and documentation.
 - **shadcn naming.** Semantic tokens use shadcn names so components drop into the Matrix product unchanged. Note that shadcn `accent` is a hover surface (`--coral-25`, kept lighter than the coral-50 error tint); gold highlight is `attention`; brand identity is `brand`.
-- **Fonts:** Bricolage Grotesque for headings (`font-heading`), Geist for UI and body (`font-sans`), Geist Mono for code and machine text (`font-mono`).
+- **Fonts:** Geist for all product UI including headings (semibold), Geist Mono for machine text (`font-mono`), Bricolage Grotesque (`font-heading`) only for brand moments (onboarding, empty states, marketing). Weights 400/500/600; no bold in product.
+- **Merging classes:** always use `cn` from `lib/utils.ts`; it registers the custom Matrix class names so tailwind-merge doesn't drop them. Add any new custom size/shadow/radius name there.
 - **Icons:** Lucide (`lucide-react`, shadcn's default; her call 2026-09-30, Hugeicons felt too soft), always rendered through `components/ui/icon.tsx` with a scale size matching (`xxs` 12 · `xs` 14 · `sm` 16 · `md` 20 default · `lg` 24; stroke 2 on the 24 grid, floored at 1.25px). Never pass a pixel size or `strokeWidth`; never mix in Hugeicons or emoji.
 - **Elevation:** shadows only from tokens: `--elevation-{xs,sm,md,lg,xl,2xl,3xl,xs-top}` in `tokens.css` = Tailwind `shadow-*`. Resting controls `xs`, overlays `lg`, dialogs `xl`. Never hand-write a `box-shadow`. (Source tokens are named `--elevation-*` because `@theme` can't map `--shadow-lg` to itself.)
 - **Radius:** `--rounded-{2xs 2,xs 4,sm 6,md 8,lg 12 default,xl 16,2xl 24,full}` in `tokens.css` = Tailwind `rounded-*`; `--radius` (shadcn) = `--rounded-lg`. Pick the radius by the container's size (see the Radius page's size table); nested corners: inner = outer − padding.
+- **Spacing:** only the scale 0·2·4·6·8·12·16·20·24·32·40·48·56·64·96px (`--space-*` in `tokens.css`; Tailwind numeric classes, p-2 = 8px). Default 8px inside a component, 16px between components. No off-scale steps (`p-2.5`, `gap-7`, `p-[13px]`). Borders 1px; 2px only for focus/active/selected.
 - **Focus** is always the Gold ring (`--ring`) with an offset. Never remove focus without replacing it.
 - **Minimum sizes:** body text 14px or more, touch targets 44px or more.
 - **One component per concept.** Add components with `pnpm dlx shadcn@latest add <name>`, then restyle with tokens. Never create a second Button.
@@ -41,7 +43,7 @@ Never invent brand values. If something is missing from Figma and DESIGN.md, mar
 - Pages live in `content/docs/library/**` (Start here, foundations, components) and `content/docs/guides/**`. Navigation order lives in each folder's `meta.json`.
 - **Site chrome is neutral white/gray** (`styles/site.css`, `bg-site-*`/`text-site-*` utilities) so components stand out. Site chrome never uses Matrix brand colors; Matrix components never use `site-*` tokens.
 - The site layout is custom and Matrix-style: floating pill nav (`components/site/site-nav.tsx`), plain sidebar (`components/site/library-sidebar.tsx`), page body (`components/site/doc-page.tsx`). Fumadocs is used only for content loading and MDX blocks.
-- Site headings use Geist. Matrix components opt into Bricolage with `font-heading`.
+- Site text uses the product scale (`text-ui`, `text-ui-xs`); page titles use the site-only `text-site-title`.
 - Each component page follows: overview → live example → variants → states → usage do/don't → accessibility → code.
 
 <!-- BEGIN:nextjs-agent-rules -->

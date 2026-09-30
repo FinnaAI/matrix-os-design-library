@@ -7,11 +7,11 @@ export type RadiusStep = { step: string; use: string; provisional?: boolean };
 export function RadiusScale({ steps }: { steps: RadiusStep[] }) {
   return (
     <div className="not-prose mb-4 overflow-x-auto rounded-xl border border-site-border">
-      <table className="w-full text-left text-body-sm">
+      <table className="w-full text-left text-ui">
         <thead>
           <tr className="border-b border-site-border">
             {['Token', 'Example', 'Value', 'Use'].map((h) => (
-              <th key={h} className="px-4 py-3 text-caption font-normal text-site-subtle">
+              <th key={h} className="px-4 py-3 text-ui-xs font-normal text-site-subtle">
                 {h}
               </th>
             ))}
@@ -22,7 +22,7 @@ export function RadiusScale({ steps }: { steps: RadiusStep[] }) {
             <tr key={step}>
               <td className="px-4 py-3 whitespace-nowrap">
                 <CopyCode value={`--rounded-${step}`} />
-                <CopyCode value={`rounded-${step}`} className="mt-1 block text-caption text-site-muted" />
+                <CopyCode value={`rounded-${step}`} className="mt-1 block text-ui-xs text-site-muted" />
               </td>
               <td className="px-4 py-3">
                 <div
@@ -34,7 +34,7 @@ export function RadiusScale({ steps }: { steps: RadiusStep[] }) {
               <td className="px-4 py-3 text-site-muted">
                 {use}
                 {provisional && (
-                  <span className="ml-2 rounded-md bg-site-hover px-1.5 py-0.5 text-caption text-site-fg">
+                  <span className="ml-2 rounded-md bg-site-hover px-1.5 py-0.5 text-ui-xs text-site-fg">
                     Provisional
                   </span>
                 )}
@@ -61,13 +61,13 @@ export function NestedRadius() {
             {['Inbox', 'Agents', 'Settings'].map((item, i) => (
               <div
                 key={item}
-                className={`${inner} px-3 py-2 text-body-sm text-foreground ${i === 0 ? 'bg-background shadow-xs' : ''}`}
+                className={`${inner} px-3 py-2 text-ui text-foreground ${i === 0 ? 'bg-background shadow-xs' : ''}`}
               >
                 {item}
               </div>
             ))}
           </div>
-          <figcaption className="mt-3 flex gap-2 text-caption text-site-muted">
+          <figcaption className="mt-3 flex gap-2 text-ui-xs text-site-muted">
             <span aria-hidden="true">{ok ? '✓' : '✕'}</span>
             {label}
           </figcaption>
@@ -89,11 +89,11 @@ const BY_SIZE = [
 export function RadiusBySize() {
   return (
     <div className="not-prose mb-4 overflow-x-auto rounded-xl border border-site-border">
-      <table className="w-full text-left text-body-sm">
+      <table className="w-full text-left text-ui">
         <thead>
           <tr className="border-b border-site-border">
             {['Element height', 'Example', 'Radius', 'For'].map((h) => (
-              <th key={h} className="px-4 py-3 text-caption font-normal text-site-subtle">
+              <th key={h} className="px-4 py-3 text-ui-xs font-normal text-site-subtle">
                 {h}
               </th>
             ))}

@@ -16,11 +16,11 @@ function Dot({ token }: { token: string }) {
 function Table({ head, children }: { head: string[]; children: ReactNode }) {
   return (
     <div className="not-prose mb-4 overflow-x-auto rounded-xl border border-site-border">
-      <table className="w-full text-left text-body-sm">
+      <table className="w-full text-left text-ui">
         <thead>
           <tr className="border-b border-site-border">
             {head.map((h) => (
-              <th key={h} className="px-4 py-3 text-caption font-normal text-site-subtle">
+              <th key={h} className="px-4 py-3 text-ui-xs font-normal text-site-subtle">
                 {h}
               </th>
             ))}
@@ -56,7 +56,7 @@ export function SemanticRoles({ roles }: { roles: SemanticRole[] }) {
                 <Dot token={token} />
                 <CopyCode value={`--${token}`} />
               </span>
-              <code className="mt-1 block pl-5 font-mono text-caption text-site-subtle">
+              <code className="mt-1 block pl-5 font-mono text-ui-xs text-site-subtle">
                 {target ? `→ --${target}` : '—'}
               </code>
             </td>
@@ -67,7 +67,7 @@ export function SemanticRoles({ roles }: { roles: SemanticRole[] }) {
               {use}
               {on && ` ${contrast(token, on).toFixed(2)}:1 on --${on}.`}
               {status && (
-                <span className="ml-2 rounded-md bg-site-hover px-1.5 py-0.5 text-caption text-site-fg">
+                <span className="ml-2 rounded-md bg-site-hover px-1.5 py-0.5 text-ui-xs text-site-fg">
                   {status === 'pending' ? 'Decision pending' : 'Provisional'}
                 </span>
               )}
@@ -90,14 +90,14 @@ export function TintTable({ variants }: { variants: string[] }) {
           <tr key={variant}>
             <td className="px-4 py-3 whitespace-nowrap">
               <span className="block text-site-fg">{variant}</span>
-              <code className="font-mono text-caption text-site-subtle">--tint-{variant}-*</code>
+              <code className="font-mono text-ui-xs text-site-subtle">--tint-{variant}-*</code>
             </td>
             <td className="space-y-1 px-4 py-3 whitespace-nowrap">
               {[fill, border, text].map((token) => (
                 <span key={token} className="flex items-center gap-2" title={`--${token}`}>
                   <Dot token={token} />
-                  <CopyCode value={tailwindUtility(token)} className="text-caption" />
-                  <code className="font-mono text-caption text-site-subtle">→ --{tokenTarget(token)}</code>
+                  <CopyCode value={tailwindUtility(token)} className="text-ui-xs" />
+                  <code className="font-mono text-ui-xs text-site-subtle">→ --{tokenTarget(token)}</code>
                 </span>
               ))}
             </td>
@@ -108,15 +108,15 @@ export function TintTable({ variants }: { variants: string[] }) {
                   borderColor: `var(--${border})`,
                   color: `var(--${text})`,
                 }}
-                className="inline-flex rounded-md border px-2 py-0.5 text-caption font-medium"
+                className="inline-flex rounded-md border px-2 py-0.5 text-ui-xs font-medium"
               >
                 Label
               </span>
-              <span className="ml-2 text-caption text-site-subtle">{contrast(text, fill).toFixed(1)}:1</span>
+              <span className="ml-2 text-ui-xs text-site-subtle">{contrast(text, fill).toFixed(1)}:1</span>
               <CopyCode
                 value={[fill, border, text].map((token) => tailwindUtility(token)).join(' ')}
                 label="Copy classes"
-                className="mx-0 mt-1 block px-0 font-sans text-caption text-site-muted underline underline-offset-2"
+                className="mx-0 mt-1 block px-0 font-sans text-ui-xs text-site-muted underline underline-offset-2"
               />
             </td>
           </tr>

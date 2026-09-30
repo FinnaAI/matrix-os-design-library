@@ -6,11 +6,11 @@ import { CopyCode } from './copy';
 export function IconSizes() {
   return (
     <div className="not-prose mb-4 overflow-x-auto rounded-xl border border-site-border">
-      <table className="w-full text-left text-body-sm">
+      <table className="w-full text-left text-ui">
         <thead>
           <tr className="border-b border-site-border">
             {['Size', 'Pixels', 'Example'].map((h) => (
-              <th key={h} className="px-4 py-3 text-caption font-normal text-site-subtle">
+              <th key={h} className="px-4 py-3 text-ui-xs font-normal text-site-subtle">
                 {h}
               </th>
             ))}

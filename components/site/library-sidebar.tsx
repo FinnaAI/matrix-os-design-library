@@ -16,8 +16,8 @@ export function LibrarySidebar({ nodes }: { nodes: PageTree.Node[] }) {
           const isEmpty = nodes[i + 1] === undefined || nodes[i + 1].type === 'separator';
           return (
             <div key={i} className="mt-6 mb-1 px-3">
-              <p className="text-caption uppercase tracking-wider text-site-subtle">{node.name}</p>
-              {isEmpty && <p className="mt-2 text-body-sm text-site-subtle">Coming soon</p>}
+              <p className="text-ui-xs uppercase tracking-wider text-site-subtle">{node.name}</p>
+              {isEmpty && <p className="mt-2 text-ui text-site-subtle">Coming soon</p>}
             </div>
           );
         }
@@ -29,7 +29,7 @@ export function LibrarySidebar({ nodes }: { nodes: PageTree.Node[] }) {
               href={node.url}
               aria-current={active ? 'page' : undefined}
               className={cn(
-                'rounded-lg px-3 py-1.5 text-body transition-colors duration-150',
+                'rounded-lg px-3 py-1.5 text-ui transition-colors duration-150',
                 active
                   ? 'bg-site-active text-site-fg'
                   : 'text-site-muted hover:bg-site-hover hover:text-site-fg',

@@ -16,7 +16,7 @@ export function ColorRamp({
 }) {
   return (
     <div className="not-prose mb-6">
-      <p className="mb-2 text-body-sm text-site-muted">{label}</p>
+      <p className="mb-2 text-ui text-site-muted">{label}</p>
       <div className="grid grid-cols-4 gap-2 sm:grid-cols-11">
         {STEPS.map((step) => {
           const token = `${scale}-${step}`;
@@ -58,10 +58,10 @@ export function ColorSet({ tokens }: { tokens: { token: string; name: string; no
               dark={isDark(token)}
               className="h-20"
             />
-            <p className="mt-2 text-body-sm font-medium text-site-fg">{name}</p>
-            <p className="font-mono text-caption text-site-muted">--{token}</p>
-            <p className="font-mono text-caption text-site-muted">{tailwindUtility(token)}</p>
-            {note && <p className="mt-1 text-caption text-site-subtle">{note}</p>}
+            <p className="mt-2 text-ui font-medium text-site-fg">{name}</p>
+            <p className="font-mono text-ui-xs text-site-muted">--{token}</p>
+            <p className="font-mono text-ui-xs text-site-muted">{tailwindUtility(token)}</p>
+            {note && <p className="mt-1 text-ui-xs text-site-subtle">{note}</p>}
           </div>
         );
       })}

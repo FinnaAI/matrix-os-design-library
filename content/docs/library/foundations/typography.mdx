@@ -1,6 +1,145 @@
 ---
 title: Typography
-description: Bricolage Grotesque, Geist and Geist Mono, and the type scale.
+description: Geist, five sizes, three weights. Hierarchy comes from weight and whitespace, not from ever-bigger text. Bricolage Grotesque is kept for brand moments.
 ---
 
-<Callout>This page is being written. The tokens already exist in `styles/tokens.css`.</Callout>
+## Usage
+
+```tsx
+// One size class, then weight and color classes on top; they stack freely.
+<h2 className="text-heading">Agents and providers</h2>
+<p className="text-ui">Connect a model to start chatting.</p>
+<p className="text-ui-xs text-muted-foreground">Updated 2 minutes ago</p>
+<span className="text-metric tabular-nums">2,481</span>
+```
+
+```css
+/* Plain CSS: every size has a size + line-height pair */
+.note {
+  font-family: var(--font-family-sans);
+  font-size: var(--type-ui-size);
+  line-height: var(--type-ui-leading);
+}
+```
+
+If you merge classes with shadcn's `cn()`, copy [`lib/utils.ts`](https://github.com/sahar-nouri-1/Matrix_design-system/blob/main/lib/utils.ts): it teaches the merge helper the Matrix sizes. Without it, `cn('text-ui', 'text-muted-foreground')` drops the size.
+
+Reach for a class first; the raw tokens are there for custom CSS. `text-ui` (14/20) is the same as shadcn's `text-sm`, so shadcn components already sit on the scale.
+
+## Fonts
+
+<FontSpecimens />
+
+The families are tokens (`--font-family-sans`, `--font-family-mono`, `--font-family-heading`) with system fallbacks, so you never write a font stack yourself. Load Geist, Geist Mono and Bricolage Grotesque with `next/font/google` (see `app/layout.tsx`).
+
+## Type scale
+
+<TypeTable
+  rows={[
+    { code: 'text-ui-lg', token: 'ui-lg', example: 'Ledes and large body copy; titles use text-heading' },
+    { code: 'text-ui', token: 'ui', example: 'Primary UI text: messages, tables, inputs, buttons, nav' },
+    { code: 'text-ui-sm', token: 'ui-sm', example: 'Chart labels, timestamps, badge text' },
+    { code: 'text-ui-xs', token: 'ui-xs', example: 'Metadata, helper text' },
+    { code: 'text-ui-cap uppercase', token: 'ui-cap', example: 'Table column headers' },
+  ]}
+/>
+
+`text-ui` is the default for product text. `text-ui-cap` is for uppercase labels; add `uppercase` with it.
+
+## Headings
+
+<TypeTable
+  rows={[
+    { code: 'text-heading', token: 'heading', example: 'Agents & providers' },
+    { code: 'text-heading-sm', token: 'heading-sm', example: 'Connected models' },
+  ]}
+/>
+
+Product headings are Geist semibold and stop at 17px. `text-heading-sm` (14/20) is a sub-heading that still outranks body text through weight.
+
+## Display numbers
+
+<TypeTable
+  rows={[
+    { code: 'text-metric tabular-nums', token: 'metric', example: '2,481' },
+    { code: 'text-metric-sm tabular-nums', token: 'metric-sm', example: '86.4%' },
+  ]}
+/>
+
+For metrics on dashboards and usage pages, never for text.
+
+## Weights
+
+<TypeTable
+  head={['Class', 'Weight', 'Example']}
+  rows={[
+    { code: 'font-normal', meta: '400', exampleClassName: 'text-ui font-normal', example: 'Regular: body text, descriptions, table cells' },
+    { code: 'font-medium', meta: '500', exampleClassName: 'text-ui font-medium', example: 'Medium: labels, button text, form field names' },
+    { code: 'font-semibold', meta: '600', exampleClassName: 'text-ui font-semibold', example: 'Semibold: headings, table headers, active nav' },
+  ]}
+/>
+
+Three weights, and 600 is the heaviest in the product: there is no bold.
+
+## Style
+
+<TypeTable
+  head={['Class', 'Applies', 'Example']}
+  rows={[
+    { code: 'text-muted-foreground', meta: '--muted-foreground', exampleClassName: 'text-ui text-muted-foreground', example: 'Secondary text: helper copy, metadata, captions' },
+    { code: 'font-mono', meta: '--font-family-mono', exampleClassName: 'text-ui font-mono', example: 'claude-sonnet-5-5 · ~/agents/research' },
+  ]}
+/>
+
+Geist Mono is for machine text: code, file paths, model and run IDs, logs. Use it at the same size classes as Geist.
+
+## Tabular numbers
+
+<TabularNumbers />
+
+Proportional figures are the default. Add `tabular-nums` to columns of figures and to live counters, so digits don't shift as they change.
+
+## Brand scale
+
+<TypeTable
+  rows={[
+    { code: 'font-heading text-brand-display', token: 'brand-display', example: 'Matrix OS' },
+    { code: 'font-heading text-brand-h1', token: 'brand-h1', example: 'Meet your agents' },
+    { code: 'font-heading text-brand-h2', token: 'brand-h2', example: 'Connect a provider' },
+    { code: 'font-heading text-brand-h3', token: 'brand-h3', example: 'Nothing here yet' },
+    { code: 'text-brand-label uppercase', token: 'brand-label', example: 'New in Matrix' },
+  ]}
+/>
+
+Bricolage Grotesque from DESIGN.md, for onboarding, empty states, the welcome screen and marketing. Never in dense UI: menus, tables, settings or chat.
+
+## Guidelines
+
+<Guidelines>
+  <Guideline>Never introduce a new size. The five product steps, two headings and two metric sizes are the whole product scale.</Guideline>
+  <Guideline>Use the Tailwind class; it pairs each size with its line height. In plain CSS, always use the size and leading tokens together.</Guideline>
+  <Guideline>Build hierarchy with weight and whitespace, not size jumps.</Guideline>
+  <Guideline>Keep Bricolage for brand moments; product headings are Geist semibold.</Guideline>
+  <Guideline>Add `tabular-nums` to columns of figures and to numbers that update live.</Guideline>
+  <Guideline dont>Don't use Tailwind's default sizes (`text-base`, `text-lg`, `text-xl`) or arbitrary sizes like `text-[15px]`.</Guideline>
+  <Guideline dont>Don't use `font-bold` in the product; 600 is the heaviest weight.</Guideline>
+</Guidelines>
+
+## Related
+
+<Related>
+  <RelatedCard title="Colors" href="/library/foundations/colors">
+    <span className="flex gap-1">
+      <span className="size-4 rounded-full bg-neutral-800" />
+      <span className="size-4 rounded-full bg-green-500" />
+      <span className="size-4 rounded-full bg-coral-500" />
+    </span>
+  </RelatedCard>
+  <RelatedCard title="Spacing" href="/library/foundations/spacing">
+    <span className="flex items-end gap-1">
+      <span className="h-2 w-2 rounded-2xs bg-site-border" />
+      <span className="h-4 w-2 rounded-2xs bg-site-border" />
+      <span className="h-6 w-2 rounded-2xs bg-site-border" />
+    </span>
+  </RelatedCard>
+</Related>

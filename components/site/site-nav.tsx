@@ -37,7 +37,7 @@ export function SiteNav() {
               href={section.href}
               aria-current={active ? 'page' : undefined}
               className={cn(
-                'rounded-lg px-4 py-1.5 text-body-sm transition-colors duration-150',
+                'rounded-lg px-4 py-1.5 text-ui transition-colors duration-150',
                 active
                   ? 'bg-site-nav-active font-medium text-site-nav-fg'
                   : 'text-site-nav-muted hover:text-site-nav-fg',

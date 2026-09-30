@@ -10,9 +10,9 @@ export function Guidelines({ children }: { children: ReactNode }) {
 export function Guideline({ children, dont = false }: { children: ReactNode; dont?: boolean }) {
   const Icon = dont ? X : Check;
   return (
-    <li className="flex gap-3 text-body text-site-fg">
+    <li className="flex gap-3 text-ui text-site-fg">
       <Icon aria-label={dont ? "Don't" : 'Do'} className="mt-1 size-4 shrink-0 text-site-muted" />
-      <span className="[&_code]:rounded [&_code]:bg-site-code [&_code]:px-1 [&_code]:font-mono [&_code]:text-body-sm">
+      <span className="[&_code]:rounded [&_code]:bg-site-code [&_code]:px-1 [&_code]:font-mono [&_code]:text-ui">
         {children}
       </span>
     </li>
@@ -31,7 +31,7 @@ export function RelatedCard({ title, href, children }: { title: string; href: st
       className="flex flex-col overflow-hidden rounded-xl border border-site-border transition-colors duration-150 hover:bg-site-hover"
     >
       <span className="flex h-24 items-center justify-center border-b border-site-border">{children}</span>
-      <span className="px-4 py-3 text-body-sm text-site-fg">{title}</span>
+      <span className="px-4 py-3 text-ui text-site-fg">{title}</span>
     </Link>
   );
 }
