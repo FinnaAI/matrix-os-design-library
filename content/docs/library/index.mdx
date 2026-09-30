@@ -1,17 +1,135 @@
 ---
 title: Start here
-description: The design system for Matrix OS. One set of tokens, components and rules for every surface.
+description: The design system for Matrix OS. One set of tokens, components and rules for every surface, with copy-paste code for each.
 ---
 
 Matrix OS runs on many surfaces: the web shell, the desktop app, mobile, macOS and a family of built-in apps. This design system gives all of them **one set of tokens, one set of components and one set of rules**, so the product feels like a single, calm, capable computer.
 
+## Use in your project
+
+Five steps for a Next.js app on Tailwind CSS v4 (the Matrix shell's stack). Each file links to its source on GitHub; copy it as-is.
+
+### 1. Add the tokens and the theme
+
+Copy [`styles/tokens.css`](https://github.com/sahar-nouri-1/Matrix_design-system/blob/main/styles/tokens.css) (every value: colors, type, spacing, radius, elevation) and [`styles/theme.css`](https://github.com/sahar-nouri-1/Matrix_design-system/blob/main/styles/theme.css) (turns them into Tailwind classes, plus the focus ring) into your app. Then import them after Tailwind in your global CSS:
+
+```css
+/* app/globals.css */
+@import 'tailwindcss';
+@import '../styles/tokens.css';
+@import '../styles/theme.css';
+```
+
+If your app already has a shadcn theme (`:root` color variables and an `@theme` block), remove it: these files replace it, and two sets would fight over names like `--primary`.
+
+Now `bg-primary`, `text-ui`, `rounded-lg`, `shadow-lg` and `p-4` work, and plain CSS can use `var(--primary)`, `var(--type-ui-size)`, `var(--rounded-lg)` or `var(--elevation-lg)`.
+
+### 2. Load the fonts
+
+```tsx
+// app/layout.tsx
+import { Bricolage_Grotesque, Geist, Geist_Mono } from 'next/font/google';
+
+const geist = Geist({ subsets: ['latin'], variable: '--font-geist-sans' });
+const geistMono = Geist_Mono({ subsets: ['latin'], variable: '--font-geist-mono' });
+const bricolage = Bricolage_Grotesque({ subsets: ['latin'], variable: '--font-bricolage' });
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en" className={`${geist.variable} ${geistMono.variable} ${bricolage.variable}`}>
+      <body className="bg-background font-sans text-ui text-foreground">{children}</body>
+    </html>
+  );
+}
+```
+
+The variable names matter: `tokens.css` reads `--font-geist-sans`, `--font-geist-mono` and `--font-bricolage`, and falls back to the font names if you load them another way.
+
+### 3. Teach `cn()` the Matrix class names
+
+shadcn's `cn()` uses tailwind-merge, which doesn't know custom names like `text-ui`. Without this, `cn('text-ui', 'text-muted-foreground')` returns only the color and drops the size.
+
+```ts
+// lib/utils.ts
+import { clsx, type ClassValue } from 'clsx';
+import { extendTailwindMerge } from 'tailwind-merge';
+
+const twMerge = extendTailwindMerge({
+  extend: {
+    theme: {
+      text: [
+        'ui-lg', 'ui', 'ui-sm', 'ui-xs', 'ui-cap',
+        'heading', 'heading-sm', 'metric', 'metric-sm',
+        'brand-display', 'brand-h1', 'brand-h2', 'brand-h3', 'brand-label',
+      ],
+      shadow: ['xs-top', '3xl'],
+      radius: ['2xs'],
+    },
+  },
+});
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}
+```
+
+### 4. Add icons
+
+```bash
+pnpm add lucide-react
+```
+
+Copy [`components/ui/icon.tsx`](https://github.com/sahar-nouri-1/Matrix_design-system/blob/main/components/ui/icon.tsx). It sets the Matrix icon sizes and stroke, so you never pass pixels or `strokeWidth`:
+
+```tsx
+import { Mail } from 'lucide-react';
+import { Icon } from '@/components/ui/icon';
+
+// 20px, the default
+<Icon icon={Mail} />
+
+// 16px, next to small text
+<Icon icon={Mail} size="sm" />
+```
+
+### 5. Check it works
+
+```tsx
+<div className="flex max-w-sm flex-col gap-2 rounded-xl border border-border bg-card p-6 shadow-xs">
+  <h2 className="text-heading">Agents</h2>
+  <p className="text-ui text-muted-foreground">Connect a model to start.</p>
+  <button className="mt-2 w-fit rounded-lg bg-primary px-4 py-2 text-ui font-medium text-primary-foreground">
+    Connect
+  </button>
+</div>
+```
+
+A card with a 17px semibold title, grey 14px text and a warm dark grey button (`#242323`) means everything is wired.
+
+- The button has no background, or a different color: step 1 is missing, or an old theme still overrides `--primary`.
+- The text is a system font instead of Geist: step 2 is missing or uses different variable names.
+
+## Foundations
+
+<Cards>
+  <Card title="Colors" href="/library/foundations/colors" description="Brand scales, semantic roles, tints. Neutral actions, coral for danger." />
+  <Card title="Typography" href="/library/foundations/typography" description="Geist product scale, weights, the Bricolage brand scale." />
+  <Card title="Spacing" href="/library/foundations/spacing" description="The 4px scale and border widths." />
+  <Card title="Radius" href="/library/foundations/radius" description="Corners from 2px to a pill, chosen by the element's size." />
+  <Card title="Elevation" href="/library/foundations/elevation" description="Seven shadow steps; xs, lg and xl do most of the work." />
+  <Card title="Iconography" href="/library/foundations/iconography" description="Lucide at five sizes, with a stroke floor." />
+</Cards>
+
 ## Source of truth
 
-1. The approved Figma brand file (`Styles` page)
-2. [`DESIGN.md`](https://github.com/HamedMP/matrix-os/blob/main/DESIGN.md) in the Matrix OS repository
-3. This design system, which turns both into working tokens and components
+**This design system is the source of truth.** Every color, size and rule lives in [`styles/tokens.css`](https://github.com/sahar-nouri-1/Matrix_design-system/blob/main/styles/tokens.css) and on these pages; the product, Figma and other docs follow it.
 
-When sources disagree, fix the lower level. Never create another token set.
+It started from two references, which are incomplete and out of date:
+
+- The Figma brand files, where the brand color scales came from
+- [`DESIGN.md`](https://github.com/HamedMP/matrix-os/blob/main/DESIGN.md) in the Matrix OS repository, for principles, radius and the brand type scale
+
+When they disagree with this site, this site wins: update the reference, never the other way round. Never create another token set.
 
 ## Principles
 
@@ -25,4 +143,4 @@ When sources disagree, fix the lower level. Never create another token set.
 
 ## Status
 
-This site is in its first phase: the approved brand foundations are in place (light mode). Components, dark mode and usage guidelines are coming next.
+All foundations are in place for light mode: colors, typography, spacing, radius, elevation and iconography. Components come next, starting with Button; motion and dark mode follow.

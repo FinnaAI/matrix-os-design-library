@@ -70,18 +70,18 @@ export function isDark(name: string): boolean {
   return luminance(resolveColor(name)) < 0.18;
 }
 
-// Tailwind exposes a color token as a utility only when app/global.css maps it in @theme
-// (`--color-primary: var(--primary)` → `bg-primary`). Read that file too so the docs never
-// show a class that doesn't exist.
-const THEME_FILE = join(process.cwd(), 'app/global.css');
-let themeCache: { mtimeMs: number; colors: Set<string> } | undefined;
+// Tailwind exposes a color token as a utility only when a @theme block maps it
+// (`--color-primary: var(--primary)` → `bg-primary`). Matrix colors are mapped in styles/theme.css,
+// site chrome in app/global.css; read both so the docs never show a class that doesn't exist.
+const THEME_FILES = [join(process.cwd(), 'styles/theme.css'), join(process.cwd(), 'app/global.css')];
+let themeCache: { key: string; colors: Set<string> } | undefined;
 
 function themeColors(): Set<string> {
-  const { mtimeMs } = statSync(THEME_FILE);
-  if (themeCache?.mtimeMs === mtimeMs) return themeCache.colors;
-  const css = readFileSync(THEME_FILE, 'utf8');
+  const key = THEME_FILES.map((f) => statSync(f).mtimeMs).join(':');
+  if (themeCache?.key === key) return themeCache.colors;
+  const css = THEME_FILES.map((f) => readFileSync(f, 'utf8')).join('\n');
   const colors = new Set([...css.matchAll(/--color-([a-z0-9-]+)\s*:/gi)].map((m) => m[1]));
-  themeCache = { mtimeMs, colors };
+  themeCache = { key, colors };
   return colors;
 }
 
@@ -98,7 +98,7 @@ export function defaultPrefix(name: string): UtilityPrefix {
 /** The Tailwind class for a color token, e.g. `muted-foreground` → `text-muted-foreground`. */
 export function tailwindUtility(name: string, prefix: UtilityPrefix = defaultPrefix(name)): string {
   if (!themeColors().has(name)) {
-    throw new Error(`--${name} has no Tailwind utility: add --color-${name} to @theme in app/global.css`);
+    throw new Error(`--${name} has no Tailwind utility: add --color-${name} to @theme in styles/theme.css`);
   }
   return `${prefix}-${name}`;
 }

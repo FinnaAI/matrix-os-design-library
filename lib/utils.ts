@@ -10,7 +10,7 @@ export const cn = createCn({
         'ui-lg', 'ui', 'ui-sm', 'ui-xs', 'ui-cap',
         'heading', 'heading-sm', 'metric', 'metric-sm',
         'brand-display', 'brand-h1', 'brand-h2', 'brand-h3', 'brand-label',
-        'site-title',
+        'site-title', // docs site only; leave out when copying
       ],
       shadow: ['xs-top', '3xl'],
       radius: ['2xs'],

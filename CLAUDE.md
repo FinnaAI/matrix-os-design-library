@@ -10,13 +10,15 @@ Documentation site and component library for Matrix OS. The owner is a UX/UI des
 
 ## Source of truth
 
-1. Figma **Style library** `SiIcS4zeWkvC5R3pfanUgL` ("Style Sheet — Color", node `1:9`): brand colors, roles, scales (25–900)
-2. Figma brand file `xPG2FeYRtC9owCKSVXCqWA` and Matrix OS `DESIGN.md`: type scale, spacing, radius, principles (their color *roles* are superseded by the Style library)
-3. `styles/tokens.css` in this repo
+**This design system is the source of truth** (her call, 2026-09-30): `styles/tokens.css` in this repo (all values) + `styles/theme.css` (the Matrix `@theme` mapping to Tailwind and base focus styles). These two files, `lib/utils.ts` and `components/ui/icon.tsx` are what apps copy; keep them free of docs-site code. Site chrome lives in `app/global.css` and `styles/site.css`.
 
-Brand color roles: **Green `--green-500`** primary brand tone (identity, not actions) · **Neutral `--neutral-800`** actions/CTA (`--primary`) · **Coral `--coral-500`** destructive/error (`--destructive`; her call 2026-09-30, overrides the Style library's coral CTA) · **Teal `--teal-500`** success · **Gold `--gold-400`** highlight. Links use `--link` (neutral-800), always underlined. Blue = information only; Neutral = structure, text and actions.
+References, not sources of truth (incomplete and out of date; update them to match this repo, never the other way):
+- Figma **Style library** `SiIcS4zeWkvC5R3pfanUgL` and brand file `xPG2FeYRtC9owCKSVXCqWA`: where the brand scales came from
+- Matrix OS `DESIGN.md`: principles, radius and the brand type scale
 
-Never invent brand values. If something is missing from Figma and DESIGN.md, mark it `PROVISIONAL` in `tokens.css` and flag it to the user.
+Brand color roles: **Green `--green-500`** primary brand tone (identity, not actions) · **Neutral `--neutral-800`** actions/CTA (`--primary`) · **Coral `--coral-500`** destructive/error (`--destructive`; her call 2026-09-30) · **Teal `--teal-500`** success · **Gold `--gold-400`** highlight. Links use `--link` (neutral-800), always underlined. Blue = information only; Neutral = structure, text and actions.
+
+Never invent brand values. If something isn't decided yet, mark it `PROVISIONAL` in `tokens.css` and ask the user; don't fill the gap from Figma or DESIGN.md without her confirmation.
 
 ## Rules
 

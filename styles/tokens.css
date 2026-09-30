@@ -1,10 +1,10 @@
 /*
- * Matrix OS design tokens — the single source of truth.
+ * Matrix OS design tokens — the single source of truth (her call, 2026-09-30).
  *
- * Source of truth: Figma Style library SiIcS4zeWkvC5R3pfanUgL (node 1:9, "Style Sheet — Color").
- * Scales also match the brand file xPG2FeYRtC9owCKSVXCqWA; roles follow the Style library.
+ * This file, not Figma, is the source of truth. The Figma Style library (SiIcS4zeWkvC5R3pfanUgL) and
+ * brand file (xPG2FeYRtC9owCKSVXCqWA) are incomplete and out of date; they were the starting reference
+ * for the brand scales (values matched 1:1 on 2026-09-28) and Figma should be updated to match this file.
  * Rule: every color is a step of a brand scale. No off-scale values.
- * Primitive values are verified 1:1 against both (2026-09-28); the Style library adds the 25 steps.
  *
  * Three tiers:
  *   1. Primitives  — raw brand scales. Never used directly in components.
@@ -92,10 +92,10 @@
 
   /* ─── 2. Semantic (light) ──────────────────────────────────────
      Rule: every semantic color points at a brand scale step. No off-scale values.
-     Roles follow the Figma Style library (SiIcS4zeWkvC5R3pfanUgL, "Style Sheet — Color"):
+     Roles started from the Figma Style library and now follow her decisions:
      Green = primary brand tone · Neutral = actions · Coral = destructive/error · Teal = success · Gold = highlight.
      Her call (2026-09-30): coral reads as danger, so actions are neutral, not the Style library's coral CTA.
-     PROVISIONAL = my interpretation where the Style library is silent. */
+     PROVISIONAL = not yet decided; confirm with her before relying on it. */
 
   /* Brand */
   --brand: var(--green-500); /* Primary brand tone: logo, brand moments */
