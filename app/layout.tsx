@@ -1,7 +1,7 @@
 import { RootProvider } from 'fumadocs-ui/provider/next';
 import type { Metadata } from 'next';
 import { Bricolage_Grotesque, Geist, Geist_Mono } from 'next/font/google';
-import { appName, siteUrl } from '@/lib/shared';
+import { appName, previewImage, siteUrl } from '@/lib/shared';
 import './global.css';
 
 const bricolage = Bricolage_Grotesque({ subsets: ['latin'], variable: '--font-bricolage' });
@@ -17,8 +17,8 @@ export const metadata: Metadata = {
   title: { default: appName, template: `%s · ${appName}` },
   description,
   icons: { icon: '/brand/rabbit-mark.svg' },
-  openGraph: { type: 'website', siteName: appName, title: appName, description, url: '/' },
-  twitter: { card: 'summary_large_image', title: appName, description },
+  openGraph: { type: 'website', siteName: appName, title: appName, description, url: '/', images: [previewImage] },
+  twitter: { card: 'summary_large_image', title: appName, description, images: [previewImage] },
 };
 
 export default function Layout({ children }: LayoutProps<'/'>) {
