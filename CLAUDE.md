@@ -12,7 +12,7 @@ Documentation site and component library for Matrix OS. The owner is a UX/UI des
 
 **This design system is the source of truth** (her call, 2026-09-30): `styles/tokens.css` in this repo (all values) + `styles/theme.css` (the Matrix `@theme` mapping to Tailwind and base focus styles). These two files, `lib/utils.ts` and `components/ui/icon.tsx` are what apps copy; keep them free of docs-site code. Site chrome lives in `app/global.css` and `styles/site.css`.
 
-References, not sources of truth (incomplete and out of date; update them to match this repo, never the other way):
+References, not sources of truth (update them to match this repo, never the other way):
 - Figma **Style library** `SiIcS4zeWkvC5R3pfanUgL` and brand file `xPG2FeYRtC9owCKSVXCqWA`: where the brand scales came from
 - Matrix OS `DESIGN.md`: principles, radius and the brand type scale
 

@@ -2,8 +2,8 @@
  * Matrix OS design tokens — the single source of truth (her call, 2026-09-30).
  *
  * This file, not Figma, is the source of truth. The Figma Style library (SiIcS4zeWkvC5R3pfanUgL) and
- * brand file (xPG2FeYRtC9owCKSVXCqWA) are incomplete and out of date; they were the starting reference
- * for the brand scales (values matched 1:1 on 2026-09-28) and Figma should be updated to match this file.
+ * brand file (xPG2FeYRtC9owCKSVXCqWA) were the starting reference for the brand scales (values matched
+ * 1:1 on 2026-09-28); Figma should be updated to match this file.
  * Rule: every color is a step of a brand scale. No off-scale values.
  *
  * Three tiers:
