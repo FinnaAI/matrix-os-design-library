@@ -1,6 +1,69 @@
 ---
 title: Iconography
-description: Icon library, sizes and usage rules.
+description: Matrix uses Lucide, 1,800+ crisp stroke icons drawn on a 24×24 grid. One Icon component sets the size and the stroke, so every icon matches. Click any icon to copy its import name.
 ---
 
-<Callout>This page is being written.</Callout>
+## Setup
+
+```bash
+pnpm add lucide-react
+```
+
+Copy [`components/ui/icon.tsx`](https://github.com/sahar-nouri-1/Matrix_design-system/blob/main/components/ui/icon.tsx) into your app. It wraps Lucide with the Matrix sizes and stroke rule. Lucide is also shadcn's default icon set, so shadcn components already use it.
+
+## Usage
+
+```tsx
+import { Mail } from 'lucide-react';
+import { Icon } from '@/components/ui/icon';
+
+// Decorative, next to a text label: hidden from screen readers automatically
+<Icon icon={Mail} />
+
+// Icon-only: give it a name
+<button aria-label="Open inbox">
+  <Icon icon={Mail} size="lg" />
+</button>
+
+// Color follows the text
+<Icon icon={Mail} className="text-muted-foreground" />
+```
+
+Never use unicode characters or emoji as icons; how they look depends on the font and the device.
+
+## Sizes
+
+<IconSizes />
+
+The stroke is drawn at 2 on the 24 grid, so it scales with the icon, and never paints thinner than 1.25px: below 16px the component raises it to hold that floor. You never set `strokeWidth` yourself. Inside buttons, badges and inputs the component will pick the icon size; standalone, pass `size`.
+
+## Icons
+
+<IconBrowser />
+
+## Guidelines
+
+<Guidelines>
+  <Guideline>Always render icons through `Icon` with a size from the scale: `xxs`, `xs`, `sm`, `md` (default) or `lg`.</Guideline>
+  <Guideline>Let the surrounding component size the icon; pass `size` only when the icon stands alone.</Guideline>
+  <Guideline>Start with the icons under **Used in Matrix**, so the same idea always gets the same icon.</Guideline>
+  <Guideline>Icon-only controls need an `aria-label`. Decorative icons stay hidden from screen readers.</Guideline>
+  <Guideline>Color icons with text utilities (`text-foreground`, `text-muted-foreground`, `text-destructive-text`), never with a hex value.</Guideline>
+  <Guideline dont>Don't pass a pixel `size` or a `strokeWidth` by hand; the product's old 11–28px sizes are replaced by the five steps above.</Guideline>
+  <Guideline dont>Don't mix in icons from other sets (Hugeicons, emoji, custom SVG) next to Lucide.</Guideline>
+</Guidelines>
+
+## Related
+
+<Related>
+  <RelatedCard title="Colors" href="/library/foundations/colors">
+    <span className="flex gap-1">
+      <span className="size-4 rounded-full bg-neutral-800" />
+      <span className="size-4 rounded-full bg-green-500" />
+      <span className="size-4 rounded-full bg-coral-500" />
+    </span>
+  </RelatedCard>
+  <RelatedCard title="Typography" href="/library/foundations/typography">
+    <span className="font-heading text-h3 text-site-fg">Aa</span>
+  </RelatedCard>
+</Related>

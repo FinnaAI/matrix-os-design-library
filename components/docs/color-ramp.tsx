@@ -1,4 +1,4 @@
-import { isDark, resolveColor } from '@/lib/tokens';
+import { isDark, resolveColor, tailwindUtility } from '@/lib/tokens';
 import { cn } from '@/lib/utils';
 import { ColorSwatch } from './color-swatch';
 
@@ -24,6 +24,7 @@ export function ColorRamp({
             <ColorSwatch
               key={token}
               token={token}
+              utility={tailwindUtility(token)}
               label={step}
               hex={resolveColor(token)}
               dark={isDark(token)}
@@ -36,7 +37,7 @@ export function ColorRamp({
   );
 }
 
-// Named brand values that sit outside the scales (ink, paper, sage).
+// Named colors shown as larger tiles with their token and Tailwind class (brand colors, surfaces).
 export function ColorSet({ tokens }: { tokens: { token: string; name: string; note?: string }[] }) {
   return (
     <div
@@ -49,9 +50,17 @@ export function ColorSet({ tokens }: { tokens: { token: string; name: string; no
         const hex = resolveColor(token);
         return (
           <div key={token}>
-            <ColorSwatch token={token} label={hex.toUpperCase()} hex={hex} dark={isDark(token)} className="h-20" />
+            <ColorSwatch
+              token={token}
+              utility={tailwindUtility(token)}
+              label={hex.toUpperCase()}
+              hex={hex}
+              dark={isDark(token)}
+              className="h-20"
+            />
             <p className="mt-2 text-body-sm font-medium text-site-fg">{name}</p>
             <p className="font-mono text-caption text-site-muted">--{token}</p>
+            <p className="font-mono text-caption text-site-muted">{tailwindUtility(token)}</p>
             {note && <p className="mt-1 text-caption text-site-subtle">{note}</p>}
           </div>
         );

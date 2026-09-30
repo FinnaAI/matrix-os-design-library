@@ -48,7 +48,7 @@
   --coral-200: #e6b5a8;
   --coral-300: #da9481;
   --coral-400: #d06e53;
-  --coral-500: #ba5236; /* brand Coral: warm action / CTA */
+  --coral-500: #ba5236; /* brand Coral: destructive / error */
   --coral-600: #8f432d;
   --coral-700: #6b3324;
   --coral-800: #442118;
@@ -93,7 +93,8 @@
   /* ─── 2. Semantic (light) ──────────────────────────────────────
      Rule: every semantic color points at a brand scale step. No off-scale values.
      Roles follow the Figma Style library (SiIcS4zeWkvC5R3pfanUgL, "Style Sheet — Color"):
-     Green = primary brand tone · Coral = warm action/CTA · Teal = success · Gold = highlight.
+     Green = primary brand tone · Neutral = actions · Coral = destructive/error · Teal = success · Gold = highlight.
+     Her call (2026-09-30): coral reads as danger, so actions are neutral, not the Style library's coral CTA.
      PROVISIONAL = my interpretation where the Style library is silent. */
 
   /* Brand */
@@ -109,8 +110,9 @@
   --popover-foreground: var(--neutral-800);
 
   /* Actions */
-  --primary: var(--coral-500); /* Warm action / CTA */
-  --primary-foreground: var(--neutral-25); /* 4.63:1 on coral-500; neutral-50 would fail at 4.43:1 */
+  --primary: var(--neutral-800); /* Actions and the main CTA (her call, 2026-09-30). Hover steps to neutral-700 */
+  --primary-foreground: var(--neutral-25); /* 15.0:1 on neutral-800 */
+  --link: var(--neutral-800); /* Links and link buttons: neutral like actions, always underlined (her call, 2026-09-30) */
   --secondary: var(--green-100); /* PROVISIONAL */
   --secondary-foreground: var(--green-800);
 
@@ -118,11 +120,11 @@
   --muted-foreground: var(--neutral-600);
 
   /* shadcn "accent" = hover/selected surface (Style library: accent-surface). */
-  --accent: var(--teal-50);
+  --accent: var(--coral-25); /* Her call (2026-09-30): warm coral hover. coral-25, not coral-50, so hover never matches the error tint fill */
   --accent-foreground: var(--neutral-800);
   --attention: var(--gold-400); /* Highlight / accent: badges, premium, attention */
 
-  --destructive: var(--coral-700); /* PROVISIONAL: darker than the coral CTA so delete never looks like "continue" */
+  --destructive: var(--coral-500); /* Brand coral = delete and errors (her call, 2026-09-30). 4.63:1 with neutral-25 text; neutral-50 would fail */
   --destructive-foreground: var(--neutral-25);
   --success: var(--teal-500);
   --warning: var(--gold-500);

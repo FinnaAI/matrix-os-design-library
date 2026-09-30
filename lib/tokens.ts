@@ -69,3 +69,36 @@ export function contrast(a: string, b: string): number {
 export function isDark(name: string): boolean {
   return luminance(resolveColor(name)) < 0.18;
 }
+
+// Tailwind exposes a color token as a utility only when app/global.css maps it in @theme
+// (`--color-primary: var(--primary)` → `bg-primary`). Read that file too so the docs never
+// show a class that doesn't exist.
+const THEME_FILE = join(process.cwd(), 'app/global.css');
+let themeCache: { mtimeMs: number; colors: Set<string> } | undefined;
+
+function themeColors(): Set<string> {
+  const { mtimeMs } = statSync(THEME_FILE);
+  if (themeCache?.mtimeMs === mtimeMs) return themeCache.colors;
+  const css = readFileSync(THEME_FILE, 'utf8');
+  const colors = new Set([...css.matchAll(/--color-([a-z0-9-]+)\s*:/gi)].map((m) => m[1]));
+  themeCache = { mtimeMs, colors };
+  return colors;
+}
+
+export type UtilityPrefix = 'bg' | 'text' | 'border' | 'outline';
+
+/** The prefix a role is normally used with: text roles → `text-`, edges → `border-`, the ring → `outline-`. */
+export function defaultPrefix(name: string): UtilityPrefix {
+  if (name === 'foreground' || name === 'link' || name.endsWith('-foreground') || name.endsWith('-text')) return 'text';
+  if (name === 'border' || name === 'input' || name.endsWith('-border')) return 'border';
+  if (name === 'ring') return 'outline';
+  return 'bg';
+}
+
+/** The Tailwind class for a color token, e.g. `muted-foreground` → `text-muted-foreground`. */
+export function tailwindUtility(name: string, prefix: UtilityPrefix = defaultPrefix(name)): string {
+  if (!themeColors().has(name)) {
+    throw new Error(`--${name} has no Tailwind utility: add --color-${name} to @theme in app/global.css`);
+  }
+  return `${prefix}-${name}`;
+}

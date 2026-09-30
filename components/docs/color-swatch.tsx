@@ -1,11 +1,13 @@
 'use client';
 
-import { useState } from 'react';
 import { cn } from '@/lib/utils';
+import { useCopy, useCopyFormat } from './copy';
 
-// One swatch tile. Click copies its CSS token, e.g. `var(--teal-800)`.
+// One swatch tile. Click copies the token in the format picked by <CopyFormatToggle />:
+// `var(--teal-500)`, `bg-teal-500` or `#288a5b`.
 export function ColorSwatch({
   token,
+  utility,
   label,
   hex,
   dark,
@@ -13,32 +15,24 @@ export function ColorSwatch({
   className,
 }: {
   token: string;
+  /** Tailwind class for this color, e.g. `bg-teal-500`. */
+  utility: string;
   label: string;
   hex: string;
   dark: boolean;
   brand?: boolean;
   className?: string;
 }) {
-  const [copied, setCopied] = useState(false);
-
-  async function copy() {
-    try {
-      await navigator.clipboard.writeText(`var(--${token})`);
-    } catch (error) {
-      // Clipboard can be blocked (permissions, insecure context); the token is still in the tooltip.
-      console.warn('Could not copy token', error);
-      return;
-    }
-    setCopied(true);
-    setTimeout(() => setCopied(false), 1200);
-  }
+  const format = useCopyFormat();
+  const { copied, copy } = useCopy();
+  const value = { css: `var(--${token})`, tailwind: utility, hex }[format];
 
   return (
     <button
       type="button"
-      onClick={copy}
-      title={`--${token} · ${hex}`}
-      aria-label={`Copy --${token} (${hex})`}
+      onClick={() => copy(value)}
+      title={`--${token} · ${utility} · ${hex}`}
+      aria-label={`Copy ${value}`}
       style={{ background: `var(--${token})` }}
       className={cn(
         'relative flex h-14 w-full flex-col justify-between rounded-lg p-2 text-left transition-transform duration-150 hover:-translate-y-0.5',

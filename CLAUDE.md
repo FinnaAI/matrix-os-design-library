@@ -14,7 +14,7 @@ Documentation site and component library for Matrix OS. The owner is a UX/UI des
 2. Figma brand file `xPG2FeYRtC9owCKSVXCqWA` and Matrix OS `DESIGN.md`: type scale, spacing, radius, principles (their color *roles* are superseded by the Style library)
 3. `styles/tokens.css` in this repo
 
-Brand color roles: **Green `--green-500`** primary brand tone (identity, not actions) · **Coral `--coral-500`** warm action/CTA (`--primary`) · **Teal `--teal-500`** success · **Gold `--gold-400`** highlight. Blue = information; Neutral = structure and text.
+Brand color roles: **Green `--green-500`** primary brand tone (identity, not actions) · **Neutral `--neutral-800`** actions/CTA (`--primary`) · **Coral `--coral-500`** destructive/error (`--destructive`; her call 2026-09-30, overrides the Style library's coral CTA) · **Teal `--teal-500`** success · **Gold `--gold-400`** highlight. Links use `--link` (neutral-800), always underlined. Blue = information only; Neutral = structure, text and actions.
 
 Never invent brand values. If something is missing from Figma and DESIGN.md, mark it `PROVISIONAL` in `tokens.css` and flag it to the user.
 
@@ -23,8 +23,9 @@ Never invent brand values. If something is missing from Figma and DESIGN.md, mar
 - **Every color is a step of a brand scale.** No off-scale values (the old ink/paper/sage/canvas are gone).
 - **Tokens only.** No hex, rgb or arbitrary Tailwind values (`w-[13px]`, `text-[11px]`) in components or pages. Use semantic utilities (`bg-primary`, `text-muted-foreground`, `border-border`) and the type scale (`text-h1`, `text-body`, `text-caption`, `text-label`).
 - **Semantic before primitive.** Prefer `bg-primary` over `bg-teal-800`. Use brand scales only for illustrations, swatches and documentation.
-- **shadcn naming.** Semantic tokens use shadcn names so components drop into the Matrix product unchanged. Note that shadcn `accent` is a hover surface (`--teal-50`); gold highlight is `attention`; brand identity is `brand`.
+- **shadcn naming.** Semantic tokens use shadcn names so components drop into the Matrix product unchanged. Note that shadcn `accent` is a hover surface (`--coral-25`, kept lighter than the coral-50 error tint); gold highlight is `attention`; brand identity is `brand`.
 - **Fonts:** Bricolage Grotesque for headings (`font-heading`), Geist for UI and body (`font-sans`), Geist Mono for code and machine text (`font-mono`).
+- **Icons:** Lucide (`lucide-react`, shadcn's default; her call 2026-09-30, Hugeicons felt too soft), always rendered through `components/ui/icon.tsx` with a scale size matching (`xxs` 12 · `xs` 14 · `sm` 16 · `md` 20 default · `lg` 24; stroke 2 on the 24 grid, floored at 1.25px). Never pass a pixel size or `strokeWidth`; never mix in Hugeicons or emoji.
 - **Focus** is always the Gold ring (`--ring`) with an offset. Never remove focus without replacing it.
 - **Minimum sizes:** body text 14px or more, touch targets 44px or more.
 - **One component per concept.** Add components with `pnpm dlx shadcn@latest add <name>`, then restyle with tokens. Never create a second Button.
@@ -40,3 +41,13 @@ Never invent brand values. If something is missing from Figma and DESIGN.md, mar
 - The site layout is custom and Matrix-style: floating pill nav (`components/site/site-nav.tsx`), plain sidebar (`components/site/library-sidebar.tsx`), page body (`components/site/doc-page.tsx`). Fumadocs is used only for content loading and MDX blocks.
 - Site headings use Geist. Matrix components opt into Bricolage with `font-heading`.
 - Each component page follows: overview → live example → variants → states → usage do/don't → accessibility → code.
+
+<!-- BEGIN:nextjs-agent-rules -->
+
+# This is NOT the Next.js you know
+
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+
+This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+
+<!-- END:nextjs-agent-rules -->

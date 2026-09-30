@@ -21,7 +21,8 @@ export default function Layout({ children }: LayoutProps<'/'>) {
       className={`${bricolage.variable} ${geist.variable} ${geistMono.variable} font-sans`}
       suppressHydrationWarning
     >
-      <body className="min-h-screen bg-site-bg text-site-fg">
+      {/* Browser extensions (e.g. ColorZilla) add attributes to <body> before React loads; don't report that as an error. */}
+      <body className="min-h-screen bg-site-bg text-site-fg" suppressHydrationWarning>
         {/* Light only: theme switching (next-themes) is off, which also removes its inline
             <script> that React 19 flags as an error in development. */}
         <RootProvider theme={{ enabled: false }}>{children}</RootProvider>

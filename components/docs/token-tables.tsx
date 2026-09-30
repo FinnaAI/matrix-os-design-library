@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
-import { contrast, tokenTarget } from '@/lib/tokens';
+import { contrast, tailwindUtility, tokenTarget, type UtilityPrefix } from '@/lib/tokens';
+import { CopyCode } from './copy';
 
 function Dot({ token }: { token: string }) {
   return (
@@ -11,9 +12,6 @@ function Dot({ token }: { token: string }) {
   );
 }
 
-function TokenName({ token }: { token: string }) {
-  return <code className="font-mono text-body-sm text-site-fg">--{token}</code>;
-}
 
 function Table({ head, children }: { head: string[]; children: ReactNode }) {
   return (
@@ -40,24 +38,30 @@ export type SemanticRole = {
   /** Measure contrast against this token and show the ratio. */
   on?: string;
   status?: 'provisional' | 'pending';
+  /** Override the Tailwind prefix when the default (text roles → `text-`, edges → `border-`, else `bg-`) is wrong. */
+  prefix?: UtilityPrefix;
 };
 
-// Role → the scale step it maps to → what it's for. "Maps to" is read from tokens.css.
+// Role (with the scale step it maps to) → its Tailwind class → what it's for.
+// "Maps to" is read from tokens.css; the class is checked against @theme in app/global.css.
 export function SemanticRoles({ roles }: { roles: SemanticRole[] }) {
   return (
-    <Table head={['Role', 'Maps to', 'Use']}>
-      {roles.map(({ token, use, on, status }) => {
+    <Table head={['Role', 'Tailwind', 'Use']}>
+      {roles.map(({ token, use, on, status, prefix }) => {
         const target = tokenTarget(token);
         return (
           <tr key={token}>
             <td className="px-4 py-3 whitespace-nowrap">
               <span className="flex items-center gap-2">
                 <Dot token={token} />
-                <TokenName token={token} />
+                <CopyCode value={`--${token}`} />
               </span>
+              <code className="mt-1 block pl-5 font-mono text-caption text-site-subtle">
+                {target ? `→ --${target}` : '—'}
+              </code>
             </td>
-            <td className="px-4 py-3 font-mono whitespace-nowrap text-site-muted">
-              {target ? `--${target}` : '—'}
+            <td className="px-4 py-3 whitespace-nowrap">
+              <CopyCode value={tailwindUtility(token, prefix)} />
             </td>
             <td className="px-4 py-3 text-site-muted">
               {use}
@@ -75,10 +79,11 @@ export function SemanticRoles({ roles }: { roles: SemanticRole[] }) {
   );
 }
 
-// Tint sets: fill + border + text, previewed as a chip. Cells show the scale step each part maps to.
+// Tint sets: fill + border + text, previewed as a chip. The parts stack in one cell (Tailwind class →
+// scale step) so long class names fit; the chip column copies all three classes at once.
 export function TintTable({ variants }: { variants: string[] }) {
   return (
-    <Table head={['Variant', 'Fill', 'Border', 'Text', 'On a chip']}>
+    <Table head={['Variant', 'Fill · border · text', 'On a chip']}>
       {variants.map((variant) => {
         const [fill, border, text] = ['fill', 'border', 'text'].map((part) => `tint-${variant}-${part}`);
         return (
@@ -87,14 +92,15 @@ export function TintTable({ variants }: { variants: string[] }) {
               <span className="block text-site-fg">{variant}</span>
               <code className="font-mono text-caption text-site-subtle">--tint-{variant}-*</code>
             </td>
-            {[fill, border, text].map((token) => (
-              <td key={token} className="px-4 py-3 whitespace-nowrap" title={`--${token}`}>
-                <span className="flex items-center gap-2">
+            <td className="space-y-1 px-4 py-3 whitespace-nowrap">
+              {[fill, border, text].map((token) => (
+                <span key={token} className="flex items-center gap-2" title={`--${token}`}>
                   <Dot token={token} />
-                  <code className="font-mono text-caption text-site-muted">--{tokenTarget(token)}</code>
+                  <CopyCode value={tailwindUtility(token)} className="text-caption" />
+                  <code className="font-mono text-caption text-site-subtle">→ --{tokenTarget(token)}</code>
                 </span>
-              </td>
-            ))}
+              ))}
+            </td>
             <td className="px-4 py-3 whitespace-nowrap">
               <span
                 style={{
@@ -107,6 +113,11 @@ export function TintTable({ variants }: { variants: string[] }) {
                 Label
               </span>
               <span className="ml-2 text-caption text-site-subtle">{contrast(text, fill).toFixed(1)}:1</span>
+              <CopyCode
+                value={[fill, border, text].map((token) => tailwindUtility(token)).join(' ')}
+                label="Copy classes"
+                className="mx-0 mt-1 block px-0 font-sans text-caption text-site-muted underline underline-offset-2"
+              />
             </td>
           </tr>
         );
