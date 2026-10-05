@@ -1,0 +1,250 @@
+---
+title: Avatar
+description: A circular identity for a person. A photo when there is one, otherwise initials, otherwise an icon. Agents are shown with the mascot, not an avatar.
+---
+
+## Usage
+
+```bash
+pnpm dlx shadcn@latest add avatar
+```
+
+Then replace `components/ui/avatar.tsx` with the [Matrix version](https://github.com/sahar-nouri-1/Matrix_design-system/blob/main/components/ui/avatar.tsx). It keeps shadcn's parts and adds sizes, initials from a name and the icon fallback.
+
+```tsx
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+
+// Pass a name: it becomes the label screen readers announce and the fallback initials.
+<Avatar name="Olivia Rhye">
+  <AvatarImage src={user.photoUrl} alt="" />
+  <AvatarFallback />
+</Avatar>
+```
+
+## Default
+
+<Example
+  title="Photo"
+  subtitle="The person's own image"
+  code={`<Avatar name="Olivia Rhye">
+  <AvatarImage src={user.photoUrl} alt="" />
+  <AvatarFallback />
+</Avatar>`}
+>
+  <Avatar name="Olivia Rhye">
+    <AvatarImage src="/examples/woman-1.jpg" alt="" />
+    <AvatarFallback />
+  </Avatar>
+</Example>
+
+The default is the person's photo. Always include `AvatarFallback` too: it shows the initials while the photo loads and whenever there isn't one (see Fallback). Avatars are for people. Agents aren't avatars: they're shown with the Matrix mascot, a separate component.
+
+## Sizes
+
+<Example
+  title="20 · 24 · 32 · 40"
+  code={`<Avatar name="Olivia Rhye" size="xs"><AvatarImage src={photo} alt="" /><AvatarFallback /></Avatar>
+<Avatar name="Olivia Rhye" size="sm"><AvatarImage src={photo} alt="" /><AvatarFallback /></Avatar>
+<Avatar name="Olivia Rhye" size="md"><AvatarImage src={photo} alt="" /><AvatarFallback /></Avatar>
+<Avatar name="Olivia Rhye" size="lg"><AvatarImage src={photo} alt="" /><AvatarFallback /></Avatar>`}
+>
+  {['xs', 'sm', 'md', 'lg'].map((size) => (
+    <span key={size} className="flex flex-col items-center">
+      <Avatar name="Olivia Rhye" size={size}>
+        <AvatarImage src="/examples/woman-1.jpg" alt="" />
+        <AvatarFallback />
+      </Avatar>
+      <ExampleLabel>{size} {({ xs: 20, sm: 24, md: 32, lg: 40 })[size]}</ExampleLabel>
+    </span>
+  ))}
+</Example>
+
+`md` (32px) is the default size. When there's no photo, initials are 40% of the circle and icons use the matching Iconography size, so both scale with the avatar.
+
+## Fallback
+
+<Example
+  title="Photo → initials → icon"
+  code={`<Avatar name="Olivia Rhye">
+  <AvatarImage src={user.photoUrl} alt="" />
+  <AvatarFallback />
+</Avatar>
+
+<Avatar name="Olivia Rhye">
+  <AvatarFallback />
+</Avatar>
+
+<Avatar>
+  <AvatarFallback />
+</Avatar>`}
+>
+  <span className="flex flex-col items-center">
+    <Avatar name="Olivia Rhye">
+      <AvatarImage src="/examples/woman-1.jpg" alt="" />
+      <AvatarFallback />
+    </Avatar>
+    <ExampleLabel>Photo</ExampleLabel>
+  </span>
+  <span className="flex flex-col items-center">
+    <Avatar name="Olivia Rhye">
+      <AvatarFallback />
+    </Avatar>
+    <ExampleLabel>Initials</ExampleLabel>
+  </span>
+  <span className="flex flex-col items-center">
+    <Avatar aria-label="Unknown person" role="img">
+      <AvatarFallback />
+    </Avatar>
+    <ExampleLabel>Icon</ExampleLabel>
+  </span>
+</Example>
+
+## Indicator
+
+<Example
+  title="A dot on the edge"
+  code={`<Avatar name="Olivia Rhye">
+  <AvatarFallback />
+  <AvatarBadge />
+</Avatar>
+
+<Avatar name="Phoenix Baker">
+  <AvatarFallback />
+  <AvatarBadge className="bg-warning" />
+</Avatar>`}
+>
+  {['xs', 'sm', 'md', 'lg'].map((size) => (
+    <Avatar key={size} name="Olivia Rhye" size={size}>
+      <AvatarFallback />
+      <AvatarBadge />
+    </Avatar>
+  ))}
+  <Avatar name="Phoenix Baker">
+    <AvatarFallback />
+    <AvatarBadge className="bg-warning" />
+  </Avatar>
+</Example>
+
+The dot is green (`bg-success`) by default; pass any status color with `className`. Its size follows the avatar. A dot alone doesn't say what it means, so pair it with text nearby ("Online", "Away").
+
+## As a button
+
+<Example
+  title="Open a profile or menu"
+  code={`<button type="button" aria-label="Account menu" className="rounded-full transition-opacity hover:opacity-85">
+  <Avatar name="Olivia Rhye">
+    <AvatarImage src={user.photoUrl} alt="" />
+    <AvatarFallback />
+  </Avatar>
+</button>`}
+>
+  <button type="button" aria-label="Account menu" className="rounded-full transition-opacity hover:opacity-85">
+    <Avatar name="Olivia Rhye">
+      <AvatarImage src="/examples/woman-1.jpg" alt="" />
+      <AvatarFallback />
+    </Avatar>
+  </button>
+</Example>
+
+Wrap the avatar in a real `button` with an `aria-label`. The gold focus ring comes from the theme; tab to the example to see it.
+
+## Group
+
+<Example
+  title="A few avatars and a +N chip"
+  code={`<AvatarGroup>
+  <Avatar name="Olivia Rhye"><AvatarImage src={photo} alt="" /><AvatarFallback /></Avatar>
+  <Avatar name="Phoenix Baker"><AvatarImage src={photo} alt="" /><AvatarFallback /></Avatar>
+  <Avatar name="Lana Steiner"><AvatarFallback /></Avatar>
+  <AvatarGroupCount>+4</AvatarGroupCount>
+</AvatarGroup>`}
+>
+  <AvatarGroup>
+    <Avatar name="Olivia Rhye">
+      <AvatarImage src="/examples/woman-1.jpg" alt="" />
+      <AvatarFallback />
+    </Avatar>
+    <Avatar name="Phoenix Baker">
+      <AvatarImage src="/examples/woman-2.jpg" alt="" />
+      <AvatarFallback />
+    </Avatar>
+    <Avatar name="Lana Steiner">
+      <AvatarFallback />
+    </Avatar>
+    <AvatarGroupCount aria-label="4 more">+4</AvatarGroupCount>
+  </AvatarGroup>
+  <AvatarGroup>
+    {[['Demi Wilkinson', '/examples/woman-3.jpg'], ['Candice Wu'], ['Drew Cano', '/examples/woman-2.jpg']].map(([name, src]) => (
+      <Avatar key={name} name={name} size="sm">
+        {src && <AvatarImage src={src} alt="" />}
+        <AvatarFallback />
+      </Avatar>
+    ))}
+    <AvatarGroupCount size="sm" aria-label="2 more">+2</AvatarGroupCount>
+  </AvatarGroup>
+</Example>
+
+Every avatar in a group shares one size; give `AvatarGroupCount` the same `size`. Each avatar gets a ring in the page color so the overlap reads clearly.
+
+## Loading
+
+<Example
+  title="Skeleton circle"
+  code={`<AvatarSkeleton />`}
+>
+  {['xs', 'sm', 'md', 'lg'].map((size) => (
+    <AvatarSkeleton key={size} size={size} />
+  ))}
+</Example>
+
+## Behavior
+
+#### The fallback is a cascade
+
+The image loads over the fallback. While it loads, or if the address is broken, people see initials, never an empty circle that later jumps.
+
+#### Initials stop at two
+
+First word plus last word: "Mary Jane Watson" is **MW**. Emoji and accented letters are never cut in half. Use `getInitials(name)` if you need the same letters elsewhere.
+
+#### The name is the label
+
+With `name`, screen readers announce "Olivia Rhye", not "O R". Without a name (the icon fallback), add `role="img"` and an `aria-label`.
+
+## API reference
+
+<PropsTable
+  type={{
+    name: { type: 'string', description: 'Accessible label and the source of the fallback initials.' },
+    size: { type: "'xs' | 'sm' | 'md' | 'lg'", default: "'md'", description: 'xs 20 · sm 24 · md 32 · lg 40.' },
+    className: { type: 'string', description: 'Extra classes on the circle, e.g. a ring color.' },
+  }}
+/>
+
+`AvatarImage` takes the usual `src` and `alt` (keep `alt=""` when `name` is set). `AvatarFallback` shows its children if you pass them, otherwise the initials, otherwise the icon. `AvatarBadge` and `AvatarGroupCount` take `className`; `AvatarGroupCount` and `AvatarSkeleton` also take `size`.
+
+## Guidelines
+
+<Guidelines>
+  <Guideline>Always pass a `name`. Different initials make a list read as different people instead of a wall of identical icons.</Guideline>
+  <Guideline>Use avatars for people only. Agents are shown with the mascot.</Guideline>
+  <Guideline>Use `xs` (20px) in menus and dense lists, `md` or `lg` in rows, cards and chat.</Guideline>
+  <Guideline>For several people, use a group with a few avatars and a +N chip, never one avatar and a number.</Guideline>
+  <Guideline dont>Don't rely on the indicator color alone; say what it means in text nearby.</Guideline>
+  <Guideline dont>Don't make avatars square or give them other colors; one consistent circle keeps people recognisable everywhere.</Guideline>
+</Guidelines>
+
+## Related
+
+<Related>
+  <RelatedCard title="Iconography" href="/library/foundations/iconography">
+    <span className="font-mono text-ui-xs text-site-muted">12 · 14 · 16 · 20</span>
+  </RelatedCard>
+  <RelatedCard title="Colors" href="/library/foundations/colors">
+    <span className="flex gap-1">
+      <span className="size-4 rounded-full bg-neutral-800" />
+      <span className="size-4 rounded-full bg-green-500" />
+      <span className="size-4 rounded-full bg-coral-500" />
+    </span>
+  </RelatedCard>
+</Related>

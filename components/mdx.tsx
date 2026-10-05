@@ -1,4 +1,15 @@
 import defaultMdxComponents from 'fumadocs-ui/mdx';
+import { TypeTable as PropsTable } from 'fumadocs-ui/components/type-table';
+import {
+  Avatar,
+  AvatarBadge,
+  AvatarFallback,
+  AvatarGroup,
+  AvatarGroupCount,
+  AvatarImage,
+  AvatarSkeleton,
+} from '@/components/ui/avatar';
+import { Example, ExampleLabel } from '@/components/docs/example';
 import type { MDXComponents } from 'mdx/types';
 import { ColorRamp, ColorSet } from '@/components/docs/color-ramp';
 import { SemanticRoles, TintTable } from '@/components/docs/token-tables';
@@ -15,6 +26,16 @@ import { FocusRingOptions, InputBorderOptions } from '@/components/docs/decision
 export function getMDXComponents(components?: MDXComponents) {
   return {
     ...defaultMdxComponents,
+    PropsTable,
+    Example,
+    ExampleLabel,
+    Avatar,
+    AvatarImage,
+    AvatarFallback,
+    AvatarBadge,
+    AvatarGroup,
+    AvatarGroupCount,
+    AvatarSkeleton,
     ColorRamp,
     ColorSet,
     CopyFormatToggle,

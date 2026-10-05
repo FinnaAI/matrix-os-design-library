@@ -200,6 +200,12 @@
   --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* Trims a text box to the capital letters, so flexbox centers the letters themselves rather than the
+   font's line box (which has extra space above). For initials and counts inside circles. */
+@utility text-box-cap {
+  text-box: trim-both cap alphabetic;
+}
+
 @layer base {
   code,
   kbd,
