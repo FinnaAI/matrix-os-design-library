@@ -1,0 +1,175 @@
+---
+title: Badge
+description: A small, non-interactive label for status or category. Six tints from the color system, three sizes, an optional dot or icon.
+---
+
+import { Check, CircleAlert, Sparkles } from 'lucide-react';
+import { Icon } from '@/components/ui/icon';
+
+## Usage
+
+```bash
+pnpm dlx shadcn@latest add badge
+```
+
+Then replace `components/ui/badge.tsx` with the [Matrix version](https://github.com/sahar-nouri-1/Matrix_design-system/blob/main/components/ui/badge.tsx). It keeps shadcn's API and adds the status variants, sizes and the dot.
+
+```tsx
+import { Badge, BadgeDot } from '@/components/ui/badge';
+
+<Badge variant="success">Connected</Badge>
+
+<Badge variant="warning">
+  <BadgeDot />
+  Needs review
+</Badge>
+```
+
+## Variants
+
+<Example
+  title="Status"
+  subtitle="What state something is in"
+  code={`<Badge variant="success">Connected</Badge>
+<Badge variant="warning">Needs review</Badge>
+<Badge variant="destructive">Failed</Badge>
+<Badge variant="info">Syncing</Badge>
+<Badge variant="neutral">Paused</Badge>`}
+>
+  <Badge variant="success">Connected</Badge>
+  <Badge variant="warning">Needs review</Badge>
+  <Badge variant="destructive">Failed</Badge>
+  <Badge variant="info">Syncing</Badge>
+  <Badge variant="neutral">Paused</Badge>
+</Example>
+
+<Example
+  title="Category"
+  subtitle="What kind of thing it is"
+  code={`<Badge variant="brand">Built-in</Badge>
+<Badge variant="neutral">Plugin</Badge>`}
+>
+  <Badge variant="brand">Built-in</Badge>
+  <Badge variant="neutral">Plugin</Badge>
+</Example>
+
+Each variant is one of the [tint sets](/library/foundations/colors#tints): a light fill, a matching edge and dark text, all above 6:1. Status colors carry meaning (teal success, gold warning, coral failure, blue information); `brand` and `neutral` label a category.
+
+## Sizes
+
+<Example
+  title="22 · 24 · 26"
+  code={`<Badge size="sm">Small</Badge>
+<Badge size="md">Medium</Badge>
+<Badge size="lg">Large</Badge>`}
+>
+  <span className="flex flex-col items-center">
+    <Badge size="sm">Small</Badge>
+    <ExampleLabel>sm · 12px text</ExampleLabel>
+  </span>
+  <span className="flex flex-col items-center">
+    <Badge size="md">Medium</Badge>
+    <ExampleLabel>md · 13px text</ExampleLabel>
+  </span>
+  <span className="flex flex-col items-center">
+    <Badge size="lg">Large</Badge>
+    <ExampleLabel>lg · 14px text</ExampleLabel>
+  </span>
+</Example>
+
+`md` is the default. Match the badge to the text beside it: `sm` next to 12px metadata, `md` in lists and tables, `lg` next to 14px body text.
+
+## With dot
+
+<Example
+  title="Live status"
+  code={`<Badge variant="success"><BadgeDot />Online</Badge>
+<Badge variant="warning"><BadgeDot />Away</Badge>
+<Badge variant="neutral"><BadgeDot />Offline</Badge>`}
+>
+  <Badge variant="success">
+    <BadgeDot />
+    Online
+  </Badge>
+  <Badge variant="warning">
+    <BadgeDot />
+    Away
+  </Badge>
+  <Badge variant="neutral">
+    <BadgeDot />
+    Offline
+  </Badge>
+</Example>
+
+The dot takes the variant's solid status color, so it reads as live state. Use it for things that change on their own: presence, a running agent, a connection.
+
+## With icon
+
+<Example
+  title="Before the label"
+  code={`<Badge variant="success"><Icon icon={Check} size="xxs" />Verified</Badge>
+<Badge variant="warning"><Icon icon={CircleAlert} size="xxs" />Attention</Badge>
+<Badge variant="brand"><Icon icon={Sparkles} size="xxs" />New</Badge>`}
+>
+  <Badge variant="success">
+    <Icon icon={Check} size="xxs" />
+    Verified
+  </Badge>
+  <Badge variant="warning">
+    <Icon icon={CircleAlert} size="xxs" />
+    Attention
+  </Badge>
+  <Badge variant="brand">
+    <Icon icon={Sparkles} size="xxs" />
+    New
+  </Badge>
+</Example>
+
+Icons are sized by the badge (12px, or 14px in `lg`) and take its text color. An icon plus a word works for everyone; color alone doesn't.
+
+## API reference
+
+<PropsTable
+  type={{
+    variant: {
+      type: "'neutral' | 'success' | 'warning' | 'destructive' | 'info' | 'brand'",
+      default: "'neutral'",
+      description: 'Status tints say what state something is in; brand and neutral label a category.',
+    },
+    size: { type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Height 22 / 24 / 26px, text 12 / 13 / 14px.' },
+    asChild: { type: 'boolean', default: 'false', description: "Render the badge's styles on your own element." },
+  }}
+/>
+
+shadcn's `default`, `secondary` and `outline` are accepted too and render the neutral badge.
+
+`BadgeDot` takes no props of its own; its color follows the badge's variant.
+
+## Guidelines
+
+<Guidelines>
+  <Guideline>Write labels in sentence case, one or two words: "Needs review", not "Needs Review".</Guideline>
+  <Guideline>Keep labels short, under about 20 characters; a badge never wraps.</Guideline>
+  <Guideline>Pick the variant by meaning: success, warning, destructive and info for state; brand and neutral for category.</Guideline>
+  <Guideline>Pair color with a word or an icon, never color alone.</Guideline>
+  <Guideline dont>Don't use badges as buttons or links. For something people click or remove, use a tag.</Guideline>
+  <Guideline dont>Don't color a badge by hand with `className`; if no variant fits, the meaning probably needs a word instead.</Guideline>
+</Guidelines>
+
+## Related
+
+<Related>
+  <RelatedCard title="Avatar" href="/library/components/avatar">
+    <span className="flex -space-x-1.5">
+      <span className="size-7 rounded-full border border-site-border bg-site-code" />
+      <span className="size-7 rounded-full border border-site-border bg-site-hover" />
+    </span>
+  </RelatedCard>
+  <RelatedCard title="Colors" href="/library/foundations/colors">
+    <span className="flex gap-1">
+      <span className="size-4 rounded-full bg-teal-500" />
+      <span className="size-4 rounded-full bg-gold-400" />
+      <span className="size-4 rounded-full bg-coral-500" />
+    </span>
+  </RelatedCard>
+</Related>
