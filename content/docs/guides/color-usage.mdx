@@ -1,0 +1,49 @@
+---
+title: Color usage
+description: Matrix has five brand colors and each one means one thing. Neutral does the work, coral warns, teal confirms, gold highlights and green is the brand. Use semantic tokens, never raw steps.
+---
+
+## What each color means
+
+| Color | Means | Tokens | Never use it for |
+|---|---|---|---|
+| **Neutral** | Structure, text and actions | `primary`, `foreground`, `muted-foreground`, `border`, `accent`, `card`, `background` | — |
+| **Coral** | Danger: delete, remove, errors | `destructive`, `destructive-text`, `tint-destructive-*` | Hover, selection, highlights, decoration |
+| **Teal** | Success, done, connected | `success`, `success-text`, `tint-success-*` | Actions |
+| **Gold** | Attention and focus | `ring`, `attention`, `warning`, `tint-warning-*` | Large fills |
+| **Green** | The Matrix brand | `brand`, `tint-brand-*`; also `primary-hover`, `link-hover` | Status ("success" is teal) |
+| **Blue** | Information only | `info`, `info-text`, `tint-info-*` | Links or actions |
+
+Links are neutral and underlined, not blue. Actions are neutral, not green or coral.
+
+## Pick the token by job
+
+| Job | Class |
+|---|---|
+| Page background | `bg-background` |
+| Card or panel | `bg-card` |
+| Menu, popover, dialog | `bg-popover` |
+| Hover or selected row | `bg-accent` (on a card it steps one shade darker automatically) |
+| Inset well, disabled fill | `bg-muted` |
+| Body text | `text-foreground` |
+| Secondary text, help, placeholders | `text-muted-foreground` |
+| Borders and dividers | `border-border` (inputs: `border-input`, the same color) |
+| Main action | `bg-primary text-primary-foreground` (use Button) |
+| Error text | `text-destructive-text` |
+| Status text on the page | `text-success-text`, `text-warning-text`, `text-info-text` |
+| A status chip or banner | `bg-tint-{name}-fill border-tint-{name}-border text-tint-{name}-text` (use Badge) |
+
+## Rules
+
+<Guidelines>
+  <Guideline>Use semantic tokens (`bg-primary`, `text-muted-foreground`). Raw steps (`bg-teal-600`) are for illustrations and docs only.</Guideline>
+  <Guideline>For text in a status color, use the `-text` token: the plain fills fail contrast as text.</Guideline>
+  <Guideline>Always pair a status color with a word or an icon. Color alone doesn't reach everyone.</Guideline>
+  <Guideline>Keep screens mostly neutral, so the few colored things (an error, a success, the brand) stand out.</Guideline>
+  <Guideline dont>Don't use coral for anything but danger. A coral hover or a coral "New" badge teaches people to ignore it.</Guideline>
+  <Guideline dont>Don't use Tailwind's default palette (`gray-*`, `red-*`, `blue-*`); its colors aren't Matrix's.</Guideline>
+  <Guideline dont>Don't write hex or rgb values. If a shade is missing, ask for a token instead of mixing one.</Guideline>
+  <Guideline dont>Don't add `dark:` classes; dark mode isn't designed yet.</Guideline>
+</Guidelines>
+
+See every swatch, token name and contrast ratio on [Colors](/library/foundations/colors).

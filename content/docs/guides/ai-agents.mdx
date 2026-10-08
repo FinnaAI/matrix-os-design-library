@@ -1,0 +1,91 @@
+---
+title: Build with AI agents
+description: How to set up Claude Code, Cursor or any coding agent so the UI it writes follows the Matrix design system. A rules block to paste, the workflow, and the checklist to run before every pull request.
+---
+
+Agents write good Matrix UI when they know three things: where the system is, which rules are non-negotiable, and how to check their own work. This page gives them all three.
+
+## 1. Point the agent at the system
+
+The whole design system is published as plain text for agents:
+
+| URL | What's in it |
+|---|---|
+| [`/llms.txt`](/llms.txt) | An index of every page with a one-line summary. Read this first. |
+| [`/llms-full.txt`](/llms-full.txt) | Every page in full: setup, tokens, every component's code, API and guidelines, and these guides. |
+
+Both live at `https://matrix-design-system.vercel.app`. They update on every change, so the agent always reads the current system.
+
+## 2. Paste this into the product repo
+
+Add this block to the product repo's `CLAUDE.md` (Claude Code) or `AGENTS.md` / `.cursor/rules` (Cursor and others). It's the short version of the rules; the agent fetches the details when it needs them.
+
+```md
+## Matrix OS design system
+
+UI follows the Matrix OS design system: https://matrix-design-system.vercel.app
+Before building UI, read https://matrix-design-system.vercel.app/llms.txt and the pages for the
+components you use (full text: /llms-full.txt). Guides: /guides/choosing-components, /guides/color-usage,
+/guides/actions, /guides/forms.
+
+Rules:
+- Use the components in components/ui (Button, Input, InputGroup, Field, Select, Checkbox, RadioGroup,
+  Switch, DropdownMenu, Tooltip, Badge, Avatar). Never build a second version; extend with props.
+- Tokens only: semantic Tailwind classes (bg-primary, text-muted-foreground, border-border).
+  No hex, rgb, arbitrary values (w-[13px]) or Tailwind's default palette (bg-gray-100, text-red-500).
+- Color: neutral for actions (bg-primary). Coral (destructive) only for delete, remove and errors.
+  Hover/selected surfaces are neutral (bg-accent). Gold is the focus ring and highlights. Green is brand.
+- Type: text-ui (14px) by default; text-ui-lg, text-ui-sm, text-ui-xs, text-heading. Geist only;
+  font-heading (Bricolage) only for brand moments. Weights normal/medium/semibold, never bold.
+- Spacing on the 4px scale (p-2 = 8px): 8px inside components, 16px between them. No p-2.5, gap-7.
+- Radius: controls rounded-md (8px), menus/popovers rounded-lg (12px), cards rounded-xl (16px).
+- Shadows: shadow-xs on resting controls, shadow-lg on overlays, shadow-xl on dialogs. Never write box-shadow.
+- Icons: lucide-react through the Icon component or inside Button; sizes xxs/xs/sm/md/lg. No emoji.
+- Sizes: controls are sm 32 / md 36 (default) / lg 40px; lg is the largest, also on mobile.
+- Every form control sits in a Field with a visible label. Errors: aria-invalid + FieldError.
+- Icon-only buttons need an aria-label and a Tooltip with the same words.
+- Never remove the focus ring. Light mode only: no dark: classes.
+- Merge classes with cn() from lib/utils (it knows the Matrix class names).
+```
+
+## 3. The workflow
+
+Ask the agent to work in this order. It keeps the output on-system and easy to review.
+
+1. **Name the job.** What does the person on this screen need to do? Pick components from [Choosing a component](/guides/choosing-components), not from memory of other design systems.
+2. **Read the component pages** it will use: the API table, the guidelines and the copy-paste examples. Start from the example code instead of writing from scratch.
+3. **Compose with tokens.** Layout with `flex`/`grid` and scale spacing; colors from [Color usage](/guides/color-usage); actions from [Actions](/guides/actions); forms from [Forms](/guides/forms).
+4. **Write the states.** Hover and focus come built in. The agent still has to handle empty, loading, error and disabled (and say *why* something is disabled).
+5. **Run the checklist below** and fix anything that fails before opening the pull request.
+
+When something the screen needs isn't in the library yet (a dialog, a table, a tabs bar), the agent should say so in the pull request and use the closest shadcn component restyled with tokens, not invent a one-off look.
+
+## 4. Checklist before a pull request
+
+<Guidelines>
+  <Guideline>Every color, size, radius, shadow and space is a token class. Search the diff for `#`, `rgb(`, `[` and Tailwind palette names (`gray-`, `red-`, `blue-`); there should be none.</Guideline>
+  <Guideline>Coral appears only on delete/remove actions and error messages.</Guideline>
+  <Guideline>There is at most one primary button per view.</Guideline>
+  <Guideline>Every input, select, checkbox, radio and switch has a visible, linked label (`htmlFor` + `id`).</Guideline>
+  <Guideline>Every icon-only button has an `aria-label` and a tooltip.</Guideline>
+  <Guideline>Tabbing through the screen shows the gold focus ring on every interactive element, in a logical order.</Guideline>
+  <Guideline>Text is 14px (`text-ui`) or larger, except captions and badges.</Guideline>
+  <Guideline>Empty, loading and error states exist and use the same components.</Guideline>
+  <Guideline dont>No new component that duplicates one in `components/ui`, and no edited copy of one inside a feature folder.</Guideline>
+</Guidelines>
+
+## Common mistakes
+
+| Agents often write | Write instead | Why |
+|---|---|---|
+| `bg-gray-100`, `text-gray-500` | `bg-accent`, `text-muted-foreground` | Tailwind's grays aren't Matrix's warm neutral. |
+| `bg-red-500` on a Delete button | `<Button variant="destructive">` | One coral, with the right hover and contrast. |
+| `text-sm font-bold` | `text-ui font-semibold` | Matrix sizes, and no bold in product UI. |
+| `rounded-lg` on a button or input | nothing (the component sets `rounded-md`) | Controls are 8px at every size. |
+| `p-2.5`, `gap-7`, `mt-[13px]` | `p-2`/`p-3`, `gap-6`/`gap-8`, `mt-3` | Only scale steps; the few exceptions live inside components. |
+| `<input className="border …">` | `<Input>` in a `<Field>` | Border, focus, error and disabled come with it. |
+| `outline-none` / `focus:ring-0` | leave focus alone | The gold ring is global; removing it breaks keyboard use. |
+| `<DropdownMenu>` to pick a form value | `<Select>` | Menus run actions; selects hold values. |
+| `<Switch>` in a form with a Save button | `<Checkbox>` | A switch applies immediately. |
+| `<Icon size={18} strokeWidth={1.5}>` | `<Icon icon={X} size="sm" />` | Five sizes, stroke set automatically. |
+| `dark:bg-…` | nothing | Light mode only until dark tokens exist. |

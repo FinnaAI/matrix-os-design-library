@@ -1,0 +1,78 @@
+---
+title: Forms
+description: How to build forms people get right the first time. Every control sits in a Field with a visible label; errors name the problem and the fix; spacing is built in.
+---
+
+## The basic shape
+
+```tsx
+import { Field, FieldDescription, FieldError, FieldGroup, FieldLabel } from '@/components/ui/field';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+
+<form className="flex flex-col gap-6">
+  <FieldGroup>
+    <Field>
+      <FieldLabel htmlFor="agent-name">Agent name</FieldLabel>
+      <Input id="agent-name" placeholder="Research assistant" />
+      <FieldDescription>Shown in chats and notifications.</FieldDescription>
+    </Field>
+    <Field>
+      <FieldLabel htmlFor="agent-email">Email for reports</FieldLabel>
+      <Input id="agent-email" type="email" aria-invalid="true" aria-describedby="agent-email-error" />
+      <FieldError id="agent-email-error">Enter a full email address, like name@example.com.</FieldError>
+    </Field>
+  </FieldGroup>
+  <div className="flex justify-end gap-2">
+    <Button variant="secondary" type="button">Cancel</Button>
+    <Button type="submit">Create agent</Button>
+  </div>
+</form>
+```
+
+Field puts the label 2px above the control and help or error text 8px below. FieldGroup spaces fields 16px apart, FieldSet sections 24px apart. Don't add your own margins.
+
+## Pick the control
+
+| People… | Use |
+|---|---|
+| Type one line | `Input` (set the right `type`: `email`, `url`, `tel`, `number`, `search`) |
+| Type several lines | `Textarea` |
+| Pick one of 2–5 options, visible | `RadioGroup` |
+| Pick one of about 5–15 | `Select` |
+| Agree, or pick several | `Checkbox` |
+| Turn something on **immediately**, no Save | `Switch` (never inside a form with a Save button) |
+
+Checkboxes and switches sit beside their label: use `<Field orientation="horizontal">` with a `FieldContent` for the label and help text.
+
+## Labels and help
+
+<Guidelines>
+  <Guideline>Every control has a visible label in sentence case, linked with `htmlFor` and `id`.</Guideline>
+  <Guideline>Help text says what people need before they type: the format, or why it's asked.</Guideline>
+  <Guideline>If most fields are required, mark the optional ones ("Note (optional)"). If most are optional, mark the required ones with `<FieldLabel required>`.</Guideline>
+  <Guideline dont>Don't use the placeholder as the label; it disappears when people type. Placeholders show an example value, if anything.</Guideline>
+</Guidelines>
+
+## Errors
+
+1. Validate when a field loses focus or on submit, not on every keystroke.
+2. Mark the control `aria-invalid="true"` and link the message with `aria-describedby`.
+3. Write the message as the fix: "Enter a full email address, like name@example.com", not "Invalid input".
+4. On submit, move focus to the first field with an error.
+5. Keep the error until the value is fixed; then remove it right away.
+
+Errors are coral text and a coral border; never color alone, always the message.
+
+## Disabled, read-only and saving
+
+- **Disabled:** just set `disabled` on the control; Field softens its label and help text. Say why nearby if it isn't obvious.
+- **Read-only:** `readOnly` on Input keeps the value focusable and copyable.
+- **Saving:** `<Button type="submit" loading>` while the form submits; keep the fields as they are.
+
+## Layout
+
+- One column by default. Put two short related fields side by side with `<FieldGroup className="grid sm:grid-cols-2">`.
+- Match the field width to its content: a code field is narrow, a description is full width.
+- Use `md` controls in forms; `lg` (40px) for single focused tasks like onboarding and on mobile.
+- Primary action last, on the right; see [Actions](/guides/actions).

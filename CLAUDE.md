@@ -46,6 +46,7 @@ Never invent brand values. If something isn't decided yet, mark it `PROVISIONAL`
 - **Developer-ready, always.** Every foundation and component page must be usable by developers as-is: real token names **and** Tailwind classes, copy-paste code that works, copyable values, and any setup a developer needs (token CSS, `@theme`, fonts, `cn`). Designers and developers read the same page.
 
 - Pages live in `content/docs/library/**` (Start here, foundations, components) and `content/docs/guides/**`. Navigation order lives in each folder's `meta.json`.
+- **Guides are read by people and by developers' AI agents** (through `/llms.txt` and `/llms-full.txt`). Write them in plain markdown (tables, code, `<Guidelines>`), no live previews, and keep the rules block in `guides/ai-agents.mdx` in sync with this file's Rules.
 - **Site chrome is neutral white/gray** (`styles/site.css`, `bg-site-*`/`text-site-*` utilities) so components stand out. Site chrome never uses Matrix brand colors; Matrix components never use `site-*` tokens.
 - The site layout is custom and Matrix-style: floating pill nav with Search ⌘K (`components/site/site-nav.tsx`; opens the Fumadocs search dialog), plain sidebar (`components/site/library-sidebar.tsx`), page body (`components/site/doc-page.tsx`). Fumadocs is used only for content loading and MDX blocks.
 - Site text uses the product scale (`text-ui`, `text-ui-xs`); page titles use the site-only `text-site-title`.

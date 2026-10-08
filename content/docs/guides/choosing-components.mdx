@@ -1,0 +1,45 @@
+---
+title: Choosing a component
+description: Start from what people need to do, then pick the component. One component per job, so the same task looks and works the same everywhere in Matrix OS.
+---
+
+Find the job in the left column. If two rows seem to fit, the **Not this** column says why one wins.
+
+## Act
+
+| People need to… | Use | Not this |
+|---|---|---|
+| Do the main thing on the screen | [Button](/library/components/button) `primary` (one per view) | A second primary; two primaries means neither is |
+| Do a secondary thing next to it | Button `secondary` | `ghost` for a visible secondary action, it's too quiet |
+| Act in a toolbar, row or card | Button `ghost`, often `square` with an icon | `secondary` repeated on every row, it gets noisy |
+| Delete or remove something | Button `destructive` (or `ghost-destructive` / `link-destructive` in rows) | Coral on anything else |
+| Go to another page | A link (`<a>`, or Button `link` with `asChild`) | A button that navigates |
+| Pick from several actions | [Dropdown menu](/library/components/dropdown-menu) from a ⋯ icon button | A row of 4+ buttons |
+| Understand an icon-only button | [Tooltip](/library/components/tooltip) with the same words as its `aria-label` | Putting needed information only in a tooltip |
+
+## Enter and choose
+
+| People need to… | Use | Not this |
+|---|---|---|
+| Type one line | [Input](/library/components/input) in a [Field](/library/components/field) | A bare input with only a placeholder |
+| Type several lines | Textarea in a Field | Input |
+| Type with an icon, prefix, unit or button inside | [InputGroup](/library/components/input#inputgroup) | Absolute-positioned icons on an Input |
+| Search | InputGroup with a search icon, `type="search"` | A Select |
+| Pick one of 2–5 visible options | [Radio group](/library/components/radio-group) | A Select hiding three options |
+| Pick one of about 5–15 known options | [Select](/library/components/select) | Dropdown menu (that's for actions) |
+| Pick one of many, or by typing | Combobox (coming) | A Select with 100 rows |
+| Agree to something or pick several | [Checkbox](/library/components/checkbox) | Switch |
+| Turn a setting on now, no Save | [Switch](/library/components/switch) | Checkbox |
+
+## Show
+
+| People need to… | Use | Not this |
+|---|---|---|
+| See a status or category | [Badge](/library/components/badge) (`success`, `warning`, `destructive`, `info`; `brand`, `neutral`) | Colored text, or a badge you can click |
+| See who a person is | [Avatar](/library/components/avatar) with a `name` | Avatar for an agent (agents use the mascot) |
+| Group content | A card: `rounded-xl bg-card p-4` (Card component coming) | Borders around every block |
+| Separate groups | Separator, or `FieldSeparator` in forms | Extra margin plus a line |
+
+## Coming next
+
+Dialog, Popover, Tabs, Table, Toast, Combobox and Card aren't in the library yet. Until they are, use the shadcn version restyled with Matrix tokens (overlays: `rounded-lg bg-popover shadow-lg`, dialogs `shadow-xl`), and note it in the pull request so it moves to the library later.
