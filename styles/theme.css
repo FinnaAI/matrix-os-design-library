@@ -2,9 +2,11 @@
    (bg-primary, text-ui, rounded-lg, shadow-lg, font-heading…).
    Copy this file and styles/tokens.css into an app, then in its global CSS:
      @import 'tailwindcss';
+     @import 'tw-animate-css';   (menus, select and tooltip animate with it)
      @import './tokens.css';
      @import './theme.css';
-   Matrix scales replace Tailwind's default green/teal/blue/neutral so off-brand shades can't leak in. */
+   Matrix scales override steps 25–900 of Tailwind's green/teal/blue/neutral with brand values.
+   Tailwind's other palettes (red, gray…) still exist: don't use them; use the semantic tokens. */
 @theme inline {
   /* Semantic colors */
   --color-brand: var(--brand);
@@ -38,6 +40,15 @@
   --color-success-text: var(--success-text);
   --color-warning-text: var(--warning-text);
   --color-destructive-text: var(--destructive-text);
+  --color-destructive-text-hover: var(--destructive-text-hover);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
   --color-info-text: var(--info-text);
   --color-tint-neutral-fill: var(--tint-neutral-fill);
   --color-tint-neutral-border: var(--tint-neutral-border);

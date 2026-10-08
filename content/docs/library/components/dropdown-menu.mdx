@@ -106,7 +106,7 @@ Rows highlight in neutral on hover or with the arrow keys. The selected option s
   title="Account menu"
   subtitle="Avatar trigger, label, groups"
   code={`<DropdownMenu>
-  <DropdownMenuTrigger aria-label="Account">
+  <DropdownMenuTrigger aria-label="Account" className="rounded-full">
     <Avatar name="Alex Morgan"><AvatarFallback /></Avatar>
   </DropdownMenuTrigger>
   <DropdownMenuContent align="end">
@@ -157,7 +157,8 @@ Rows highlight in neutral on hover or with the arrow keys. The selected option s
 <Example
   title="Multi-select"
   subtitle="Checks, stays open"
-  code={`<DropdownMenuCheckboxItem checked={showDone} onCheckedChange={setShowDone} onSelect={(e) => e.preventDefault()}>
+  code={`<DropdownMenuLabel>Task status</DropdownMenuLabel>
+<DropdownMenuCheckboxItem checked={showDone} onCheckedChange={setShowDone} onSelect={(e) => e.preventDefault()}>
   Finished
 </DropdownMenuCheckboxItem>`}
 >
@@ -227,7 +228,7 @@ Rows highlight in neutral on hover and with the arrow keys. The gold ring stays 
 
 #### Rows don't wrap
 
-Labels stay on one line. Keep them short (verb + noun); long names truncate.
+Labels stay on one line. Keep them short (verb + noun); the menu grows to fit, up to the screen edge.
 
 #### Touch grows the rows
 

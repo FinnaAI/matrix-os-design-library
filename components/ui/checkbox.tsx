@@ -16,7 +16,8 @@ const checkboxVariants = cva(
     'peer group/checkbox grid shrink-0 place-content-center rounded-xs border border-input bg-background text-primary shadow-xs',
     'transition-[border-color] duration-150 hover:border-muted-foreground',
     'data-[state=checked]:border-primary data-[state=indeterminate]:border-primary',
-    'aria-invalid:border-destructive',
+    'aria-invalid:border-destructive aria-invalid:data-[state=checked]:border-destructive',
+    'disabled:data-[state=checked]:border-border disabled:data-[state=indeterminate]:border-border',
     'disabled:cursor-not-allowed disabled:border-border disabled:bg-muted disabled:text-muted-foreground disabled:shadow-none',
   ],
   {
@@ -29,9 +30,10 @@ const checkboxVariants = cva(
 
 function Checkbox({
   className,
-  size = 'sm',
+  size: sizeProp,
   ...props
 }: React.ComponentProps<typeof CheckboxPrimitive.Root> & VariantProps<typeof checkboxVariants>) {
+  const size = sizeProp ?? 'sm';
   const iconSize = size === 'md' ? 'xs' : 'xxs';
   return (
     <CheckboxPrimitive.Root

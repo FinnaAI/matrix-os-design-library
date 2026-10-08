@@ -7,7 +7,11 @@ Matrix OS runs on many surfaces: the web shell, the desktop app, mobile, macOS a
 
 ## Use in your project
 
-Five steps for a Next.js app on Tailwind CSS v4 (the Matrix shell's stack). Each file links to its source on GitHub; copy it as-is.
+Six steps for a Next.js app on Tailwind CSS v4 (the Matrix shell's stack). Each file links to its source on GitHub; copy it as-is.
+
+```bash
+pnpm add radix-ui class-variance-authority clsx tailwind-merge tw-animate-css lucide-react
+```
 
 ### 1. Add the tokens and the theme
 
@@ -16,6 +20,7 @@ Copy [`styles/tokens.css`](https://github.com/sahar-nouri-1/Matrix_design-system
 ```css
 /* app/globals.css */
 @import 'tailwindcss';
+@import 'tw-animate-css'; /* menus, select and tooltip animate with it */
 @import '../styles/tokens.css';
 @import '../styles/theme.css';
 ```
@@ -24,11 +29,12 @@ If your app already has a shadcn theme (`:root` color variables and an `@theme` 
 
 Now `bg-primary`, `text-ui`, `rounded-lg`, `shadow-lg` and `p-4` work, and plain CSS can use `var(--primary)`, `var(--type-ui-size)`, `var(--rounded-lg)` or `var(--elevation-lg)`.
 
-### 2. Load the fonts
+### 2. Load the fonts and the tooltip provider
 
 ```tsx
 // app/layout.tsx
 import { Bricolage_Grotesque, Geist, Geist_Mono } from 'next/font/google';
+import { TooltipProvider } from '@/components/ui/tooltip';
 
 const geist = Geist({ subsets: ['latin'], variable: '--font-geist-sans' });
 const geistMono = Geist_Mono({ subsets: ['latin'], variable: '--font-geist-mono' });
@@ -37,13 +43,17 @@ const bricolage = Bricolage_Grotesque({ subsets: ['latin'], variable: '--font-br
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${geist.variable} ${geistMono.variable} ${bricolage.variable}`}>
-      <body className="bg-background font-sans text-ui text-foreground">{children}</body>
+      <body className="bg-background font-sans text-ui text-foreground">
+        <TooltipProvider>{children}</TooltipProvider>
+      </body>
     </html>
   );
 }
 ```
 
 The variable names matter: `tokens.css` reads `--font-geist-sans`, `--font-geist-mono` and `--font-bricolage`, and falls back to the font names if you load them another way.
+
+`TooltipProvider` wraps the app once (copy `tooltip.tsx` in step 5). Tooltips need it, and one shared provider gives them the Matrix timing.
 
 ### 3. Teach `cn()` the Matrix class names
 
@@ -64,6 +74,10 @@ const twMerge = extendTailwindMerge({
       ],
       shadow: ['xs-top', '3xl'],
       radius: ['2xs'],
+    },
+    // Custom utilities that would otherwise be mistaken for text colors.
+    classGroups: {
+      'text-box': ['text-box-cap'],
     },
   },
 });
@@ -92,7 +106,21 @@ import { Icon } from '@/components/ui/icon';
 <Icon icon={Mail} size="sm" />
 ```
 
-### 5. Check it works
+### 5. Add components
+
+Copy the files you need from [`components/ui`](https://github.com/sahar-nouri-1/Matrix_design-system/tree/main/components/ui), with the ones they depend on. They keep shadcn's names and parts, so they replace shadcn's versions one for one.
+
+| Component | Also copy |
+| --- | --- |
+| Avatar, Checkbox | `icon.tsx` |
+| Field | `label.tsx`, `separator.tsx` |
+| Input group | `button.tsx`, `input.tsx`, `textarea.tsx` |
+| Select, Dropdown menu | `menu-styles.ts` |
+| Tooltip | add `TooltipProvider` to the layout (step 2) |
+
+In every copied file, `cn` comes from `@/lib/utils` (step 3). If you use the shadcn CLI instead, run `pnpm dlx shadcn@latest add <name>` first and then replace the file; delete any theme it writes into your global CSS, since step 1 already provides it.
+
+### 6. Check it works
 
 ```tsx
 <div className="flex max-w-sm flex-col gap-2 rounded-xl border border-border bg-card p-6 shadow-xs">
@@ -120,6 +148,17 @@ A card with a 17px semibold title, grey 14px text and a warm dark grey button (`
   <Card title="Iconography" href="/library/foundations/iconography" description="Lucide at five sizes, with a stroke floor." />
 </Cards>
 
+## Components
+
+<Cards>
+  <Card title="Button" href="/library/components/button" description="Primary, secondary, ghost, link and destructive, four sizes." />
+  <Card title="Input and Field" href="/library/components/field" description="Text fields with labels, help text and errors." />
+  <Card title="Checkbox, Radio, Switch" href="/library/components/checkbox" description="Choices and settings." />
+  <Card title="Select and Dropdown menu" href="/library/components/select" description="Picking a value, and menus of actions." />
+  <Card title="Tooltip" href="/library/components/tooltip" description="Short hints on hover and focus." />
+  <Card title="Avatar and Badge" href="/library/components/badge" description="People, and status labels." />
+</Cards>
+
 ## Source of truth
 
 **This design system is the source of truth.** Every color, size and rule lives in [`styles/tokens.css`](https://github.com/sahar-nouri-1/Matrix_design-system/blob/main/styles/tokens.css) and on these pages; the product, Figma and other docs follow it.
@@ -143,4 +182,4 @@ When they disagree with this site, this site wins: update the reference, never t
 
 ## Status
 
-All foundations are in place for light mode: colors, typography, spacing, radius, elevation and iconography. Components come next, starting with Button; motion and dark mode follow.
+Light mode is in place: all foundations (colors, typography, spacing, radius, elevation, iconography) and 11 components (Avatar, Badge, Button, Checkbox, Dropdown menu, Field, Input, Radio group, Select, Switch, Tooltip). Coming next: more components (Card, Dialog, Tabs, Textarea), motion and dark mode.

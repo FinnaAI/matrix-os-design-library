@@ -82,7 +82,7 @@ const BY_SIZE = [
   { height: 'h-3 w-3', px: 12, step: '2xs', what: 'Status dot, mini swatch' },
   { height: 'h-5 w-10', px: 20, step: 'xs', what: 'Checkbox, counter, tag' },
   { height: 'h-9 w-24', px: 36, step: 'md', what: 'Controls at any size: button, input, select, menu item' },
-  { height: 'h-16 w-28', px: 64, step: 'lg', what: 'Menu, popover, tooltip, small card' },
+  { height: 'h-16 w-28', px: 64, step: 'lg', what: 'Menu, popover, small card' },
   { height: 'h-24 w-32', px: 96, step: 'xl', what: 'Card, panel' },
 ];
 

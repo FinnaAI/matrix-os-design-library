@@ -140,6 +140,7 @@
   --success-text: var(--teal-600);
   --warning-text: var(--gold-700);
   --destructive-text: var(--coral-600);
+  --destructive-text-hover: var(--coral-700); /* Destructive links darken on hover (coral-600 → 700) */
   --info-text: var(--blue-600);
 
   /* Tints: fill + border + text sets for chips, badges and banners. All text pairs ≥ 6:1. PROVISIONAL */

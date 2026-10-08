@@ -13,7 +13,7 @@ const buttonVariants = cva(
   [
     'relative inline-flex shrink-0 items-center justify-center gap-1.5 font-medium whitespace-nowrap',
     'transition-[color,background-color,border-color,text-decoration-color] duration-150 select-none',
-    'disabled:pointer-events-none disabled:opacity-50 aria-busy:pointer-events-none',
+    'disabled:pointer-events-none disabled:opacity-50 aria-busy:pointer-events-none aria-disabled:pointer-events-none aria-disabled:opacity-50',
     '[&_svg]:pointer-events-none [&_svg]:shrink-0',
   ],
   {
@@ -26,7 +26,7 @@ const buttonVariants = cva(
         'ghost-destructive': 'text-destructive-text hover:bg-tint-destructive-fill',
         link: 'h-auto! px-0! text-link underline decoration-1 underline-offset-4 hover:text-link-hover',
         'link-destructive':
-          'h-auto! px-0! text-destructive-text underline decoration-1 underline-offset-4 hover:text-destructive-hover',
+          'h-auto! px-0! text-destructive-text underline decoration-1 underline-offset-4 hover:text-destructive-text-hover',
         // shadcn's names, kept so existing product code keeps working: outline → secondary, default → primary.
         default: 'bg-primary text-primary-foreground shadow-xs hover:bg-primary-hover',
         outline: 'border border-border bg-secondary text-secondary-foreground shadow-xs hover:bg-secondary-hover',
@@ -56,38 +56,65 @@ const buttonVariants = cva(
 type ButtonProps = React.ComponentProps<'button'> &
   VariantProps<typeof buttonVariants> & {
     asChild?: boolean;
-    /** Shows a spinner, keeps the button's width and blocks clicks. */
+    /** Shows a spinner, keeps the button's width, label and focus, and blocks clicks. */
     loading?: boolean;
   };
 
 function Button({
   className,
-  variant = 'primary',
-  size = 'md',
+  variant,
+  size,
   square = false,
   round = false,
   asChild = false,
   loading = false,
   disabled,
+  type,
+  tabIndex,
+  onClick,
   children,
   ...props
 }: ButtonProps) {
+  // `?? ` (not default params) so an explicit null from a wrapper still gets the default look.
+  const v = variant ?? 'primary';
+  const s = size ?? 'md';
   const Comp = asChild ? Slot.Root : 'button';
+  // asChild renders your element (e.g. a link), which has no native `disabled`: fake it accessibly.
+  const fakeDisabled = asChild && !!disabled;
+  const blocked = loading || fakeDisabled;
+
   return (
     <Comp
       data-slot="button"
-      data-variant={variant}
-      data-size={size}
+      data-variant={v}
+      data-size={s}
+      // A plain button defaults to type="button" so it never submits a form by accident.
+      type={asChild ? type : (type ?? 'button')}
       aria-busy={loading || undefined}
-      disabled={asChild ? undefined : disabled || loading}
-      className={cn(buttonVariants({ variant, size, square, round }), className)}
+      aria-disabled={fakeDisabled || undefined}
+      tabIndex={fakeDisabled ? -1 : tabIndex}
+      // Loading keeps the button enabled so keyboard focus stays on it, except a submit button,
+      // which is disabled so a form can't be sent twice while it's saving.
+      disabled={asChild ? undefined : disabled || (loading && type === 'submit') || undefined}
+      // Mouse clicks are blocked by CSS (aria-busy / aria-disabled); this also blocks Enter and Space.
+      onClick={
+        onClick &&
+        ((event: React.MouseEvent<HTMLButtonElement>) => {
+          if (blocked) {
+            event.preventDefault();
+            return;
+          }
+          onClick(event);
+        })
+      }
+      className={cn(buttonVariants({ variant: v, size: s, square, round }), className)}
       {...props}
     >
       {loading && !asChild ? (
         <>
-          {/* The label stays in place (invisible) so the button keeps its width. */}
-          <span className="invisible contents">{children}</span>
-          <span className="absolute inset-0 flex items-center justify-center">
+          {/* The label stays in place, transparent, so the width holds and screen readers still read it. */}
+          <span className="contents text-transparent [&_svg]:opacity-0">{children}</span>
+          <span className="absolute inset-0 flex items-center justify-center text-current">
             <Loader2 className="animate-spin" aria-hidden="true" />
           </span>
         </>

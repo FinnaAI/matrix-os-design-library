@@ -18,7 +18,8 @@ const radioVariants = cva(
     'peer grid aspect-square shrink-0 place-content-center rounded-full border border-input bg-background shadow-xs',
     'transition-[border-color] duration-150 hover:border-muted-foreground',
     'data-[state=checked]:border-primary',
-    'aria-invalid:border-destructive',
+    'aria-invalid:border-destructive aria-invalid:data-[state=checked]:border-destructive',
+    'disabled:data-[state=checked]:border-border disabled:data-[state=indeterminate]:border-border',
     'disabled:cursor-not-allowed disabled:border-border disabled:bg-muted disabled:shadow-none',
   ],
   {
@@ -33,9 +34,10 @@ const DOT = { sm: 'size-1.5', md: 'size-2' } as const;
 
 function RadioGroupItem({
   className,
-  size = 'sm',
+  size: sizeProp,
   ...props
 }: React.ComponentProps<typeof RadioGroupPrimitive.Item> & VariantProps<typeof radioVariants>) {
+  const size = sizeProp ?? 'sm';
   return (
     <RadioGroupPrimitive.Item
       data-slot="radio-group-item"
@@ -44,7 +46,7 @@ function RadioGroupItem({
       {...props}
     >
       <RadioGroupPrimitive.Indicator data-slot="radio-group-indicator" className="grid place-content-center">
-        <span className={cn('block rounded-full bg-primary in-disabled:bg-muted-foreground', DOT[size ?? 'sm'])} />
+        <span className={cn('block rounded-full bg-primary in-disabled:bg-muted-foreground', DOT[size])} />
       </RadioGroupPrimitive.Indicator>
     </RadioGroupPrimitive.Item>
   );

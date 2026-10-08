@@ -72,10 +72,14 @@ A dark neutral bubble with 12px medium text, 6px from its trigger, with an arrow
   title="Toolbar"
   subtitle="Move across: the next tooltip is instant"
   code={`<div className="flex gap-1">
-  {[['Bold', Bold], ['Italic', Italic], ['Underline', Underline]].map(([label, Icon]) => (
+  {[
+    { label: 'Bold', glyph: Bold },
+    { label: 'Italic', glyph: Italic },
+    { label: 'Underline', glyph: Underline },
+  ].map(({ label, glyph: Glyph }) => (
     <Tooltip key={label}>
       <TooltipTrigger asChild>
-        <Button variant="ghost" square aria-label={label}><Icon /></Button>
+        <Button variant="ghost" square aria-label={label}><Glyph /></Button>
       </TooltipTrigger>
       <TooltipContent>{label}</TooltipContent>
     </Tooltip>
@@ -154,15 +158,17 @@ A dark neutral bubble with 12px medium text, 6px from its trigger, with an arrow
   subtitle="Wrap it so the hint still shows"
   code={`<Tooltip>
   <TooltipTrigger asChild>
-    <span tabIndex={0}><Button variant="ghost-destructive" square disabled aria-label="Delete"><Trash2 /></Button></span>
+    <span tabIndex={0} aria-label="Delete (unavailable)" className="inline-flex rounded-md">
+      <Button variant="ghost-destructive" square disabled aria-hidden="true" tabIndex={-1}><Trash2 /></Button>
+    </span>
   </TooltipTrigger>
   <TooltipContent>Only owners can delete this agent</TooltipContent>
 </Tooltip>`}
 >
   <Tooltip>
     <TooltipTrigger asChild>
-      <span tabIndex={0} className="inline-flex rounded-md">
-        <Button variant="ghost-destructive" square disabled aria-label="Delete"><Trash2 /></Button>
+      <span tabIndex={0} aria-label="Delete (unavailable)" className="inline-flex rounded-md">
+        <Button variant="ghost-destructive" square disabled aria-hidden="true" tabIndex={-1}><Trash2 /></Button>
       </span>
     </TooltipTrigger>
     <TooltipContent>Only owners can delete this agent</TooltipContent>

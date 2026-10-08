@@ -13,9 +13,6 @@ import { Textarea } from '@/components/ui/textarea';
 
 const SIZES = { sm: 'h-8', md: 'h-9', lg: 'h-10' } as const;
 
-// The focus ring sits on the group, not on the inner control, so it wraps the icons and buttons too.
-const CONTROL_FOCUSED = 'has-[[data-slot=input-group-control]:focus-visible]';
-
 function InputGroup({
   className,
   size = 'md',
@@ -38,8 +35,10 @@ function InputGroup({
         'has-[>[data-align=block-start]]:h-auto has-[>[data-align=block-start]]:flex-col has-[>[data-align=block-start]]:[&>input]:pb-3',
         'has-[>[data-align=block-end]]:h-auto has-[>[data-align=block-end]]:flex-col has-[>[data-align=block-end]]:[&>input]:pt-3',
 
-        // Focus: the global gold ring, drawn around the whole group.
-        `${CONTROL_FOCUSED}:outline-2 ${CONTROL_FOCUSED}:outline-offset-2 ${CONTROL_FOCUSED}:outline-ring ${CONTROL_FOCUSED}:outline-solid`,
+        // Focus: the global gold ring, drawn around the whole group (so it wraps icons and buttons too).
+        // Written out in full: Tailwind only generates class names it can read as whole strings.
+        'has-[[data-slot=input-group-control]:focus-visible]:outline-2 has-[[data-slot=input-group-control]:focus-visible]:outline-offset-2',
+        'has-[[data-slot=input-group-control]:focus-visible]:outline-ring has-[[data-slot=input-group-control]:focus-visible]:outline-solid',
 
         // Error and disabled.
         'has-[[data-slot=input-group-control][aria-invalid=true]]:border-destructive',
@@ -55,7 +54,7 @@ function InputGroup({
 const inputGroupAddonVariants = cva(
   [
     'flex h-auto cursor-text items-center justify-center gap-2 text-ui text-muted-foreground select-none',
-    'group-has-[:disabled]/input-group:opacity-50',
+    'group-has-[[data-slot=input-group-control]:disabled]/input-group:opacity-50',
     '[&>svg]:size-4 [&>svg]:shrink-0',
     '[&>kbd]:rounded-xs [&>kbd]:bg-muted [&>kbd]:px-1 [&>kbd]:font-sans [&>kbd]:text-ui-xs',
   ],

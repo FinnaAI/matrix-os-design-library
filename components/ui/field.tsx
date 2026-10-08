@@ -10,9 +10,10 @@ import { Separator } from '@/components/ui/separator';
 // label 2px above the control, help text and errors 8px below it, 16px between fields, 24px between sections.
 // Errors color only the message, never the label. Disabling the control softens the label and help text.
 
-// When anything inside the field is disabled, soften its label and help text.
+// When the field's control is disabled, soften its label and help text. Only real controls count,
+// so a disabled helper button (e.g. Copy) next to an enabled input doesn't grey the field out.
 const SOFTEN_WHEN_DISABLED =
-  '[&:has(:disabled)_[data-slot=field-label]]:text-muted-foreground [&:has(:disabled)_[data-slot=field-description]]:opacity-70';
+  '[&:has(:is([data-slot=input],[data-slot=input-group-control],[data-slot=textarea],[data-slot=select-trigger],[data-slot=checkbox],[data-slot=radio-group-item],[data-slot=switch]):disabled)_[data-slot=field-label]]:text-muted-foreground [&:has(:is([data-slot=input],[data-slot=input-group-control],[data-slot=textarea],[data-slot=select-trigger],[data-slot=checkbox],[data-slot=radio-group-item],[data-slot=switch]):disabled)_[data-slot=field-description]]:opacity-70';
 
 function FieldSet({ className, ...props }: React.ComponentProps<'fieldset'>) {
   return (

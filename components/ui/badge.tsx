@@ -38,11 +38,13 @@ export type BadgeVariant = NonNullable<VariantProps<typeof badgeVariants>['varia
 
 function Badge({
   className,
-  variant = 'neutral',
-  size = 'md',
+  variant: variantProp,
+  size: sizeProp,
   asChild = false,
   ...props
 }: React.ComponentProps<'span'> & VariantProps<typeof badgeVariants> & { asChild?: boolean }) {
+  const variant = variantProp ?? 'neutral';
+  const size = sizeProp ?? 'md';
   const Comp = asChild ? Slot.Root : 'span';
   return (
     <Comp

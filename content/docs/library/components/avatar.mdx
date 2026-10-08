@@ -74,7 +74,7 @@ The default is the person's photo. Always include `AvatarFallback` too: it shows
   <AvatarFallback />
 </Avatar>
 
-<Avatar>
+<Avatar role="img" aria-label="Unknown person">
   <AvatarFallback />
 </Avatar>`}
 >
@@ -156,7 +156,7 @@ Wrap the avatar in a real `button` with an `aria-label`. The gold focus ring com
   <Avatar name="Olivia Rhye"><AvatarImage src={photo} alt="" /><AvatarFallback /></Avatar>
   <Avatar name="Phoenix Baker"><AvatarImage src={photo} alt="" /><AvatarFallback /></Avatar>
   <Avatar name="Lana Steiner"><AvatarFallback /></Avatar>
-  <AvatarGroupCount>+4</AvatarGroupCount>
+  <AvatarGroupCount aria-label="4 more">+4</AvatarGroupCount>
 </AvatarGroup>`}
 >
   <AvatarGroup>

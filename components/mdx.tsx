@@ -11,6 +11,7 @@ import {
 } from '@/components/ui/avatar';
 import { Badge, BadgeDot } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { Icon } from '@/components/ui/icon';
 import { Input } from '@/components/ui/input';
 import {
   InputGroup,
@@ -103,6 +104,7 @@ export function getMDXComponents(components?: MDXComponents) {
     Badge,
     BadgeDot,
     Button,
+    Icon,
     Input,
     InputGroup,
     InputGroupAddon,

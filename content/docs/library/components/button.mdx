@@ -54,7 +54,7 @@ import { Button } from '@/components/ui/button';
   <Button variant="link">View all agents</Button>
 </Example>
 
-Primary is the dark neutral; secondary is outlined on the page color; ghost has no fill until hover. Links are neutral and always underlined, and lighten on hover.
+Primary is the dark neutral; secondary is outlined on the page color; ghost has no fill until hover. Links are neutral and always underlined, and turn dark brand green on hover, like primary.
 
 ## Destructive
 
@@ -177,7 +177,7 @@ Put a Lucide icon straight inside the button; it's sized for you (14px at `xs`, 
   <Guideline>Write labels as verb + noun in sentence case: "Create agent", "Connect provider", not "Submit" or "OK".</Guideline>
   <Guideline>Use `xs` in dense chrome like toolbars, `md` in content and forms, `lg` for a single focused action such as onboarding.</Guideline>
   <Guideline>Keep coral for actions that destroy or remove something.</Guideline>
-  <Guideline dont>Don't disable a button without saying why; add helper text or a tooltip with what's missing.</Guideline>
+  <Guideline dont>Don't disable a button without saying why; add helper text, or a [tooltip on a wrapper](/library/components/tooltip#variants) (a disabled button can't show one itself).</Guideline>
   <Guideline dont>Don't use ghost or link for the main action; they don't carry enough weight.</Guideline>
 </Guidelines>
 

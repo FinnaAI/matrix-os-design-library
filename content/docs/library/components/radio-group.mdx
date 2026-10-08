@@ -47,8 +47,10 @@ The group handles the rest: one option selected at a time, one tab stop, arrow k
 
 <Example
   title="Focus, disabled and invalid"
-  code={`<RadioGroupItem value="a" disabled />
-<RadioGroupItem value="b" aria-invalid="true" />`}
+  code={`<RadioGroup aria-label="Plan">
+  <RadioGroupItem value="a" disabled aria-label="Disabled option" />
+  <RadioGroupItem value="b" aria-invalid="true" aria-label="Invalid option" />
+</RadioGroup>`}
 >
   <RadioGroup defaultValue="focus" aria-label="States" className="flex gap-6">
     <div className="flex flex-col items-center">
@@ -80,8 +82,10 @@ The group handles the rest: one option selected at a time, one tab stop, arrow k
 
 <Example
   title="sm · md"
-  code={`<RadioGroupItem value="a" />
-<RadioGroupItem value="b" size="md" />`}
+  code={`<RadioGroup defaultValue="a" aria-label="Plan">
+  <RadioGroupItem value="a" aria-label="Small" />
+  <RadioGroupItem value="b" size="md" aria-label="Medium" />
+</RadioGroup>`}
 >
   <RadioGroup defaultValue="sm" aria-label="Small">
     <div className="flex flex-col items-center">

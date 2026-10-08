@@ -35,9 +35,9 @@ import { Field, FieldLabel } from '@/components/ui/field';
 
 <Example
   title="Focus, disabled and invalid"
-  code={`<Switch defaultChecked disabled />
-<Switch disabled />
-<Switch aria-invalid="true" />`}
+  code={`<Switch defaultChecked disabled aria-label="Disabled, on" />
+<Switch disabled aria-label="Disabled, off" />
+<Switch aria-invalid="true" aria-label="Invalid" />`}
 >
   <div className="flex flex-col items-center">
     <Switch defaultChecked aria-label="Focused" className="outline-2 outline-offset-2 outline-ring outline-solid" />
@@ -61,8 +61,8 @@ import { Field, FieldLabel } from '@/components/ui/field';
 
 <Example
   title="sm · md"
-  code={`<Switch size="sm" defaultChecked />
-<Switch defaultChecked />`}
+  code={`<Switch size="sm" defaultChecked aria-label="Small" />
+<Switch defaultChecked aria-label="Medium" />`}
 >
   <div className="flex flex-col items-center">
     <Switch size="sm" defaultChecked aria-label="Small" />

@@ -72,7 +72,7 @@ The list opens below the trigger at the trigger's width, with a check at the end
 <Example
   title="Placeholder"
   subtitle="Nothing chosen yet"
-  code={`<SelectTrigger><SelectValue placeholder="Choose a model" /></SelectTrigger>`}
+  code={`<SelectTrigger aria-label="Model"><SelectValue placeholder="Choose a model" /></SelectTrigger>`}
 >
   <Select>
     <SelectTrigger aria-label="Model" className="max-w-56">
@@ -215,7 +215,7 @@ Sizes match Input and Button. shadcn's `size="default"` still works (same as `md
 
 #### Opens below, at the trigger's width
 
-The list sits under the trigger and is at least as wide as it. Long option names truncate.
+The list sits under the trigger and is at least as wide as it; long option names make it wider. Keep option names short.
 
 #### Keyboard
 

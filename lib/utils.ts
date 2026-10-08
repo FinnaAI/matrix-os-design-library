@@ -15,5 +15,9 @@ export const cn = createCn({
       shadow: ['xs-top', '3xl'],
       radius: ['2xs'],
     },
+    // Custom utilities that would otherwise be mistaken for colors (text-*) and dropped.
+    classGroups: {
+      'text-box': ['text-box-cap'],
+    },
   },
 });

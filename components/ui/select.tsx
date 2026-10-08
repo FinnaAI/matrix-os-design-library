@@ -55,7 +55,7 @@ function SelectTrigger({
         'aria-invalid:border-destructive',
         'disabled:cursor-not-allowed disabled:bg-muted disabled:text-muted-foreground disabled:shadow-none',
         '*:data-[slot=select-value]:line-clamp-1 *:data-[slot=select-value]:flex *:data-[slot=select-value]:items-center *:data-[slot=select-value]:gap-1.5',
-        '[&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 [&_svg]:text-muted-foreground',
+        '[&_svg]:pointer-events-none [&_svg]:size-3.5 [&>svg]:size-4 [&_svg]:shrink-0 [&_svg]:text-muted-foreground',
         TRIGGER_SIZES[size],
         className,
       )}
