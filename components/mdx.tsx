@@ -71,6 +71,8 @@ import {
   SelectPreview,
 } from '@/components/docs/menu-preview';
 import { MultiSelectMenuDemo } from '@/components/docs/menu-demos';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
+import { TooltipPreview } from '@/components/docs/tooltip-preview';
 import { Separator } from '@/components/ui/separator';
 import { Example, ExampleLabel } from '@/components/docs/example';
 import type { MDXComponents } from 'mdx/types';
@@ -152,6 +154,10 @@ export function getMDXComponents(components?: MDXComponents) {
     MenuPreviewSeparator,
     SelectPreview,
     MultiSelectMenuDemo,
+    Tooltip,
+    TooltipContent,
+    TooltipTrigger,
+    TooltipPreview,
     Separator,
     ColorRamp,
     ColorSet,

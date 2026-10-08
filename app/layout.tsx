@@ -2,6 +2,7 @@ import { RootProvider } from 'fumadocs-ui/provider/next';
 import type { Metadata } from 'next';
 import { Bricolage_Grotesque, Geist, Geist_Mono } from 'next/font/google';
 import { appName, previewImage, siteUrl } from '@/lib/shared';
+import { TooltipProvider } from '@/components/ui/tooltip';
 import './global.css';
 
 const bricolage = Bricolage_Grotesque({ subsets: ['latin'], variable: '--font-bricolage' });
@@ -32,7 +33,10 @@ export default function Layout({ children }: LayoutProps<'/'>) {
       <body className="min-h-screen bg-site-bg text-site-fg" suppressHydrationWarning>
         {/* Light only: theme switching (next-themes) is off, which also removes its inline
             <script> that React 19 flags as an error in development. */}
-        <RootProvider theme={{ enabled: false }}>{children}</RootProvider>
+        <RootProvider theme={{ enabled: false }}>
+          {/* One provider for every tooltip, so moving across a toolbar shows the next tooltip instantly. */}
+          <TooltipProvider>{children}</TooltipProvider>
+        </RootProvider>
       </body>
     </html>
   );

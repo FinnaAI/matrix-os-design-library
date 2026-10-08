@@ -10,6 +10,7 @@
     "input",
     "radio-group",
     "select",
-    "switch"
+    "switch",
+    "tooltip"
   ]
 }

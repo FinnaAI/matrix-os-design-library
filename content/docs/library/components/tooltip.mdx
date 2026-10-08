@@ -1,0 +1,222 @@
+---
+title: Tooltip
+description: A short plain-text hint on hover or keyboard focus. What an icon button does, or the full text of a label that's cut off. A few words, never interactive.
+---
+
+import { Bold, Copy, Italic, Link2, Pencil, Trash2, Underline } from 'lucide-react';
+
+## Usage
+
+```bash
+pnpm dlx shadcn@latest add tooltip
+```
+
+Then replace `components/ui/tooltip.tsx` with the [Matrix version](https://github.com/sahar-nouri-1/Matrix_design-system/blob/main/components/ui/tooltip.tsx), and wrap your app **once** in `TooltipProvider`:
+
+```tsx
+// app/layout.tsx
+import { TooltipProvider } from '@/components/ui/tooltip';
+
+<body>
+  <TooltipProvider>{children}</TooltipProvider>
+</body>
+```
+
+One shared provider sets the timing for every tooltip: **500ms** before the first one opens, then **instant** while you move to the next trigger within 300ms, so a toolbar reads as one surface. Don't add a provider per tooltip; that breaks the instant follow-up.
+
+```tsx
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
+
+<Tooltip>
+  <TooltipTrigger asChild>
+    <Button variant="ghost" square aria-label="Copy link"><Link2 /></Button>
+  </TooltipTrigger>
+  <TooltipContent>Copy link</TooltipContent>
+</Tooltip>
+```
+
+## At a glance
+
+<Example title="The bubble" subtitle="Static picture, one per side" code={`// See the live examples below for working code.`} className="gap-10">
+  <TooltipPreview side="top">Copy link</TooltipPreview>
+  <TooltipPreview side="bottom">Rename agent</TooltipPreview>
+  <TooltipPreview side="left">Delete</TooltipPreview>
+  <TooltipPreview side="right">Settings</TooltipPreview>
+</Example>
+
+A dark neutral bubble with 12px medium text, 6px from its trigger, with an arrow pointing at it. It opens on the top by default and flips to the other side when there's no room.
+
+## Variants
+
+<Example
+  title="Icon button"
+  subtitle="The tooltip names the action"
+  code={`<Tooltip>
+  <TooltipTrigger asChild>
+    <Button variant="ghost" square aria-label="Copy link"><Link2 /></Button>
+  </TooltipTrigger>
+  <TooltipContent>Copy link</TooltipContent>
+</Tooltip>`}
+>
+  <Tooltip>
+    <TooltipTrigger asChild>
+      <Button variant="ghost" square aria-label="Copy link">
+        <Link2 />
+      </Button>
+    </TooltipTrigger>
+    <TooltipContent>Copy link</TooltipContent>
+  </Tooltip>
+</Example>
+
+<Example
+  title="Toolbar"
+  subtitle="Move across: the next tooltip is instant"
+  code={`<div className="flex gap-1">
+  {[['Bold', Bold], ['Italic', Italic], ['Underline', Underline]].map(([label, Icon]) => (
+    <Tooltip key={label}>
+      <TooltipTrigger asChild>
+        <Button variant="ghost" square aria-label={label}><Icon /></Button>
+      </TooltipTrigger>
+      <TooltipContent>{label}</TooltipContent>
+    </Tooltip>
+  ))}
+</div>`}
+>
+  <div className="flex gap-1">
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <Button variant="ghost" square aria-label="Bold"><Bold /></Button>
+      </TooltipTrigger>
+      <TooltipContent>Bold</TooltipContent>
+    </Tooltip>
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <Button variant="ghost" square aria-label="Italic"><Italic /></Button>
+      </TooltipTrigger>
+      <TooltipContent>Italic</TooltipContent>
+    </Tooltip>
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <Button variant="ghost" square aria-label="Underline"><Underline /></Button>
+      </TooltipTrigger>
+      <TooltipContent>Underline</TooltipContent>
+    </Tooltip>
+  </div>
+</Example>
+
+<Example
+  title="With a shortcut"
+  code={`<TooltipContent>
+  Rename <kbd className="ml-1 rounded-xs bg-background/15 px-1 font-sans">⌘E</kbd>
+</TooltipContent>`}
+>
+  <Tooltip>
+    <TooltipTrigger asChild>
+      <Button variant="ghost" square aria-label="Rename"><Pencil /></Button>
+    </TooltipTrigger>
+    <TooltipContent>
+      Rename <kbd className="ml-1 rounded-xs bg-background/15 px-1 font-sans">⌘E</kbd>
+    </TooltipContent>
+  </Tooltip>
+</Example>
+
+<Example
+  title="Placement"
+  subtitle="top (default) · right · bottom · left"
+  code={`<TooltipContent side="right">Duplicate</TooltipContent>`}
+  className="gap-8"
+>
+  {['top', 'right', 'bottom', 'left'].map((side) => (
+    <Tooltip key={side}>
+      <TooltipTrigger asChild>
+        <Button variant="secondary" size="sm">{side}</Button>
+      </TooltipTrigger>
+      <TooltipContent side={side}>Opens on the {side}</TooltipContent>
+    </Tooltip>
+  ))}
+</Example>
+
+<Example
+  title="Long text"
+  subtitle="Wraps at 320px"
+  code={`<TooltipContent>Agents keep working after you close your laptop. They pause only when they need your approval.</TooltipContent>`}
+>
+  <Tooltip>
+    <TooltipTrigger asChild>
+      <Button variant="secondary">Always on</Button>
+    </TooltipTrigger>
+    <TooltipContent>Agents keep working after you close your laptop. They pause only when they need your approval.</TooltipContent>
+  </Tooltip>
+</Example>
+
+<Example
+  title="On a disabled button"
+  subtitle="Wrap it so the hint still shows"
+  code={`<Tooltip>
+  <TooltipTrigger asChild>
+    <span tabIndex={0}><Button variant="ghost-destructive" square disabled aria-label="Delete"><Trash2 /></Button></span>
+  </TooltipTrigger>
+  <TooltipContent>Only owners can delete this agent</TooltipContent>
+</Tooltip>`}
+>
+  <Tooltip>
+    <TooltipTrigger asChild>
+      <span tabIndex={0} className="inline-flex rounded-md">
+        <Button variant="ghost-destructive" square disabled aria-label="Delete"><Trash2 /></Button>
+      </span>
+    </TooltipTrigger>
+    <TooltipContent>Only owners can delete this agent</TooltipContent>
+  </Tooltip>
+</Example>
+
+A disabled button doesn't receive hover or focus, so put the tooltip on a focusable wrapper. Use it to say why the action isn't available.
+
+## Behavior
+
+#### Always a delay, then instant while scanning
+
+500ms before the first tooltip, so moving the mouse across the page doesn't flash bubbles. After one has shown, the next opens immediately for 300ms.
+
+#### Keyboard focus opens it too
+
+Tabbing to a trigger shows its tooltip; Escape hides it. Screen readers read the tooltip as the trigger's description.
+
+#### Hover only on touch
+
+Phones and tablets have no hover, so a tooltip never appears there. Never put information only in a tooltip; the trigger must make sense without it (an icon button still needs its `aria-label`).
+
+#### Never interactive
+
+No links or buttons inside. If people need to click something in it, use a popover.
+
+## API reference
+
+<PropsTable
+  type={{
+    TooltipProvider: { type: 'delayDuration · skipDelayDuration', default: '500 · 300', description: 'Wrap the app once. Sets the timing for every tooltip.' },
+    Tooltip: { type: 'open · onOpenChange · delayDuration', description: 'One tooltip. Override delayDuration only for a special case, e.g. 1000ms for truncated text.' },
+    TooltipTrigger: { type: 'asChild', description: 'The element that shows the tooltip. Use asChild to keep your Button.' },
+    TooltipContent: { type: "side?: 'top' | 'right' | 'bottom' | 'left' · align · sideOffset", default: "'top' · 6", description: 'The bubble. Flips automatically when there isn’t room.' },
+  }}
+/>
+
+## Guidelines
+
+<Guidelines>
+  <Guideline>Give every icon-only button a tooltip with the same words as its `aria-label`.</Guideline>
+  <Guideline>Keep it to a few words, in sentence case, without a full stop: "Copy link", not "Click here to copy the link."</Guideline>
+  <Guideline>Add the keyboard shortcut when there is one.</Guideline>
+  <Guideline dont>Don't repeat a visible label; a button that says "Save" doesn't need a "Save" tooltip.</Guideline>
+  <Guideline dont>Don't put essential information or actions in a tooltip; touch users never see it.</Guideline>
+</Guidelines>
+
+## Related
+
+<Related>
+  <RelatedCard title="Button" href="/library/components/button">
+    <Button variant="ghost" square aria-label="Copy"><Copy /></Button>
+  </RelatedCard>
+  <RelatedCard title="Dropdown menu" href="/library/components/dropdown-menu">
+    <span className="text-ui text-site-muted">Actions</span>
+  </RelatedCard>
+</Related>
