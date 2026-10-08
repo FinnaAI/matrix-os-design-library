@@ -145,7 +145,7 @@ Sizes match Button, so an input and a button of the same size sit level. `md` is
   className="items-start"
   code={`<Input placeholder="Default" />
 <Input aria-invalid="true" aria-describedby="email-error" defaultValue="name@example" />
-<p id="email-error" className="text-ui-xs text-destructive-text">Enter a full email address, like name@example.com.</p>
+<p id="email-error" className="text-ui-sm text-destructive-text">Enter a full email address, like name@example.com.</p>
 <Input disabled placeholder="Disabled" />
 <Input readOnly defaultValue="Read only" />`}
 >
@@ -161,7 +161,7 @@ Sizes match Button, so an input and a button of the same size sit level. `md` is
   </div>
   <div className="flex w-56 flex-col gap-1">
     <Input aria-invalid="true" aria-label="Email" aria-describedby="email-error" defaultValue="name@example" />
-    <p id="email-error" className="text-ui-xs text-destructive-text">Enter a full email address, like name@example.com.</p>
+    <p id="email-error" className="text-ui-sm text-destructive-text">Enter a full email address, like name@example.com.</p>
   </div>
   <div className="flex w-56 flex-col gap-1">
     <Input disabled placeholder="Disabled" aria-label="Disabled" />
@@ -196,7 +196,7 @@ Sizes match Button, so an input and a button of the same size sit level. `md` is
   </InputGroup>
 </Example>
 
-Errors set `aria-invalid` (coral border) and always come with a message below the field, linked with `aria-describedby`. Disabled fields get a muted fill instead of fading out, so the value stays readable. Tab into any field on this page to see the focus ring.
+Errors set `aria-invalid` (coral border) and always come with a message below the field, linked with `aria-describedby`; in forms, use [Field](/library/components/field) for the label, help text and error. Disabled fields get a muted fill instead of fading out, so the value stays readable. Tab into any field on this page to see the focus ring.
 
 ## Behavior
 
@@ -281,6 +281,9 @@ Holds an icon, `InputGroupText`, a `<kbd>` or an `InputGroupButton`.
 <Related>
   <RelatedCard title="Button" href="/library/components/button">
     <Button size="sm">Save</Button>
+  </RelatedCard>
+  <RelatedCard title="Field" href="/library/components/field">
+    <span className="text-ui font-medium text-foreground">Email</span>
   </RelatedCard>
   <RelatedCard title="Badge" href="/library/components/badge">
     <span className="rounded-sm border border-tint-success-border bg-tint-success-fill px-1.5 py-0.5 text-ui-sm font-medium text-tint-success-text">Available</span>

@@ -1,0 +1,311 @@
+---
+title: Field
+description: The standard form unit. A label above the control, optional help text or an error below, with the spacing built in.
+---
+
+import { Mail } from 'lucide-react';
+
+## Usage
+
+```bash
+pnpm dlx shadcn@latest add field
+```
+
+Then replace `components/ui/field.tsx`, `label.tsx` and `separator.tsx` with the [Matrix versions](https://github.com/sahar-nouri-1/Matrix_design-system/tree/main/components/ui). They keep shadcn's parts and add the Matrix type, colors and spacing.
+
+```tsx
+import { Field, FieldDescription, FieldLabel } from '@/components/ui/field';
+import { Input } from '@/components/ui/input';
+
+<Field>
+  <FieldLabel htmlFor="email">Email</FieldLabel>
+  <Input id="email" type="email" placeholder="name@example.com" />
+  <FieldDescription>We'll send the invite here.</FieldDescription>
+</Field>
+```
+
+The spacing is part of the component: the **label sits 2px above** its control, **help text and errors 8px below** it, **16px between fields** and **24px between sections**. Validation timing and error copy follow the [Input behavior](/library/components/input#behavior).
+
+## Field
+
+<Example
+  title="Label, input and help text"
+  code={`<Field>
+  <FieldLabel htmlFor="email">Email</FieldLabel>
+  <Input id="email" type="email" placeholder="name@example.com" />
+  <FieldDescription>We'll send the invite here.</FieldDescription>
+</Field>`}
+>
+  <Field className="max-w-sm">
+    <FieldLabel htmlFor="field-email">Email</FieldLabel>
+    <Input id="field-email" type="email" placeholder="name@example.com" />
+    <FieldDescription>We'll send the invite here.</FieldDescription>
+  </Field>
+</Example>
+
+## Group
+
+<Example
+  title="Stacked, 16px between fields"
+  code={`<FieldGroup>
+  <Field>
+    <FieldLabel htmlFor="name">Name</FieldLabel>
+    <Input id="name" placeholder="Agent name" />
+  </Field>
+  <Field>
+    <FieldLabel htmlFor="handle">Handle</FieldLabel>
+    <Input id="handle" placeholder="research-agent" />
+  </Field>
+  <Field>
+    <FieldLabel htmlFor="purpose">Purpose</FieldLabel>
+    <Input id="purpose" placeholder="What it helps with" />
+  </Field>
+</FieldGroup>`}
+>
+  <FieldGroup className="max-w-sm">
+    <Field>
+      <FieldLabel htmlFor="group-name">Name</FieldLabel>
+      <Input id="group-name" placeholder="Agent name" />
+    </Field>
+    <Field>
+      <FieldLabel htmlFor="group-handle">Handle</FieldLabel>
+      <Input id="group-handle" placeholder="research-agent" />
+    </Field>
+    <Field>
+      <FieldLabel htmlFor="group-purpose">Purpose</FieldLabel>
+      <Input id="group-purpose" placeholder="What it helps with" />
+    </Field>
+  </FieldGroup>
+</Example>
+
+## Grid
+
+<Example
+  title="Side-by-side pairs, 16px apart"
+  code={`<FieldGroup className="grid sm:grid-cols-2">
+  <Field>
+    <FieldLabel htmlFor="first">First name</FieldLabel>
+    <Input id="first" placeholder="First name" />
+  </Field>
+  <Field>
+    <FieldLabel htmlFor="last">Last name</FieldLabel>
+    <Input id="last" placeholder="Last name" />
+  </Field>
+</FieldGroup>`}
+>
+  <FieldGroup className="grid max-w-sm sm:grid-cols-2">
+    <Field>
+      <FieldLabel htmlFor="grid-first">First name</FieldLabel>
+      <Input id="grid-first" placeholder="First name" />
+    </Field>
+    <Field>
+      <FieldLabel htmlFor="grid-last">Last name</FieldLabel>
+      <Input id="grid-last" placeholder="Last name" />
+    </Field>
+  </FieldGroup>
+</Example>
+
+Use a grid only for short, related pairs (first and last name, city and postcode). It stacks on narrow screens.
+
+## Required
+
+<Example
+  title="Asterisk after the label"
+  code={`<Field>
+  <FieldLabel htmlFor="email" required>Email</FieldLabel>
+  <Input id="email" type="email" required placeholder="name@example.com" />
+</Field>`}
+>
+  <Field className="max-w-sm">
+    <FieldLabel htmlFor="required-email" required>
+      Email
+    </FieldLabel>
+    <Input id="required-email" type="email" required placeholder="name@example.com" />
+  </Field>
+</Example>
+
+`required` on the label adds the asterisk; set `required` on the control too, so browsers and screen readers know. The asterisk is neutral, not coral: coral means an error.
+
+## Error
+
+<Example
+  title="Message below the control"
+  code={`<Field>
+  <FieldLabel htmlFor="email">Email</FieldLabel>
+  <Input id="email" type="email" aria-invalid="true" aria-describedby="email-error" defaultValue="name@example" />
+  <FieldError id="email-error">Enter a full email address, like name@example.com.</FieldError>
+</Field>`}
+>
+  <Field className="max-w-sm">
+    <FieldLabel htmlFor="error-email">Email</FieldLabel>
+    <Input
+      id="error-email"
+      type="email"
+      aria-invalid="true"
+      aria-describedby="error-email-message"
+      defaultValue="name@example"
+    />
+    <FieldError id="error-email-message">Enter a full email address, like name@example.com.</FieldError>
+  </Field>
+</Example>
+
+Set `aria-invalid` on the control (coral border) and put the message in `FieldError`, linked with `aria-describedby`. The label stays neutral. `FieldError` also accepts an `errors` array from form libraries and shows each message once.
+
+## Disabled
+
+<Example
+  title="Just disable the control"
+  code={`<Field>
+  <FieldLabel htmlFor="workspace">Workspace</FieldLabel>
+  <Input id="workspace" disabled defaultValue="Matrix OS" />
+  <FieldDescription>Only owners can rename the workspace.</FieldDescription>
+</Field>`}
+>
+  <Field className="max-w-sm">
+    <FieldLabel htmlFor="disabled-workspace">Workspace</FieldLabel>
+    <Input id="disabled-workspace" disabled defaultValue="Matrix OS" />
+    <FieldDescription>Only owners can rename the workspace.</FieldDescription>
+  </Field>
+</Example>
+
+Disable the control and the field softens its own label and help text. Use the help text to say why it's disabled.
+
+## Inline
+
+<Example
+  title="Input and button, sizes match"
+  code={`<Field orientation="horizontal">
+  <Input type="email" placeholder="name@example.com" aria-label="Email" />
+  <Button>Invite</Button>
+</Field>`}
+>
+  <Field orientation="horizontal" className="max-w-sm">
+    <Input type="email" placeholder="name@example.com" aria-label="Email" />
+    <Button>Invite</Button>
+  </Field>
+</Example>
+
+The default sizes already line up (Input `md` and Button `md` are both 36px), with 8px between them.
+
+## Complete form
+
+<Example
+  title="Everything together"
+  code={`<form>
+  <FieldSet>
+    <FieldLegend>Invite a teammate</FieldLegend>
+    <FieldGroup>
+      <FieldGroup className="grid sm:grid-cols-2">
+        <Field>
+          <FieldLabel htmlFor="first" required>First name</FieldLabel>
+          <Input id="first" required placeholder="First name" />
+        </Field>
+        <Field>
+          <FieldLabel htmlFor="last" required>Last name</FieldLabel>
+          <Input id="last" required placeholder="Last name" />
+        </Field>
+      </FieldGroup>
+      <Field>
+        <FieldLabel htmlFor="email" required>Email</FieldLabel>
+        <InputGroup>
+          <InputGroupAddon><Mail /></InputGroupAddon>
+          <InputGroupInput id="email" type="email" required placeholder="name@example.com" />
+        </InputGroup>
+        <FieldDescription>They'll get an email with a link to join.</FieldDescription>
+      </Field>
+      <Field>
+        <FieldLabel htmlFor="note">Note</FieldLabel>
+        <Textarea id="note" placeholder="Add a short message (optional)" />
+      </Field>
+    </FieldGroup>
+  </FieldSet>
+  <div className="flex justify-end gap-2">
+    <Button variant="secondary" type="button">Cancel</Button>
+    <Button type="submit">Send invite</Button>
+  </div>
+</form>`}
+>
+  <div className="flex w-full max-w-md flex-col gap-6">
+    <FieldSet>
+      <FieldLegend>Invite a teammate</FieldLegend>
+      <FieldGroup>
+        <FieldGroup className="grid sm:grid-cols-2">
+          <Field>
+            <FieldLabel htmlFor="form-first" required>
+              First name
+            </FieldLabel>
+            <Input id="form-first" required placeholder="First name" />
+          </Field>
+          <Field>
+            <FieldLabel htmlFor="form-last" required>
+              Last name
+            </FieldLabel>
+            <Input id="form-last" required placeholder="Last name" />
+          </Field>
+        </FieldGroup>
+        <Field>
+          <FieldLabel htmlFor="form-email" required>
+            Email
+          </FieldLabel>
+          <InputGroup>
+            <InputGroupAddon>
+              <Mail />
+            </InputGroupAddon>
+            <InputGroupInput id="form-email" type="email" required placeholder="name@example.com" />
+          </InputGroup>
+          <FieldDescription>They'll get an email with a link to join.</FieldDescription>
+        </Field>
+        <Field>
+          <FieldLabel htmlFor="form-note">Note</FieldLabel>
+          <Textarea id="form-note" placeholder="Add a short message (optional)" />
+        </Field>
+      </FieldGroup>
+    </FieldSet>
+    <div className="flex justify-end gap-2">
+      <Button variant="secondary" type="button">
+        Cancel
+      </Button>
+      <Button type="button">Send invite</Button>
+    </div>
+  </div>
+</Example>
+
+## API reference
+
+Field is a set of small parts. Put a real control (Input, Input group, Textarea) inside; Field adds the label, help text, error and spacing.
+
+<PropsTable
+  type={{
+    Field: { type: "orientation?: 'vertical' | 'horizontal' | 'responsive'", default: "'vertical'", description: 'One field. Label 2px above the control, help text 8px below. horizontal puts them in a row, 8px apart; responsive switches at the group’s width.' },
+    FieldLabel: { type: 'required?: boolean · htmlFor', description: 'The label, linked to the control with htmlFor / id. required adds a neutral asterisk.' },
+    FieldDescription: { type: 'p', description: 'Help text below the control, 13px, subtle.' },
+    FieldError: { type: 'errors?: { message?: string }[]', description: 'Error text in coral, announced to screen readers. Pair it with aria-invalid on the control.' },
+    FieldGroup: { type: 'div', description: 'Stacks fields 16px apart. Add grid sm:grid-cols-2 for side-by-side pairs.' },
+    FieldSet: { type: 'fieldset', description: 'A titled section of fields, 24px from the next section.' },
+    FieldLegend: { type: "variant?: 'legend' | 'label'", default: "'legend'", description: 'The section title for a FieldSet.' },
+    FieldContent: { type: 'div', description: 'Wraps a label and help text next to a checkbox or switch.' },
+    FieldSeparator: { type: 'children?: ReactNode', description: 'A divider between groups, optionally with text in the middle.' },
+  }}
+/>
+
+## Guidelines
+
+<Guidelines>
+  <Guideline>Link every label to its control with `htmlFor` and `id`.</Guideline>
+  <Guideline>Pair `FieldError` with `aria-invalid` on the control; never show an error with color alone.</Guideline>
+  <Guideline>Use help text for what people need before they type (format, why it's needed), and the error for what went wrong.</Guideline>
+  <Guideline>Mark required fields only when most fields are optional; if most are required, mark the optional ones instead.</Guideline>
+  <Guideline>Just disable the control; the field softens its own label and help text.</Guideline>
+  <Guideline dont>Don't add your own margins between fields; FieldGroup and FieldSet already space them.</Guideline>
+</Guidelines>
+
+## Related
+
+<Related>
+  <RelatedCard title="Input" href="/library/components/input">
+    <Input placeholder="Name" aria-label="Name" size="sm" className="w-32" />
+  </RelatedCard>
+  <RelatedCard title="Button" href="/library/components/button">
+    <Button size="sm">Save</Button>
+  </RelatedCard>
+</Related>

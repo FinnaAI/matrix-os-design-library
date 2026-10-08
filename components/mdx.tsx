@@ -21,6 +21,20 @@ import {
   InputGroupTextarea,
 } from '@/components/ui/input-group';
 import { Textarea } from '@/components/ui/textarea';
+import {
+  Field,
+  FieldContent,
+  FieldDescription,
+  FieldError,
+  FieldGroup,
+  FieldLabel,
+  FieldLegend,
+  FieldSeparator,
+  FieldSet,
+  FieldTitle,
+} from '@/components/ui/field';
+import { Label } from '@/components/ui/label';
+import { Separator } from '@/components/ui/separator';
 import { Example, ExampleLabel } from '@/components/docs/example';
 import type { MDXComponents } from 'mdx/types';
 import { ColorRamp, ColorSet } from '@/components/docs/color-ramp';
@@ -58,6 +72,18 @@ export function getMDXComponents(components?: MDXComponents) {
     InputGroupText,
     InputGroupTextarea,
     Textarea,
+    Field,
+    FieldContent,
+    FieldDescription,
+    FieldError,
+    FieldGroup,
+    FieldLabel,
+    FieldLegend,
+    FieldSeparator,
+    FieldSet,
+    FieldTitle,
+    Label,
+    Separator,
     ColorRamp,
     ColorSet,
     CopyFormatToggle,
