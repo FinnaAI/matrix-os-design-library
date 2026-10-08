@@ -1,0 +1,193 @@
+---
+title: Button
+description: Triggers an action. Four variants by emphasis, destructive versions for irreversible actions, and a link style. Neutral for actions, coral only for danger.
+---
+
+import { ArrowRight, ArrowUp, Ellipsis, Plus, Trash2 } from 'lucide-react';
+
+## Usage
+
+```bash
+pnpm dlx shadcn@latest add button
+```
+
+Then replace `components/ui/button.tsx` with the [Matrix version](https://github.com/sahar-nouri-1/Matrix_design-system/blob/main/components/ui/button.tsx). It keeps shadcn's API and adds the Matrix variants, sizes, `square`, `round` and `loading`.
+
+```tsx
+import { Button } from '@/components/ui/button';
+
+<Button onClick={save}>Save changes</Button>
+<Button variant="secondary">Cancel</Button>
+```
+
+## Variants
+
+<Example
+  title="Primary"
+  subtitle="The main action in a view"
+  code={`<Button>Create agent</Button>`}
+>
+  <Button>Create agent</Button>
+</Example>
+
+<Example
+  title="Secondary"
+  subtitle="Every other action next to it"
+  code={`<Button variant="secondary">Cancel</Button>`}
+>
+  <Button variant="secondary">Cancel</Button>
+</Example>
+
+<Example
+  title="Ghost"
+  subtitle="Low-emphasis actions in toolbars and menus"
+  code={`<Button variant="ghost">Skip for now</Button>`}
+>
+  <Button variant="ghost">Skip for now</Button>
+</Example>
+
+<Example
+  title="Link"
+  subtitle="An action that reads like text"
+  code={`<Button variant="link">View all agents</Button>`}
+>
+  <Button variant="link">View all agents</Button>
+</Example>
+
+Primary is the dark neutral; secondary is outlined on the page color; ghost has no fill until hover. Links are neutral and always underlined, and lighten on hover.
+
+## Destructive
+
+<Example
+  title="For actions that can't be undone"
+  code={`<Button variant="destructive">Delete agent</Button>
+<Button variant="ghost-destructive">Remove</Button>
+<Button variant="link-destructive">Disconnect</Button>`}
+>
+  <Button variant="destructive">Delete agent</Button>
+  <Button variant="ghost-destructive">Remove</Button>
+  <Button variant="link-destructive">Disconnect</Button>
+</Example>
+
+Coral means danger, so it's only for deleting, removing or disconnecting. Use the solid version for the final confirm, and the ghost or link version where the action is one of several.
+
+## Sizes
+
+<Example
+  title="28 · 32 · 36 · 40"
+  code={`<Button size="xs">Extra small</Button>
+<Button size="sm">Small</Button>
+<Button size="md">Medium</Button>
+<Button size="lg">Large</Button>`}
+>
+  {['xs', 'sm', 'md', 'lg'].map((size) => (
+    <span key={size} className="flex flex-col items-center">
+      <Button size={size}>{({ xs: 'Extra small', sm: 'Small', md: 'Medium', lg: 'Large' })[size]}</Button>
+      <ExampleLabel>{size} · {({ xs: '28px, 13px', sm: '32px, 14px', md: '36px, 14px', lg: '40px, 17px' })[size]}</ExampleLabel>
+    </span>
+  ))}
+</Example>
+
+`md` (36px) is the default. Every size has an 8px corner, so buttons read as one family next to each other.
+
+## With icon
+
+<Example
+  title="Leading and trailing"
+  code={`<Button><Plus />New agent</Button>
+<Button variant="secondary">Continue<ArrowRight /></Button>`}
+>
+  <Button>
+    <Plus />
+    New agent
+  </Button>
+  <Button variant="secondary">
+    Continue
+    <ArrowRight />
+  </Button>
+</Example>
+
+Put a Lucide icon straight inside the button; it's sized for you (14px at `xs`, 16px above) and the padding on that side tightens so the button stays balanced.
+
+## Icon only
+
+<Example
+  title="Square and round"
+  code={`<Button variant="secondary" square aria-label="Add file"><Plus /></Button>
+<Button variant="ghost" square aria-label="More options"><Ellipsis /></Button>
+<Button variant="ghost-destructive" square aria-label="Delete"><Trash2 /></Button>
+<Button square round aria-label="Send message"><ArrowUp /></Button>`}
+>
+  <Button variant="secondary" square aria-label="Add file">
+    <Plus />
+  </Button>
+  <Button variant="ghost" square aria-label="More options">
+    <Ellipsis />
+  </Button>
+  <Button variant="ghost-destructive" square aria-label="Delete">
+    <Trash2 />
+  </Button>
+  <Button square round aria-label="Send message">
+    <ArrowUp />
+  </Button>
+</Example>
+
+`square` makes the width equal the height at any size. Use `ghost` for quiet neutral icon actions (more, edit, close) and `ghost-destructive` only when the action deletes or removes; add `round` for circular buttons like the chat composer's send. An icon-only button always needs an `aria-label`.
+
+## States
+
+<Example
+  title="Loading and disabled"
+  code={`<Button loading>Saving</Button>
+<Button variant="secondary" disabled>Cancel</Button>`}
+>
+  <Button loading>Saving</Button>
+  <Button variant="secondary" disabled>
+    Cancel
+  </Button>
+</Example>
+
+`loading` shows a spinner, keeps the button's width and blocks clicks. Hover and focus are built in: tab to any button on this page to see the gold focus ring.
+
+## API reference
+
+<PropsTable
+  type={{
+    variant: {
+      type: "'primary' | 'secondary' | 'ghost' | 'link' | 'destructive' | 'ghost-destructive' | 'link-destructive'",
+      default: "'primary'",
+      description: 'Choose by intent, not looks. shadcn’s default and outline are accepted too (primary and secondary).',
+    },
+    size: {
+      type: "'xs' | 'sm' | 'md' | 'lg'",
+      default: "'md'",
+      description: '28 / 32 / 36 / 40px, labels 13 / 14 / 14 / 17px. shadcn’s icon sizes still work.',
+    },
+    square: { type: 'boolean', default: 'false', description: 'Icon only: width equals height. Add an aria-label.' },
+    round: { type: 'boolean', default: 'false', description: 'Fully circular.' },
+    loading: { type: 'boolean', default: 'false', description: 'Spinner, same width, no clicks.' },
+    asChild: { type: 'boolean', default: 'false', description: 'Put the button styles on your own element, e.g. a Next.js Link.' },
+  }}
+/>
+
+## Guidelines
+
+<Guidelines>
+  <Guideline>One primary button per view. If two actions compete, neither is primary.</Guideline>
+  <Guideline>Write labels as verb + noun in sentence case: "Create agent", "Connect provider", not "Submit" or "OK".</Guideline>
+  <Guideline>Use `xs` in dense chrome like toolbars, `md` in content and forms, `lg` for a single focused action such as onboarding.</Guideline>
+  <Guideline>Keep coral for actions that destroy or remove something.</Guideline>
+  <Guideline dont>Don't disable a button without saying why; add helper text or a tooltip with what's missing.</Guideline>
+  <Guideline dont>Don't use ghost or link for the main action; they don't carry enough weight.</Guideline>
+</Guidelines>
+
+## Related
+
+<Related>
+  <RelatedCard title="Badge" href="/library/components/badge">
+    <span className="rounded-sm border border-tint-success-border bg-tint-success-fill px-1.5 py-0.5 text-ui-sm font-medium text-tint-success-text">Connected</span>
+  </RelatedCard>
+  <RelatedCard title="Iconography" href="/library/foundations/iconography">
+    <span className="font-mono text-ui-xs text-site-muted">14 · 16</span>
+  </RelatedCard>
+</Related>

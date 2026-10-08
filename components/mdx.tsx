@@ -10,6 +10,7 @@ import {
   AvatarSkeleton,
 } from '@/components/ui/avatar';
 import { Badge, BadgeDot } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import { Example, ExampleLabel } from '@/components/docs/example';
 import type { MDXComponents } from 'mdx/types';
 import { ColorRamp, ColorSet } from '@/components/docs/color-ramp';
@@ -39,6 +40,7 @@ export function getMDXComponents(components?: MDXComponents) {
     AvatarSkeleton,
     Badge,
     BadgeDot,
+    Button,
     ColorRamp,
     ColorSet,
     CopyFormatToggle,

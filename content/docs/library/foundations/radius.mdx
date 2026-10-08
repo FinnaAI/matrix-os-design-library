@@ -1,6 +1,6 @@
 ---
 title: Radius
-description: Matrix is rounded but precise. Eight steps from a 2px corner to a full pill, chosen by the size of the element; 12px is the default for components.
+description: Matrix is rounded but precise. Eight steps from a 2px corner to a full pill, chosen by the size of the element. Controls are 8px at every size; surfaces that hold them are 12px.
 ---
 
 ## Usage
@@ -17,7 +17,7 @@ description: Matrix is rounded but precise. Eight steps from a 2px corner to a f
 <div className="rounded-lg border border-border bg-card" />
 ```
 
-shadcn components read `--radius`, which points at `--rounded-lg` (12px), so they pick up the Matrix default automatically.
+shadcn components read `--radius`, which points at `--rounded-md` (8px), the control radius, so they pick up the Matrix default automatically.
 
 ## Radius scale
 
@@ -26,8 +26,8 @@ shadcn components read `--radius`, which points at `--rounded-lg` (12px), so the
     { step: '2xs', use: 'Tiny marks under 16px: status dots in a row, mini swatches, progress segments.' },
     { step: 'xs', use: 'Checkboxes, inline code, keyboard keys, small counters.' },
     { step: 'sm', use: 'Small tags, tooltips and badges around 24px tall.' },
-    { step: 'md', use: 'Compact controls and swatches: small buttons, menu items.' },
-    { step: 'lg', use: 'The default: buttons, inputs, menus, popovers.' },
+    { step: 'md', use: 'Every control, at any size: buttons, inputs, selects, menu items, swatches.' },
+    { step: 'lg', use: 'Surfaces that hold controls: menus, popovers, tooltips, small cards.' },
     { step: 'xl', use: 'Brand cards and panels.' },
     { step: '2xl', use: 'Dialogs, sheets and large feature surfaces.', provisional: true },
     { step: 'full', use: 'Pills: badges, avatars, toggles, chips.' },
@@ -40,7 +40,7 @@ Click a token or class to copy it.
 
 <RadiusBySize />
 
-A corner has to fit the element it rounds. The same 12px that looks right on a 40px button turns a 20px tag into a pill, and a 4px corner looks sharp on a large card. Before you pick a radius, check the height of the container and use the step next to it in the table. Between two rows, pick the smaller radius.
+A corner has to fit the element it rounds. The same 8px that looks right on a 36px button turns a 14px chip into a pill, and a 4px corner looks sharp on a large card. Before you pick a radius, check the height of the container and use the step next to it in the table. Between two rows, pick the smaller radius.
 
 ## Nested corners
 
@@ -53,7 +53,7 @@ When a rounded surface sits inside another, the inner corner is the outer corner
 <Guidelines>
   <Guideline>Use a token, never a hand-written `border-radius` or an arbitrary `rounded-[10px]`.</Guideline>
   <Guideline>Always consider the size of the container before picking a radius: small elements get small corners, large surfaces get larger ones.</Guideline>
-  <Guideline>Start from `lg` (12px) for standard controls. Go smaller for compact elements, larger only for cards and dialogs.</Guideline>
+  <Guideline>Controls (buttons, inputs, selects) are `md` (8px) at every size, so a row of them reads as one family. Their containers step up: `lg` for menus and popovers, `xl` for cards.</Guideline>
   <Guideline>Nest corners: inner radius = outer radius − padding.</Guideline>
   <Guideline>Use `full` only for pills and circles, never for rectangular buttons or cards.</Guideline>
   <Guideline dont>Don't mix radii on one surface (a rounded top with square bottom corners), except where it's attached to an edge.</Guideline>

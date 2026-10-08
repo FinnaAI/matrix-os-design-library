@@ -110,20 +110,26 @@
   --popover-foreground: var(--neutral-800);
 
   /* Actions */
-  --primary: var(--neutral-800); /* Actions and the main CTA (her call, 2026-09-30). Hover steps to neutral-700 */
+  --primary: var(--neutral-800); /* Actions and the main CTA (her call, 2026-09-30) */
+  --primary-hover: var(--green-700); /* Her call (2026-10-08): primary hovers to dark brand green; label 7.4:1 */
   --primary-foreground: var(--neutral-25); /* 15.0:1 on neutral-800 */
   --link: var(--neutral-800); /* Links and link buttons: neutral like actions, always underlined (her call, 2026-09-30) */
-  --secondary: var(--green-100); /* PROVISIONAL */
-  --secondary-foreground: var(--green-800);
+  --link-hover: var(--green-700); /* Her call (2026-10-08): same dark brand green as primary hover; 7.4:1 on the page */
+  /* Secondary: outlined, like (her call, 2026-10-06): page-color fill, --border edge, shadow-xs */
+  --secondary: var(--neutral-25);
+  --secondary-foreground: var(--neutral-800);
+  --secondary-hover: var(--neutral-50);
+  --ghost-hover: var(--accent); /* One hover color for buttons, menus and lists */
 
   --muted: var(--neutral-200); /* PROVISIONAL: card is neutral-100, so wells inside cards step down once */
   --muted-foreground: var(--neutral-600);
 
   /* shadcn "accent" = hover/selected surface (Style library: accent-surface). */
-  --accent: var(--coral-25); /* Her call (2026-09-30): warm coral hover. coral-25, not coral-50, so hover never matches the error tint fill */
+  --accent: var(--neutral-100); /* Hover and selected surfaces. Neutral, never coral: coral only means danger (her call, 2026-10-06) */
   --accent-foreground: var(--neutral-800);
   --attention: var(--gold-400); /* Highlight / accent: badges, premium, attention */
 
+  --destructive-hover: var(--coral-600);
   --destructive: var(--coral-500); /* Brand coral = delete and errors (her call, 2026-09-30). 4.63:1 with neutral-25 text; neutral-50 would fail */
   --destructive-foreground: var(--neutral-25);
   --success: var(--teal-500);
@@ -227,12 +233,12 @@
   --rounded-2xs: 2px;
   --rounded-xs: 4px;
   --rounded-sm: 6px;
-  --rounded-md: 8px; /* compact controls, swatches */
-  --rounded-lg: 12px; /* default component radius */
+  --rounded-md: 8px; /* every control at any size: buttons, inputs, selects, menu items (her call, 2026-10-06) */
+  --rounded-lg: 12px; /* surfaces that hold controls: menus, popovers, small cards */
   --rounded-xl: 16px; /* brand cards */
   --rounded-2xl: 24px;
   --rounded-full: 9999px; /* pills */
-  --radius: var(--rounded-lg); /* shadcn's base radius */
+  --radius: var(--rounded-md); /* shadcn's base radius = the control radius */
 
   /* Elevation: layered shadows modelled on the scale (her call, 2026-09-30), tinted with the
      Matrix warm neutral instead of pure black. Use xs (resting controls), lg (overlays), xl (dialogs). */

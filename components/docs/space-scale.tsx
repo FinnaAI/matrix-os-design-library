@@ -103,12 +103,12 @@ export function SpacingInContext() {
         {['Agent name', 'Model'].map((label) => (
           <div key={label} className="space-y-2">
             <p className="text-ui font-medium text-foreground">{label}</p>
-            <div className="h-10 rounded-lg border border-input bg-background" />
+            <div className="h-10 rounded-md border border-input bg-background" />
           </div>
         ))}
         <div className="flex justify-end gap-2 pt-2">
-          <span className="rounded-lg border border-border px-3 py-2 text-ui text-foreground">Cancel</span>
-          <span className="rounded-lg bg-primary px-3 py-2 text-ui text-primary-foreground">Create agent</span>
+          <span className="rounded-md border border-border px-3 py-2 text-ui text-foreground">Cancel</span>
+          <span className="rounded-md bg-primary px-3 py-2 text-ui text-primary-foreground">Create agent</span>
         </div>
       </div>
       <figcaption className="mt-3 text-ui-xs text-site-muted">
