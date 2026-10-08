@@ -163,8 +163,8 @@
   --tint-info-text: var(--blue-700);
 
   --border: var(--neutral-300); /* Style library: border-subtle */
-  --input: var(--neutral-300); /* PROVISIONAL: revisit with the Input component (3:1 needs neutral-500) */
-  --ring: var(--gold-400); /* Brand gold (her call, 2026-09-29). Contrast (2.0:1) is revisited with the Input component */
+  --input: var(--neutral-300); /* Her call (2026-10-08): same as --border; kept with the Input component */
+  --ring: var(--gold-400); /* Brand gold, single ring with a 2px offset (her call, confirmed 2026-10-08 with the Input component) */
 
   --sidebar: var(--background);
   --sidebar-foreground: var(--foreground);

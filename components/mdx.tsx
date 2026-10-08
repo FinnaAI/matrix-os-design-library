@@ -11,6 +11,16 @@ import {
 } from '@/components/ui/avatar';
 import { Badge, BadgeDot } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupButton,
+  InputGroupInput,
+  InputGroupText,
+  InputGroupTextarea,
+} from '@/components/ui/input-group';
+import { Textarea } from '@/components/ui/textarea';
 import { Example, ExampleLabel } from '@/components/docs/example';
 import type { MDXComponents } from 'mdx/types';
 import { ColorRamp, ColorSet } from '@/components/docs/color-ramp';
@@ -23,7 +33,6 @@ import { ShadowScale } from '@/components/docs/shadow-scale';
 import { FontSpecimens, TabularNumbers, TypeTable } from '@/components/docs/type-scale';
 import { BorderWidthScale, SpaceScale, SpacingInContext } from '@/components/docs/space-scale';
 import { NestedRadius, RadiusBySize, RadiusScale } from '@/components/docs/radius-scale';
-import { FocusRingOptions, InputBorderOptions } from '@/components/docs/decision-previews';
 
 export function getMDXComponents(components?: MDXComponents) {
   return {
@@ -41,6 +50,14 @@ export function getMDXComponents(components?: MDXComponents) {
     Badge,
     BadgeDot,
     Button,
+    Input,
+    InputGroup,
+    InputGroupAddon,
+    InputGroupButton,
+    InputGroupInput,
+    InputGroupText,
+    InputGroupTextarea,
+    Textarea,
     ColorRamp,
     ColorSet,
     CopyFormatToggle,
@@ -58,8 +75,6 @@ export function getMDXComponents(components?: MDXComponents) {
     RadiusBySize,
     SemanticRoles,
     TintTable,
-    FocusRingOptions,
-    InputBorderOptions,
     Guidelines,
     Guideline,
     Related,

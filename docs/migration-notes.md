@@ -43,3 +43,22 @@ Findings come from reading the matrix-os repo (shell, packages/ui) on the dates 
 - Today: Hugeicons via `shell/src/lib/hugeicons.tsx`, sizes 11–28px ad hoc, stroke 1.5.
 - Instead: Lucide through `components/ui/icon.tsx` with the five sizes; `lib/matrix-icons.ts` maps the
   product's current icons to Lucide names. Needs the team's agreement (they had picked Hugeicons).
+
+## Input (2026-10-08)
+
+- Today: 6 files use the shadcn `Input`; about 85 hand-made `<input>` elements across shell and desktop.
+  Icons inside fields are faked with padding (`className="pl-9"` plus an absolutely positioned icon).
+- Instead: `<Input>` for plain fields; `<InputGroup>` + `<InputGroupAddon>` for icons, prefixes,
+  shortcuts and inline buttons.
+
+  ```tsx
+  // Before
+  <div className="relative"><Search className="absolute left-3 …" /><Input className="pl-9" … /></div>
+  // After
+  <InputGroup>
+    <InputGroupAddon><Search /></InputGroupAddon>
+    <InputGroupInput placeholder="Search providers and credentials…" />
+  </InputGroup>
+  ```
+
+- Sizes: shadcn's default `h-9` = Matrix `md`. Use `size="lg"` on mobile.

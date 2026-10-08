@@ -1,0 +1,288 @@
+---
+title: Input
+description: Single-line text entry, with room for icons, text, keyboard hints and small buttons inside the field.
+---
+
+import { Check, Copy, Link2, Loader2, Search } from 'lucide-react';
+
+## Usage
+
+```bash
+pnpm dlx shadcn@latest add input input-group
+```
+
+Then replace `components/ui/input.tsx`, `input-group.tsx` and `textarea.tsx` with the [Matrix versions](https://github.com/sahar-nouri-1/Matrix_design-system/tree/main/components/ui). They keep shadcn's API and add the Matrix sizes, fill, focus and error styles.
+
+```tsx
+import { Input } from '@/components/ui/input';
+
+<Input type="email" placeholder="name@example.com" aria-label="Email" />
+```
+
+Use `Input` for a plain field. When the field needs an icon, text, a shortcut or a button inside it, wrap it in an `InputGroup`.
+
+## Variants
+
+<Example title="Basic" code={`<Input placeholder="Agent name" aria-label="Agent name" />`}>
+  <Input placeholder="Agent name" aria-label="Agent name" className="max-w-64" />
+</Example>
+
+<Example
+  title="With icon"
+  code={`<InputGroup>
+  <InputGroupAddon><Search /></InputGroupAddon>
+  <InputGroupInput placeholder="Search agents" aria-label="Search agents" />
+</InputGroup>`}
+>
+  <InputGroup className="max-w-64">
+    <InputGroupAddon>
+      <Search />
+    </InputGroupAddon>
+    <InputGroupInput placeholder="Search agents" aria-label="Search agents" />
+  </InputGroup>
+</Example>
+
+<Example
+  title="Leading text"
+  code={`<InputGroup>
+  <InputGroupAddon><InputGroupText>https://</InputGroupText></InputGroupAddon>
+  <InputGroupInput placeholder="example.com" aria-label="Website" />
+</InputGroup>`}
+>
+  <InputGroup className="max-w-64">
+    <InputGroupAddon>
+      <InputGroupText>https://</InputGroupText>
+    </InputGroupAddon>
+    <InputGroupInput placeholder="example.com" aria-label="Website" />
+  </InputGroup>
+</Example>
+
+<Example
+  title="Trailing text"
+  code={`<InputGroup>
+  <InputGroupInput type="number" placeholder="500" aria-label="Monthly limit" />
+  <InputGroupAddon align="inline-end"><InputGroupText>credits</InputGroupText></InputGroupAddon>
+</InputGroup>`}
+>
+  <InputGroup className="max-w-64">
+    <InputGroupInput type="number" placeholder="500" aria-label="Monthly limit" />
+    <InputGroupAddon align="inline-end">
+      <InputGroupText>credits</InputGroupText>
+    </InputGroupAddon>
+  </InputGroup>
+</Example>
+
+<Example
+  title="Keyboard shortcut"
+  code={`<InputGroup>
+  <InputGroupAddon><Search /></InputGroupAddon>
+  <InputGroupInput placeholder="Search" aria-label="Search" />
+  <InputGroupAddon align="inline-end"><kbd>⌘K</kbd></InputGroupAddon>
+</InputGroup>`}
+>
+  <InputGroup className="max-w-64">
+    <InputGroupAddon>
+      <Search />
+    </InputGroupAddon>
+    <InputGroupInput placeholder="Search" aria-label="Search" />
+    <InputGroupAddon align="inline-end">
+      <kbd>⌘K</kbd>
+    </InputGroupAddon>
+  </InputGroup>
+</Example>
+
+<Example
+  title="With button"
+  code={`<InputGroup>
+  <InputGroupInput readOnly value="mx_live_4f9a…c21e" aria-label="API key" />
+  <InputGroupAddon align="inline-end">
+    <InputGroupButton size="icon-xs" aria-label="Copy API key"><Copy /></InputGroupButton>
+  </InputGroupAddon>
+</InputGroup>`}
+>
+  <InputGroup className="max-w-64">
+    <InputGroupInput readOnly value="mx_live_4f9a…c21e" aria-label="API key" />
+    <InputGroupAddon align="inline-end">
+      <InputGroupButton size="icon-xs" aria-label="Copy API key">
+        <Copy />
+      </InputGroupButton>
+    </InputGroupAddon>
+  </InputGroup>
+</Example>
+
+Icons inside the field are 16px and use the subtle text color. Clicking an icon or text addon focuses the field; buttons inside it keep their own action.
+
+## Sizes
+
+<Example
+  title="All sizes"
+  code={`<Input size="sm" placeholder="sm · 32px" />
+<Input placeholder="md · 36px (default)" />
+<Input size="lg" placeholder="lg · 40px" />`}
+>
+  <Input size="sm" placeholder="sm · 32px" aria-label="Small" className="max-w-48" />
+  <Input placeholder="md · 36px (default)" aria-label="Medium" className="max-w-48" />
+  <Input size="lg" placeholder="lg · 40px" aria-label="Large" className="max-w-48" />
+</Example>
+
+<Example
+  title="Next to a button"
+  code={`<Input placeholder="name@example.com" aria-label="Email" />
+<Button>Invite</Button>`}
+>
+  <div className="flex w-full max-w-sm gap-2">
+    <Input placeholder="name@example.com" aria-label="Email" />
+    <Button>Invite</Button>
+  </div>
+</Example>
+
+Sizes match Button, so an input and a button of the same size sit level. `md` is the default in forms and content; `sm` fits dense toolbars and table filters; `lg` is for mobile and single focused tasks like onboarding (its 17px text also stops iOS from zooming into the field).
+
+## States
+
+<Example
+  title="All states"
+  className="items-start"
+  code={`<Input placeholder="Default" />
+<Input aria-invalid="true" aria-describedby="email-error" defaultValue="name@example" />
+<p id="email-error" className="text-ui-xs text-destructive-text">Enter a full email address, like name@example.com.</p>
+<Input disabled placeholder="Disabled" />
+<Input readOnly defaultValue="Read only" />`}
+>
+  <div className="flex w-56 flex-col gap-1">
+    <Input placeholder="Default" aria-label="Default" />
+  </div>
+  <div className="flex w-56 flex-col gap-1">
+    <Input
+      placeholder="Focused"
+      aria-label="Focused"
+      className="outline-2 outline-offset-2 outline-ring outline-solid"
+    />
+  </div>
+  <div className="flex w-56 flex-col gap-1">
+    <Input aria-invalid="true" aria-label="Email" aria-describedby="email-error" defaultValue="name@example" />
+    <p id="email-error" className="text-ui-xs text-destructive-text">Enter a full email address, like name@example.com.</p>
+  </div>
+  <div className="flex w-56 flex-col gap-1">
+    <Input disabled placeholder="Disabled" aria-label="Disabled" />
+  </div>
+  <div className="flex w-56 flex-col gap-1">
+    <Input readOnly defaultValue="Read only" aria-label="Read only" />
+  </div>
+</Example>
+
+<Example
+  title="Checking and confirmed"
+  code={`<InputGroup>
+  <InputGroupInput defaultValue="research-agent" aria-label="Handle" aria-busy="true" />
+  <InputGroupAddon align="inline-end"><Loader2 className="animate-spin" /></InputGroupAddon>
+</InputGroup>
+<InputGroup>
+  <InputGroupInput defaultValue="research-agent" aria-label="Handle" />
+  <InputGroupAddon align="inline-end"><Check className="text-success-text" aria-label="Available" /></InputGroupAddon>
+</InputGroup>`}
+>
+  <InputGroup className="max-w-56">
+    <InputGroupInput defaultValue="research-agent" aria-label="Handle, checking" aria-busy="true" />
+    <InputGroupAddon align="inline-end">
+      <Loader2 className="animate-spin" />
+    </InputGroupAddon>
+  </InputGroup>
+  <InputGroup className="max-w-56">
+    <InputGroupInput defaultValue="research-agent" aria-label="Handle, available" />
+    <InputGroupAddon align="inline-end">
+      <Check className="text-success-text" aria-label="Available" />
+    </InputGroupAddon>
+  </InputGroup>
+</Example>
+
+Errors set `aria-invalid` (coral border) and always come with a message below the field, linked with `aria-describedby`. Disabled fields get a muted fill instead of fading out, so the value stays readable. Tab into any field on this page to see the focus ring.
+
+## Behavior
+
+#### Validate when the person leaves the field
+
+Let people finish typing before checking. Showing "invalid email" after three characters is obvious and frustrating; never show an error while they're still in the field.
+
+#### After the first error, validate as they type
+
+Once a field has shown an error, check it on every change so the error clears the moment it's fixed.
+
+#### Show "checking" only for real server calls
+
+The spinner appears only while a request is in flight, after the person leaves the field or stops typing for 300ms, never on every keystroke.
+
+#### Confirm only what's uncertain
+
+Use the checkmark for things that can genuinely fail, like a handle that might be taken. For ordinary fields, no error is enough.
+
+## API reference
+
+### Input
+
+<PropsTable
+  type={{
+    size: { type: "'sm' | 'md' | 'lg'", default: "'md'", description: '32 / 36 / 40px, text 14 / 14 / 17px. Lines up with Button sizes.' },
+    'aria-invalid': { type: 'boolean', default: 'false', description: 'Error look (coral border). Pair it with a message linked by aria-describedby.' },
+    disabled: { type: 'boolean', default: 'false', description: 'Muted fill, not focusable.' },
+    readOnly: { type: 'boolean', default: 'false', description: 'Focusable and copyable, but not editable.' },
+  }}
+/>
+
+All other props go to the native `<input>`. shadcn's native `size` attribute is replaced by the Matrix size; set width with `className`.
+
+### InputGroup
+
+<PropsTable
+  type={{
+    size: { type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Height of the whole field, same as Input.' },
+  }}
+/>
+
+Put one `InputGroupInput` (or `InputGroupTextarea`) inside, plus `InputGroupAddon` before or after it.
+
+### InputGroupAddon
+
+<PropsTable
+  type={{
+    align: {
+      type: "'inline-start' | 'inline-end' | 'block-start' | 'block-end'",
+      default: "'inline-start'",
+      description: 'Before or after the text on the same line, or above or below it.',
+    },
+  }}
+/>
+
+Holds an icon, `InputGroupText`, a `<kbd>` or an `InputGroupButton`.
+
+### InputGroupButton
+
+<PropsTable
+  type={{
+    size: { type: "'xs' | 'icon-xs'", default: "'xs'", description: '24px tall, so it fits inside the field. icon-xs is square; add an aria-label.' },
+    variant: { type: 'Button variant', default: "'ghost'", description: 'Any Button variant; ghost suits most actions inside a field.' },
+  }}
+/>
+
+## Guidelines
+
+<Guidelines>
+  <Guideline>Give every field a visible label in sentence case, short and meaningful: "Email address", not "Email Address".</Guideline>
+  <Guideline>Write errors that name the exact problem and how to fix it: "Enter a full email address, like name@example.com", not "Invalid input". One error at a time.</Guideline>
+  <Guideline>Match the field's width to what goes in it: a code field is narrow, a description field is full width.</Guideline>
+  <Guideline>Use the right `type` (`email`, `tel`, `url`, `number`, `search`) for better mobile keyboards and autofill.</Guideline>
+  <Guideline dont>Don't use the placeholder as the only label; it disappears as soon as someone types.</Guideline>
+  <Guideline dont>Don't rely on color alone for errors; always show the message below the field.</Guideline>
+  <Guideline dont>Don't hide an error until the input is fixed.</Guideline>
+</Guidelines>
+
+## Related
+
+<Related>
+  <RelatedCard title="Button" href="/library/components/button">
+    <Button size="sm">Save</Button>
+  </RelatedCard>
+  <RelatedCard title="Badge" href="/library/components/badge">
+    <span className="rounded-sm border border-tint-success-border bg-tint-success-fill px-1.5 py-0.5 text-ui-sm font-medium text-tint-success-text">Available</span>
+  </RelatedCard>
+</Related>

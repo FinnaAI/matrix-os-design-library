@@ -3,6 +3,7 @@
   "pages": [
     "avatar",
     "badge",
-    "button"
+    "button",
+    "input"
   ]
 }
