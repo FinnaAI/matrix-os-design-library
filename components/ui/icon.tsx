@@ -1,7 +1,7 @@
 import { Icon as LucideNodeIcon, type IconNode, type LucideIcon, type LucideProps } from 'lucide-react';
 
 // Matrix icons are Lucide, drawn on a 24×24 grid (her call, 2026-09-30: crisper than Hugeicons).
-// Scale and stroke match the design system. The product currently uses 11–28px ad hoc;
+// One scale and one stroke rule for every icon. The product currently uses 11–28px ad hoc;
 // these five sizes replace them.
 //
 // Stroke rule: drawn at 2 on the 24 grid, so it scales with the icon (16px paints 1.33, 24px paints 2.0),

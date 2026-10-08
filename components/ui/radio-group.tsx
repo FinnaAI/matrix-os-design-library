@@ -5,7 +5,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { RadioGroup as RadioGroupPrimitive } from 'radix-ui';
 import { cn } from '@/lib/utils';
 
-// shadcn/ui Radio group, restyled with Matrix tokens and:
+// shadcn/ui Radio group, restyled with Matrix tokens:
 // outlined; selected darkens the ring and shows a dark dot. Sizes sm 16 (6px dot) · md 20 (8px dot).
 // The group is one tab stop; arrow keys move and select. Focus is the global gold ring.
 

@@ -1,6 +1,6 @@
 // Shared look for every floating list: Dropdown menu, Select, and later Context menu and Combobox.
 // One card, one row, one label, one divider, so a menu and a select's options read as the same thing.
-// Modelled on the menu: 32px rows (40px on touch), 14px text and icons, neutral hover.
+// One menu look: 32px rows (40px on touch), 14px text and icons, neutral hover.
 
 /** The floating card: menus and popovers use the `lg` radius, overlays the `lg` shadow. */
 export const menuSurface = [

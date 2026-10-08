@@ -4,7 +4,7 @@ import * as React from 'react';
 import { Tooltip as TooltipPrimitive } from 'radix-ui';
 import { cn } from '@/lib/utils';
 
-// shadcn/ui Tooltip, restyled with Matrix tokens and:
+// shadcn/ui Tooltip, restyled with Matrix tokens:
 // a dark neutral bubble with light 12px medium text, a 6px arrow, 6px from the trigger, max 320px wide.
 // Timing: 500ms before the first tooltip, then instant for 300ms while moving across a toolbar.
 // That skip-delay needs ONE TooltipProvider around the app (see the Tooltip page), not one per tooltip.

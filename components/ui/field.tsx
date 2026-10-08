@@ -6,7 +6,7 @@ import { cn } from '@/lib/utils';
 import { Label } from '@/components/ui/label';
 import { Separator } from '@/components/ui/separator';
 
-// shadcn/ui Field, restyled with Matrix tokens and the spacing contract:
+// shadcn/ui Field, restyled with Matrix tokens and this spacing contract:
 // label 2px above the control, help text and errors 8px below it, 16px between fields, 24px between sections.
 // Errors color only the message, never the label. Disabling the control softens the label and help text.
 

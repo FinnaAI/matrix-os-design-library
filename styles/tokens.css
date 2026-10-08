@@ -115,7 +115,7 @@
   --primary-foreground: var(--neutral-25); /* 15.0:1 on neutral-800 */
   --link: var(--neutral-800); /* Links and link buttons: neutral like actions, always underlined (her call, 2026-09-30) */
   --link-hover: var(--green-700); /* Her call (2026-10-08): same dark brand green as primary hover; 7.4:1 on the page */
-  /* Secondary: outlined, like (her call, 2026-10-06): page-color fill, --border edge, shadow-xs */
+  /* Secondary: outlined (her call, 2026-10-06): page-color fill, --border edge, shadow-xs */
   --secondary: var(--neutral-25);
   --secondary-foreground: var(--neutral-800);
   --secondary-hover: var(--neutral-50);
@@ -241,7 +241,7 @@
   --rounded-full: 9999px; /* pills */
   --radius: var(--rounded-md); /* shadcn's base radius = the control radius */
 
-  /* Elevation: layered shadows modelled on the scale (her call, 2026-09-30), tinted with the
+  /* Elevation: layered shadows (her call, 2026-09-30), tinted with the
      Matrix warm neutral instead of pure black. Use xs (resting controls), lg (overlays), xl (dialogs). */
   --shadow-color: 36 35 35; /* neutral-800 (text-default), as RGB channels */
   --elevation-xs: 0 1px 2px 0 rgb(var(--shadow-color) / 0.05);

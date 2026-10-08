@@ -7,7 +7,7 @@ import { Checkbox as CheckboxPrimitive } from 'radix-ui';
 import { cn } from '@/lib/utils';
 import { Icon } from '@/components/ui/icon';
 
-// shadcn/ui Checkbox, restyled with Matrix tokens and:
+// shadcn/ui Checkbox, restyled with Matrix tokens:
 // outlined, not filled. Checked and indeterminate darken the border and show a dark mark on the page color.
 // Sizes sm 16 · md 20. Focus is the global gold ring; errors use aria-invalid.
 

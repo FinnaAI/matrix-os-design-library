@@ -3,7 +3,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { Slot } from 'radix-ui';
 import { cn } from '@/lib/utils';
 
-// shadcn/ui Badge, restyled with Matrix tokens and: a tinted label
+// shadcn/ui Badge, restyled with Matrix tokens: a tinted label
 // (light fill, matching edge, dark text) that reports status. Badges are informational, never buttons.
 // Each variant is one of the tint sets on the Colors page, so every label stays above 6:1.
 

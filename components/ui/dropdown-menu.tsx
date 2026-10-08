@@ -14,7 +14,7 @@ import {
   menuSurface,
 } from '@/components/ui/menu-styles';
 
-// shadcn/ui Dropdown menu, restyled with Matrix tokens and.
+// shadcn/ui Dropdown menu, restyled with Matrix tokens.
 // For actions. To pick a value in a form, use Select. Shares its look with Select (menu-styles.ts).
 // Checkbox and radio rows show a check at the end of the row, the same as Select.
 

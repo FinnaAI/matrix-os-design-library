@@ -4,9 +4,9 @@ import { Loader2 } from 'lucide-react';
 import { Slot } from 'radix-ui';
 import { cn } from '@/lib/utils';
 
-// shadcn/ui Button, restyled with Matrix tokens and.
+// shadcn/ui Button, restyled with Matrix tokens.
 // Primary is neutral (actions), destructive is coral (danger), links are neutral and underlined.
-// Sizes follow (28 · 32 · 36 · 40px); corners follow the radius-by-size table
+// Sizes 28 · 32 · 36 · 40px; corners follow the radius-by-size table
 // (every size 8px, so the sizes read as one family). Focus is the global gold ring from styles/theme.css.
 
 const buttonVariants = cva(

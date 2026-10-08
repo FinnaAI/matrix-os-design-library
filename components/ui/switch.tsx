@@ -5,7 +5,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { Switch as SwitchPrimitive } from 'radix-ui';
 import { cn } from '@/lib/utils';
 
-// shadcn/ui Switch, restyled with Matrix tokens and:
+// shadcn/ui Switch, restyled with Matrix tokens:
 // dark neutral track when on, the input border color when off, a near-white thumb.
 // Sizes sm 28×16 · md 36×20 (default). Screen readers announce on/off (role="switch").
 // The thumb's slide is the one animation that carries meaning, so it stays.

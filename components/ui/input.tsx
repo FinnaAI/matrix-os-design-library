@@ -2,7 +2,7 @@ import * as React from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
 
-// shadcn/ui Input, restyled with Matrix tokens and.
+// shadcn/ui Input, restyled with Matrix tokens.
 // Sizes line up with Button (sm 32 · md 36 · lg 40), so an input and a button of the same size sit level.
 // lg uses 17px text: at 16px or more, iOS doesn't zoom into the field on focus.
 // Focus is the global gold ring from styles/theme.css; errors use aria-invalid.

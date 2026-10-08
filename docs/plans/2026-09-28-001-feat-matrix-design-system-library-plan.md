@@ -29,7 +29,7 @@ Matrix OS ships 7 UI surfaces with 6+ separate token sets:
 
 The approved brand (`DESIGN.md` + Figma "Styles" page) exists but the product doesn't use it (see `../matrix-os-design/01-ui-audit.md` and `../matrix-os-design/02-figma-vs-design-md.md`). This repo becomes the **single, working implementation** of that brand: one token file, one component per concept, documentation Matrix engineers and their coding agents can copy from directly.
 
-The layout and page anatomy follow the design system:
+The layout and page anatomy:
 - Start here → Foundations → Components
 - Every component page runs Usage → Variants → Sizes → With icon → Shape → States → API reference → Guidelines → Related
 - Human docs on the site, agent docs as markdown in the repo
@@ -58,7 +58,7 @@ The layout and page anatomy follow the design system:
 ## Scope Boundaries
 
 - **Landing page:** removed for now; `/` redirects to `/library`.
-- **Site shell (done 2026-09-28, user request):** layout ahead of schedule. Floating pill nav (logo · Library · Guides · GitHub), plain sidebar, neutral white/gray site chrome (`styles/site.css`) so Matrix components stand out. Content paths are now `content/docs/library/**` and `content/docs/guides/**`; the paths in this plan that say `content/docs/foundations|components|guides` mean these.
+- **Site shell (done 2026-09-28, user request):** custom layout ahead of schedule. Floating pill nav (logo · Library · Guides · GitHub), plain sidebar, neutral white/gray site chrome (`styles/site.css`) so Matrix components stand out. Content paths are now `content/docs/library/**` and `content/docs/guides/**`; the paths in this plan that say `content/docs/foundations|components|guides` mean these.
 - **Dark mode:** out of scope (user decision, 2026-09-28). Components use semantic tokens only and no `dark:` variants, so a dark palette can be added later without rewriting components.
 - **Website architecture** (Library/Guides split, card-grid library index, floating nav): not now. Only a minimal version arrives with the landing page in Phase E.
 - **Matrix theme presets** (winxp, nord, dracula…): out of scope. Tokens are structured so a theme only remaps semantic tokens.
@@ -100,7 +100,6 @@ The layout and page anatomy follow the design system:
 
 ### External References
 
-- DS (live): page anatomy, "copy, paste, done", "fewer options, faster decisions", two-audience docs, `COMPONENTS.md` decision tree, per-component agent files, guard suite, docs-with-change rule.
 - shadcn CLI 4.x (current: 4.21), new-york style on the unified `radix-ui` package (the Matrix shell already imports from `radix-ui`).
 - `fumadocs-typescript` 5.x: `AutoTypeTable` generates prop tables from TypeScript types, which keeps API references from drifting.
 - Test tooling: Vitest 4, Testing Library, `vitest-axe` for automated accessibility checks.
@@ -143,7 +142,7 @@ These use PROVISIONAL values until decided. Tokens are centralized, so changing 
 - Default border: sage `#E0E1CA` (off-scale) vs Green 100 `#E4EDD4` vs Neutral 200 `#E1E0E0` vs current product `#DCD9CC`. Input borders must reach 3:1 or rely on another visible boundary. Decide at the U4 review.
 - Status on-color pairs and subtle surfaces. Decide at the U4 review.
 - `secondary` and `accent` surfaces: currently Green 100. Decide at the U4 review.
-- Source of truth for the Matrix team (Figma-first per DESIGN.md vs code-first per Matrix). This affects the "Start here" wording. Decide at the U3 review; founders' input needed.
+- Source of truth for the Matrix team (Figma-first per DESIGN.md vs code-first). This affects the "Start here" wording. Decide at the U3 review; founders' input needed.
 
 ### Deferred to Implementation
 
@@ -173,7 +172,7 @@ agents/
   components/<name>.md      # per component, written with the component
   COMPONENTS.md             # Phase D decision tree + index
 templates/
-  component-page.mdx        # page skeleton with the anatomy
+  component-page.mdx        # page skeleton with the component anatomy
   agent-doc.md              # agent file skeleton
 scripts/
   check-tokens.mjs          # token guard (R10)
@@ -500,7 +499,7 @@ Every unit in this phase follows the per-component recipe (see High-Level Techni
 - One overlay surface style: elevated neutral surface, `shadow-lg`, layer tokens from U6.
 - Glass is allowed only where DESIGN.md allows it.
 - Destructive confirmations always use Alert dialog.
-- Toast = what happened; Alert = what is true now (borrowed from the feedback guide).
+- Toast = what happened; Alert = what is true now.
 - Guidelines must define the **Dialog vs Sheet** rule (centered decision vs side panel of related content) and Sheet's default side.
 - Guidelines must define **Toast** duration, screen position, max stack and dismiss behavior, aligned with the Matrix shell's single notification host (`ShellNotificationStack` in matrix-os).
 
@@ -631,7 +630,7 @@ Every unit in this phase follows the per-component recipe (see High-Level Techni
 - It respects reduced motion.
 - No new colors. The boot gradient stops (`#647141`, `#F1C377`, `#EAB6A7`, `#C6D8E3`, `#6D777D`) are off-scale. Either copy them into `tokens.css` as named brand tokens (like `--brand-sage`) or map them to the nearest scale steps. The owner decides at the review stop.
 - Proposed structure (owner reviews): an animated rabbit mark + wordmark hero, a one-line pitch, two entry cards (Library · Guides) and a minimal footer.
-- Decide at this point whether to add the card-grid Library index.
+- Decide at this point whether to add a card-grid Library index.
 
 **Test scenarios:**
 - Happy path: the landing renders; links to Library and Guides work.
@@ -673,5 +672,4 @@ Every unit in this phase follows the per-component recipe (see High-Level Techni
 - Audit: `../matrix-os-design/01-ui-audit.md`; Figma check: `../matrix-os-design/02-figma-vs-design-md.md`
 - Matrix brand contract: `matrix-os/DESIGN.md`, `matrix-os/design/components/*.md`
 - Figma: file `xPG2FeYRtC9owCKSVXCqWA`, page "Styles" (`1:846`)
-- DS: (library, component anatomy, AI agents guide)
 - Fumadocs TypeScript: https://fumadocs.dev (AutoTypeTable); shadcn CLI 4.x

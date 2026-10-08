@@ -13,7 +13,7 @@ import {
   menuSurface,
 } from '@/components/ui/menu-styles';
 
-// shadcn/ui Select, restyled with Matrix tokens and:
+// shadcn/ui Select, restyled with Matrix tokens:
 // the trigger looks and sizes exactly like Input (sm 32 · md 36 · lg 40); the options share the
 // Dropdown menu look, with a check at the end of the selected row. The list opens below the trigger
 // and matches its width. Focus is the global gold ring; errors use aria-invalid.
