@@ -10,8 +10,11 @@ export const previewImage = {
   alt: 'Matrix OS Design System',
 };
 
-/** The public production address (Vercel). Used for link previews. */
-export const siteUrl = 'https://matrix-design-system.vercel.app';
+/** The public production address, used for link previews. On Vercel it follows the project's own
+ *  production domain, so moving the site to another project or domain needs no code change. */
+export const siteUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL
+  ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+  : 'https://matrix-os-design-library.vercel.app';
 
 export const gitConfig = {
   user: 'FinnaAI',

@@ -11,7 +11,6 @@ export const contentType = 'image/png';
 
 const TITLE = 'Matrix OS';
 const SUBTITLE = 'Design System';
-const TOPICS = 'Colors · Typography · Spacing · Radius · Elevation · Icons';
 
 // Google Fonts serves a TTF (which ImageResponse needs) to non-browser clients. Subset to the text used.
 async function googleFont(family: string, weight: number, text: string): Promise<ArrayBuffer | null> {
@@ -37,15 +36,15 @@ export default async function OpengraphImage() {
     `fill="${resolveColor('brand')}"`,
   );
 
-  const [display, sans] = await Promise.all([
+  const [display] = await Promise.all([
     googleFont('Bricolage Grotesque', 700, TITLE + SUBTITLE),
-    googleFont('Geist', 400, TOPICS),
   ]);
   const fonts = [
     display && { name: 'Bricolage', data: display, weight: 700 as const },
-    sans && { name: 'Geist', data: sans, weight: 400 as const },
   ].filter((f) => f !== null && f !== undefined);
 
+  // Everything sits in the centre square: Slack and others show the preview as a square
+  // thumbnail and crop the sides, so the wide image only adds page color around it.
   return new ImageResponse(
     (
       <div
@@ -54,27 +53,25 @@ export default async function OpengraphImage() {
           height: '100%',
           display: 'flex',
           flexDirection: 'column',
-          justifyContent: 'space-between',
-          padding: 80,
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: 36,
           background: page,
         }}
       >
-        <img src={`data:image/svg+xml;base64,${Buffer.from(mark).toString('base64')}`} width={85} height={110} alt="" />
-        <div style={{ display: 'flex', flexDirection: 'column' }}>
-          <div style={{ fontFamily: 'Bricolage', fontSize: 112, fontWeight: 700, color: ink, lineHeight: 1, letterSpacing: -2 }}>
+        <img src={`data:image/svg+xml;base64,${Buffer.from(mark).toString('base64')}`} width={80} height={103} alt="" />
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <div style={{ fontFamily: 'Bricolage', fontSize: 64, fontWeight: 700, color: ink, lineHeight: 1, letterSpacing: -1.5 }}>
             {TITLE}
           </div>
-          <div style={{ fontFamily: 'Bricolage', fontSize: 112, fontWeight: 700, color: muted, lineHeight: 1.05, letterSpacing: -2 }}>
+          <div style={{ fontFamily: 'Bricolage', fontSize: 64, fontWeight: 700, color: muted, lineHeight: 1.1, letterSpacing: -1.5 }}>
             {SUBTITLE}
           </div>
         </div>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          <div style={{ fontFamily: 'Geist', fontSize: 28, color: muted }}>{TOPICS}</div>
-          <div style={{ display: 'flex', gap: 12 }}>
-            {swatches.map((color) => (
-              <div key={color} style={{ width: 36, height: 36, borderRadius: 9999, background: color }} />
-            ))}
-          </div>
+        <div style={{ display: 'flex', gap: 12 }}>
+          {swatches.map((color) => (
+            <div key={color} style={{ width: 28, height: 28, borderRadius: 9999, background: color }} />
+          ))}
         </div>
       </div>
     ),
