@@ -14,8 +14,8 @@ export const previewImage = {
 export const siteUrl = 'https://matrix-design-system.vercel.app';
 
 export const gitConfig = {
-  user: 'sahar-nouri-1',
-  repo: 'Matrix_design-system',
+  user: 'FinnaAI',
+  repo: 'matrix-os-design-library',
   branch: 'main',
 };
 

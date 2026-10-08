@@ -15,7 +15,7 @@ pnpm add radix-ui class-variance-authority clsx tailwind-merge tw-animate-css lu
 
 ### 1. Add the tokens and the theme
 
-Copy [`styles/tokens.css`](https://github.com/sahar-nouri-1/Matrix_design-system/blob/main/styles/tokens.css) (every value: colors, type, spacing, radius, elevation) and [`styles/theme.css`](https://github.com/sahar-nouri-1/Matrix_design-system/blob/main/styles/theme.css) (turns them into Tailwind classes, plus the focus ring) into your app. Then import them after Tailwind in your global CSS:
+Copy [`styles/tokens.css`](https://github.com/FinnaAI/matrix-os-design-library/blob/main/styles/tokens.css) (every value: colors, type, spacing, radius, elevation) and [`styles/theme.css`](https://github.com/FinnaAI/matrix-os-design-library/blob/main/styles/theme.css) (turns them into Tailwind classes, plus the focus ring) into your app. Then import them after Tailwind in your global CSS:
 
 ```css
 /* app/globals.css */
@@ -93,7 +93,7 @@ export function cn(...inputs: ClassValue[]) {
 pnpm add lucide-react
 ```
 
-Copy [`components/ui/icon.tsx`](https://github.com/sahar-nouri-1/Matrix_design-system/blob/main/components/ui/icon.tsx). It sets the Matrix icon sizes and stroke, so you never pass pixels or `strokeWidth`:
+Copy [`components/ui/icon.tsx`](https://github.com/FinnaAI/matrix-os-design-library/blob/main/components/ui/icon.tsx). It sets the Matrix icon sizes and stroke, so you never pass pixels or `strokeWidth`:
 
 ```tsx
 import { Mail } from 'lucide-react';
@@ -108,7 +108,7 @@ import { Icon } from '@/components/ui/icon';
 
 ### 5. Add components
 
-Copy the files you need from [`components/ui`](https://github.com/sahar-nouri-1/Matrix_design-system/tree/main/components/ui), with the ones they depend on. They keep shadcn's names and parts, so they replace shadcn's versions one for one.
+Copy the files you need from [`components/ui`](https://github.com/FinnaAI/matrix-os-design-library/tree/main/components/ui), with the ones they depend on. They keep shadcn's names and parts, so they replace shadcn's versions one for one.
 
 | Component | Also copy |
 | --- | --- |
@@ -161,7 +161,7 @@ A card with a 17px semibold title, grey 14px text and a warm dark grey button (`
 
 ## Source of truth
 
-**This design system is the source of truth.** Every color, size and rule lives in [`styles/tokens.css`](https://github.com/sahar-nouri-1/Matrix_design-system/blob/main/styles/tokens.css) and on these pages; the product, Figma and other docs follow it.
+**This design system is the source of truth.** Every color, size and rule lives in [`styles/tokens.css`](https://github.com/FinnaAI/matrix-os-design-library/blob/main/styles/tokens.css) and on these pages; the product, Figma and other docs follow it.
 
 It started from two references:
 
