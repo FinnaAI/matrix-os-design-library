@@ -192,19 +192,18 @@ For an optional value, put "None" first instead of adding a clear button to the 
 ## Sizes
 
 <Example
-  title="sm · md · lg · xl"
+  title="sm · md · lg"
   code={`<SelectTrigger size="sm">…</SelectTrigger>
 <SelectTrigger>…</SelectTrigger>
-<SelectTrigger size="lg">…</SelectTrigger>
-<SelectTrigger size="xl">…</SelectTrigger>`}
+<SelectTrigger size="lg">…</SelectTrigger>`}
 >
-  {['sm', 'md', 'lg', 'xl'].map((size) => (
+  {['sm', 'md', 'lg'].map((size) => (
     <Select key={size} defaultValue={size}>
       <SelectTrigger size={size} aria-label={`Size ${size}`} className="w-40">
         <SelectValue />
       </SelectTrigger>
       <SelectContent>
-        <SelectItem value={size}>{({ sm: 'sm · 32px', md: 'md · 36px', lg: 'lg · 40px', xl: 'xl · 44px' })[size]}</SelectItem>
+        <SelectItem value={size}>{({ sm: 'sm · 32px', md: 'md · 36px', lg: 'lg · 40px' })[size]}</SelectItem>
       </SelectContent>
     </Select>
   ))}
@@ -231,7 +230,7 @@ A select is a form value. If the change should apply immediately to a setting, t
 <PropsTable
   type={{
     Select: { type: 'value · onValueChange · defaultValue · disabled · required', description: 'Holds the selected value.' },
-    SelectTrigger: { type: "size?: 'sm' | 'md' | 'lg' | 'xl' · aria-invalid", default: "'md'", description: 'The field. 32 / 36 / 40 / 44px like Input. Full width; set width with className.' },
+    SelectTrigger: { type: "size?: 'sm' | 'md' | 'lg' · aria-invalid", default: "'md'", description: 'The field. 32 / 36 / 40px like Input. Full width; set width with className.' },
     SelectValue: { type: 'placeholder?', description: 'Shows the selected option, or the placeholder.' },
     SelectContent: { type: "position?: 'popper' | 'item-aligned'", default: "'popper'", description: 'The list. Opens below the trigger at its width.' },
     SelectItem: { type: 'value · disabled?', description: 'One option, with a check when selected.' },

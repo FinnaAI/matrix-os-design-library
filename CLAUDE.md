@@ -36,7 +36,7 @@ Never invent brand values. If something isn't decided yet, mark it `PROVISIONAL`
 - **Spacing:** only the scale 0·2·4·6·8·12·16·20·24·32·40·48·56·64·96px (`--space-*` in `tokens.css`; Tailwind numeric classes, p-2 = 8px). Default 8px inside a component, 16px between components. No off-scale steps (`p-2.5`, `gap-7`, `p-[13px]`). Borders 1px; 2px only for focus/active/selected.
   **Approved exceptions** (her call, 2026-10-08), tuned to optical balance: Button padding `px-2.5`/`px-3.5` and their `pl`/`pr` (10/14px); menu row check inset `pr-7` and icon-less inset `pl-7` (28px = 8 + 14 icon + 6 gap); Badge heights `h-5.5`/`h-6.5` (22/26px); Field `mt-px` checkbox nudge. Don't add new ones without asking.
 - **Focus** is always the Gold ring (`--ring`) with an offset. Never remove focus without replacing it.
-- **Minimum sizes:** body text 14px or more, touch targets 44px or more.
+- **Sizes:** body text 14px or more. Touch targets on mobile are at least 40px; controls top out at `lg` 40px (her call, 2026-10-08: no 44px size).
 - **One component per concept.** Add components with `pnpm dlx shadcn@latest add <name>`, then restyle with tokens. Never create a second Button.
 - **Light mode only** until dark tokens are designed. Don't add `dark:` variants yet.
 - Wordmark is "Matrix OS", never "MatrixOS".

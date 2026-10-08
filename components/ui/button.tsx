@@ -37,8 +37,6 @@ const buttonVariants = cva(
         sm: 'h-8 rounded-md px-3 text-ui has-[>svg:first-child]:pl-2.5 has-[>svg:last-child]:pr-2.5 [&_svg]:size-4',
         md: 'h-9 rounded-md px-3.5 text-ui has-[>svg:first-child]:pl-3 has-[>svg:last-child]:pr-3 [&_svg]:size-4',
         lg: 'h-10 rounded-md px-4 text-ui-lg has-[>svg:first-child]:pl-3.5 has-[>svg:last-child]:pr-3.5 [&_svg]:size-4',
-        // 44px: the touch-target minimum. For mobile and touch-first screens.
-        xl: 'h-11 rounded-md px-4 text-ui-lg has-[>svg:first-child]:pl-3.5 has-[>svg:last-child]:pr-3.5 [&_svg]:size-5',
         // shadcn's icon sizes, kept for existing code; prefer `square` with a size.
         icon: 'size-9 rounded-md [&_svg]:size-4',
         'icon-xs': 'size-7 rounded-md [&_svg]:size-3.5 [&_svg]:icon-stroke-xs',

@@ -54,7 +54,7 @@ import { Button } from '@/components/ui/button';
   <Button variant="link">View all agents</Button>
 </Example>
 
-Primary is the dark neutral; secondary is outlined on the page color; ghost has no fill until hover. Links are neutral and always underlined, and turn dark brand green on hover, like primary.
+Primary is the dark neutral; secondary is outlined on the page color; ghost has no fill until hover. Links are always underlined. The neutral link turns dark brand green on hover, like primary; the coral link just gets a shade darker (coral-600 → coral-700).
 
 ## Destructive
 
@@ -74,22 +74,21 @@ Coral means danger, so it's only for deleting, removing or disconnecting. Use th
 ## Sizes
 
 <Example
-  title="28 · 32 · 36 · 40 · 44"
+  title="28 · 32 · 36 · 40"
   code={`<Button size="xs">Extra small</Button>
 <Button size="sm">Small</Button>
 <Button size="md">Medium</Button>
-<Button size="lg">Large</Button>
-<Button size="xl">Extra large</Button>`}
+<Button size="lg">Large</Button>`}
 >
-  {['xs', 'sm', 'md', 'lg', 'xl'].map((size) => (
+  {['xs', 'sm', 'md', 'lg'].map((size) => (
     <span key={size} className="flex flex-col items-center">
-      <Button size={size}>{({ xs: 'Extra small', sm: 'Small', md: 'Medium', lg: 'Large', xl: 'Extra large' })[size]}</Button>
-      <ExampleLabel>{size} · {({ xs: '28px, 13px', sm: '32px, 14px', md: '36px, 14px', lg: '40px, 17px', xl: '44px, 17px' })[size]}</ExampleLabel>
+      <Button size={size}>{({ xs: 'Extra small', sm: 'Small', md: 'Medium', lg: 'Large' })[size]}</Button>
+      <ExampleLabel>{size} · {({ xs: '28px, 13px', sm: '32px, 14px', md: '36px, 14px', lg: '40px, 17px' })[size]}</ExampleLabel>
     </span>
   ))}
 </Example>
 
-`md` (36px) is the default. `xl` (44px) is the touch-target minimum: use it on mobile and touch-first screens. Every size has an 8px corner, so buttons read as one family next to each other.
+`md` (36px) is the default. Every size has an 8px corner, so buttons read as one family next to each other.
 
 ## With icon
 
@@ -160,9 +159,9 @@ Put a Lucide icon straight inside the button; it's sized for you (14px at `xs`, 
       description: 'Choose by intent, not looks. shadcn’s default and outline are accepted too (primary and secondary).',
     },
     size: {
-      type: "'xs' | 'sm' | 'md' | 'lg' | 'xl'",
+      type: "'xs' | 'sm' | 'md' | 'lg'",
       default: "'md'",
-      description: '28 / 32 / 36 / 40 / 44px, labels 13 / 14 / 14 / 17 / 17px. xl is the 44px touch size. shadcn’s icon sizes still work.',
+      description: '28 / 32 / 36 / 40px, labels 13 / 14 / 14 / 17px. shadcn’s icon sizes still work.',
     },
     square: { type: 'boolean', default: 'false', description: 'Icon only: width equals height. Add an aria-label.' },
     round: { type: 'boolean', default: 'false', description: 'Fully circular.' },

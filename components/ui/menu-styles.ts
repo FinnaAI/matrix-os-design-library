@@ -1,6 +1,6 @@
 // Shared look for every floating list: Dropdown menu, Select, and later Context menu and Combobox.
 // One card, one row, one label, one divider, so a menu and a select's options read as the same thing.
-// Modelled on the menu: 32px rows (44px on touch), 14px text and icons, neutral hover.
+// Modelled on the menu: 32px rows (40px on touch), 14px text and icons, neutral hover.
 
 /** The floating card: menus and popovers use the `lg` radius, overlays the `lg` shadow. */
 export const menuSurface = [
@@ -14,7 +14,7 @@ export const menuSurface = [
 /** One row. Highlight follows hover and keyboard (never a gold ring per row). Inner radius = 12 − 4 padding = 8. */
 export const menuItem = [
   'relative flex h-8 w-full cursor-default items-center gap-1.5 rounded-md px-2 text-ui text-popover-foreground outline-hidden select-none',
-  'pointer-coarse:h-11', // 44px touch target
+  'pointer-coarse:h-10', // 40px on touch
   'data-highlighted:bg-accent data-highlighted:text-accent-foreground',
   'data-disabled:pointer-events-none data-disabled:opacity-50',
   '[&_svg]:pointer-events-none [&_svg]:size-3.5 [&_svg]:icon-stroke-xs [&_svg]:shrink-0 [&_svg]:text-muted-foreground',

@@ -22,7 +22,6 @@ const inputVariants = cva(
         sm: 'h-8 text-ui file:text-ui',
         md: 'h-9 text-ui file:text-ui',
         lg: 'h-10 text-ui-lg file:text-ui-lg',
-        xl: 'h-11 text-ui-lg file:text-ui-lg', // 44px touch target
       },
     },
     defaultVariants: { size: 'md' },

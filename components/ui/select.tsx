@@ -14,7 +14,7 @@ import {
 } from '@/components/ui/menu-styles';
 
 // shadcn/ui Select, restyled with Matrix tokens and:
-// the trigger looks and sizes exactly like Input (sm 32 · md 36 · lg 40 · xl 44); the options share the
+// the trigger looks and sizes exactly like Input (sm 32 · md 36 · lg 40); the options share the
 // Dropdown menu look, with a check at the end of the selected row. The list opens below the trigger
 // and matches its width. Focus is the global gold ring; errors use aria-invalid.
 
@@ -34,7 +34,6 @@ const TRIGGER_SIZES = {
   sm: 'h-8 text-ui',
   md: 'h-9 text-ui',
   lg: 'h-10 text-ui-lg',
-  xl: 'h-11 text-ui-lg', // 44px touch target
   // shadcn's name, kept so existing code keeps working.
   default: 'h-9 text-ui',
 } as const;

@@ -11,7 +11,7 @@ import { Textarea } from '@/components/ui/textarea';
 // keyboard hints or small buttons inside the same field. The group owns the border, fill, size and
 // focus ring; the control inside is borderless.
 
-const SIZES = { sm: 'h-8', md: 'h-9', lg: 'h-10', xl: 'h-11' } as const;
+const SIZES = { sm: 'h-8', md: 'h-9', lg: 'h-10' } as const;
 
 function InputGroup({
   className,
@@ -142,7 +142,7 @@ function InputGroupInput({ className, ...props }: React.ComponentProps<typeof In
   return (
     <Input
       data-slot="input-group-control"
-      className={cn(GROUP_CONTROL, 'h-full group-data-[size=lg]/input-group:text-ui-lg group-data-[size=xl]/input-group:text-ui-lg', className)}
+      className={cn(GROUP_CONTROL, 'h-full group-data-[size=lg]/input-group:text-ui-lg', className)}
       {...props}
     />
   );
