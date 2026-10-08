@@ -32,7 +32,7 @@ export function Example({
           type="button"
           onClick={() => setOpen(!open)}
           aria-expanded={open}
-          className="rounded-md px-2 py-1 text-ui-xs text-site-muted transition-colors duration-150 hover:bg-site-hover hover:text-site-fg"
+          className="rounded-md px-2 py-1 text-ui-xs text-site-muted transition-colors duration-120 hover:bg-site-hover hover:text-site-fg"
         >
           {open ? 'Hide code' : 'Show code'}
         </button>

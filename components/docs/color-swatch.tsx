@@ -35,7 +35,7 @@ export function ColorSwatch({
       aria-label={`Copy ${value}`}
       style={{ background: `var(--${token})` }}
       className={cn(
-        'relative flex h-14 w-full flex-col justify-between rounded-lg p-2 text-left transition-transform duration-150 hover:-translate-y-0.5',
+        'relative flex h-14 w-full flex-col justify-between rounded-lg p-2 text-left transition-transform duration-120 hover:-translate-y-0.5',
         dark ? 'text-site-nav-fg' : 'border border-site-border text-site-fg',
         className,
       )}

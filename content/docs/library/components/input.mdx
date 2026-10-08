@@ -118,11 +118,13 @@ Icons inside the field are 16px and use the subtle text color. Clicking an icon 
   title="All sizes"
   code={`<Input size="sm" placeholder="sm · 32px" aria-label="Small" />
 <Input placeholder="md · 36px (default)" aria-label="Medium" />
-<Input size="lg" placeholder="lg · 40px" aria-label="Large" />`}
+<Input size="lg" placeholder="lg · 40px" aria-label="Large" />
+<Input size="xl" placeholder="xl · 44px (touch)" aria-label="Extra large" />`}
 >
   <Input size="sm" placeholder="sm · 32px" aria-label="Small" className="max-w-48" />
   <Input placeholder="md · 36px (default)" aria-label="Medium" className="max-w-48" />
   <Input size="lg" placeholder="lg · 40px" aria-label="Large" className="max-w-48" />
+  <Input size="xl" placeholder="xl · 44px (touch)" aria-label="Extra large" className="max-w-48" />
 </Example>
 
 <Example
@@ -136,7 +138,7 @@ Icons inside the field are 16px and use the subtle text color. Clicking an icon 
   </div>
 </Example>
 
-Sizes match Button, so an input and a button of the same size sit level. `md` is the default in forms and content; `sm` fits dense toolbars and table filters; `lg` is for mobile and single focused tasks like onboarding (its 17px text also stops iOS from zooming into the field).
+Sizes match Button, so an input and a button of the same size sit level. `md` is the default in forms and content; `sm` fits dense toolbars and table filters; `lg` is for single focused tasks like onboarding; `xl` (44px) is the touch-target size for mobile. Both use 17px text, which also stops iOS from zooming into the field.
 
 ## States
 
@@ -222,7 +224,7 @@ Use the checkmark for things that can genuinely fail, like a handle that might b
 
 <PropsTable
   type={{
-    size: { type: "'sm' | 'md' | 'lg'", default: "'md'", description: '32 / 36 / 40px, text 14 / 14 / 17px. Lines up with Button sizes.' },
+    size: { type: "'sm' | 'md' | 'lg' | 'xl'", default: "'md'", description: '32 / 36 / 40 / 44px, text 14 / 14 / 17 / 17px. Lines up with Button sizes; xl is the touch size.' },
     'aria-invalid': { type: 'boolean', default: 'false', description: 'Error look (coral border). Pair it with a message linked by aria-describedby.' },
     disabled: { type: 'boolean', default: 'false', description: 'Muted fill, not focusable.' },
     readOnly: { type: 'boolean', default: 'false', description: 'Focusable and copyable, but not editable.' },
@@ -235,7 +237,7 @@ All other props go to the native `<input>`. shadcn's native `size` attribute is 
 
 <PropsTable
   type={{
-    size: { type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Height of the whole field, same as Input.' },
+    size: { type: "'sm' | 'md' | 'lg' | 'xl'", default: "'md'", description: 'Height of the whole field, same as Input.' },
   }}
 />
 

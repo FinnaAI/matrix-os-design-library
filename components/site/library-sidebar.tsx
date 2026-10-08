@@ -29,7 +29,7 @@ export function LibrarySidebar({ nodes }: { nodes: PageTree.Node[] }) {
               href={node.url}
               aria-current={active ? 'page' : undefined}
               className={cn(
-                'rounded-lg px-3 py-1.5 text-ui transition-colors duration-150',
+                'rounded-lg px-3 py-1.5 text-ui transition-colors duration-120',
                 active
                   ? 'bg-site-active text-site-fg'
                   : 'text-site-muted hover:bg-site-hover hover:text-site-fg',

@@ -28,7 +28,7 @@ export function RelatedCard({ title, href, children }: { title: string; href: st
   return (
     <Link
       href={href}
-      className="flex flex-col overflow-hidden rounded-xl border border-site-border transition-colors duration-150 hover:bg-site-hover"
+      className="flex flex-col overflow-hidden rounded-xl border border-site-border transition-colors duration-120 hover:bg-site-hover"
     >
       <span className="flex h-24 items-center justify-center border-b border-site-border">{children}</span>
       <span className="px-4 py-3 text-ui text-site-fg">{title}</span>

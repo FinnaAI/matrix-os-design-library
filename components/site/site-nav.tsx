@@ -41,7 +41,7 @@ export function SiteNav() {
               href={section.href}
               aria-current={active ? 'page' : undefined}
               className={cn(
-                'rounded-lg px-4 py-1.5 text-ui transition-colors duration-150',
+                'rounded-lg px-4 py-1.5 text-ui transition-colors duration-120',
                 active
                   ? 'bg-site-nav-active font-medium text-site-nav-fg'
                   : 'text-site-nav-muted hover:text-site-nav-fg',
@@ -55,7 +55,7 @@ export function SiteNav() {
           type="button"
           onClick={() => setOpenSearch(true)}
           aria-label="Search the design system"
-          className="ml-1 flex h-8 items-center gap-2 rounded-lg px-3 text-ui text-site-nav-muted transition-colors duration-150 hover:bg-site-nav-active hover:text-site-nav-fg"
+          className="ml-1 flex h-8 items-center gap-2 rounded-lg px-3 text-ui text-site-nav-muted transition-colors duration-120 hover:bg-site-nav-active hover:text-site-nav-fg"
         >
           <Search className="size-4" aria-hidden="true" />
           <span className="hidden sm:inline">Search</span>
@@ -66,7 +66,7 @@ export function SiteNav() {
           target="_blank"
           rel="noreferrer"
           aria-label="GitHub repository"
-          className="ml-1 flex size-8 items-center justify-center rounded-lg text-site-nav-muted transition-colors duration-150 hover:text-site-nav-fg"
+          className="ml-1 flex size-8 items-center justify-center rounded-lg text-site-nav-muted transition-colors duration-120 hover:text-site-nav-fg"
         >
           <GitHubMark className="size-4" />
         </a>

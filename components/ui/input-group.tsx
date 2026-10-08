@@ -11,7 +11,7 @@ import { Textarea } from '@/components/ui/textarea';
 // keyboard hints or small buttons inside the same field. The group owns the border, fill, size and
 // focus ring; the control inside is borderless.
 
-const SIZES = { sm: 'h-8', md: 'h-9', lg: 'h-10' } as const;
+const SIZES = { sm: 'h-8', md: 'h-9', lg: 'h-10', xl: 'h-11' } as const;
 
 function InputGroup({
   className,
@@ -25,7 +25,7 @@ function InputGroup({
       role="group"
       className={cn(
         'group/input-group relative flex w-full min-w-0 items-center rounded-md border border-input bg-background shadow-xs',
-        'transition-[border-color] duration-150',
+        'transition-[border-color] duration-120',
         SIZES[size],
         'has-[>textarea]:h-auto',
 
@@ -40,7 +40,8 @@ function InputGroup({
         'has-[[data-slot=input-group-control]:focus-visible]:outline-2 has-[[data-slot=input-group-control]:focus-visible]:outline-offset-2',
         'has-[[data-slot=input-group-control]:focus-visible]:outline-ring has-[[data-slot=input-group-control]:focus-visible]:outline-solid',
 
-        // Error and disabled.
+        // Hover (only while the control is enabled), error and disabled.
+        'has-[[data-slot=input-group-control]:enabled]:hover:border-muted-foreground',
         'has-[[data-slot=input-group-control][aria-invalid=true]]:border-destructive',
         'has-[[data-slot=input-group-control]:disabled]:bg-muted has-[[data-slot=input-group-control]:disabled]:shadow-none',
 
@@ -94,8 +95,8 @@ function InputGroupAddon({
 
 // Small buttons that live inside the field: 24px, so they fit the 32–40px group with even padding.
 const GROUP_BUTTON_SIZES = {
-  xs: { size: 'xs', square: false, className: 'h-6 rounded-xs px-2' },
-  'icon-xs': { size: 'xs', square: true, className: 'h-6 rounded-xs' },
+  xs: { size: 'xs', square: false, className: 'h-6 rounded-xs px-2 [&_svg]:icon-stroke-xs' },
+  'icon-xs': { size: 'xs', square: true, className: 'h-6 rounded-xs [&_svg]:icon-stroke-xs' },
 } as const;
 
 function InputGroupButton({
@@ -141,7 +142,7 @@ function InputGroupInput({ className, ...props }: React.ComponentProps<typeof In
   return (
     <Input
       data-slot="input-group-control"
-      className={cn(GROUP_CONTROL, 'h-full group-data-[size=lg]/input-group:text-ui-lg', className)}
+      className={cn(GROUP_CONTROL, 'h-full group-data-[size=lg]/input-group:text-ui-lg group-data-[size=xl]/input-group:text-ui-lg', className)}
       {...props}
     />
   );

@@ -10,10 +10,10 @@ import { cn } from '@/lib/utils';
 const inputVariants = cva(
   [
     'w-full min-w-0 rounded-md border border-input bg-background px-3 text-foreground shadow-xs',
-    'transition-[border-color] duration-150',
+    'transition-[border-color] duration-120',
     'placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground',
     'file:mr-3 file:h-full file:border-0 file:bg-transparent file:font-medium file:text-foreground',
-    'aria-invalid:border-destructive',
+    'enabled:hover:border-muted-foreground aria-invalid:border-destructive',
     'disabled:cursor-not-allowed disabled:bg-muted disabled:text-muted-foreground disabled:shadow-none',
   ],
   {
@@ -22,6 +22,7 @@ const inputVariants = cva(
         sm: 'h-8 text-ui file:text-ui',
         md: 'h-9 text-ui file:text-ui',
         lg: 'h-10 text-ui-lg file:text-ui-lg',
+        xl: 'h-11 text-ui-lg file:text-ui-lg', // 44px touch target
       },
     },
     defaultVariants: { size: 'md' },

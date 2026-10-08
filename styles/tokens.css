@@ -106,7 +106,7 @@
   --foreground: var(--neutral-800);
   --card: var(--neutral-100);
   --card-foreground: var(--neutral-800);
-  --popover: var(--neutral-25); /* PROVISIONAL */
+  --popover: var(--neutral-25); /* Menus, popovers, dialogs (confirmed 2026-10-08) */
   --popover-foreground: var(--neutral-800);
 
   /* Actions */
@@ -121,7 +121,7 @@
   --secondary-hover: var(--neutral-50);
   --ghost-hover: var(--accent); /* One hover color for buttons, menus and lists */
 
-  --muted: var(--neutral-200); /* PROVISIONAL: card is neutral-100, so wells inside cards step down once */
+  --muted: var(--neutral-200); /* Disabled fills, wells inside cards (card is neutral-100, so this steps down once); confirmed 2026-10-08 */
   --muted-foreground: var(--neutral-600);
 
   /* shadcn "accent" = hover/selected surface (Style library: accent-surface). */
@@ -136,14 +136,14 @@
   --warning: var(--gold-500);
   --info: var(--blue-500);
 
-  /* Status text on light surfaces. The fills above fail 4.5:1 as text, so text uses a darker step. PROVISIONAL */
+  /* Status text on light surfaces. The fills above fail 4.5:1 as text, so text uses a darker step. Confirmed 2026-10-08 */
   --success-text: var(--teal-600);
   --warning-text: var(--gold-700);
   --destructive-text: var(--coral-600);
   --destructive-text-hover: var(--coral-700); /* Destructive links darken on hover (coral-600 → 700) */
   --info-text: var(--blue-600);
 
-  /* Tints: fill + border + text sets for chips, badges and banners. All text pairs ≥ 6:1. PROVISIONAL */
+  /* Tints: fill + border + text sets for chips, badges and banners. All text pairs ≥ 6:1. Confirmed 2026-10-08 */
   --tint-neutral-fill: var(--neutral-100);
   --tint-neutral-border: var(--neutral-200);
   --tint-neutral-text: var(--neutral-700);

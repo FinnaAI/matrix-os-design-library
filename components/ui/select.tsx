@@ -14,7 +14,7 @@ import {
 } from '@/components/ui/menu-styles';
 
 // shadcn/ui Select, restyled with Matrix tokens and:
-// the trigger looks and sizes exactly like Input (sm 32 · md 36 · lg 40); the options share the
+// the trigger looks and sizes exactly like Input (sm 32 · md 36 · lg 40 · xl 44); the options share the
 // Dropdown menu look, with a check at the end of the selected row. The list opens below the trigger
 // and matches its width. Focus is the global gold ring; errors use aria-invalid.
 
@@ -34,6 +34,7 @@ const TRIGGER_SIZES = {
   sm: 'h-8 text-ui',
   md: 'h-9 text-ui',
   lg: 'h-10 text-ui-lg',
+  xl: 'h-11 text-ui-lg', // 44px touch target
   // shadcn's name, kept so existing code keeps working.
   default: 'h-9 text-ui',
 } as const;
@@ -50,12 +51,12 @@ function SelectTrigger({
       data-size={size}
       className={cn(
         'flex w-full min-w-0 items-center justify-between gap-2 rounded-md border border-input bg-background px-3 text-left text-foreground whitespace-nowrap shadow-xs',
-        'transition-[border-color] duration-150',
+        'transition-[border-color] duration-120',
         'data-placeholder:text-muted-foreground',
-        'aria-invalid:border-destructive',
+        'enabled:hover:border-muted-foreground aria-invalid:border-destructive',
         'disabled:cursor-not-allowed disabled:bg-muted disabled:text-muted-foreground disabled:shadow-none',
         '*:data-[slot=select-value]:line-clamp-1 *:data-[slot=select-value]:flex *:data-[slot=select-value]:items-center *:data-[slot=select-value]:gap-1.5',
-        '[&_svg]:pointer-events-none [&_svg]:size-3.5 [&>svg]:size-4 [&_svg]:shrink-0 [&_svg]:text-muted-foreground',
+        '[&_svg]:pointer-events-none [&_svg]:size-3.5 [&_svg]:icon-stroke-xs [&>svg]:size-4 [&>svg]:stroke-2 [&_svg]:shrink-0 [&_svg]:text-muted-foreground',
         TRIGGER_SIZES[size],
         className,
       )}
@@ -140,7 +141,7 @@ function SelectScrollUpButton({
       className={cn('flex cursor-default items-center justify-center py-1 text-muted-foreground', className)}
       {...props}
     >
-      <ChevronUp className="size-3.5" />
+      <ChevronUp className="size-3.5 icon-stroke-xs" />
     </SelectPrimitive.ScrollUpButton>
   );
 }
@@ -155,7 +156,7 @@ function SelectScrollDownButton({
       className={cn('flex cursor-default items-center justify-center py-1 text-muted-foreground', className)}
       {...props}
     >
-      <ChevronDown className="size-3.5" />
+      <ChevronDown className="size-3.5 icon-stroke-xs" />
     </SelectPrimitive.ScrollDownButton>
   );
 }

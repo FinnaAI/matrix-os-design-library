@@ -165,7 +165,7 @@ function IconTile({ name, node }: { name: string; node: IconNode }) {
       onClick={() => copy(name)}
       title={`Copy ${name}`}
       aria-label={`Copy ${name}`}
-      className="flex h-20 flex-col justify-between rounded-lg border border-site-border p-2 text-left text-site-fg transition-colors duration-150 hover:bg-site-hover"
+      className="flex h-20 flex-col justify-between rounded-lg border border-site-border p-2 text-left text-site-fg transition-colors duration-120 hover:bg-site-hover"
     >
       <span className="truncate text-ui-xs text-site-muted">{copied ? 'Copied' : name}</span>
       <span className="flex justify-center pb-2">

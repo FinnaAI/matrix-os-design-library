@@ -82,7 +82,7 @@ export function CopyFormatToggle() {
             title={example}
             onClick={() => setFormat(value)}
             className={cn(
-              'rounded-md px-3 py-1 text-ui-xs transition-colors duration-150',
+              'rounded-md px-3 py-1 text-ui-xs transition-colors duration-120',
               current === value ? 'bg-site-bg text-site-fg shadow-xs' : 'text-site-muted hover:text-site-fg',
             )}
           >
@@ -105,7 +105,7 @@ export function CopyCode({ value, label, className }: { value: string; label?: s
       aria-label={`Copy ${value}`}
       title={label ? value : 'Click to copy'}
       className={cn(
-        'relative -mx-1 rounded-md px-1 font-mono text-ui text-site-fg transition-colors duration-150 hover:bg-site-active',
+        'relative -mx-1 rounded-md px-1 font-mono text-ui text-site-fg transition-colors duration-120 hover:bg-site-active',
         className,
       )}
     >
@@ -114,7 +114,7 @@ export function CopyCode({ value, label, className }: { value: string; label?: s
       <span
         aria-live="polite"
         className={cn(
-          'pointer-events-none absolute -top-7 left-1/2 -translate-x-1/2 rounded-md bg-site-nav px-2 py-0.5 font-sans text-ui-xs text-site-nav-fg transition-opacity duration-150',
+          'pointer-events-none absolute -top-7 left-1/2 -translate-x-1/2 rounded-md bg-site-nav px-2 py-0.5 font-sans text-ui-xs text-site-nav-fg transition-opacity duration-120',
           copied ? 'opacity-100' : 'opacity-0',
         )}
       >

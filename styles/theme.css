@@ -223,6 +223,13 @@
 }
 
 @layer base {
+  /* On a card (neutral-100) the default hover (also neutral-100) would vanish, so hovers inside
+     a card step one shade darker. Applies to anything with bg-card or data-slot="card". */
+  :where(.bg-card, [data-slot='card']) {
+    --accent: var(--neutral-200);
+    --ghost-hover: var(--neutral-200);
+  }
+
   code,
   kbd,
   pre,
@@ -235,4 +242,14 @@
     outline: 2px solid var(--ring);
     outline-offset: 2px;
   }
+}
+
+/* Icon stroke floor for icons sized by a parent with CSS (buttons, menus, selects), matching
+   components/ui/icon.tsx: never paint thinner than 1.25px. Lucide draws on a 24 grid, so the
+   stroke-width is 1.25 × 24 / size. Prefer <Icon size="…"> where you render icons yourself. */
+@utility icon-stroke-xxs {
+  stroke-width: 2.5; /* 12px icons */
+}
+@utility icon-stroke-xs {
+  stroke-width: 2.1429; /* 14px icons */
 }

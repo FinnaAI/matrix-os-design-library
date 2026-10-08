@@ -14,7 +14,7 @@ import { Icon } from '@/components/ui/icon';
 const checkboxVariants = cva(
   [
     'peer group/checkbox grid shrink-0 place-content-center rounded-xs border border-input bg-background text-primary shadow-xs',
-    'transition-[border-color] duration-150 hover:border-muted-foreground',
+    'transition-[border-color] duration-120 hover:border-muted-foreground',
     'data-[state=checked]:border-primary data-[state=indeterminate]:border-primary',
     'aria-invalid:border-destructive aria-invalid:data-[state=checked]:border-destructive',
     'disabled:data-[state=checked]:border-border disabled:data-[state=indeterminate]:border-border',

@@ -12,10 +12,11 @@ import { cn } from '@/lib/utils';
 
 const switchVariants = cva(
   [
-    'peer group/switch inline-flex shrink-0 items-center rounded-full p-0.5 transition-colors duration-150',
+    'peer group/switch inline-flex shrink-0 items-center rounded-full p-0.5 transition-colors duration-120',
     'data-[state=checked]:bg-primary data-[state=unchecked]:bg-input',
     'aria-invalid:ring-2 aria-invalid:ring-destructive',
-    'disabled:cursor-not-allowed disabled:opacity-50',
+    // Disabled matches Checkbox and Radio: a muted fill, not a fade. On still reads as on (darker).
+    'disabled:cursor-not-allowed disabled:data-[state=unchecked]:bg-muted disabled:data-[state=checked]:bg-muted-foreground',
   ],
   {
     variants: {
@@ -52,7 +53,7 @@ function Switch({
       <SwitchPrimitive.Thumb
         data-slot="switch-thumb"
         className={cn(
-          'pointer-events-none block rounded-full bg-background shadow-xs transition-transform duration-150 data-[state=unchecked]:translate-x-0',
+          'pointer-events-none block rounded-full bg-background shadow-xs transition-transform duration-120 data-[state=unchecked]:translate-x-0',
           THUMB[s],
         )}
       />
