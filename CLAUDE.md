@@ -45,11 +45,12 @@ Never invent brand values. If something isn't decided yet, mark it `PROVISIONAL`
 
 - Pages live in `content/docs/library/**` (Start here, foundations, components) and `content/docs/guides/**`. Navigation order lives in each folder's `meta.json`.
 - **Site chrome is neutral white/gray** (`styles/site.css`, `bg-site-*`/`text-site-*` utilities) so components stand out. Site chrome never uses Matrix brand colors; Matrix components never use `site-*` tokens.
-- The site layout is custom and Matrix-style: floating pill nav (`components/site/site-nav.tsx`), plain sidebar (`components/site/library-sidebar.tsx`), page body (`components/site/doc-page.tsx`). Fumadocs is used only for content loading and MDX blocks.
+- The site layout is custom and Matrix-style: floating pill nav with Search ⌘K (`components/site/site-nav.tsx`; opens the Fumadocs search dialog), plain sidebar (`components/site/library-sidebar.tsx`), page body (`components/site/doc-page.tsx`). Fumadocs is used only for content loading and MDX blocks.
 - Site text uses the product scale (`text-ui`, `text-ui-xs`); page titles use the site-only `text-site-title`.
 - Each component page follows: overview → live example → variants → states → usage do/don't → accessibility → code.
 - **Adding a shadcn component:** `pnpm dlx shadcn@latest add <name>`, then (1) change its `cn` import from `"cn"` to `@/lib/utils` (the raw package drops Matrix class names), (2) restyle with Matrix tokens only, (3) keep shadcn's part names and `data-slot`s so it drops into the product unchanged. Document it with `<Example title code>` blocks (preview + Show code) and a `<PropsTable>`, modelled on the.
 - **Component pages describe the component, not the migration.** Product-specific "before → after" notes go in `docs/migration-notes.md` (source for the future migration guide and agent `.md` files), never on the component page.
+- **Menus share one look:** Dropdown menu and Select (and later Context menu, Combobox) take their card, row, label and divider classes from `components/ui/menu-styles.ts`. Change the look there, never per component. Overlays animate with `tw-animate-css`.
 - **Agents vs people:** Avatar is for people only. Agents are shown with the mascot (Matrix rabbit art), which will be its own component; don't add an agent variant to Avatar.
 
 <!-- BEGIN:nextjs-agent-rules -->

@@ -5,9 +5,11 @@
     "badge",
     "button",
     "checkbox",
+    "dropdown-menu",
     "field",
     "input",
     "radio-group",
+    "select",
     "switch"
   ]
 }

@@ -1,0 +1,272 @@
+---
+title: Dropdown menu
+description: A button-triggered list of actions. One size, 32px rows with 14px text and icons; rows grow to 40px on touch.
+---
+
+import {
+  ArrowDownWideNarrow,
+  Copy,
+  Ellipsis,
+  LogOut,
+  Pencil,
+  Settings,
+  Share2,
+  Trash2,
+  User,
+} from 'lucide-react';
+
+## Usage
+
+```bash
+pnpm dlx shadcn@latest add dropdown-menu
+```
+
+Then replace `components/ui/dropdown-menu.tsx` and add `menu-styles.ts` from the [Matrix versions](https://github.com/sahar-nouri-1/Matrix_design-system/tree/main/components/ui). The menu card, rows, labels and dividers come from `menu-styles.ts`, which Select shares, so a menu and a select's options always look the same. Menus animate with `tw-animate-css`, shadcn's standard.
+
+```tsx
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+
+<DropdownMenu>
+  <DropdownMenuTrigger asChild>
+    <Button variant="ghost" square aria-label="More options"><Ellipsis /></Button>
+  </DropdownMenuTrigger>
+  <DropdownMenuContent align="end">
+    <DropdownMenuItem onSelect={rename}><Pencil /> Rename</DropdownMenuItem>
+    <DropdownMenuItem onSelect={duplicate}><Copy /> Duplicate</DropdownMenuItem>
+    <DropdownMenuSeparator />
+    <DropdownMenuItem variant="destructive" onSelect={remove}><Trash2 /> Delete</DropdownMenuItem>
+  </DropdownMenuContent>
+</DropdownMenu>
+```
+
+A menu is for actions. To pick a value in a form, use a [Select](/library/components/select).
+
+## At a glance
+
+<Example
+  title="An open menu"
+  subtitle="Static picture of every row type"
+  code={`// See the live examples below for working code.`}
+>
+  <MenuPreview>
+    <MenuPreviewLabel>Agent</MenuPreviewLabel>
+    <MenuPreviewItem icon={<Pencil />} shortcut="⌘E" highlighted>Rename</MenuPreviewItem>
+    <MenuPreviewItem icon={<Copy />} shortcut="⌘D">Duplicate</MenuPreviewItem>
+    <MenuPreviewItem icon={<Share2 />} disabled>Share</MenuPreviewItem>
+    <MenuPreviewSeparator />
+    <MenuPreviewLabel>Sort by</MenuPreviewLabel>
+    <MenuPreviewItem checked>Last active</MenuPreviewItem>
+    <MenuPreviewItem checked={false}>Name</MenuPreviewItem>
+    <MenuPreviewSeparator />
+    <MenuPreviewItem icon={<Trash2 />} destructive>Delete agent</MenuPreviewItem>
+  </MenuPreview>
+</Example>
+
+Rows highlight in neutral on hover or with the arrow keys. The selected option shows a check at the end of the row. Delete is the only coral row.
+
+## Variants
+
+<Example
+  title="Action menu"
+  subtitle="Icon button, actions with icons"
+  code={`<DropdownMenu>
+  <DropdownMenuTrigger asChild>
+    <Button variant="ghost" square aria-label="More options"><Ellipsis /></Button>
+  </DropdownMenuTrigger>
+  <DropdownMenuContent align="end">
+    <DropdownMenuItem><Pencil /> Rename</DropdownMenuItem>
+    <DropdownMenuItem><Copy /> Duplicate</DropdownMenuItem>
+    <DropdownMenuSeparator />
+    <DropdownMenuItem variant="destructive"><Trash2 /> Delete</DropdownMenuItem>
+  </DropdownMenuContent>
+</DropdownMenu>`}
+>
+  <DropdownMenu>
+    <DropdownMenuTrigger asChild>
+      <Button variant="ghost" square aria-label="More options">
+        <Ellipsis />
+      </Button>
+    </DropdownMenuTrigger>
+    <DropdownMenuContent align="end">
+      <DropdownMenuItem><Pencil /> Rename</DropdownMenuItem>
+      <DropdownMenuItem><Copy /> Duplicate</DropdownMenuItem>
+      <DropdownMenuSeparator />
+      <DropdownMenuItem variant="destructive"><Trash2 /> Delete</DropdownMenuItem>
+    </DropdownMenuContent>
+  </DropdownMenu>
+</Example>
+
+<Example
+  title="Account menu"
+  subtitle="Avatar trigger, label, groups"
+  code={`<DropdownMenu>
+  <DropdownMenuTrigger aria-label="Account">
+    <Avatar name="Alex Morgan"><AvatarFallback /></Avatar>
+  </DropdownMenuTrigger>
+  <DropdownMenuContent align="end">
+    <DropdownMenuLabel>alex@example.com</DropdownMenuLabel>
+    <DropdownMenuItem><User /> Profile</DropdownMenuItem>
+    <DropdownMenuItem><Settings /> Settings</DropdownMenuItem>
+    <DropdownMenuSeparator />
+    <DropdownMenuItem><LogOut /> Log out</DropdownMenuItem>
+  </DropdownMenuContent>
+</DropdownMenu>`}
+>
+  <DropdownMenu>
+    <DropdownMenuTrigger aria-label="Account" className="rounded-full">
+      <Avatar name="Alex Morgan">
+        <AvatarFallback />
+      </Avatar>
+    </DropdownMenuTrigger>
+    <DropdownMenuContent align="end">
+      <DropdownMenuLabel>alex@example.com</DropdownMenuLabel>
+      <DropdownMenuItem><User /> Profile</DropdownMenuItem>
+      <DropdownMenuItem><Settings /> Settings</DropdownMenuItem>
+      <DropdownMenuSeparator />
+      <DropdownMenuItem><LogOut /> Log out</DropdownMenuItem>
+    </DropdownMenuContent>
+  </DropdownMenu>
+</Example>
+
+<Example
+  title="With shortcuts"
+  subtitle="Right-aligned hints"
+  code={`<DropdownMenuItem>
+  <Pencil /> Rename <DropdownMenuShortcut>⌘E</DropdownMenuShortcut>
+</DropdownMenuItem>`}
+>
+  <DropdownMenu>
+    <DropdownMenuTrigger asChild>
+      <Button variant="secondary">Edit</Button>
+    </DropdownMenuTrigger>
+    <DropdownMenuContent align="start">
+      <DropdownMenuItem><Pencil /> Rename <DropdownMenuShortcut>⌘E</DropdownMenuShortcut></DropdownMenuItem>
+      <DropdownMenuItem><Copy /> Duplicate <DropdownMenuShortcut>⌘D</DropdownMenuShortcut></DropdownMenuItem>
+      <DropdownMenuSeparator />
+      <DropdownMenuItem variant="destructive"><Trash2 /> Delete <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut></DropdownMenuItem>
+    </DropdownMenuContent>
+  </DropdownMenu>
+</Example>
+
+<Example
+  title="Multi-select"
+  subtitle="Checks, stays open"
+  code={`<DropdownMenuCheckboxItem checked={showDone} onCheckedChange={setShowDone} onSelect={(e) => e.preventDefault()}>
+  Finished
+</DropdownMenuCheckboxItem>`}
+>
+  <MultiSelectMenuDemo />
+</Example>
+
+<Example
+  title="Single choice"
+  subtitle="One option, picks and closes"
+  code={`<DropdownMenuRadioGroup value={sort} onValueChange={setSort}>
+  <DropdownMenuRadioItem value="active">Last active</DropdownMenuRadioItem>
+  <DropdownMenuRadioItem value="name">Name</DropdownMenuRadioItem>
+  <DropdownMenuRadioItem value="created">Date created</DropdownMenuRadioItem>
+</DropdownMenuRadioGroup>`}
+>
+  <DropdownMenu>
+    <DropdownMenuTrigger asChild>
+      <Button variant="ghost"><ArrowDownWideNarrow /> Sort</Button>
+    </DropdownMenuTrigger>
+    <DropdownMenuContent align="start">
+      <DropdownMenuLabel>Sort by</DropdownMenuLabel>
+      <DropdownMenuRadioGroup defaultValue="active">
+        <DropdownMenuRadioItem value="active">Last active</DropdownMenuRadioItem>
+        <DropdownMenuRadioItem value="name">Name</DropdownMenuRadioItem>
+        <DropdownMenuRadioItem value="created">Date created</DropdownMenuRadioItem>
+      </DropdownMenuRadioGroup>
+    </DropdownMenuContent>
+  </DropdownMenu>
+</Example>
+
+<Example
+  title="With submenu"
+  code={`<DropdownMenuSub>
+  <DropdownMenuSubTrigger><Share2 /> Share</DropdownMenuSubTrigger>
+  <DropdownMenuSubContent>
+    <DropdownMenuItem>Copy link</DropdownMenuItem>
+    <DropdownMenuItem>Invite people</DropdownMenuItem>
+  </DropdownMenuSubContent>
+</DropdownMenuSub>`}
+>
+  <DropdownMenu>
+    <DropdownMenuTrigger asChild>
+      <Button variant="secondary">Project</Button>
+    </DropdownMenuTrigger>
+    <DropdownMenuContent align="start">
+      <DropdownMenuItem><Pencil /> Rename</DropdownMenuItem>
+      <DropdownMenuSub>
+        <DropdownMenuSubTrigger><Share2 /> Share</DropdownMenuSubTrigger>
+        <DropdownMenuSubContent>
+          <DropdownMenuItem>Copy link</DropdownMenuItem>
+          <DropdownMenuItem>Invite people</DropdownMenuItem>
+        </DropdownMenuSubContent>
+      </DropdownMenuSub>
+    </DropdownMenuContent>
+  </DropdownMenu>
+</Example>
+
+## Behavior
+
+#### The keyboard is built in
+
+Enter, Space or ArrowDown opens the menu; arrows move, typing jumps to a matching row, Escape closes and returns focus to the trigger.
+
+#### Highlight, not a focus ring
+
+Rows highlight in neutral on hover and with the arrow keys. The gold ring stays on the trigger, so a menu never fills with rings.
+
+#### Rows don't wrap
+
+Labels stay on one line. Keep them short (verb + noun); long names truncate.
+
+#### Touch grows the rows
+
+On a touch screen rows grow from 32px to 40px, automatically.
+
+## API reference
+
+<PropsTable
+  type={{
+    DropdownMenuContent: { type: "align?: 'start' | 'center' | 'end' · side?", default: "'center'", description: 'The card. Use align="end" for menus opened from an icon button on the right.' },
+    DropdownMenuItem: { type: "variant?: 'default' | 'destructive' · inset? · onSelect", description: 'An action row. Put a 14px Lucide icon first. destructive is coral, only for delete or remove.' },
+    DropdownMenuCheckboxItem: { type: 'checked · onCheckedChange', description: 'A row that toggles, with a check at the end. Prevent onSelect’s default to keep the menu open.' },
+    DropdownMenuRadioGroup: { type: 'value · onValueChange', description: 'Wraps DropdownMenuRadioItem rows; one can be selected. Picks and closes.' },
+    DropdownMenuLabel: { type: 'inset?', description: 'A small heading above a group.' },
+    DropdownMenuSeparator: { type: '—', description: 'A full-width divider between groups.' },
+    DropdownMenuShortcut: { type: 'span', description: 'A keyboard hint at the end of a row.' },
+    DropdownMenuSub: { type: 'SubTrigger · SubContent', description: 'A nested menu. Opens on hover or ArrowRight.' },
+  }}
+/>
+
+## Guidelines
+
+<Guidelines>
+  <Guideline>Open menus from a button: an icon button (⋯) for row or card actions, a labelled button for a toolbar.</Guideline>
+  <Guideline>Write rows as verb + noun ("Rename agent"); order them by how often they're used, with destructive actions last, after a divider.</Guideline>
+  <Guideline>Give every row an icon or none; don't mix within a group.</Guideline>
+  <Guideline dont>Don't use a menu to pick a value in a form; use a [Select](/library/components/select).</Guideline>
+  <Guideline dont>Don't nest more than one submenu deep.</Guideline>
+</Guidelines>
+
+## Related
+
+<Related>
+  <RelatedCard title="Select" href="/library/components/select">
+    <span className="flex h-8 w-32 items-center justify-between rounded-md border border-input bg-background px-2 text-ui text-foreground">Daily <span className="text-muted-foreground">⌄</span></span>
+  </RelatedCard>
+  <RelatedCard title="Button" href="/library/components/button">
+    <Button variant="ghost" square aria-label="More options">
+      <Ellipsis />
+    </Button>
+  </RelatedCard>
+</Related>

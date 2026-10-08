@@ -1,0 +1,265 @@
+---
+title: Select
+description: Picks one value from a short, known list. Click and pick, no typing. Looks and sizes like Input.
+---
+
+## Usage
+
+```bash
+pnpm dlx shadcn@latest add select
+```
+
+Then replace `components/ui/select.tsx` and add `menu-styles.ts` from the [Matrix versions](https://github.com/sahar-nouri-1/Matrix_design-system/tree/main/components/ui). The trigger matches [Input](/library/components/input) (border, sizes, focus, error) and the list matches [Dropdown menu](/library/components/dropdown-menu).
+
+```tsx
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+
+<Select value={frequency} onValueChange={setFrequency}>
+  <SelectTrigger id="frequency"><SelectValue placeholder="Choose how often" /></SelectTrigger>
+  <SelectContent>
+    <SelectItem value="hourly">Every hour</SelectItem>
+    <SelectItem value="daily">Every day</SelectItem>
+    <SelectItem value="weekly">Every week</SelectItem>
+  </SelectContent>
+</Select>
+```
+
+If the list is long or people would rather type, use a combobox (coming later). If there are only 2–5 options that fit on screen, a [Radio group](/library/components/radio-group) is faster.
+
+## At a glance
+
+<Example title="An open select" subtitle="Static picture" code={`// See the live examples below for working code.`}>
+  <SelectPreview value="Every day">
+    <MenuPreviewItem checked={false}>Every hour</MenuPreviewItem>
+    <MenuPreviewItem checked highlighted>Every day</MenuPreviewItem>
+    <MenuPreviewItem checked={false}>Every week</MenuPreviewItem>
+  </SelectPreview>
+</Example>
+
+The list opens below the trigger at the trigger's width, with a check at the end of the selected option.
+
+## Variants
+
+<Example
+  title="Default"
+  code={`<Field>
+  <FieldLabel htmlFor="frequency">Run</FieldLabel>
+  <Select defaultValue="daily">
+    <SelectTrigger id="frequency"><SelectValue /></SelectTrigger>
+    <SelectContent>
+      <SelectItem value="hourly">Every hour</SelectItem>
+      <SelectItem value="daily">Every day</SelectItem>
+      <SelectItem value="weekly">Every week</SelectItem>
+    </SelectContent>
+  </Select>
+</Field>`}
+>
+  <Field className="max-w-56">
+    <FieldLabel htmlFor="sel-frequency">Run</FieldLabel>
+    <Select defaultValue="daily">
+      <SelectTrigger id="sel-frequency">
+        <SelectValue />
+      </SelectTrigger>
+      <SelectContent>
+        <SelectItem value="hourly">Every hour</SelectItem>
+        <SelectItem value="daily">Every day</SelectItem>
+        <SelectItem value="weekly">Every week</SelectItem>
+      </SelectContent>
+    </Select>
+  </Field>
+</Example>
+
+<Example
+  title="Placeholder"
+  subtitle="Nothing chosen yet"
+  code={`<SelectTrigger><SelectValue placeholder="Choose a model" /></SelectTrigger>`}
+>
+  <Select>
+    <SelectTrigger aria-label="Model" className="max-w-56">
+      <SelectValue placeholder="Choose a model" />
+    </SelectTrigger>
+    <SelectContent>
+      <SelectItem value="fast">Fast</SelectItem>
+      <SelectItem value="balanced">Balanced</SelectItem>
+      <SelectItem value="best">Most capable</SelectItem>
+    </SelectContent>
+  </Select>
+</Example>
+
+<Example
+  title="Groups"
+  subtitle="Labels and dividers"
+  code={`<SelectContent>
+  <SelectGroup>
+    <SelectLabel>Europe</SelectLabel>
+    <SelectItem value="fra">Frankfurt</SelectItem>
+    <SelectItem value="ams">Amsterdam</SelectItem>
+  </SelectGroup>
+  <SelectSeparator />
+  <SelectGroup>
+    <SelectLabel>North America</SelectLabel>
+    <SelectItem value="iad">Virginia</SelectItem>
+    <SelectItem value="sfo">California</SelectItem>
+  </SelectGroup>
+</SelectContent>`}
+>
+  <Select defaultValue="fra">
+    <SelectTrigger aria-label="Region" className="max-w-56">
+      <SelectValue />
+    </SelectTrigger>
+    <SelectContent>
+      <SelectGroup>
+        <SelectLabel>Europe</SelectLabel>
+        <SelectItem value="fra">Frankfurt</SelectItem>
+        <SelectItem value="ams">Amsterdam</SelectItem>
+      </SelectGroup>
+      <SelectSeparator />
+      <SelectGroup>
+        <SelectLabel>North America</SelectLabel>
+        <SelectItem value="iad">Virginia</SelectItem>
+        <SelectItem value="sfo">California</SelectItem>
+      </SelectGroup>
+    </SelectContent>
+  </Select>
+</Example>
+
+<Example
+  title="Optional"
+  subtitle="A “None” option clears"
+  code={`<SelectContent>
+  <SelectItem value="none">None</SelectItem>
+  <SelectSeparator />
+  <SelectItem value="slack">Slack</SelectItem>
+  <SelectItem value="email">Email</SelectItem>
+</SelectContent>`}
+>
+  <Select defaultValue="none">
+    <SelectTrigger aria-label="Also notify in" className="max-w-56">
+      <SelectValue />
+    </SelectTrigger>
+    <SelectContent>
+      <SelectItem value="none">None</SelectItem>
+      <SelectSeparator />
+      <SelectItem value="slack">Slack</SelectItem>
+      <SelectItem value="email">Email</SelectItem>
+    </SelectContent>
+  </Select>
+</Example>
+
+For an optional value, put "None" first instead of adding a clear button to the trigger.
+
+## States
+
+<Example
+  title="Error and disabled"
+  className="items-start"
+  code={`<Field>
+  <FieldLabel htmlFor="region">Region</FieldLabel>
+  <Select>
+    <SelectTrigger id="region" aria-invalid="true" aria-describedby="region-error"><SelectValue placeholder="Choose a region" /></SelectTrigger>
+    …
+  </Select>
+  <FieldError id="region-error">Choose where your computer runs.</FieldError>
+</Field>
+<Select disabled defaultValue="daily">…</Select>`}
+>
+  <Field className="max-w-56">
+    <FieldLabel htmlFor="sel-region">Region</FieldLabel>
+    <Select>
+      <SelectTrigger id="sel-region" aria-invalid="true" aria-describedby="sel-region-error">
+        <SelectValue placeholder="Choose a region" />
+      </SelectTrigger>
+      <SelectContent>
+        <SelectItem value="fra">Frankfurt</SelectItem>
+        <SelectItem value="iad">Virginia</SelectItem>
+      </SelectContent>
+    </Select>
+    <FieldError id="sel-region-error">Choose where your computer runs.</FieldError>
+  </Field>
+  <Field className="max-w-56">
+    <FieldLabel htmlFor="sel-disabled">Run</FieldLabel>
+    <Select disabled defaultValue="daily">
+      <SelectTrigger id="sel-disabled">
+        <SelectValue />
+      </SelectTrigger>
+      <SelectContent>
+        <SelectItem value="daily">Every day</SelectItem>
+      </SelectContent>
+    </Select>
+  </Field>
+</Example>
+
+## Sizes
+
+<Example
+  title="sm · md · lg"
+  code={`<SelectTrigger size="sm">…</SelectTrigger>
+<SelectTrigger>…</SelectTrigger>
+<SelectTrigger size="lg">…</SelectTrigger>`}
+>
+  {['sm', 'md', 'lg'].map((size) => (
+    <Select key={size} defaultValue={size}>
+      <SelectTrigger size={size} aria-label={`Size ${size}`} className="w-40">
+        <SelectValue />
+      </SelectTrigger>
+      <SelectContent>
+        <SelectItem value={size}>{({ sm: 'sm · 32px', md: 'md · 36px', lg: 'lg · 40px' })[size]}</SelectItem>
+      </SelectContent>
+    </Select>
+  ))}
+</Example>
+
+Sizes match Input and Button. shadcn's `size="default"` still works (same as `md`).
+
+## Behavior
+
+#### Opens below, at the trigger's width
+
+The list sits under the trigger and is at least as wide as it. Long option names truncate.
+
+#### Keyboard
+
+Space, Enter or the arrows open the list; arrows move, typing jumps to a matching option, Enter picks, Escape closes without changing anything.
+
+#### Picking applies to the form
+
+A select is a form value. If the change should apply immediately to a setting, that's still fine, but say so near the field.
+
+## API reference
+
+<PropsTable
+  type={{
+    Select: { type: 'value · onValueChange · defaultValue · disabled · required', description: 'Holds the selected value.' },
+    SelectTrigger: { type: "size?: 'sm' | 'md' | 'lg' · aria-invalid", default: "'md'", description: 'The field. 32 / 36 / 40px like Input. Full width; set width with className.' },
+    SelectValue: { type: 'placeholder?', description: 'Shows the selected option, or the placeholder.' },
+    SelectContent: { type: "position?: 'popper' | 'item-aligned'", default: "'popper'", description: 'The list. Opens below the trigger at its width.' },
+    SelectItem: { type: 'value · disabled?', description: 'One option, with a check when selected.' },
+    SelectGroup: { type: '—', description: 'Groups options under a SelectLabel.' },
+    SelectSeparator: { type: '—', description: 'A divider between groups.' },
+  }}
+/>
+
+## Guidelines
+
+<Guidelines>
+  <Guideline>Use a select for 5 to about 15 known options. Fewer: radio group. More, or searchable: combobox.</Guideline>
+  <Guideline>Give it a visible label with [Field](/library/components/field).</Guideline>
+  <Guideline>Pre-select a sensible default when one exists; use a placeholder only when people must actively choose.</Guideline>
+  <Guideline dont>Don't use a select for actions; use a [Dropdown menu](/library/components/dropdown-menu).</Guideline>
+</Guidelines>
+
+## Related
+
+<Related>
+  <RelatedCard title="Dropdown menu" href="/library/components/dropdown-menu">
+    <Button variant="ghost" square aria-label="More options">⋯</Button>
+  </RelatedCard>
+  <RelatedCard title="Radio group" href="/library/components/radio-group">
+    <RadioGroup defaultValue="a" aria-label="Example">
+      <RadioGroupItem value="a" aria-label="Option" />
+    </RadioGroup>
+  </RelatedCard>
+  <RelatedCard title="Input" href="/library/components/input">
+    <Input placeholder="Name" aria-label="Name" size="sm" className="w-32" />
+  </RelatedCard>
+</Related>

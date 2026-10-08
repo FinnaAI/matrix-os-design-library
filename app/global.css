@@ -1,4 +1,5 @@
 @import 'tailwindcss';
+@import 'tw-animate-css'; /* enter/exit animations for menus and overlays (shadcn standard; the product already uses it) */
 @import 'fumadocs-ui/css/neutral.css';
 @import 'fumadocs-ui/css/preset.css';
 @import '../styles/tokens.css';
