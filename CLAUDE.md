@@ -1,6 +1,6 @@
 # Matrix OS Design System
 
-Documentation site and component library for Matrix OS. The owner is a UX/UI designer, not a developer: explain decisions in plain language and pause on structural choices.
+Documentation site and component library for Matrix OS. It is maintained by designers as well as developers: explain decisions in plain language and pause on structural choices.
 
 ## Stack
 
@@ -10,19 +10,19 @@ Documentation site and component library for Matrix OS. The owner is a UX/UI des
 
 ## Source of truth
 
-**This design system is the source of truth** (her call, 2026-09-30): `styles/tokens.css` in this repo (all values) + `styles/theme.css` (the Matrix `@theme` mapping to Tailwind and base focus styles). These two files, `lib/utils.ts` and `components/ui/icon.tsx` are what apps copy; keep them free of docs-site code. Site chrome lives in `app/global.css` and `styles/site.css`.
+**This design system is the source of truth** (decided 2026-09-30): `styles/tokens.css` in this repo (all values) + `styles/theme.css` (the Matrix `@theme` mapping to Tailwind and base focus styles). These two files, `lib/utils.ts` and `components/ui/icon.tsx` are what apps copy; keep them free of docs-site code. Site chrome lives in `app/global.css` and `styles/site.css`.
 
 References, not sources of truth (update them to match this repo, never the other way):
 - Figma **Style library** `SiIcS4zeWkvC5R3pfanUgL` and brand file `xPG2FeYRtC9owCKSVXCqWA`: where the brand scales came from
 - Matrix OS `DESIGN.md`: principles, radius and the brand type scale
 
-Brand color roles: **Green `--green-500`** primary brand tone (identity, not actions) · **Neutral `--neutral-800`** actions/CTA (`--primary`) · **Coral `--coral-500`** destructive/error (`--destructive`; her call 2026-09-30) · **Teal `--teal-500`** success · **Gold `--gold-400`** highlight. Links use `--link` (neutral-800), always underlined. Blue = information only; Neutral = structure, text and actions.
+Brand color roles: **Green `--green-500`** primary brand tone (identity, not actions) · **Neutral `--neutral-800`** actions/CTA (`--primary`) · **Coral `--coral-500`** destructive/error (`--destructive`; decided 2026-09-30) · **Teal `--teal-500`** success · **Gold `--gold-400`** highlight. Links use `--link` (neutral-800), always underlined. Blue = information only; Neutral = structure, text and actions.
 
-Never invent brand values. If something isn't decided yet, mark it `PROVISIONAL` in `tokens.css` and ask the user; don't fill the gap from Figma or DESIGN.md without her confirmation.
+Never invent brand values. If something isn't decided yet, mark it `PROVISIONAL` in `tokens.css` and ask the design system maintainer; don't fill the gap from Figma or DESIGN.md without confirmation.
 
 ## Rules
 
-- **Coral means danger, only.** Coral (and the destructive tokens built on it) is for destructive actions and errors, never for hover, selection, highlights or decoration (her call, 2026-10-06). Hover and selection are neutral (`--accent`).
+- **Coral means danger, only.** Coral (and the destructive tokens built on it) is for destructive actions and errors, never for hover, selection, highlights or decoration (decided 2026-10-06). Hover and selection are neutral (`--accent`).
 - **Every color is a step of a brand scale.** No off-scale values (the old ink/paper/sage/canvas are gone).
 - **Tokens only.** No hex, rgb or arbitrary Tailwind values (`w-[13px]`, `text-[11px]`) in components or pages. Use semantic utilities (`bg-primary`, `text-muted-foreground`, `border-border`) and the type scale: product `text-ui-lg/ui/ui-sm/ui-xs/ui-cap`, `text-heading(-sm)`, `text-metric(-sm)`; brand `text-brand-*` with `font-heading`, for brand moments only.
 - **Semantic before primitive.** Prefer `bg-primary` over `bg-teal-800`. Use brand scales only for illustrations, swatches and documentation.
@@ -30,13 +30,13 @@ Never invent brand values. If something isn't decided yet, mark it `PROVISIONAL`
 - **Fonts:** Geist for all product UI including headings (semibold), Geist Mono for machine text (`font-mono`), Bricolage Grotesque (`font-heading`) only for brand moments (onboarding, empty states, marketing). Weights 400/500/600; no bold in product.
 - **Write class names out in full.** Tailwind only generates classes it can read as whole strings; never build them with template literals or string concatenation (that's how InputGroup lost its focus ring).
 - **Merging classes:** always use `cn` from `lib/utils.ts`; it registers the custom Matrix class names so tailwind-merge doesn't drop them. Add any new custom size/shadow/radius name there.
-- **Icons:** Lucide (`lucide-react`, shadcn's default; her call 2026-09-30, Hugeicons felt too soft), always rendered through `components/ui/icon.tsx` with a size from the scale (`xxs` 12 · `xs` 14 · `sm` 16 · `md` 20 default · `lg` 24; stroke 2 on the 24 grid, floored at 1.25px). Never pass a pixel size or `strokeWidth`; never mix in Hugeicons or emoji.
+- **Icons:** Lucide (`lucide-react`, shadcn's default; decided 2026-09-30, Hugeicons felt too soft), always rendered through `components/ui/icon.tsx` with a size from the scale (`xxs` 12 · `xs` 14 · `sm` 16 · `md` 20 default · `lg` 24; stroke 2 on the 24 grid, floored at 1.25px). Never pass a pixel size or `strokeWidth`; never mix in Hugeicons or emoji.
 - **Elevation:** shadows only from tokens: `--elevation-{xs,sm,md,lg,xl,2xl,3xl,xs-top}` in `tokens.css` = Tailwind `shadow-*`. Resting controls `xs`, overlays `lg`, dialogs `xl`. Never hand-write a `box-shadow`. (Source tokens are named `--elevation-*` because `@theme` can't map `--shadow-lg` to itself.)
-- **Radius:** `--rounded-{2xs 2,xs 4,sm 6,md 8,lg 12,xl 16,2xl 24,full}` in `tokens.css` = Tailwind `rounded-*`. **Controls (buttons, inputs, selects, menu items) are `md` 8px at every size**; menus/popovers/small cards `lg` 12px; cards `xl` 16px (her call, 2026-10-06; DESIGN.md's 12px default is superseded). `--radius` (shadcn) = `--rounded-md`. Pick the radius by the container's size (see the Radius page's size table); nested corners: inner = outer − padding.
+- **Radius:** `--rounded-{2xs 2,xs 4,sm 6,md 8,lg 12,xl 16,2xl 24,full}` in `tokens.css` = Tailwind `rounded-*`. **Controls (buttons, inputs, selects, menu items) are `md` 8px at every size**; menus/popovers/small cards `lg` 12px; cards `xl` 16px (decided 2026-10-06; DESIGN.md's 12px default is superseded). `--radius` (shadcn) = `--rounded-md`. Pick the radius by the container's size (see the Radius page's size table); nested corners: inner = outer − padding.
 - **Spacing:** only the scale 0·2·4·6·8·12·16·20·24·32·40·48·56·64·96px (`--space-*` in `tokens.css`; Tailwind numeric classes, p-2 = 8px). Default 8px inside a component, 16px between components. No off-scale steps (`p-2.5`, `gap-7`, `p-[13px]`). Borders 1px; 2px only for focus/active/selected.
-  **Approved exceptions** (her call, 2026-10-08), tuned for optical balance: Button padding `px-2.5`/`px-3.5` and their `pl`/`pr` (10/14px); menu row check inset `pr-7` and icon-less inset `pl-7` (28px = 8 + 14 icon + 6 gap); Badge heights `h-5.5`/`h-6.5` (22/26px); Field `mt-px` checkbox nudge. Don't add new ones without asking.
+  **Approved exceptions** (decided 2026-10-08), tuned for optical balance: Button padding `px-2.5`/`px-3.5` and their `pl`/`pr` (10/14px); menu row check inset `pr-7` and icon-less inset `pl-7` (28px = 8 + 14 icon + 6 gap); Badge heights `h-5.5`/`h-6.5` (22/26px); Field `mt-px` checkbox nudge. Don't add new ones without asking.
 - **Focus** is always the Gold ring (`--ring`) with an offset. Never remove focus without replacing it.
-- **Sizes:** body text 14px or more. Touch targets on mobile are at least 40px; controls top out at `lg` 40px (her call, 2026-10-08: no 44px size).
+- **Sizes:** body text 14px or more. Touch targets on mobile are at least 40px; controls top out at `lg` 40px (decided 2026-10-08: no 44px size).
 - **One component per concept.** Add components with `pnpm dlx shadcn@latest add <name>`, then restyle with tokens. Never create a second Button.
 - **Light mode only** until dark tokens are designed. Don't add `dark:` variants yet.
 - Wordmark is "Matrix OS", never "MatrixOS".

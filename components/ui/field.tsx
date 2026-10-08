@@ -66,7 +66,7 @@ function FieldGroup({ className, ...props }: React.ComponentProps<'div'>) {
 const fieldVariants = cva(['group/field flex w-full gap-2', SOFTEN_WHEN_DISABLED], {
   variants: {
     orientation: {
-      // Label sits 2px above its control (her call, 2026-10-08); help text and errors stay 8px below it.
+      // Label sits 2px above its control (decided 2026-10-08); help text and errors stay 8px below it.
       vertical: [
         'flex-col gap-0.5 [&>*]:w-full [&>.sr-only]:w-auto',
         '[&>[data-slot=field-description]]:mt-1.5 [&>[data-slot=field-error]]:mt-1.5',

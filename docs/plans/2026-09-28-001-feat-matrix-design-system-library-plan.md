@@ -58,7 +58,7 @@ The layout and page anatomy:
 ## Scope Boundaries
 
 - **Landing page:** removed for now; `/` redirects to `/library`.
-- **Site shell (done 2026-09-28, user request):** custom layout ahead of schedule. Floating pill nav (logo · Library · Guides · GitHub), plain sidebar, neutral white/gray site chrome (`styles/site.css`) so Matrix components stand out. Content paths are now `content/docs/library/**` and `content/docs/guides/**`; the paths in this plan that say `content/docs/foundations|components|guides` mean these.
+- **Site shell (done 2026-09-28):** custom layout ahead of schedule. Floating pill nav (logo · Library · Guides · GitHub), plain sidebar, neutral white/gray site chrome (`styles/site.css`) so Matrix components stand out. Content paths are now `content/docs/library/**` and `content/docs/guides/**`; the paths in this plan that say `content/docs/foundations|components|guides` mean these.
 - **Dark mode:** out of scope (user decision, 2026-09-28). Components use semantic tokens only and no `dark:` variants, so a dark palette can be added later without rewriting components.
 - **Website architecture** (Library/Guides split, card-grid library index, floating nav): not now. Only a minimal version arrives with the landing page in Phase E.
 - **Matrix theme presets** (winxp, nord, dracula…): out of scope. Tokens are structured so a theme only remaps semantic tokens.
@@ -342,7 +342,7 @@ for each component:
   - status colors (always with icon/label)
   - contrast pairs (measured)
   - "Coral is attention, not text"
-- Present the border options side by side with contrast ratios, including the value the product ships today (`#DCD9CC` from `@matrix-os/brand`), so the owner/founders can pick knowing the migration cost.
+- Present the border options side by side with contrast ratios, including the value the product ships today (`#DCD9CC` from `@matrix-os/brand`), so the founders can pick knowing the migration cost.
 - Add PROVISIONAL **on-color pairs for each status** (`--success-foreground`, and a subtle surface + text pair such as warning text = gold-700 on gold-50). The current status fills fail 4.5:1 against paper (warning 2.57, info 3.89, success 4.19).
 - Add **semantic tokens for Matrix-specific colors**: `--status-ready/pending/failed/syncing` and `--window-close/minimize/maximize`. Tier 5 components use only these, so themes can remap them.
 
@@ -397,7 +397,7 @@ for each component:
 
 **Test expectation:** none beyond the contrast additions (content and tokens).
 
-**Verification:** All foundation pages are complete. The owner signs off on Foundations before any component is built.
+**Verification:** All foundation pages are complete. The design lead signs off on Foundations before any component is built.
 
 ### Phase C — Components (basics first)
 
@@ -438,7 +438,7 @@ Every unit in this phase follows the per-component recipe (see High-Level Techni
 - Error path: `disabled` prevents click handlers and removes the element from the focus order (native disabled).
 - Happy path: the rendered class list contains no `outline-none` or `focus-visible:ring-*`, so the global focus style applies. The visible Gold focus is confirmed by screenshot at the review stop.
 
-**Verification:** Gates pass. The docs page matches the anatomy, and the owner approves it as the template for all components.
+**Verification:** Gates pass. The docs page matches the anatomy, and the design lead approves it as the template for all components.
 
 - [ ] **Unit 8: Tier 1 — Core display** 🛑
 
@@ -628,7 +628,7 @@ Every unit in this phase follows the per-component recipe (see High-Level Techni
 **Approach:**
 - Motion is built on the brand boot gradient (`bootGradientColors` in the Matrix brand package) and the dotted rabbit.
 - It respects reduced motion.
-- No new colors. The boot gradient stops (`#647141`, `#F1C377`, `#EAB6A7`, `#C6D8E3`, `#6D777D`) are off-scale. Either copy them into `tokens.css` as named brand tokens (like `--brand-sage`) or map them to the nearest scale steps. The owner decides at the review stop.
+- No new colors. The boot gradient stops (`#647141`, `#F1C377`, `#EAB6A7`, `#C6D8E3`, `#6D777D`) are off-scale. Either copy them into `tokens.css` as named brand tokens (like `--brand-sage`) or map them to the nearest scale steps. The design lead decides at the review stop.
 - Proposed structure (owner reviews): an animated rabbit mark + wordmark hero, a one-line pitch, two entry cards (Library · Guides) and a minimal footer.
 - Decide at this point whether to add a card-grid Library index.
 
