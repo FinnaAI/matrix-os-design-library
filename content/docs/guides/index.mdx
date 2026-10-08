@@ -1,16 +1,28 @@
 ---
 title: Guides
-description: How to build Matrix OS with the library. Rules, patterns and checklists for people and for the AI agents that write code with them.
+description: How the library's parts work together. Each guide settles one kind of decision, for the people and the AI agents building Matrix OS.
 ---
 
-The [Library](/library) explains each token and component on its own. These guides explain how they work together.
+Component pages explain one component. Guides settle the decisions between them. Every guide follows the same order: what it decides, when it applies, the rules, the words, accessibility, and what it leaves to another guide.
 
-| Guide | Read it when |
-|---|---|
-| [Build with AI agents](/guides/ai-agents) | You use Claude Code, Cursor or another agent to write Matrix UI. Start here. |
-| [Choosing a component](/guides/choosing-components) | You know what people need to do, not which component does it. |
-| [Color usage](/guides/color-usage) | You're picking a color for text, a surface, a status or a hover. |
-| [Actions](/guides/actions) | You're placing buttons, links, menus or a delete action. |
-| [Forms](/guides/forms) | You're building anything people type into, pick from or switch on. |
+## Build
 
-Agents can read every page as plain text: [`/llms.txt`](/llms.txt) lists them, [`/llms-full.txt`](/llms-full.txt) has them all in one file.
+<GuideList>
+  <GuideLink title="Build with AI agents" href="/guides/ai-agents">The rules block for your repo, the order an agent works in, and the checklist before every pull request.</GuideLink>
+  <GuideLink title="Choosing a component" href="/guides/choosing-components">Start from what people need to do; one component per job.</GuideLink>
+</GuideList>
+
+## Decide
+
+<GuideList>
+  <GuideLink title="Color usage" href="/guides/color-usage">What each color means, which token does which job, and why coral is only for danger.</GuideLink>
+  <GuideLink title="Actions" href="/guides/actions">One primary per view, emphasis by variant, and when an action turns coral.</GuideLink>
+</GuideList>
+
+## Ask users for
+
+<GuideList>
+  <GuideLink title="Forms" href="/guides/forms">Which control, where the label goes, when to validate and how errors read.</GuideLink>
+</GuideList>
+
+Agents read every page as plain text: [`/llms.txt`](/llms.txt) lists them, [`/llms-full.txt`](/llms-full.txt) has them all in one file.

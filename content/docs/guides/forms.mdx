@@ -1,9 +1,20 @@
 ---
 title: Forms
-description: How to build forms people get right the first time. Every control sits in a Field with a visible label; errors name the problem and the fix; spacing is built in.
+description: How to build forms people get right the first time. Every control sits in a Field with a visible label, errors name the fix, and the spacing is built in.
 ---
 
-## The basic shape
+This guide decides which control asks for a value, how it's labelled, and when and how errors appear. It applies to anything people type into, pick from or switch on. The parts are on [Field](/library/components/field) and [Input](/library/components/input).
+
+## Ask one question: does the change wait for Save?
+
+| Answer | Use | Why |
+|---|---|---|
+| Yes, it's saved with the form | Input, Textarea, Select, RadioGroup, Checkbox | People review, then commit |
+| No, it applies the moment it changes | Switch, on its own or in a settings list | No Save button to wait for |
+
+A Switch never sits in a form with a Save button, and a form field never saves on its own without saying so.
+
+## Every control sits in a Field
 
 ```tsx
 import { Field, FieldDescription, FieldError, FieldGroup, FieldLabel } from '@/components/ui/field';
@@ -32,47 +43,63 @@ import { Button } from '@/components/ui/button';
 
 Field puts the label 2px above the control and help or error text 8px below. FieldGroup spaces fields 16px apart, FieldSet sections 24px apart. Don't add your own margins.
 
-## Pick the control
+## The control follows the number of options
 
 | People… | Use |
 |---|---|
-| Type one line | `Input` (set the right `type`: `email`, `url`, `tel`, `number`, `search`) |
+| Type one line | `Input` with the right `type`: `email`, `url`, `tel`, `number`, `search` |
 | Type several lines | `Textarea` |
-| Pick one of 2–5 options, visible | `RadioGroup` |
+| Pick one of 2–5, all visible | `RadioGroup` |
 | Pick one of about 5–15 | `Select` |
 | Agree, or pick several | `Checkbox` |
-| Turn something on **immediately**, no Save | `Switch` (never inside a form with a Save button) |
 
-Checkboxes and switches sit beside their label: use `<Field orientation="horizontal">` with a `FieldContent` for the label and help text.
+Checkboxes and switches sit beside their label: `<Field orientation="horizontal">` with a `FieldContent` for the label and help text.
 
-## Labels and help
+## Labels stay visible; placeholders are examples
 
 <Guidelines>
   <Guideline>Every control has a visible label in sentence case, linked with `htmlFor` and `id`.</Guideline>
   <Guideline>Help text says what people need before they type: the format, or why it's asked.</Guideline>
   <Guideline>If most fields are required, mark the optional ones ("Note (optional)"). If most are optional, mark the required ones with `<FieldLabel required>`.</Guideline>
-  <Guideline dont>Don't use the placeholder as the label; it disappears when people type. Placeholders show an example value, if anything.</Guideline>
+  <Guideline dont>Don't use the placeholder as the label; it disappears as people type.</Guideline>
 </Guidelines>
 
-## Errors
+## Validate when people leave a field, not while they type
 
-1. Validate when a field loses focus or on submit, not on every keystroke.
-2. Mark the control `aria-invalid="true"` and link the message with `aria-describedby`.
-3. Write the message as the fix: "Enter a full email address, like name@example.com", not "Invalid input".
-4. On submit, move focus to the first field with an error.
-5. Keep the error until the value is fixed; then remove it right away.
+1. Check a field when it loses focus, and all fields on submit. Never on every keystroke.
+2. On submit, move focus to the first field with an error.
+3. Keep the error until the value is fixed, then remove it right away.
 
-Errors are coral text and a coral border; never color alone, always the message.
+## Errors name the fix
+
+Write the message as what to do: "Enter a full email address, like name@example.com", not "Invalid input". One error per field, below it, in coral with a coral border. Never color alone: the message is always there.
 
 ## Disabled, read-only and saving
 
-- **Disabled:** just set `disabled` on the control; Field softens its label and help text. Say why nearby if it isn't obvious.
+- **Disabled:** set `disabled` on the control; Field softens its label and help. Say why nearby if it isn't obvious.
 - **Read-only:** `readOnly` on Input keeps the value focusable and copyable.
-- **Saving:** `<Button type="submit" loading>` while the form submits; keep the fields as they are.
+- **Saving:** `<Button type="submit" loading>` while the form submits; leave the fields as they are.
 
-## Layout
+## One column, sized to the content
 
-- One column by default. Put two short related fields side by side with `<FieldGroup className="grid sm:grid-cols-2">`.
-- Match the field width to its content: a code field is narrow, a description is full width.
-- Use `md` controls in forms; `lg` (40px) for single focused tasks like onboarding and on mobile.
-- Primary action last, on the right; see [Actions](/guides/actions).
+- One column by default. Two short related fields side by side: `<FieldGroup className="grid sm:grid-cols-2">`.
+- Match the width to the content: a code field is narrow, a description full width.
+- `md` controls in forms; `lg` (40px) for single focused tasks like onboarding and on mobile.
+- The primary action goes last, on the right ([Actions](/guides/actions)).
+
+## Accessibility
+
+Mark errors with `aria-invalid="true"` and link the message with `aria-describedby`; FieldError announces it to screen readers. Labels linked with `htmlFor` also make the text clickable, which doubles the target for checkboxes and radios.
+
+## Not covered here
+
+Which component to pick for a value is [Choosing a component](/guides/choosing-components). Error colors are [Color usage](/guides/color-usage). Confirmations and toasts after saving will be in a Feedback guide.
+
+## Checklist
+
+<Guidelines>
+  <Guideline>Every control is in a Field with a linked, visible label.</Guideline>
+  <Guideline>Errors use `aria-invalid` + `FieldError` and say how to fix the value.</Guideline>
+  <Guideline>No Switch inside a form with a Save button.</Guideline>
+  <Guideline dont>No placeholder-only labels and no hand-added margins between fields.</Guideline>
+</Guidelines>

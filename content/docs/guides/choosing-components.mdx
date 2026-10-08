@@ -3,43 +3,61 @@ title: Choosing a component
 description: Start from what people need to do, then pick the component. One component per job, so the same task looks and works the same everywhere in Matrix OS.
 ---
 
-Find the job in the left column. If two rows seem to fit, the **Not this** column says why one wins.
+This guide decides which component does a job. It applies whenever you, or an agent, are about to reach for a component, before writing any code.
 
-## Act
+## Ask one question: does it act, hold a value, or show?
+
+| People are… | It's a… | Start in |
+|---|---|---|
+| Making something happen | Action | [Act](#act-buttons-run-things-menus-group-them) |
+| Giving the product a value it keeps | Input | [Enter and choose](#values-live-in-fields-actions-never-do) |
+| Reading a state, a label or a person | Display | [Show](#show-states-with-words-not-just-color) |
+
+Most mistakes come from crossing these: a menu that holds a value, a switch inside a form, a badge you can click.
+
+## Act: buttons run things, menus group them
 
 | People need to… | Use | Not this |
 |---|---|---|
-| Do the main thing on the screen | [Button](/library/components/button) `primary` (one per view) | A second primary; two primaries means neither is |
-| Do a secondary thing next to it | Button `secondary` | `ghost` for a visible secondary action, it's too quiet |
-| Act in a toolbar, row or card | Button `ghost`, often `square` with an icon | `secondary` repeated on every row, it gets noisy |
-| Delete or remove something | Button `destructive` (or `ghost-destructive` / `link-destructive` in rows) | Coral on anything else |
+| Do the main thing on the screen | [Button](/library/components/button) `primary`, one per view | A second primary; two primaries means neither is |
+| Do a secondary thing next to it | Button `secondary` | `ghost` for a visible alternative, it's too quiet |
+| Act in a toolbar, row or card | Button `ghost`, often `square` with an icon | `secondary` repeated on every row |
+| Delete or remove something | Button `destructive` (`ghost-destructive` / `link-destructive` in rows) | Coral on anything else |
 | Go to another page | A link (`<a>`, or Button `link` with `asChild`) | A button that navigates |
-| Pick from several actions | [Dropdown menu](/library/components/dropdown-menu) from a ⋯ icon button | A row of 4+ buttons |
-| Understand an icon-only button | [Tooltip](/library/components/tooltip) with the same words as its `aria-label` | Putting needed information only in a tooltip |
+| Pick from several actions | [Dropdown menu](/library/components/dropdown-menu) from a ⋯ icon button | A row of four or more buttons |
+| Understand an icon-only button | [Tooltip](/library/components/tooltip) with the `aria-label`'s words | Needed information only in a tooltip |
 
-## Enter and choose
+## Values live in fields, actions never do
 
 | People need to… | Use | Not this |
 |---|---|---|
 | Type one line | [Input](/library/components/input) in a [Field](/library/components/field) | A bare input with only a placeholder |
 | Type several lines | Textarea in a Field | Input |
-| Type with an icon, prefix, unit or button inside | [InputGroup](/library/components/input#inputgroup) | Absolute-positioned icons on an Input |
+| Type with an icon, prefix, unit or button inside | [InputGroup](/library/components/input#inputgroup) | Icons positioned over an Input |
 | Search | InputGroup with a search icon, `type="search"` | A Select |
-| Pick one of 2–5 visible options | [Radio group](/library/components/radio-group) | A Select hiding three options |
+| Pick one of 2–5 options, all visible | [Radio group](/library/components/radio-group) | A Select hiding three options |
 | Pick one of about 5–15 known options | [Select](/library/components/select) | Dropdown menu (that's for actions) |
 | Pick one of many, or by typing | Combobox (coming) | A Select with 100 rows |
-| Agree to something or pick several | [Checkbox](/library/components/checkbox) | Switch |
+| Agree to something, or pick several | [Checkbox](/library/components/checkbox) | Switch |
 | Turn a setting on now, no Save | [Switch](/library/components/switch) | Checkbox |
 
-## Show
+## Show states with words, not just color
 
 | People need to… | Use | Not this |
 |---|---|---|
-| See a status or category | [Badge](/library/components/badge) (`success`, `warning`, `destructive`, `info`; `brand`, `neutral`) | Colored text, or a badge you can click |
+| See a status or category | [Badge](/library/components/badge): `success`, `warning`, `destructive`, `info`; `brand`, `neutral` | Colored text alone, or a clickable badge |
 | See who a person is | [Avatar](/library/components/avatar) with a `name` | Avatar for an agent (agents use the mascot) |
-| Group content | A card: `rounded-xl bg-card p-4` (Card component coming) | Borders around every block |
+| Group content | A card: `rounded-xl bg-card p-4` (Card component coming) | A border around every block |
 | Separate groups | Separator, or `FieldSeparator` in forms | Extra margin plus a line |
 
-## Coming next
+## Missing components borrow from shadcn, restyled
 
-Dialog, Popover, Tabs, Table, Toast, Combobox and Card aren't in the library yet. Until they are, use the shadcn version restyled with Matrix tokens (overlays: `rounded-lg bg-popover shadow-lg`, dialogs `shadow-xl`), and note it in the pull request so it moves to the library later.
+Dialog, Popover, Tabs, Table, Toast, Combobox and Card aren't in the library yet. Until they are, use the shadcn version restyled with Matrix tokens (overlays `rounded-lg bg-popover shadow-lg`, dialogs `shadow-xl`) and note it in the pull request.
+
+## Accessibility comes with the right choice
+
+Picking the right component is most of the accessibility work: a Select is announced as a list of options, a Switch as on/off, a Radio group lets arrows move between options. Rebuilding one from `div`s loses all of that.
+
+## Not covered here
+
+How to style what you picked is [Color usage](/guides/color-usage); where actions go is [Actions](/guides/actions); how fields behave together is [Forms](/guides/forms).

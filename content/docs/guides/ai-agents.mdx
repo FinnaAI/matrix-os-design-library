@@ -1,24 +1,22 @@
 ---
 title: Build with AI agents
-description: How to set up Claude Code, Cursor or any coding agent so the UI it writes follows the Matrix design system. A rules block to paste, the workflow, and the checklist to run before every pull request.
+description: How to set up Claude Code, Cursor or any coding agent so the UI it writes follows the Matrix design system. A rules block to paste, the order to work in, and the checklist before every pull request.
 ---
 
-Agents write good Matrix UI when they know three things: where the system is, which rules are non-negotiable, and how to check their own work. This page gives them all three.
+Agents write good Matrix UI when they know three things: where the system is, which rules never bend, and how to check their own work. This guide decides all three. It applies to any repo that builds Matrix OS screens.
 
-## 1. Point the agent at the system
-
-The whole design system is published as plain text for agents:
+## Agents read the system as plain text
 
 | URL | What's in it |
 |---|---|
-| [`/llms.txt`](/llms.txt) | An index of every page with a one-line summary. Read this first. |
-| [`/llms-full.txt`](/llms-full.txt) | Every page in full: setup, tokens, every component's code, API and guidelines, and these guides. |
+| [`/llms.txt`](/llms.txt) | Every page with a one-line summary. The agent reads this first, then only the pages it needs. |
+| [`/llms-full.txt`](/llms-full.txt) | Every page in full: setup, tokens, each component's code, API and guidelines, and these guides. |
 
-Both live at `https://matrix-design-system.vercel.app`. They update on every change, so the agent always reads the current system.
+Both live at `https://matrix-design-system.vercel.app` and update with every change, so the agent never works from an old copy.
 
-## 2. Paste this into the product repo
+## Every repo carries the rules block
 
-Add this block to the product repo's `CLAUDE.md` (Claude Code) or `AGENTS.md` / `.cursor/rules` (Cursor and others). It's the short version of the rules; the agent fetches the details when it needs them.
+Paste this into the product repo's `CLAUDE.md` (Claude Code) or `AGENTS.md` / `.cursor/rules` (Cursor and others). It's the short version; the agent fetches details when it needs them.
 
 ```md
 ## Matrix OS design system
@@ -33,6 +31,7 @@ Rules:
   Switch, DropdownMenu, Tooltip, Badge, Avatar). Never build a second version; extend with props.
 - Tokens only: semantic Tailwind classes (bg-primary, text-muted-foreground, border-border).
   No hex, rgb, arbitrary values (w-[13px]) or Tailwind's default palette (bg-gray-100, text-red-500).
+- Never invent a token or class name. If one is missing, say so instead of making one up.
 - Color: neutral for actions (bg-primary). Coral (destructive) only for delete, remove and errors.
   Hover/selected surfaces are neutral (bg-accent). Gold is the focus ring and highlights. Green is brand.
 - Type: text-ui (14px) by default; text-ui-lg, text-ui-sm, text-ui-xs, text-heading. Geist only;
@@ -46,32 +45,41 @@ Rules:
 - Icon-only buttons need an aria-label and a Tooltip with the same words.
 - Never remove the focus ring. Light mode only: no dark: classes.
 - Merge classes with cn() from lib/utils (it knows the Matrix class names).
+- When rules conflict: accessibility first, then these rules, then the guide, then the component page.
 ```
 
-## 3. The workflow
+## The agent picks, then reads, then composes
 
-Ask the agent to work in this order. It keeps the output on-system and easy to review.
+1. **Name the job.** What does the person on this screen need to do? Pick components from [Choosing a component](/guides/choosing-components), not from other design systems it remembers.
+2. **Read the component pages** it will use: API table, guidelines, copy-paste examples. Start from the example code.
+3. **Compose with tokens.** Layout with `flex`/`grid` and scale spacing; colors from [Color usage](/guides/color-usage), actions from [Actions](/guides/actions), forms from [Forms](/guides/forms).
+4. **Write the states.** Hover and focus are built in. Empty, loading, error and disabled are not, and a disabled control needs a reason.
+5. **Run the checklist** below and fix what fails before opening the pull request.
 
-1. **Name the job.** What does the person on this screen need to do? Pick components from [Choosing a component](/guides/choosing-components), not from memory of other design systems.
-2. **Read the component pages** it will use: the API table, the guidelines and the copy-paste examples. Start from the example code instead of writing from scratch.
-3. **Compose with tokens.** Layout with `flex`/`grid` and scale spacing; colors from [Color usage](/guides/color-usage); actions from [Actions](/guides/actions); forms from [Forms](/guides/forms).
-4. **Write the states.** Hover and focus come built in. The agent still has to handle empty, loading, error and disabled (and say *why* something is disabled).
-5. **Run the checklist below** and fix anything that fails before opening the pull request.
+## Missing pieces get flagged, not invented
 
-When something the screen needs isn't in the library yet (a dialog, a table, a tabs bar), the agent should say so in the pull request and use the closest shadcn component restyled with tokens, not invent a one-off look.
+When a screen needs something the library doesn't have yet (a dialog, a table, tabs), the agent uses the closest shadcn component restyled with Matrix tokens and says so in the pull request. Overlays are `rounded-lg bg-popover shadow-lg`, dialogs `shadow-xl`. That way the piece moves into the library later instead of living on as a one-off.
 
-## 4. Checklist before a pull request
+## Correct early, review twice
+
+For the person running the agent:
+
+- **Spend corrections early.** Fix the choice of components before the agent writes the screen, not after.
+- **Don't be the first reviewer.** Ask the agent to run the checklist and list what it changed before you look.
+- **Ask for evidence.** "Show me the focus order" or "list every color class you used" beats "looks good?".
+
+## Checklist before a pull request
 
 <Guidelines>
-  <Guideline>Every color, size, radius, shadow and space is a token class. Search the diff for `#`, `rgb(`, `[` and Tailwind palette names (`gray-`, `red-`, `blue-`); there should be none.</Guideline>
+  <Guideline>Every color, size, radius, shadow and space is a token class. Search the diff for `#`, `rgb(`, `[` and palette names (`gray-`, `red-`, `blue-`); there should be none.</Guideline>
   <Guideline>Coral appears only on delete/remove actions and error messages.</Guideline>
-  <Guideline>There is at most one primary button per view.</Guideline>
+  <Guideline>At most one primary button per view.</Guideline>
   <Guideline>Every input, select, checkbox, radio and switch has a visible, linked label (`htmlFor` + `id`).</Guideline>
   <Guideline>Every icon-only button has an `aria-label` and a tooltip.</Guideline>
   <Guideline>Tabbing through the screen shows the gold focus ring on every interactive element, in a logical order.</Guideline>
   <Guideline>Text is 14px (`text-ui`) or larger, except captions and badges.</Guideline>
-  <Guideline>Empty, loading and error states exist and use the same components.</Guideline>
-  <Guideline dont>No new component that duplicates one in `components/ui`, and no edited copy of one inside a feature folder.</Guideline>
+  <Guideline>Empty, loading and error states exist and use library components.</Guideline>
+  <Guideline dont>No new component that duplicates one in `components/ui`, and no edited copy of one in a feature folder.</Guideline>
 </Guidelines>
 
 ## Common mistakes
@@ -89,3 +97,7 @@ When something the screen needs isn't in the library yet (a dialog, a table, a t
 | `<Switch>` in a form with a Save button | `<Checkbox>` | A switch applies immediately. |
 | `<Icon size={18} strokeWidth={1.5}>` | `<Icon icon={X} size="sm" />` | Five sizes, stroke set automatically. |
 | `dark:bg-…` | nothing | Light mode only until dark tokens exist. |
+
+## Not covered here
+
+Which component to use is [Choosing a component](/guides/choosing-components). How to install the system in an app is [Start here](/library).

@@ -1,22 +1,26 @@
 ---
 title: Color usage
-description: Matrix has five brand colors and each one means one thing. Neutral does the work, coral warns, teal confirms, gold highlights and green is the brand. Use semantic tokens, never raw steps.
+description: Each Matrix color means one thing. Neutral does the work, coral warns of danger, teal confirms, gold highlights and green is the brand. Pick by meaning, with semantic tokens.
 ---
 
-## What each color means
+This guide decides which color a thing gets and which token carries it. It applies to every text, surface, border and status in the product. Swatches, scales and contrast ratios are on [Colors](/library/foundations/colors).
 
-| Color | Means | Tokens | Never use it for |
-|---|---|---|---|
-| **Neutral** | Structure, text and actions | `primary`, `foreground`, `muted-foreground`, `border`, `accent`, `card`, `background` | — |
-| **Coral** | Danger: delete, remove, errors | `destructive`, `destructive-text`, `tint-destructive-*` | Hover, selection, highlights, decoration |
-| **Teal** | Success, done, connected | `success`, `success-text`, `tint-success-*` | Actions |
-| **Gold** | Attention and focus | `ring`, `attention`, `warning`, `tint-warning-*` | Large fills |
-| **Green** | The Matrix brand | `brand`, `tint-brand-*`; also `primary-hover`, `link-hover` | Status ("success" is teal) |
-| **Blue** | Information only | `info`, `info-text`, `tint-info-*` | Links or actions |
+## Ask one question: what does this color have to say?
 
-Links are neutral and underlined, not blue. Actions are neutral, not green or coral.
+| If it says… | Use | Tokens |
+|---|---|---|
+| Nothing; it's structure, text or an action | **Neutral** | `primary`, `foreground`, `muted-foreground`, `border`, `accent`, `card`, `background` |
+| "This will destroy something" or "this went wrong" | **Coral** | `destructive`, `destructive-text`, `tint-destructive-*` |
+| "Done", "connected", "it worked" | **Teal** | `success`, `success-text`, `tint-success-*` |
+| "Look here", "careful" | **Gold** | `ring`, `attention`, `warning`, `tint-warning-*` |
+| "This is Matrix" | **Green** | `brand`, `tint-brand-*` (and the hover of primary and links) |
+| "For your information" | **Blue** | `info`, `info-text`, `tint-info-*` |
 
-## Pick the token by job
+If the answer is "nothing", it's neutral. Most of every screen should be.
+
+## Neutral does the work
+
+Actions, text, borders, hover and selection are all neutral. Links are neutral and underlined, not blue. The main button is the dark neutral `bg-primary` and turns brand green on hover.
 
 | Job | Class |
 |---|---|
@@ -28,22 +32,32 @@ Links are neutral and underlined, not blue. Actions are neutral, not green or co
 | Body text | `text-foreground` |
 | Secondary text, help, placeholders | `text-muted-foreground` |
 | Borders and dividers | `border-border` (inputs: `border-input`, the same color) |
-| Main action | `bg-primary text-primary-foreground` (use Button) |
-| Error text | `text-destructive-text` |
-| Status text on the page | `text-success-text`, `text-warning-text`, `text-info-text` |
-| A status chip or banner | `bg-tint-{name}-fill border-tint-{name}-border text-tint-{name}-text` (use Badge) |
 
-## Rules
+## Coral means danger, only
+
+Coral is for delete, remove and errors. Nothing else: not hover, not selection, not "new", not decoration. Every extra use teaches people to ignore it, and then the one real warning gets missed.
+
+## Status text uses the darker `-text` step
+
+The plain status fills are too light to read as text. For words, use `text-destructive-text`, `text-success-text`, `text-warning-text` or `text-info-text`. For a chip or banner, use a tint set (`bg-tint-success-fill border-tint-success-border text-tint-success-text`), or better, a [Badge](/library/components/badge).
+
+## Semantic tokens, never raw steps
+
+`bg-primary`, not `bg-neutral-800`; `text-destructive-text`, not `text-coral-600`. Raw steps are for illustrations and these docs. Tailwind's default palette (`gray-*`, `red-*`, `blue-*`) is not Matrix's and never appears in product code, and neither do hex or rgb values. If a shade is missing, ask for a token instead of mixing one.
+
+## Accessibility: never color alone
+
+Every status color comes with a word or an icon, so it reads for people who can't tell the colors apart. Text pairs in the system already pass contrast (4.5:1 or better); a hand-picked color may not.
+
+## Not covered here
+
+Which button variant to use is [Actions](/guides/actions). How an error looks in a form is [Forms](/guides/forms). Dark mode isn't designed yet: don't add `dark:` classes.
+
+## Checklist
 
 <Guidelines>
-  <Guideline>Use semantic tokens (`bg-primary`, `text-muted-foreground`). Raw steps (`bg-teal-600`) are for illustrations and docs only.</Guideline>
-  <Guideline>For text in a status color, use the `-text` token: the plain fills fail contrast as text.</Guideline>
-  <Guideline>Always pair a status color with a word or an icon. Color alone doesn't reach everyone.</Guideline>
-  <Guideline>Keep screens mostly neutral, so the few colored things (an error, a success, the brand) stand out.</Guideline>
-  <Guideline dont>Don't use coral for anything but danger. A coral hover or a coral "New" badge teaches people to ignore it.</Guideline>
-  <Guideline dont>Don't use Tailwind's default palette (`gray-*`, `red-*`, `blue-*`); its colors aren't Matrix's.</Guideline>
-  <Guideline dont>Don't write hex or rgb values. If a shade is missing, ask for a token instead of mixing one.</Guideline>
-  <Guideline dont>Don't add `dark:` classes; dark mode isn't designed yet.</Guideline>
+  <Guideline>Every color is a semantic token class.</Guideline>
+  <Guideline>Coral appears only on destructive actions and errors.</Guideline>
+  <Guideline>Every status color has a word or an icon next to it.</Guideline>
+  <Guideline dont>No `gray-*`, `red-*`, `blue-*`, hex or rgb in the diff.</Guideline>
 </Guidelines>
-
-See every swatch, token name and contrast ratio on [Colors](/library/foundations/colors).

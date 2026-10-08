@@ -1,19 +1,24 @@
 ---
 title: Actions
-description: How to place buttons, links and menus so every screen has one clear next step. Hierarchy by emphasis, neutral for actions, coral only when something will be destroyed.
+description: How buttons, links and menus are placed so every screen has one clear next step. Emphasis by variant, neutral for actions, coral only when something will be destroyed.
 ---
 
-## One clear next step
+This guide decides which variant an action gets, where it goes, and when it turns coral. It applies to every button, link and menu row. The component itself is on [Button](/library/components/button).
 
-Each view has **at most one** `primary` button: the thing most people came to do. Everything else steps down.
+## Ask one question: does this destroy something?
 
-| Emphasis | Variant | Use for |
+| Answer | Variant | Why |
 |---|---|---|
-| Highest | `primary` | The main action: "Create agent", "Save changes" |
-| Medium | `secondary` | Alternatives next to it: "Cancel", "Preview" |
-| Low | `ghost` | Toolbars, rows, cards, icon buttons |
-| Inline | `link` | Actions inside a sentence, or that navigate |
-| Danger | `destructive`, `ghost-destructive`, `link-destructive` | Delete, remove, disconnect |
+| Yes, and it's the main action (a confirm dialog) | `destructive` | The one place a coral fill is right |
+| Yes, in a row, card or menu | `ghost-destructive`, `link-destructive`, or a destructive menu row | Coral, but quiet until it's needed |
+| No, it's what people came to do | `primary` | The next step |
+| No, it's an alternative to that | `secondary` | Visible, but steps back |
+| No, it's in a toolbar, row or card | `ghost` | Present without competing |
+| No, it sits in a sentence or goes somewhere | `link` | Reads as part of the text |
+
+## One primary per view
+
+Each view has at most one `primary` button. If two actions compete, neither is primary: make one `secondary`, or ask which one most people came for.
 
 ```tsx
 <div className="flex justify-end gap-2">
@@ -22,21 +27,23 @@ Each view has **at most one** `primary` button: the thing most people came to do
 </div>
 ```
 
-Put the primary action last (on the right) in dialogs, forms and footers; secondary actions to its left, 8px apart (`gap-2`).
+## The primary goes last
 
-## Labels
+In dialogs, forms and footers the primary action sits on the right, alternatives to its left, 8px apart (`gap-2`). People read to the end and find the next step there.
+
+## Labels say what happens
 
 <Guidelines>
-  <Guideline>Verb + noun, in sentence case: "Connect provider", "Rename agent". Not "Submit", "OK" or "Click here".</Guideline>
-  <Guideline>Say what will happen: "Create agent" tells people the result; "Continue" doesn't.</Guideline>
-  <Guideline dont>Don't use all caps, and don't end with a full stop.</Guideline>
+  <Guideline>Verb + noun, in sentence case: "Connect provider", "Rename agent".</Guideline>
+  <Guideline>Name the result: "Create agent" tells people what they'll get; "Continue" doesn't.</Guideline>
+  <Guideline dont>Not "Submit", "OK" or "Click here"; no all caps, no full stop.</Guideline>
 </Guidelines>
 
-## Sizes
+## Sizes match the fields beside them
 
-Controls are `sm` 32px, `md` 36px (default) and `lg` 40px. `lg` is the largest, also on mobile, where touch targets are at least 40px. Use `xs` (28px) only in dense chrome like toolbars. Inputs and selects share these sizes, so a button sits level with the field next to it.
+`sm` 32px, `md` 36px (default), `lg` 40px. `lg` is the largest, also on mobile, where touch targets are at least 40px. `xs` (28px) is for dense chrome like toolbars. Inputs and selects share these sizes, so a button sits level with the field next to it.
 
-## Icon buttons
+## Icon buttons always say what they do
 
 ```tsx
 <Tooltip>
@@ -47,31 +54,41 @@ Controls are `sm` 32px, `md` 36px (default) and `lg` 40px. `lg` is the largest, 
 </Tooltip>
 ```
 
-An icon-only button always has an `aria-label` and a tooltip with the same words. Icons go straight inside Button; it sizes them.
+An icon-only button has an `aria-label` and a tooltip with the same words. Icons go straight inside Button; it sizes them.
 
-## Several actions
+## Three actions show, more go in a menu
 
-- **Up to three** related actions: show them as buttons.
-- **More than three**, or actions on each row or card: a `ghost` `square` ⋯ button that opens a [Dropdown menu](/library/components/dropdown-menu) with `align="end"`.
-- In a menu, write rows as verb + noun, most used first, and put destructive rows last after a separator.
+- Up to three related actions: buttons.
+- More than three, or actions on each row or card: a `ghost` `square` ⋯ button opening a [Dropdown menu](/library/components/dropdown-menu) with `align="end"`.
+- Menu rows are verb + noun, most used first, destructive rows last after a separator.
 
-## Destructive actions
-
-Coral means something will be destroyed or removed. It's the only place coral appears on an action.
+## Permanent deletes are confirmed by name
 
 | Situation | Do |
 |---|---|
-| Delete one thing, easy to undo | `ghost-destructive` or a destructive menu row, then an undo toast |
-| Delete something permanent or large | Confirm in a dialog that names it: "Delete *Research agent*?" with a `destructive` button "Delete agent" |
+| Delete one thing, easy to undo | Delete right away, then offer undo |
+| Delete something permanent or large | A dialog that names it: "Delete *Research agent*?", the consequence, and a `destructive` "Delete agent" button |
 | Remove inline, e.g. disconnect | `link-destructive` |
 
+Focus Cancel when a confirm dialog opens, never the destructive button.
+
+## Loading beats disabled
+
+`<Button loading>` keeps the width, shows a spinner and blocks clicks while an action runs. Disable a button only when the action truly can't happen yet, and say why: helper text, or a tooltip on a wrapper (a disabled button can't show one). Often it's better to keep it enabled and explain what's missing when it's pressed.
+
+## Accessibility
+
+Use `<button>` for actions and `<a>` for navigation (Button `asChild` keeps the look). Every action is reachable with Tab and shows the gold focus ring; don't remove it.
+
+## Not covered here
+
+Submitting and validating forms is [Forms](/guides/forms). Why coral is reserved is [Color usage](/guides/color-usage).
+
+## Checklist
+
 <Guidelines>
-  <Guideline>Name the thing and the consequence in the confirmation: "Its chats and memory are deleted for everyone."</Guideline>
-  <Guideline dont>Don't make the destructive button the default focus in a dialog; focus Cancel.</Guideline>
-  <Guideline dont>Don't color a non-destructive action coral to get attention.</Guideline>
+  <Guideline>At most one primary per view, placed last.</Guideline>
+  <Guideline>Coral only on destructive actions.</Guideline>
+  <Guideline>Every icon-only button has an `aria-label` and a tooltip.</Guideline>
+  <Guideline dont>No disabled button without a reason people can see.</Guideline>
 </Guidelines>
-
-## Disabled and loading
-
-- **Loading:** `<Button loading>` keeps the width, shows a spinner and blocks clicks. Use it while an action runs instead of disabling.
-- **Disabled:** only when the action truly can't happen yet, and say why: helper text, or a tooltip on a wrapper (a disabled button can't show one). Often it's better to keep the button enabled and explain what's missing when it's pressed.
