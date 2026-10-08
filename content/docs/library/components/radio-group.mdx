@@ -1,0 +1,223 @@
+---
+title: Radio group
+description: Picks exactly one of a few options you can see at once.
+---
+
+## Usage
+
+```bash
+pnpm dlx shadcn@latest add radio-group
+```
+
+Then replace `components/ui/radio-group.tsx` with the [Matrix version](https://github.com/sahar-nouri-1/Matrix_design-system/blob/main/components/ui/radio-group.tsx). It keeps shadcn's API (`value`, `onValueChange`, `defaultValue`) and adds the Matrix sizes and look.
+
+```tsx
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { Field, FieldLabel } from '@/components/ui/field';
+
+<RadioGroup defaultValue="monthly" aria-label="Billing">
+  <Field orientation="horizontal">
+    <RadioGroupItem value="monthly" id="monthly" />
+    <FieldLabel htmlFor="monthly">Monthly</FieldLabel>
+  </Field>
+  <Field orientation="horizontal">
+    <RadioGroupItem value="yearly" id="yearly" />
+    <FieldLabel htmlFor="yearly">Yearly</FieldLabel>
+  </Field>
+</RadioGroup>
+```
+
+The group handles the rest: one option selected at a time, one tab stop, arrow keys to move.
+
+## Variants
+
+<Example title="Unselected" code={`<RadioGroup aria-label="Example"><RadioGroupItem value="a" aria-label="Option" /></RadioGroup>`}>
+  <RadioGroup aria-label="Unselected example">
+    <RadioGroupItem value="a" aria-label="Option" />
+  </RadioGroup>
+</Example>
+
+<Example title="Selected" code={`<RadioGroup defaultValue="a" aria-label="Example"><RadioGroupItem value="a" aria-label="Option" /></RadioGroup>`}>
+  <RadioGroup defaultValue="a" aria-label="Selected example">
+    <RadioGroupItem value="a" aria-label="Option" />
+  </RadioGroup>
+</Example>
+
+## States
+
+<Example
+  title="Focus, disabled and invalid"
+  code={`<RadioGroupItem value="a" disabled />
+<RadioGroupItem value="b" aria-invalid="true" />`}
+>
+  <RadioGroup defaultValue="focus" aria-label="States" className="flex gap-6">
+    <div className="flex flex-col items-center">
+      <RadioGroupItem value="focus" aria-label="Focused" className="outline-2 outline-offset-2 outline-ring outline-solid" />
+      <ExampleLabel>Focus</ExampleLabel>
+    </div>
+  </RadioGroup>
+  <RadioGroup defaultValue="on" disabled aria-label="Disabled, selected">
+    <div className="flex flex-col items-center">
+      <RadioGroupItem value="on" aria-label="Disabled, selected" />
+      <ExampleLabel>Disabled · on</ExampleLabel>
+    </div>
+  </RadioGroup>
+  <RadioGroup disabled aria-label="Disabled">
+    <div className="flex flex-col items-center">
+      <RadioGroupItem value="off" aria-label="Disabled" />
+      <ExampleLabel>Disabled · off</ExampleLabel>
+    </div>
+  </RadioGroup>
+  <RadioGroup aria-label="Invalid">
+    <div className="flex flex-col items-center">
+      <RadioGroupItem value="x" aria-invalid="true" aria-label="Invalid" />
+      <ExampleLabel>Invalid</ExampleLabel>
+    </div>
+  </RadioGroup>
+</Example>
+
+## Sizes
+
+<Example
+  title="sm · md"
+  code={`<RadioGroupItem value="a" />
+<RadioGroupItem value="b" size="md" />`}
+>
+  <RadioGroup defaultValue="sm" aria-label="Small">
+    <div className="flex flex-col items-center">
+      <RadioGroupItem value="sm" aria-label="Small" />
+      <ExampleLabel>sm · 16px, 6px dot (default)</ExampleLabel>
+    </div>
+  </RadioGroup>
+  <RadioGroup defaultValue="md" aria-label="Medium">
+    <div className="flex flex-col items-center">
+      <RadioGroupItem value="md" size="md" aria-label="Medium" />
+      <ExampleLabel>md · 20px, 8px dot</ExampleLabel>
+    </div>
+  </RadioGroup>
+</Example>
+
+## With labels
+
+<Example
+  title="Labels and descriptions"
+  code={`<FieldSet>
+  <FieldLegend variant="label">When an agent finishes</FieldLegend>
+  <RadioGroup defaultValue="notify">
+    <Field orientation="horizontal">
+      <RadioGroupItem value="notify" id="notify" />
+      <FieldContent>
+        <FieldLabel htmlFor="notify">Notify me</FieldLabel>
+        <FieldDescription>A notification on every device.</FieldDescription>
+      </FieldContent>
+    </Field>
+    <Field orientation="horizontal">
+      <RadioGroupItem value="summary" id="summary" />
+      <FieldContent>
+        <FieldLabel htmlFor="summary">Add to the daily summary</FieldLabel>
+        <FieldDescription>One email at the end of the day.</FieldDescription>
+      </FieldContent>
+    </Field>
+    <Field orientation="horizontal">
+      <RadioGroupItem value="nothing" id="nothing" />
+      <FieldLabel htmlFor="nothing">Do nothing</FieldLabel>
+    </Field>
+  </RadioGroup>
+</FieldSet>`}
+>
+  <FieldSet className="w-full max-w-sm">
+    <FieldLegend variant="label">When an agent finishes</FieldLegend>
+    <RadioGroup defaultValue="notify">
+      <Field orientation="horizontal">
+        <RadioGroupItem value="notify" id="rg-notify" />
+        <FieldContent>
+          <FieldLabel htmlFor="rg-notify">Notify me</FieldLabel>
+          <FieldDescription>A notification on every device.</FieldDescription>
+        </FieldContent>
+      </Field>
+      <Field orientation="horizontal">
+        <RadioGroupItem value="summary" id="rg-summary" />
+        <FieldContent>
+          <FieldLabel htmlFor="rg-summary">Add to the daily summary</FieldLabel>
+          <FieldDescription>One email at the end of the day.</FieldDescription>
+        </FieldContent>
+      </Field>
+      <Field orientation="horizontal">
+        <RadioGroupItem value="nothing" id="rg-nothing" />
+        <FieldLabel htmlFor="rg-nothing">Do nothing</FieldLabel>
+      </Field>
+    </RadioGroup>
+  </FieldSet>
+</Example>
+
+## Which control
+
+| The list is… | Use | Why not the others |
+| --- | --- | --- |
+| 2–5 visible options, pick one | **Radio group** | Every option is readable at once, so people compare instead of search. |
+| A long or searchable list, pick one | **Select** or combobox | A radio list you have to scroll stops being comparable. |
+| Several independent options | **[Checkbox](/library/components/checkbox)** | A radio group can never mean "two of these". |
+| A setting that applies immediately | **[Switch](/library/components/switch)** | Radios belong to a form that's saved. |
+| Inside a dropdown menu | **Never a radio** | The menu owns the arrow keys; use a menu item with a check. |
+
+## Behavior
+
+#### The group is one tab stop
+
+Tab enters the group once, on the selected option (or the first one). Arrow keys then move and select, skipping disabled options and wrapping at the ends.
+
+#### Space selects; Enter doesn't
+
+Enter is left for submitting the form.
+
+#### Give the group a name
+
+Label the group with a `FieldLegend` inside a `FieldSet`, or `aria-label` on `RadioGroup`, so screen readers announce what the choice is about.
+
+## API reference
+
+### RadioGroup
+
+<PropsTable
+  type={{
+    value: { type: 'string', description: 'Controlled selected value. Use defaultValue when uncontrolled.' },
+    onValueChange: { type: '(value: string) => void', description: 'Called when the selection changes.' },
+    disabled: { type: 'boolean', default: 'false', description: 'Disables every option.' },
+    required: { type: 'boolean', default: 'false', description: 'One option must be selected before the form submits.' },
+  }}
+/>
+
+### RadioGroupItem
+
+<PropsTable
+  type={{
+    value: { type: 'string', description: 'This option’s value. Required.' },
+    size: { type: "'sm' | 'md'", default: "'sm'", description: '16 / 20px, with a 6 / 8px dot.' },
+    disabled: { type: 'boolean', default: 'false', description: 'Disables this option only.' },
+    'aria-invalid': { type: 'boolean', default: 'false', description: 'Coral border. Pair it with a FieldError message.' },
+  }}
+/>
+
+## Guidelines
+
+<Guidelines>
+  <Guideline>Use radios for 2–5 options people should compare at a glance.</Guideline>
+  <Guideline>Select a sensible default when one exists, so the group never starts empty without reason.</Guideline>
+  <Guideline>Order options logically: most common first, or a natural order (small to large).</Guideline>
+  <Guideline dont>Don't use a single radio on its own; it can't be unselected. Use a checkbox.</Guideline>
+  <Guideline dont>Don't put radios inside a dropdown menu.</Guideline>
+</Guidelines>
+
+## Related
+
+<Related>
+  <RelatedCard title="Checkbox" href="/library/components/checkbox">
+    <Checkbox defaultChecked aria-label="Example" />
+  </RelatedCard>
+  <RelatedCard title="Switch" href="/library/components/switch">
+    <Switch defaultChecked aria-label="Example" />
+  </RelatedCard>
+  <RelatedCard title="Field" href="/library/components/field">
+    <span className="text-ui font-medium text-foreground">Email</span>
+  </RelatedCard>
+</Related>

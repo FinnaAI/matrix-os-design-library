@@ -4,7 +4,10 @@
     "avatar",
     "badge",
     "button",
+    "checkbox",
     "field",
-    "input"
+    "input",
+    "radio-group",
+    "switch"
   ]
 }

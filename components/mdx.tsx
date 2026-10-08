@@ -34,6 +34,9 @@ import {
   FieldTitle,
 } from '@/components/ui/field';
 import { Label } from '@/components/ui/label';
+import { Checkbox } from '@/components/ui/checkbox';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { Switch } from '@/components/ui/switch';
 import { Separator } from '@/components/ui/separator';
 import { Example, ExampleLabel } from '@/components/docs/example';
 import type { MDXComponents } from 'mdx/types';
@@ -83,6 +86,10 @@ export function getMDXComponents(components?: MDXComponents) {
     FieldSet,
     FieldTitle,
     Label,
+    Checkbox,
+    RadioGroup,
+    RadioGroupItem,
+    Switch,
     Separator,
     ColorRamp,
     ColorSet,

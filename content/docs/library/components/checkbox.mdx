@@ -1,0 +1,195 @@
+---
+title: Checkbox
+description: Turns one option on or off, or picks several from a list. Outlined, with a dark check when selected.
+---
+
+## Usage
+
+```bash
+pnpm dlx shadcn@latest add checkbox
+```
+
+Then replace `components/ui/checkbox.tsx` with the [Matrix version](https://github.com/sahar-nouri-1/Matrix_design-system/blob/main/components/ui/checkbox.tsx). It keeps shadcn's API (`checked`, `onCheckedChange`, `defaultChecked`) and adds the Matrix sizes and look.
+
+```tsx
+import { Checkbox } from '@/components/ui/checkbox';
+import { Field, FieldLabel } from '@/components/ui/field';
+
+<Field orientation="horizontal">
+  <Checkbox id="terms" />
+  <FieldLabel htmlFor="terms">I agree to the terms</FieldLabel>
+</Field>
+```
+
+## Variants
+
+<Example title="Unchecked" code={`<Checkbox aria-label="Unchecked" />`}>
+  <Checkbox aria-label="Unchecked" />
+</Example>
+
+<Example title="Checked" code={`<Checkbox defaultChecked aria-label="Checked" />`}>
+  <Checkbox defaultChecked aria-label="Checked" />
+</Example>
+
+<Example
+  title="Indeterminate"
+  subtitle="Some, not all, of a group"
+  code={`<Checkbox checked="indeterminate" aria-label="Select all" />`}
+>
+  <Checkbox checked="indeterminate" aria-label="Select all" />
+</Example>
+
+## States
+
+<Example
+  title="Focus, disabled and invalid"
+  code={`<Checkbox defaultChecked disabled aria-label="Disabled" />
+<Checkbox aria-invalid="true" aria-label="Invalid" />`}
+>
+  <div className="flex flex-col items-center">
+    <Checkbox defaultChecked aria-label="Focused" className="outline-2 outline-offset-2 outline-ring outline-solid" />
+    <ExampleLabel>Focus</ExampleLabel>
+  </div>
+  <div className="flex flex-col items-center">
+    <Checkbox defaultChecked disabled aria-label="Disabled, checked" />
+    <ExampleLabel>Disabled · on</ExampleLabel>
+  </div>
+  <div className="flex flex-col items-center">
+    <Checkbox disabled aria-label="Disabled" />
+    <ExampleLabel>Disabled · off</ExampleLabel>
+  </div>
+  <div className="flex flex-col items-center">
+    <Checkbox aria-invalid="true" aria-label="Invalid" />
+    <ExampleLabel>Invalid</ExampleLabel>
+  </div>
+</Example>
+
+## Sizes
+
+<Example
+  title="sm · md"
+  code={`<Checkbox defaultChecked />
+<Checkbox size="md" defaultChecked />`}
+>
+  <div className="flex flex-col items-center">
+    <Checkbox defaultChecked aria-label="Small" />
+    <ExampleLabel>sm · 16px (default)</ExampleLabel>
+  </div>
+  <div className="flex flex-col items-center">
+    <Checkbox size="md" defaultChecked aria-label="Medium" />
+    <ExampleLabel>md · 20px</ExampleLabel>
+  </div>
+</Example>
+
+`sm` sits next to 14px text in forms, lists and tables. `md` is for touch and for checkboxes that are the main control on a screen.
+
+## With a label
+
+<Example
+  title="Label and description"
+  code={`<Field orientation="horizontal">
+  <Checkbox id="updates" defaultChecked />
+  <FieldContent>
+    <FieldLabel htmlFor="updates">Weekly summary</FieldLabel>
+    <FieldDescription>A short email with what your agents did this week.</FieldDescription>
+  </FieldContent>
+</Field>`}
+>
+  <Field orientation="horizontal" className="max-w-sm">
+    <Checkbox id="cb-updates" defaultChecked />
+    <FieldContent>
+      <FieldLabel htmlFor="cb-updates">Weekly summary</FieldLabel>
+      <FieldDescription>A short email with what your agents did this week.</FieldDescription>
+    </FieldContent>
+  </Field>
+</Example>
+
+<Example
+  title="A group"
+  code={`<FieldSet>
+  <FieldLegend variant="label">Notify me about</FieldLegend>
+  <FieldGroup data-slot="checkbox-group">
+    <Field orientation="horizontal">
+      <Checkbox id="done" defaultChecked />
+      <FieldLabel htmlFor="done">Finished tasks</FieldLabel>
+    </Field>
+    <Field orientation="horizontal">
+      <Checkbox id="approval" defaultChecked />
+      <FieldLabel htmlFor="approval">Tasks waiting for approval</FieldLabel>
+    </Field>
+    <Field orientation="horizontal">
+      <Checkbox id="failed" />
+      <FieldLabel htmlFor="failed">Failed runs</FieldLabel>
+    </Field>
+  </FieldGroup>
+</FieldSet>`}
+>
+  <FieldSet className="w-full max-w-sm">
+    <FieldLegend variant="label">Notify me about</FieldLegend>
+    <FieldGroup data-slot="checkbox-group">
+      <Field orientation="horizontal">
+        <Checkbox id="cb-done" defaultChecked />
+        <FieldLabel htmlFor="cb-done">Finished tasks</FieldLabel>
+      </Field>
+      <Field orientation="horizontal">
+        <Checkbox id="cb-approval" defaultChecked />
+        <FieldLabel htmlFor="cb-approval">Tasks waiting for approval</FieldLabel>
+      </Field>
+      <Field orientation="horizontal">
+        <Checkbox id="cb-failed" />
+        <FieldLabel htmlFor="cb-failed">Failed runs</FieldLabel>
+      </Field>
+    </FieldGroup>
+  </FieldSet>
+</Example>
+
+Clicking the label toggles the checkbox, so the whole row is a target.
+
+## Behavior
+
+#### Space toggles; Enter doesn't
+
+Space checks and unchecks, the same as a native checkbox. Enter is left for submitting the form around it.
+
+#### Indeterminate is set from code
+
+Use `checked="indeterminate"` for a "select all" box when only some items in the group are selected. Clicking it selects all.
+
+## API reference
+
+<PropsTable
+  type={{
+    size: { type: "'sm' | 'md'", default: "'sm'", description: '16 / 20px.' },
+    checked: { type: "boolean | 'indeterminate'", description: 'Controlled state. Use defaultChecked when uncontrolled.' },
+    onCheckedChange: { type: "(checked: boolean | 'indeterminate') => void", description: 'Called when the state changes.' },
+    disabled: { type: 'boolean', default: 'false', description: 'Muted, not focusable.' },
+    'aria-invalid': { type: 'boolean', default: 'false', description: 'Coral border. Pair it with a FieldError message.' },
+    required: { type: 'boolean', default: 'false', description: 'Must be checked before the form submits.' },
+  }}
+/>
+
+## Guidelines
+
+<Guidelines>
+  <Guideline>Use a checkbox for choices saved with a form, consent ("I agree to the terms") and multi-select lists.</Guideline>
+  <Guideline>Write labels as a positive statement of what checking does: "Send a weekly summary", not "Don't send emails".</Guideline>
+  <Guideline>Link the label with `htmlFor` so clicking the text toggles the box.</Guideline>
+  <Guideline dont>Don't use a checkbox for a setting that takes effect immediately; use a [Switch](/library/components/switch).</Guideline>
+  <Guideline dont>Don't use checkboxes when only one option can be picked; use a [Radio group](/library/components/radio-group).</Guideline>
+</Guidelines>
+
+## Related
+
+<Related>
+  <RelatedCard title="Radio group" href="/library/components/radio-group">
+    <RadioGroup defaultValue="a" aria-label="Example">
+      <RadioGroupItem value="a" aria-label="Option" />
+    </RadioGroup>
+  </RelatedCard>
+  <RelatedCard title="Switch" href="/library/components/switch">
+    <Switch defaultChecked aria-label="Example" />
+  </RelatedCard>
+  <RelatedCard title="Field" href="/library/components/field">
+    <span className="text-ui font-medium text-foreground">Email</span>
+  </RelatedCard>
+</Related>

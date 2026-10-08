@@ -1,0 +1,197 @@
+---
+title: Switch
+description: Turns a setting on or off, effective immediately.
+---
+
+## Usage
+
+```bash
+pnpm dlx shadcn@latest add switch
+```
+
+Then replace `components/ui/switch.tsx` with the [Matrix version](https://github.com/sahar-nouri-1/Matrix_design-system/blob/main/components/ui/switch.tsx). It keeps shadcn's API (`checked`, `onCheckedChange`, `defaultChecked`) and adds the Matrix sizes and look. shadcn's `size="default"` still works (same as `md`).
+
+```tsx
+import { Switch } from '@/components/ui/switch';
+import { Field, FieldLabel } from '@/components/ui/field';
+
+<Field orientation="horizontal">
+  <FieldLabel htmlFor="auto-run">Run agents on a schedule</FieldLabel>
+  <Switch id="auto-run" checked={enabled} onCheckedChange={setEnabled} />
+</Field>
+```
+
+## Variants
+
+<Example title="Off" code={`<Switch aria-label="Off" />`}>
+  <Switch aria-label="Off" />
+</Example>
+
+<Example title="On" code={`<Switch defaultChecked aria-label="On" />`}>
+  <Switch defaultChecked aria-label="On" />
+</Example>
+
+## States
+
+<Example
+  title="Focus, disabled and invalid"
+  code={`<Switch defaultChecked disabled />
+<Switch disabled />
+<Switch aria-invalid="true" />`}
+>
+  <div className="flex flex-col items-center">
+    <Switch defaultChecked aria-label="Focused" className="outline-2 outline-offset-2 outline-ring outline-solid" />
+    <ExampleLabel>Focus</ExampleLabel>
+  </div>
+  <div className="flex flex-col items-center">
+    <Switch defaultChecked disabled aria-label="Disabled, on" />
+    <ExampleLabel>Disabled · on</ExampleLabel>
+  </div>
+  <div className="flex flex-col items-center">
+    <Switch disabled aria-label="Disabled, off" />
+    <ExampleLabel>Disabled · off</ExampleLabel>
+  </div>
+  <div className="flex flex-col items-center">
+    <Switch aria-invalid="true" aria-label="Invalid" />
+    <ExampleLabel>Invalid</ExampleLabel>
+  </div>
+</Example>
+
+## Sizes
+
+<Example
+  title="sm · md"
+  code={`<Switch size="sm" defaultChecked />
+<Switch defaultChecked />`}
+>
+  <div className="flex flex-col items-center">
+    <Switch size="sm" defaultChecked aria-label="Small" />
+    <ExampleLabel>sm · 28×16</ExampleLabel>
+  </div>
+  <div className="flex flex-col items-center">
+    <Switch defaultChecked aria-label="Medium" />
+    <ExampleLabel>md · 36×20 (default)</ExampleLabel>
+  </div>
+</Example>
+
+## With a label
+
+<Example
+  title="Settings rows"
+  code={`<FieldGroup>
+  <Field orientation="horizontal">
+    <FieldContent>
+      <FieldLabel htmlFor="schedule">Run on a schedule</FieldLabel>
+      <FieldDescription>Agents start their tasks at the times you set.</FieldDescription>
+    </FieldContent>
+    <Switch id="schedule" defaultChecked />
+  </Field>
+  <Field orientation="horizontal">
+    <FieldContent>
+      <FieldLabel htmlFor="sounds">Sounds</FieldLabel>
+      <FieldDescription>Play a sound when a task finishes.</FieldDescription>
+    </FieldContent>
+    <Switch id="sounds" />
+  </Field>
+</FieldGroup>`}
+>
+  <FieldGroup className="max-w-sm">
+    <Field orientation="horizontal">
+      <FieldContent>
+        <FieldLabel htmlFor="sw-schedule">Run on a schedule</FieldLabel>
+        <FieldDescription>Agents start their tasks at the times you set.</FieldDescription>
+      </FieldContent>
+      <Switch id="sw-schedule" defaultChecked />
+    </Field>
+    <Field orientation="horizontal">
+      <FieldContent>
+        <FieldLabel htmlFor="sw-sounds">Sounds</FieldLabel>
+        <FieldDescription>Play a sound when a task finishes.</FieldDescription>
+      </FieldContent>
+      <Switch id="sw-sounds" />
+    </Field>
+  </FieldGroup>
+</Example>
+
+<Example
+  title="Switch before the label"
+  code={`<Field orientation="horizontal">
+  <Switch id="notify" defaultChecked />
+  <FieldContent>
+    <FieldLabel htmlFor="notify">Notify me when a task finishes</FieldLabel>
+    <FieldDescription>On every device you're signed in on.</FieldDescription>
+  </FieldContent>
+</Field>`}
+>
+  <Field orientation="horizontal" className="max-w-sm">
+    <Switch id="sw-lead-notify" defaultChecked />
+    <FieldContent>
+      <FieldLabel htmlFor="sw-lead-notify">Notify me when a task finishes</FieldLabel>
+      <FieldDescription>On every device you're signed in on.</FieldDescription>
+    </FieldContent>
+  </Field>
+</Example>
+
+The switch can sit at either end. In settings lists, put the label first and the switch at the end of the row, so switches line up down the page. In short lists or inside a form, it can lead like a checkbox. Keep one side per screen.
+
+## Switch or checkbox?
+
+| The control is for… | Use | Why not the other |
+| --- | --- | --- |
+| A setting that takes effect the moment it changes | **Switch** | No Save button; the system changes as you flip it. |
+| A form value saved when the form is submitted | **[Checkbox](/library/components/checkbox)** | A switch promises an immediate change the form can't deliver. |
+| Agreeing to something ("I accept the terms") | **Checkbox** | Consent is a value you submit, not a setting you flip. |
+| Two or more options where only one can be on | **[Radio group](/library/components/radio-group)** | Two switches that can't both be on are a radio group in disguise. |
+| Filtering a list | **Checkbox** | Filters change the view, not the system. |
+| Turning on a whole feature that reveals more settings | **Switch** | On its own row, above the settings it reveals. |
+
+## Behavior
+
+#### It applies immediately
+
+A switch has no Save. If a change needs confirming or can be abandoned, it's a checkbox in a form.
+
+#### Space toggles
+
+The same as Checkbox and Radio. Screen readers announce it as on or off, not checked.
+
+#### The slide carries meaning
+
+The thumb's movement is how people read the change, so it animates even where other motion is reduced.
+
+## API reference
+
+<PropsTable
+  type={{
+    size: { type: "'sm' | 'md'", default: "'md'", description: '28×16 / 36×20px. shadcn’s default is accepted (md).' },
+    checked: { type: 'boolean', description: 'Controlled state. Use defaultChecked when uncontrolled.' },
+    onCheckedChange: { type: '(checked: boolean) => void', description: 'Called when it flips. Apply the setting here.' },
+    disabled: { type: 'boolean', default: 'false', description: 'Faded, keeps its on/off color, not focusable.' },
+    'aria-invalid': { type: 'boolean', default: 'false', description: 'Coral ring. Pair it with a FieldError message.' },
+  }}
+/>
+
+## Guidelines
+
+<Guidelines>
+  <Guideline>Use a switch only for settings that apply immediately.</Guideline>
+  <Guideline>Label what turns on, not the state: "Sounds", not "Sounds on/off".</Guideline>
+  <Guideline>If the change takes a moment, show progress next to the switch instead of disabling it silently.</Guideline>
+  <Guideline dont>Don't put a switch in a form with a Save button; use a checkbox.</Guideline>
+</Guidelines>
+
+## Related
+
+<Related>
+  <RelatedCard title="Checkbox" href="/library/components/checkbox">
+    <Checkbox defaultChecked aria-label="Example" />
+  </RelatedCard>
+  <RelatedCard title="Radio group" href="/library/components/radio-group">
+    <RadioGroup defaultValue="a" aria-label="Example">
+      <RadioGroupItem value="a" aria-label="Option" />
+    </RadioGroup>
+  </RelatedCard>
+  <RelatedCard title="Field" href="/library/components/field">
+    <span className="text-ui font-medium text-foreground">Email</span>
+  </RelatedCard>
+</Related>
