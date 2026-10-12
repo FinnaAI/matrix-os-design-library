@@ -24,7 +24,7 @@ Paste this into the product repo's `CLAUDE.md` (Claude Code) or `AGENTS.md` / `.
 UI follows the Matrix OS design system: https://matrix-os-design-library.vercel.app
 Before building UI, read https://matrix-os-design-library.vercel.app/llms.txt and the pages for the
 components you use (full text: /llms-full.txt). Guides: /guides/choosing-components, /guides/color-usage,
-/guides/actions, /guides/forms.
+/guides/logo, /guides/actions, /guides/forms.
 
 Rules:
 - Use the components in components/ui (Button, Input, InputGroup, Field, Select, Checkbox, RadioGroup,
@@ -40,6 +40,8 @@ Rules:
 - Radius: controls rounded-md (8px), menus/popovers rounded-lg (12px), cards rounded-xl (16px).
 - Shadows: shadow-xs on resting controls, shadow-lg on overlays, shadow-xl on dialogs. Never write box-shadow.
 - Icons: lucide-react through the Icon component or inside Button; sizes xxs/xs/sm/md/lg. No emoji.
+- Logo: RabbitMark only, sized by height (h-6 w-auto), at least h-4. Forest (text-teal-800) by default;
+  app icons are bg-teal-800 text-neutral-25. Never redraw, stretch, recolor or use it as an icon.
 - Sizes: controls are sm 32 / md 36 (default) / lg 40px; lg is the largest, also on mobile.
 - Every form control sits in a Field with a visible label. Errors: aria-invalid + FieldError.
 - Icon-only buttons need an aria-label and a Tooltip with the same words.
