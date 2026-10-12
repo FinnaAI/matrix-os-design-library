@@ -87,6 +87,7 @@ import {
   LogoDonts,
   LogoLooks,
   LogoSizes,
+  MarketingPairs,
 } from '@/components/docs/logo-specimens';
 import { RabbitMark } from '@/components/brand/rabbit-mark';
 import { CopyFormatToggle } from '@/components/docs/copy';
@@ -200,6 +201,7 @@ export function getMDXComponents(components?: MDXComponents) {
     IosIconLooks,
     AndroidIconLooks,
     LogoDonts,
+    MarketingPairs,
     ...components,
   } satisfies MDXComponents;
 }

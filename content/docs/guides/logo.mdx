@@ -12,7 +12,7 @@ This guide decides how the Matrix rabbit appears: which look, what size, how muc
 | On a product screen (nav, sign-in, empty state) | **Forest**, the default: teal-800 on the light surface | `text-teal-800` |
 | As an app icon, favicon or Mac icon | **Sentinel**: near-white on Forest | `bg-teal-800 text-neutral-25` |
 | On a launch screen | **Forest** in light mode, **Sentinel** in dark mode | `bg-neutral-25 text-teal-800` / `bg-teal-800 text-neutral-25` |
-| In marketing on a light background (store, banner, print) | **Forest**, or **Signal** for a warm accent | `text-teal-800` / `bg-gold-300 text-teal-800` |
+| In marketing (store, banner, social, print) | One of the four **marketing pairs** | see below |
 | In place of an action icon (send, run, new) | **None.** Use a [Lucide icon](/library/foundations/iconography) | |
 | For an agent | **None.** Agents get the mascot, not the mark | |
 
@@ -60,9 +60,18 @@ Don't stretch, squash, rotate, outline, crop, simplify or push it off-centre. Do
 
 Every app icon is a near-white rabbit on a solid teal-800 tile, at about 66% of the tile's height and centred, with no offset or extra scale. iOS uses the same icon in light and dark. Android needs three layers: the background color, the rabbit, and a monochrome rabbit for themed icons (Android 13+). Full sizes and file names are on [Logo](/library/foundations/logo#app-icons).
 
-## Marketing can use any brand color
+## Marketing uses four pairs, nothing else
 
-Inside the product, colors carry meaning (coral is danger, teal is success). In marketing they don't, so store screenshots and banners can use any brand-scale color, ideally the soft 50-step tints. The rabbit still uses one of the three looks.
+Marketing (store screenshots, banners, social, print) uses three colors: Forest (`teal-800`), Wheat (`gold-300`) and near-white (`neutral-25`), always in one of these pairs:
+
+| Rabbit or wordmark | Background | Classes |
+|---|---|---|
+| near-white | Forest | `bg-teal-800 text-neutral-25` |
+| Wheat | Forest | `bg-teal-800 text-gold-300` |
+| Forest | Wheat | `bg-gold-300 text-teal-800` |
+| Forest | near-white | `bg-neutral-25 text-teal-800` |
+
+Don't put the rabbit on other brand colors, tints or photos, and don't pair near-white with Wheat (1.6:1, the rabbit fades). The wordmark "Matrix OS" follows the same pairs. See them side by side on [Logo](/library/foundations/logo#marketing-pairs).
 
 ## Accessibility
 

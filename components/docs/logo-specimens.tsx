@@ -67,6 +67,48 @@ export function LogoLooks() {
   );
 }
 
+const MARKETING = [
+  { name: 'Sentinel', tile: 'bg-teal-800 text-neutral-25', classes: 'bg-teal-800 text-neutral-25', contrast: '13.1:1' },
+  { name: 'Wheat on Forest', tile: 'bg-teal-800 text-gold-300', classes: 'bg-teal-800 text-gold-300', contrast: '8.4:1' },
+  { name: 'Signal', tile: 'bg-gold-300 text-teal-800', classes: 'bg-gold-300 text-teal-800', contrast: '8.4:1' },
+  { name: 'Forest', tile: 'border border-site-border bg-neutral-25 text-teal-800', classes: 'bg-neutral-25 text-teal-800', contrast: '13.1:1' },
+];
+
+/** The only rabbit and background pairs marketing uses, plus the wordmark on Forest. */
+export function MarketingPairs() {
+  return (
+    <div className="not-prose mb-6 grid grid-cols-2 gap-4 sm:grid-cols-3">
+      {MARKETING.map((pair) => (
+        <figure key={pair.name}>
+          <div className={cn('flex aspect-square items-center justify-center rounded-xl', pair.tile)}>
+            <RabbitMark className="h-1/2 w-auto" />
+          </div>
+          <Caption title={pair.name}>
+            <span className="flex flex-wrap gap-1">
+              {pair.classes.split(' ').map((cls) => (
+                <code key={cls}>{cls}</code>
+              ))}
+            </span>
+            <span className="block">{pair.contrast}</span>
+          </Caption>
+        </figure>
+      ))}
+      <figure>
+        <div className="flex aspect-square items-center justify-center rounded-xl bg-teal-800 text-gold-300">
+          <span className="font-heading text-brand-h2 font-semibold">Matrix OS</span>
+        </div>
+        <Caption title="Wordmark, Wheat on Forest">
+          <span className="flex flex-wrap gap-1">
+            <code>font-heading</code>
+            <code>text-gold-300</code>
+          </span>
+          <span className="block">8.4:1</span>
+        </Caption>
+      </figure>
+    </div>
+  );
+}
+
 /** One ear-width (1/8 of the mark's height) of clear space on every side. */
 export function LogoClearSpace() {
   return (
