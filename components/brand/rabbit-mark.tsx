@@ -1,7 +1,8 @@
 import type { SVGProps } from 'react';
 
 // Canonical Matrix OS rabbit mark, copied from matrix-os `packages/brand/src/marks.ts`.
-// Inherits the surrounding text color. Never redraw, stretch, rotate or outline it.
+// Inherits the surrounding text color. Size it by height with w-auto (h-6 w-auto) so the 510:660 shape holds.
+// Never redraw, stretch, rotate or outline it. Looks, sizes and app icons: /library/foundations/logo.
 export function RabbitMark(props: SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 510 660" fill="currentColor" aria-hidden="true" {...props}>

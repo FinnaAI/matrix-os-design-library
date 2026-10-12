@@ -62,3 +62,15 @@ Findings come from reading the matrix-os repo (shell, packages/ui) on the dates 
   ```
 
 - Sizes: shadcn's default `h-9` = Matrix `md`. Use `size="lg"` on mobile.
+
+## Logo and app icons (2026-10-12)
+
+Read from matrix-os `apps/mobile/assets/` (repo state 2026-09-28), `shell/src/app/` and `macos/Resources/`.
+
+- iOS `app.icon/icon.json`: the rabbit layer is scaled **1.07** with an offset of **(-11.8, -49.4)**, so it runs into the edge and the mask crops it. → Scale 1, offset 0, rabbit about 66% of the tile height, centred.
+- iOS `app.icon`: a light gradient background, `darken`/`multiply` blend modes, `blur-material: 0.5` and an off-scale fill (`display-p3:0.340,0.370,0.322` ≈ `#434E3F`). → Solid teal-800 background, neutral-25 rabbit, no blend or translucency. Tinted: near-white rabbit on transparent (today a mid-grey PNG, `ios-tinted.png`). Clear light: rabbit layer teal-800.
+- `app.icon/Assets/rabbit.svg` has a **503 × 660** viewBox; the canonical mark is **510 × 660** and its paths reach x ≈ 506, so the right edge is clipped by about 3 units. The paths are the same, so it isn't skewed. → Replace with the 510 × 660 file from the design system (`public/brand/rabbit-mark-white.svg`).
+- Android `app.json`: `adaptiveIcon.backgroundColor` is `#EEEEE2` (off-scale) and there is no `monochromeImage`. → `#0E3422` (teal-800), add a monochrome rabbit layer, keep the rabbit inside the 66dp safe circle.
+- Splash: `backgroundColor` `#FAFAF9` (off-scale) with no dark variant. → Light: teal-800 rabbit on `#FAFAFA` (neutral-25); dark: neutral-25 rabbit on `#0E3422`.
+- Web `shell/src/app/icon.png` (512) and `apple-icon.png` (180): an olive tile with a cream rabbit that runs off the bottom-left. → Sentinel tile, rabbit centred (PROVISIONAL spec on the Logo page).
+- Mac `macos/Resources/AppIcon.icns`: glossy bevel, gradient and glass highlights on the rabbit. → Flat Sentinel (PROVISIONAL spec on the Logo page).

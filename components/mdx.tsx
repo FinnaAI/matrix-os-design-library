@@ -80,6 +80,15 @@ import type { MDXComponents } from 'mdx/types';
 import { ColorRamp, ColorSet } from '@/components/docs/color-ramp';
 import { SemanticRoles, TintTable } from '@/components/docs/token-tables';
 import { GuideLink, GuideList, Guideline, Guidelines, Related, RelatedCard } from '@/components/docs/guidelines';
+import {
+  AndroidIconLooks,
+  IosIconLooks,
+  LogoClearSpace,
+  LogoDonts,
+  LogoLooks,
+  LogoSizes,
+} from '@/components/docs/logo-specimens';
+import { RabbitMark } from '@/components/brand/rabbit-mark';
 import { CopyFormatToggle } from '@/components/docs/copy';
 import { IconBrowser } from '@/components/docs/icon-browser';
 import { IconSizes } from '@/components/docs/icon-sizes';
@@ -184,6 +193,13 @@ export function getMDXComponents(components?: MDXComponents) {
     RelatedCard,
     GuideList,
     GuideLink,
+    RabbitMark,
+    LogoLooks,
+    LogoClearSpace,
+    LogoSizes,
+    IosIconLooks,
+    AndroidIconLooks,
+    LogoDonts,
     ...components,
   } satisfies MDXComponents;
 }

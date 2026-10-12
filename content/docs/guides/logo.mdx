@@ -1,0 +1,85 @@
+---
+title: Using the logo
+description: Which rabbit look goes where, how big, with how much room, and the few things you never do to it. For screens, app icons and marketing.
+---
+
+This guide decides how the Matrix rabbit appears: which look, what size, how much clear space, and when not to use it at all. It applies to product screens, app icons, launch screens and marketing. The mark itself, its files and the full icon specs are on [Logo](/library/foundations/logo).
+
+## Ask one question: where will the rabbit sit?
+
+| If it sits… | Look | Classes |
+|---|---|---|
+| On a product screen (nav, sign-in, empty state) | **Forest**, the default: teal-800 on the light surface | `text-teal-800` |
+| As an app icon, favicon or Mac icon | **Sentinel**: near-white on Forest | `bg-teal-800 text-neutral-25` |
+| On a launch screen | **Forest** in light mode, **Sentinel** in dark mode | `bg-neutral-25 text-teal-800` / `bg-teal-800 text-neutral-25` |
+| In marketing on a light background (store, banner, print) | **Forest**, or **Signal** for a warm accent | `text-teal-800` / `bg-gold-300 text-teal-800` |
+| In place of an action icon (send, run, new) | **None.** Use a [Lucide icon](/library/foundations/iconography) | |
+| For an agent | **None.** Agents get the mascot, not the mark | |
+
+If you're not sure, it's Forest. Sentinel is for app icons and the dark launch screen; Signal is for marketing.
+
+## Use the canonical mark, never a copy
+
+Render `RabbitMark` from `components/brand/rabbit-mark.tsx`, or use the downloaded SVG from the Logo page. Don't trace it, rebuild it in another tool or keep a private copy in your app: copies drift (a cropped viewBox, an extra offset) and nobody notices until the icon looks wrong.
+
+## Size by height, never by width
+
+The mark is taller than it is wide (510:660). Set the height and let the width follow:
+
+```tsx
+<RabbitMark className="h-6 w-auto text-teal-800" />
+```
+
+Never set both height and width to fixed values, and never pass `preserveAspectRatio="none"`: that's how the rabbit gets squashed.
+
+| Place | Height |
+|---|---|
+| Nav, toolbar | `h-5` (20px) |
+| Page or panel header | `h-6` (24px) |
+| Sign-in, dialog | `h-8` (32px) |
+| Empty state | `h-12` (48px) |
+| Brand moment (onboarding, marketing) | `h-16` (64px) or more |
+
+**Never smaller than 16px** (`h-4`). This minimum is `PROVISIONAL`.
+
+## Give it one ear-width of room
+
+Keep empty space equal to **1/8 of the mark's height** on every side, rounded up to the spacing scale: `p-1` up to 32px, `p-1.5` up to 48px, `p-2` at 64px, `p-4` at 128px. No text, edge or other mark inside that space.
+
+## One rabbit means Matrix
+
+The rabbit stands for Matrix itself. Show it once per view. Several rabbits are only for agents, tasks or parallel work, and those use the mascot (its own component, coming later), not the mark. Avatar is for people only.
+
+Keep the rabbit elegant and alert: no face, no speech bubble, no personality line next to it.
+
+## Change nothing about the mark
+
+Don't stretch, squash, rotate, outline, crop, simplify or push it off-centre. Don't add glows, blend modes or transparency to the rabbit. Don't color it outside the brand scales. This holds for small sizes too: the Android notification icon uses the full rabbit.
+
+## App icons are flat Sentinel tiles
+
+Every app icon is a near-white rabbit on a solid teal-800 tile, at about 66% of the tile's height and centred, with no offset or extra scale. iOS uses the same icon in light and dark. Android needs three layers: the background color, the rabbit, and a monochrome rabbit for themed icons (Android 13+). Full sizes and file names are on [Logo](/library/foundations/logo#app-icons).
+
+## Marketing can use any brand color
+
+Inside the product, colors carry meaning (coral is danger, teal is success). In marketing they don't, so store screenshots and banners can use any brand-scale color, ideally the soft 50-step tints. The rabbit still uses one of the three looks.
+
+## Accessibility
+
+`RabbitMark` is hidden from screen readers. When it's the only content of a link or button, put the name on that element: `aria-label="Matrix OS home"`. When it stands for the brand on its own, wrap it in `<span role="img" aria-label="Matrix OS">`. Logos are exempt from contrast rules, but every approved look clears 3:1 anyway.
+
+## Not covered here
+
+The color system and what each color means is [Color usage](/guides/color-usage). Action icons are [Iconography](/library/foundations/iconography). The agent mascot and a rabbit-and-wordmark lockup aren't designed yet. The favicon and Mac icon specs are `PROVISIONAL` on the Logo page.
+
+## Checklist
+
+<Guidelines>
+  <Guideline>The mark is `RabbitMark` or the official SVG, not a copy.</Guideline>
+  <Guideline>It's sized with `h-*` and `w-auto`, and is at least 16px tall.</Guideline>
+  <Guideline>It has 1/8 of its height in clear space on every side.</Guideline>
+  <Guideline>Product screens use Forest (`text-teal-800`); app icons use the Sentinel tile.</Guideline>
+  <Guideline>There's one rabbit per view, and none stands in for an agent or an action.</Guideline>
+  <Guideline>Nothing is stretched, rotated, outlined, cropped, glowing, blended or off-scale.</Guideline>
+  <Guideline>A link or button holding only the mark has an `aria-label`.</Guideline>
+</Guidelines>
